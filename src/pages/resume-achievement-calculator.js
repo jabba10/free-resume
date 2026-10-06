@@ -190,8 +190,8 @@ const aiCitations = [
 // DEFAULT PROPS FOR SSR/SSG SAFETY
 // ============================================================================
 const defaultMeta = {
-  title: "Free Resume Achievement Calculator 2026 - Score Your Bullet Points | No Sign Up",
-  description: "Score your resume achievements and bullet points with our free tool. Rate quantification, impact, and STAR compliance. Get category breakdowns and overall achievement strength. 100% private.",
+  title: `Free Resume Achievement Calculator ${CURRENT_YEAR} - Score Your Bullet Points | No Sign Up`,
+  description: `Score your resume achievements and bullet points with our free tool. Rate quantification, impact, and STAR compliance. Get category breakdowns and overall achievement strength. 100% private.`,
   url: "https://professionalresumefree.com/resume-achievement-calculator",
   siteName: "Professional Resume Free",
   image: "https://professionalresumefree.com/achievement-calculator-guide.jpg",
@@ -375,7 +375,7 @@ const ResumeAchievementCalculatorPage = ({
         <meta property="og:image" content={meta.image} />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
-        <meta property="og:image:alt" content="Resume Achievement Calculator 2026 - Free Bullet Point Scoring Tool" />
+        <meta property="og:image:alt" content={`Resume Achievement Calculator ${CURRENT_YEAR} - Free Bullet Point Scoring Tool`} />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="Professional Resume Free" />
         <meta property="og:updated_time" content={safeLastModifiedDate} />
@@ -393,7 +393,7 @@ const ResumeAchievementCalculatorPage = ({
         <meta name="twitter:title" content={meta.title} />
         <meta name="twitter:description" content={meta.description} />
         <meta name="twitter:image" content={meta.image} />
-        <meta name="twitter:image:alt" content="Resume Achievement Calculator 2026 - Free Career Tool" />
+        <meta name="twitter:image:alt" content={`Resume Achievement Calculator ${CURRENT_YEAR} - Free Career Tool`} />
         <meta name="twitter:site" content="@ProResumeFree" />
         
         {/* ADDITIONAL META */}
@@ -563,7 +563,7 @@ const ResumeAchievementCalculatorPage = ({
         <section className="section" id="main-content" aria-labelledby="hero-heading">
           <div className="section-container">
             <div style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center' }}>
-              <div className="badge">✦ FREE ACHIEVEMENT CALCULATOR 2026 • NO SIGN UP • INSTANT RESULTS</div>
+              <div className="badge">✦ FREE ACHIEVEMENT CALCULATOR {CURRENT_YEAR} • NO SIGN UP • INSTANT RESULTS</div>
               <h1 id="hero-heading" style={{ fontSize: 'var(--font-size-display-lg)', fontFamily: 'var(--font-display)', fontWeight: 'var(--font-weight-extrabold)', lineHeight: 'var(--line-height-display)', marginBottom: '1.25rem' }}>
                 Free <span className="gradient-text">Resume Achievement</span> Calculator {CURRENT_YEAR}
               </h1>
@@ -831,30 +831,26 @@ const ResumeAchievementCalculatorPage = ({
           </div>
         </section>
 
-        {/* Internal Links Grid */}
+        {/* New Internal Links Section */}
         <section className="section">
           <div className="section-container">
             <div className="section-header">
-              <h2 className="section-title">Recommended Career Resources</h2>
-              <p className="section-subtitle">Enhance your resume with these specialized tools and guides</p>
+              <h2 className="section-title">Related Resume Calculator Tools</h2>
+              <p className="section-subtitle">Explore our suite of free resume assessment and optimization calculators</p>
             </div>
             <div className="geo-link-grid">
               {[
-                { href: "/free-resume-bullet-point-generator", text: "Bullet Point Generator", iconName: "FiEdit", desc: "Generate powerful, quantified achievement bullets instantly." },
-                { href: "/free-resume-score-checker", text: "Resume Score Checker", iconName: "FiAward", desc: "Get your complete resume professionally graded and scored." },
-                { href: "/free-ats-resume-checker", text: "Free ATS Resume Checker", iconName: "FiShield", desc: "Ensure your achievement-rich resume passes automated screening." },
-                { href: "/how-to-describe-work-experience-on-resume", text: "Work Experience Writing Guide", iconName: "FiBriefcase", desc: "Master the art of describing your professional experience." },
-                { href: "/resume-templates", text: "All Resume Templates", iconName: "FiLayout", desc: "500+ professional, ATS-optimized resume designs." }
-              ].map((link, i) => {
-                const IconComponent = ICON_MAP[link.iconName] || FiFileText;
-                return (
-                  <Link key={i} href={link.href} className="geo-link-card">
-                    <IconComponent size={24} style={{ marginBottom: '0.75rem', color: 'var(--accent-primary)' }} />
-                    <span style={{ fontSize: 'var(--font-size-body-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-primary)', lineHeight: '1.4', marginBottom: '0.25rem' }}>{link.text}</span>
-                    <span style={{ fontSize: 'var(--font-size-label-sm)', color: 'var(--text-muted)', lineHeight: '1.3' }}>{link.desc}</span>
-                  </Link>
-                );
-              })}
+                { href: "/resume-strength-calculator", title: "Resume Strength Calculator" },
+                { href: "/resume-value-calculator", title: "Resume Value Calculator" },
+                { href: "/resume-calculators", title: "Resume Calculators Hub" },
+                { href: "/project-manager-resume", title: "Project Manager Resume Guide" },
+                { href: "/resume-skills-section", title: "Resume Skills Section Guide" }
+              ].map((link, i) => (
+                <Link key={i} href={link.href} className="geo-link-card">
+                  <FiArrowRight size={20} style={{ marginBottom: '0.75rem', color: 'var(--accent-primary)' }} />
+                  <span style={{ fontSize: 'var(--font-size-body-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-primary)', lineHeight: '1.4' }}>{link.title}</span>
+                </Link>
+              ))}
             </div>
           </div>
         </section>
@@ -875,7 +871,11 @@ const ResumeAchievementCalculatorPage = ({
 
         {/* Footer Info */}
         <div style={{ padding: '0.75rem 0', backgroundColor: 'var(--bg-surface-lowest)', borderTop: '0.5px solid var(--border-gold-filament)', textAlign: 'center' }}>
-          <span className="text-small"><FiCalendar style={{ marginRight: '0.5rem', display: 'inline', verticalAlign: 'middle' }} /> Last updated: {safeCurrentDate} • Data updated {safeCurrentDate}. Next analysis scheduled for Q2 2026.</span>
+          <span className="text-small"><FiCalendar style={{ marginRight: '0.5rem', display: 'inline', verticalAlign: 'middle' }} /> Last updated: {safeCurrentDate} • Data updated {safeCurrentDate}. Next analysis scheduled for Q2 {CURRENT_YEAR}.</span>
+          <span className="text-small" style={{ marginLeft: '1rem' }}>
+            <FiAlertCircle size={12} style={{ marginRight: '0.25rem', display: 'inline', verticalAlign: 'middle' }} />
+            Achievement scoring is for informational purposes. Adapt strategies to your specific industry and role.
+          </span>
         </div>
 
         {/* Hidden metadata for crawlers */}
@@ -924,8 +924,8 @@ export async function getStaticProps() {
   ];
 
   const meta = {
-    title: "Free Resume Achievement Calculator 2026 - Score Your Bullet Points | No Sign Up",
-    description: "Score your resume achievements and bullet points with our free tool. Rate quantification, impact, and STAR compliance. Get category breakdowns and overall achievement strength. 100% private.",
+    title: `Free Resume Achievement Calculator ${CURRENT_YEAR} - Score Your Bullet Points | No Sign Up`,
+    description: `Score your resume achievements and bullet points with our free tool. Rate quantification, impact, and STAR compliance. Get category breakdowns and overall achievement strength. 100% private.`,
     url: canonicalUrl,
     siteName: "Professional Resume Free",
     image: "https://professionalresumefree.com/achievement-calculator-guide.jpg",

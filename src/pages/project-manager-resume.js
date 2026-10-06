@@ -995,25 +995,6 @@ const ProjectManagerResumePage = ({ seoData, buildTimestamp }) => {
           </div>
         </section>
 
-        {/* Long-Tail Keywords Section */}
-        <section className="section" aria-labelledby="longtail-heading">
-          <div className="section-container">
-            <div className="section-header">
-              <h2 className="section-title" id="longtail-heading">Common Questions About Project Manager Resumes</h2>
-            </div>
-            <div className="grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))' }}>
-              {longTailKeywords.map((keyword, i) => (
-                <div key={i} className="card-executive" style={{ padding: '20px', textAlign: 'center' }}>
-                  <p style={{ fontWeight: '600', marginBottom: '12px' }}>❓ {keyword}</p>
-                  <Link href="/project-management-resource-library" className="btn-outline" style={{ minWidth: 'auto', padding: '0.5rem 1rem', fontSize: '0.8rem', display: 'inline-flex' }}>
-                    Find answer in our resource library →
-                  </Link>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
         {/* FAQ Section */}
         <section className="section section-alt" id="faq" aria-labelledby="faq-heading">
           <div className="section-container">
@@ -1055,31 +1036,26 @@ const ProjectManagerResumePage = ({ seoData, buildTimestamp }) => {
           </div>
         </section>
 
-        {/* Internal Links Grid */}
-        <section className="section" aria-labelledby="resources-heading">
+        {/* New Internal Links Section */}
+        <section className="section" aria-labelledby="internal-links-heading">
           <div className="section-container">
             <div className="section-header">
-              <h2 className="section-title" id="resources-heading">Complete Your Project Management Career Toolkit for {CURRENT_YEAR}</h2>
-              <p className="section-subtitle">Access our full suite of free, expert-developed resources designed specifically for project management professionals</p>
+              <h2 className="section-title" id="internal-links-heading">Related Project Manager Resume Resources</h2>
+              <p className="section-subtitle">Continue exploring our expert guides and tools designed specifically for project management professionals</p>
             </div>
             <div className="geo-link-grid">
               {[
-                { href: "/free-ats-resume-checker", text: "Free ATS Resume Checker", iconName: "FiShield", desc: "Test your PM resume against ATS" },
-                { href: "/resume-skills-section", text: "Skills Section Guide", iconName: "FiCpu", desc: "Categorize PM skills effectively" },
-                { href: "/free-resume-keyword-matcher", text: "Keyword Matcher Tool", iconName: "FiSearch", desc: "Match PM job description keywords" },
-                { href: "/comprehensive-resume-guide-2026", text: "Complete Resume Guide 2026", iconName: "FiBookOpen", desc: "Full resume writing masterclass" },
-                { href: "/how-to-describe-work-experience-on-resume", text: "Work Experience Writing", iconName: "FiBriefcase", desc: "CAR/STAR bullet point mastery" },
-                { href: "/best-ats-resume-format-2026", text: "ATS Format Guide 2026", iconName: "FiCheck", desc: "Beat the bots with proper formatting" }
-              ].map((link, i) => {
-                const IconComponent = ICON_MAP[link.iconName] || FiFileText;
-                return (
-                  <Link key={i} href={link.href} className="geo-link-card" style={{ flexDirection: 'column', gap: '0.5rem' }}>
-                    <IconComponent size={24} style={{ color: 'var(--accent-primary)' }} />
-                    <span style={{ fontSize: 'var(--font-size-body-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-primary)', lineHeight: '1.3' }}>{link.text}</span>
-                    <span style={{ fontSize: 'var(--font-size-label-sm)', color: 'var(--text-muted)', lineHeight: '1.3' }}>{link.desc}</span>
-                  </Link>
-                );
-              })}
+                { href: "/resume-templates", title: "Project Manager Resume Templates" },
+                { href: "/resume-guide", title: "Project Manager Resume Guide" },
+                { href: "/resume-achievement-calculator", title: "Achievement Calculator" },
+                { href: "/promotion-probability-calculator", title: "Promotion Probability Calculator" },
+                { href: "/resume-strength-calculator", title: "Resume Strength Score" }
+              ].map((link, i) => (
+                <Link key={i} href={link.href} className="geo-link-card">
+                  <FiArrowRight size={20} style={{ marginBottom: '0.75rem', color: 'var(--accent-primary)' }} />
+                  <span style={{ fontSize: 'var(--font-size-body-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-primary)', lineHeight: '1.4' }}>{link.title}</span>
+                </Link>
+              ))}
             </div>
           </div>
         </section>
@@ -1087,7 +1063,6 @@ const ProjectManagerResumePage = ({ seoData, buildTimestamp }) => {
         {/* Footer Info */}
         <div style={{ padding: '1rem 0', backgroundColor: 'var(--bg-surface-lowest)', borderTop: '0.5px solid var(--border-gold-filament)', textAlign: 'center' }}>
           <span className="text-small"><FiCalendar style={{ marginRight: '0.5rem', display: 'inline', verticalAlign: 'middle' }} /> Last updated: {safeCurrentDate} • Build: {buildTimestamp} • Sources: PMI, LinkedIn, Indeed, Glassdoor, Burning Glass • Based on 2,000+ PM resumes analyzed</span>
-          <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '0.5rem' }}>© {CURRENT_YEAR} Professional Resume Free. All rights reserved.</p>
         </div>
 
         {/* Hidden Metadata */}

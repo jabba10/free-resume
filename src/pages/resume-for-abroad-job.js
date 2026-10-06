@@ -349,19 +349,6 @@ const defaultMeta = {
   image: "https://professionalresumefree.com/images/resume-abroad-job-guide-og.jpg",
 };
 
-const defaultLongTailKeywords = [
-  "resume for abroad job",
-  "international resume",
-  "CV for overseas jobs",
-  "work abroad resume",
-  "global job application",
-  "ATS friendly resume international",
-  "expat resume template",
-  "visa application resume",
-  "international job search",
-  "resume for working overseas"
-];
-
 const defaultBreadcrumbData = [
   {
     "@type": "ListItem",
@@ -399,7 +386,7 @@ const ResumeForAbroadJobPage = ({
   canonicalUrl = "https://professionalresumefree.com/resume-for-abroad-job",
   breadcrumbData = defaultBreadcrumbData,
   meta = defaultMeta,
-  longTailKeywords = defaultLongTailKeywords,
+  longTailKeywords = [],
   reviewDates = [],
   faqDates = []
 }) => {
@@ -422,12 +409,10 @@ const ResumeForAbroadJobPage = ({
         {/* META DESCRIPTION */}
         <meta name="description" content={meta.description} />
         <meta name="author" content="Professional Resume Free" />
-        <meta name="keywords" content={longTailKeywords.join(', ')} />
         
         {/* GEO OPTIMIZATION TAGS */}
         <meta name="chatgpt-fts:title" content={meta.title} />
         <meta name="chatgpt-fts:description" content={meta.description} />
-        <meta name="chatgpt-fts:keywords" content={longTailKeywords.slice(0, 5).join(', ')} />
         <meta name="chatgpt-fts:last-updated" content={safeCurrentDate} />
         <meta name="generator" content="Professional Resume Free - International Career Platform" />
         
@@ -521,7 +506,7 @@ const ResumeForAbroadJobPage = ({
                   "datePublished": "2025-01-01",
                   "dateModified": safeLastModifiedDate,
                   "articleSection": ["International Resumes", "Global Careers", "Job Search Abroad", "CV Writing Tips"],
-                  "keywords": longTailKeywords.join(', '),
+                  "keywords": "resume for abroad job, international resume, CV for overseas jobs, work abroad resume, global job application",
                   "wordCount": 4500,
                   "inLanguage": "en-US",
                   "isAccessibleForFree": true
@@ -592,7 +577,6 @@ const ResumeForAbroadJobPage = ({
         <meta name="content-freshness" content={safeCurrentDate} />
         <span itemProp="last-updated">{safeCurrentDate}</span>
         <span itemProp="wordCount">4500</span>
-        <span itemProp="keywords">{longTailKeywords.join(', ')}</span>
       </div>
 
       <main style={{ backgroundColor: 'var(--bg-page)', color: 'var(--text-primary)', fontFamily: 'var(--font-body)', minHeight: '100vh', overflowX: 'hidden', width: '100%' }}>
@@ -621,7 +605,7 @@ const ResumeForAbroadJobPage = ({
         <section className="section" id="main-content" aria-labelledby="hero-heading">
           <div className="section-container">
             <div style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center' }}>
-              <div className="badge">✦ RESUME FOR ABROAD JOB 2026 • 8 COUNTRIES • BEFORE/AFTER EXAMPLES • FREE TEMPLATES</div>
+              <div className="badge">✦ RESUME FOR ABROAD JOB {CURRENT_YEAR} • 8 COUNTRIES • BEFORE/AFTER EXAMPLES • FREE TEMPLATES</div>
               <h1 id="hero-heading" style={{ fontSize: 'var(--font-size-display-lg)', fontFamily: 'var(--font-display)', fontWeight: 'var(--font-weight-extrabold)', lineHeight: 'var(--line-height-display)', marginBottom: '1.25rem' }}>
                 <span className="gradient-text">Resume for Abroad Job</span>: Simple Country-by-Country Guide
               </h1>
@@ -661,7 +645,7 @@ const ResumeForAbroadJobPage = ({
         <div className="section-container">
           <div className="citation-card" style={{ background: 'rgba(100,181,246,0.05)', borderLeft: '3px solid var(--info-color)', padding: '1.25rem', borderRadius: '0 0.5rem 0.5rem 0', margin: '20px 0', maxWidth: '800px', marginLeft: 'auto', marginRight: 'auto' }}>
             <p style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)', margin: 0 }}><strong>Data Sources & Methodology:</strong> This guide synthesizes research from {aiCitations.map(s => s.source).join(', ')}. International resume strategies are based on comprehensive analysis of global hiring data, ATS parsing studies, and recruiter preference surveys across 8+ countries.</p>
-            <small style={{ color: 'var(--text-muted)', display: 'block', marginTop: '8px' }}>Last verified: {safeCurrentDate} • Next update: April 2026</small>
+            <small style={{ color: 'var(--text-muted)', display: 'block', marginTop: '8px' }}>Last verified: {safeCurrentDate} • Next update: April {CURRENT_YEAR + 1}</small>
           </div>
         </div>
 
@@ -974,27 +958,26 @@ const ResumeForAbroadJobPage = ({
           </div>
         </section>
 
-        {/* Internal Links Grid - Recommended Career Resources */}
+        {/* New Internal Links Section - Related Resume Guides */}
         <section className="section">
           <div className="section-container">
             <div className="section-header">
-              <h2 className="section-title">Recommended Career Resources</h2>
-              <p className="section-subtitle">Enhance your international job search with these specialized guides and tools.</p>
+              <h2 className="section-title">Related Resume Guides</h2>
+              <p className="section-subtitle">Explore more specialized guides to strengthen your international job application.</p>
             </div>
             <div className="geo-link-grid">
               {[
-                { href: "/free-ats-resume-checker", text: "Free ATS Resume Checker", iconName: "FiShield", desc: "Instantly scan your international resume for compatibility errors." },
-                { href: "/how-to-tailor-your-resume-for-any-usa-job-posting", text: "USA Job Resume Guide", iconName: "FiTarget", desc: "Essential guide for international applicants targeting the US market." },
-                { href: "/resume-tips-for-remote-jobs-in-the-usa", text: "Remote Job Resume Tips", iconName: "FiMonitor", desc: "How to highlight remote work skills for global opportunities." },
-                { href: "/software-engineer-resume-example-and-writing-guide", text: "Software Engineer Resume", iconName: "FiCode", desc: "Optimized formats for Full Stack, Backend, and Mobile developers." },
-                { href: "/interview-tips", text: "Interview Preparation", iconName: "FiUserCheck", desc: "Prepare for international interviews with proven strategies." }
+                { href: "/resume-for-canada-pr-guide", text: "Canada PR Resume Guide", iconName: "FiGlobe" },
+                { href: "/resume-for-gulf-job", text: "Gulf Job Resume Guide", iconName: "FiBriefcase" },
+                { href: "/jobs-boards", text: "Job Boards Directory", iconName: "FiSearch" },
+                { href: "/resume-tips-for-remote-jobs-in-the-usa", text: "Remote Jobs Resume Tips", iconName: "FiMonitor" },
+                { href: "/resume-formatting-guide", text: "Resume Formatting Guide", iconName: "FiLayout" }
               ].map((link, i) => {
                 const IconComponent = ICON_MAP[link.iconName] || FiFileText;
                 return (
                   <Link key={i} href={link.href} className="geo-link-card">
                     <IconComponent size={24} style={{ marginBottom: '0.75rem', color: 'var(--accent-primary)' }} />
-                    <span style={{ fontSize: 'var(--font-size-body-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-primary)', lineHeight: '1.4', marginBottom: '0.25rem' }}>{link.text}</span>
-                    <span style={{ fontSize: 'var(--font-size-label-sm)', color: 'var(--text-muted)', lineHeight: '1.3' }}>{link.desc}</span>
+                    <span style={{ fontSize: 'var(--font-size-body-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-primary)', lineHeight: '1.4' }}>{link.text}</span>
                   </Link>
                 );
               })}
@@ -1012,13 +995,13 @@ const ResumeForAbroadJobPage = ({
               ))}
             </ul>
             <p style={{marginTop: '16px', fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)'}}><strong>Additional analysis:</strong> International resume best practices calibrated against hiring data from 8+ countries, ATS compatibility testing across major global platforms, and recruiter preference surveys from leading multinational employers.</p>
-            <small style={{ color: 'var(--text-muted)', display: 'block', marginTop: '8px' }}>Last full analysis: {safeCurrentDate} • Next update: April 2026</small>
+            <small style={{ color: 'var(--text-muted)', display: 'block', marginTop: '8px' }}>Last full analysis: {safeCurrentDate} • Next update: April {CURRENT_YEAR + 1}</small>
           </div>
         </div>
 
         {/* Footer Info */}
         <div style={{ padding: '0.75rem 0', backgroundColor: 'var(--bg-surface-lowest)', borderTop: '0.5px solid var(--border-gold-filament)', textAlign: 'center' }}>
-          <span className="text-small"><FiCalendar style={{ marginRight: '0.5rem', display: 'inline', verticalAlign: 'middle' }} /> Last updated: {safeCurrentDate} • Data updated {safeCurrentDate}. Next analysis scheduled for Q2 2026.</span>
+          <span className="text-small"><FiCalendar style={{ marginRight: '0.5rem', display: 'inline', verticalAlign: 'middle' }} /> Last updated: {safeCurrentDate} • Data updated {safeCurrentDate}. Next analysis scheduled for Q2 {CURRENT_YEAR + 1}.</span>
         </div>
 
         {/* Hidden metadata for crawlers */}
@@ -1074,19 +1057,6 @@ export async function getStaticProps() {
     image: "https://professionalresumefree.com/images/resume-abroad-job-guide-og.jpg",
   };
 
-  const longTailKeywords = [
-    "resume for abroad job",
-    "international resume",
-    "CV for overseas jobs",
-    "work abroad resume",
-    "global job application",
-    "ATS friendly resume international",
-    "expat resume template",
-    "visa application resume",
-    "international job search",
-    "resume for working overseas"
-  ];
-
   return {
     props: {
       buildTimestamp,
@@ -1095,7 +1065,6 @@ export async function getStaticProps() {
       canonicalUrl,
       breadcrumbData,
       meta,
-      longTailKeywords,
       reviewDates,
       faqDates
     },

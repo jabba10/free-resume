@@ -251,19 +251,6 @@ const defaultMeta = {
   image: "https://professionalresumefree.com/images/government-job-resume-og.jpg",
 };
 
-const defaultLongTailKeywords = [
-  "government job resume",
-  "government job biodata",
-  "UPSC resume format",
-  "SSC application form",
-  "state PSC resume",
-  "government employment application",
-  "official resume format",
-  "government job application 2026",
-  "civil services biodata",
-  "public sector resume"
-];
-
 const defaultBreadcrumbData = [
   {
     "@type": "ListItem",
@@ -306,7 +293,6 @@ const ResumeForGovernmentJobPage = ({
   canonicalUrl = "https://professionalresumefree.com/resume-for-government-job",
   breadcrumbData = defaultBreadcrumbData,
   meta = defaultMeta,
-  longTailKeywords = defaultLongTailKeywords,
   reviewDates = [],
   faqDates = []
 }) => {
@@ -329,13 +315,11 @@ const ResumeForGovernmentJobPage = ({
         
         {/* META DESCRIPTION */}
         <meta name="description" content={meta.description} />
-        <meta name="keywords" content={longTailKeywords.join(', ')} />
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
         
         {/* GEO OPTIMIZATION TAGS */}
         <meta name="chatgpt-fts:title" content={meta.title} />
         <meta name="chatgpt-fts:description" content={meta.description} />
-        <meta name="chatgpt-fts:keywords" content={longTailKeywords.slice(0, 5).join(', ')} />
         <meta name="chatgpt-fts:last-updated" content={safeCurrentDate} />
         <meta name="generator" content="Professional Resume Free - Government Employment Platform" />
         
@@ -379,7 +363,7 @@ const ResumeForGovernmentJobPage = ({
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={meta.title} />
         <meta name="twitter:description" content={meta.description} />
-        <meta name="twitter:image" content="https://professionalresumefree.com/images/government-job-resume-twitter.jpg" />
+        <meta name="twitter:image" content={meta.image} />
         <meta name="twitter:image:alt" content="Government Job Resume Guide 2026" />
         <meta name="twitter:site" content="@ProResumeFree" />
         <meta name="twitter:creator" content="@ProResumeFree" />
@@ -443,8 +427,7 @@ const ResumeForGovernmentJobPage = ({
                   },
                   "mainEntityOfPage": canonicalUrl,
                   "wordCount": 4500,
-                  "articleSection": ["Government Jobs", "Resume Writing", "UPSC Preparation", "SSC Exams"],
-                  "keywords": longTailKeywords.join(', ')
+                  "articleSection": ["Government Jobs", "Resume Writing", "UPSC Preparation", "SSC Exams"]
                 },
                 {
                   "@type": "BreadcrumbList",
@@ -541,7 +524,6 @@ const ResumeForGovernmentJobPage = ({
         <meta name="content-freshness" content={safeCurrentDate} />
         <span itemProp="dateModified">{safeLastModifiedDate}</span>
         <span itemProp="wordCount">4500</span>
-        <span itemProp="keywords">{longTailKeywords.join(', ')}</span>
         <span itemProp="build-timestamp">{buildTimestamp}</span>
       </div>
 
@@ -571,7 +553,7 @@ const ResumeForGovernmentJobPage = ({
         <section className="section" id="main-content" aria-labelledby="hero-heading">
           <div className="section-container">
             <div style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center' }}>
-              <div className="badge">✦ GOVERNMENT JOB RESUME GUIDE 2026 • UPSC • SSC • STATE PSC • BANKING • OFFICIAL FORMATS</div>
+              <div className="badge">✦ GOVERNMENT JOB RESUME GUIDE {CURRENT_YEAR} • UPSC • SSC • STATE PSC • BANKING • OFFICIAL FORMATS</div>
               <h1 id="hero-heading" style={{ fontSize: 'var(--font-size-display-lg)', fontFamily: 'var(--font-display)', fontWeight: 'var(--font-weight-extrabold)', lineHeight: 'var(--line-height-display)', marginBottom: '1.25rem' }}>
                 <span className="gradient-text">Government Job Resume</span> Guide: Biodata Format & Official Tips
               </h1>
@@ -611,7 +593,7 @@ const ResumeForGovernmentJobPage = ({
         <div className="section-container">
           <div className="citation-card" style={{ background: 'rgba(100,181,246,0.05)', borderLeft: '3px solid var(--info-color)', padding: '1.25rem', borderRadius: '0 0.5rem 0.5rem 0', margin: '20px 0', maxWidth: '800px', marginLeft: 'auto', marginRight: 'auto' }}>
             <p style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)', margin: 0 }}><strong>Data Sources & Methodology:</strong> This guide synthesizes research from {aiCitations.map(s => s.source).join(', ')}. Government biodata strategies are based on comprehensive analysis of application outcomes, document verification processes, and insights from former recruitment officials.</p>
-            <small style={{ color: 'var(--text-muted)', display: 'block', marginTop: '8px' }}>Last verified: {safeCurrentDate} • Next update: April 2026</small>
+            <small style={{ color: 'var(--text-muted)', display: 'block', marginTop: '8px' }}>Last verified: {safeCurrentDate} • Next update: April {CURRENT_YEAR + 1}</small>
           </div>
         </div>
 
@@ -864,27 +846,26 @@ const ResumeForGovernmentJobPage = ({
           </div>
         </section>
 
-        {/* Internal Links Grid - Recommended Career Resources */}
+        {/* New Internal Links Section - Related Resume Guides */}
         <section className="section">
           <div className="section-container">
             <div className="section-header">
-              <h2 className="section-title">Recommended Career Resources</h2>
-              <p className="section-subtitle">Enhance your government exam preparation with these specialized guides and tools.</p>
+              <h2 className="section-title">Related Resume Guides</h2>
+              <p className="section-subtitle">Explore more specialized guides to strengthen your job application journey.</p>
             </div>
             <div className="geo-link-grid">
               {[
-                { href: "/resume-formatting-guide", text: "Resume Formatting Guide", iconName: "FiLayout", desc: "Ensure your biodata meets strict government layout and format standards." },
-                { href: "/interview-tips", text: "Government Interview Prep", iconName: "FiUserCheck", desc: "Prepare for personality tests and viva voce with expert strategies." },
-                { href: "/cover-letter-guides", text: "Cover Letter Guides", iconName: "FiFileText", desc: "Complete your application with professional cover letters." },
-                { href: "/how-to-beat-the-ats-optimization-tips-for-modern-hiring-software", text: "Beat ATS Screening", iconName: "FiCpu", desc: "Optimize your biodata for online government application portals." },
-                { href: "/free-ats-resume-checker", text: "Free ATS Resume Checker", iconName: "FiShield", desc: "Test your government biodata for compatibility and formatting issues." }
+                { href: "/resume-for-abroad-job", text: "Abroad Job Resume Guide", iconName: "FiGlobe" },
+                { href: "/resume-for-private-job", text: "Private Sector Resume Guide", iconName: "FiBriefcase" },
+                { href: "/resume-format-india", text: "India Resume Format", iconName: "FiLayout" },
+                { href: "/resume-guide", text: "Complete Resume Guide", iconName: "FiFileText" },
+                { href: "/resume-formatting-guide", text: "Resume Formatting Guide", iconName: "FiAlignLeft" }
               ].map((link, i) => {
                 const IconComponent = ICON_MAP[link.iconName] || FiFileText;
                 return (
                   <Link key={i} href={link.href} className="geo-link-card">
                     <IconComponent size={24} style={{ marginBottom: '0.75rem', color: 'var(--accent-primary)' }} />
-                    <span style={{ fontSize: 'var(--font-size-body-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-primary)', lineHeight: '1.4', marginBottom: '0.25rem' }}>{link.text}</span>
-                    <span style={{ fontSize: 'var(--font-size-label-sm)', color: 'var(--text-muted)', lineHeight: '1.3' }}>{link.desc}</span>
+                    <span style={{ fontSize: 'var(--font-size-body-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-primary)', lineHeight: '1.4' }}>{link.text}</span>
                   </Link>
                 );
               })}
@@ -902,13 +883,13 @@ const ResumeForGovernmentJobPage = ({
               ))}
             </ul>
             <p style={{marginTop: '16px', fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)'}}><strong>Additional analysis:</strong> Government biodata best practices calibrated against document verification outcomes, interviews with former recruitment officials, and analysis of UPSC, SSC, State PSC, and Banking examination application patterns.</p>
-            <small style={{ color: 'var(--text-muted)', display: 'block', marginTop: '8px' }}>Last full analysis: {safeCurrentDate} • Next update: April 2026</small>
+            <small style={{ color: 'var(--text-muted)', display: 'block', marginTop: '8px' }}>Last full analysis: {safeCurrentDate} • Next update: April {CURRENT_YEAR + 1}</small>
           </div>
         </div>
 
         {/* Footer Info */}
         <div style={{ padding: '0.75rem 0', backgroundColor: 'var(--bg-surface-lowest)', borderTop: '0.5px solid var(--border-gold-filament)', textAlign: 'center' }}>
-          <span className="text-small"><FiCalendar style={{ marginRight: '0.5rem', display: 'inline', verticalAlign: 'middle' }} /> Last updated: {safeCurrentDate} • Data updated {safeCurrentDate}. Next analysis scheduled for Q2 2026.</span>
+          <span className="text-small"><FiCalendar style={{ marginRight: '0.5rem', display: 'inline', verticalAlign: 'middle' }} /> Last updated: {safeCurrentDate} • Data updated {safeCurrentDate}. Next analysis scheduled for Q2 {CURRENT_YEAR + 1}.</span>
         </div>
 
         {/* Hidden metadata for crawlers */}
@@ -970,19 +951,6 @@ export async function getStaticProps() {
     image: "https://professionalresumefree.com/images/government-job-resume-og.jpg",
   };
 
-  const longTailKeywords = [
-    "government job resume",
-    "government job biodata",
-    "UPSC resume format",
-    "SSC application form",
-    "state PSC resume",
-    "government employment application",
-    "official resume format",
-    "government job application 2026",
-    "civil services biodata",
-    "public sector resume"
-  ];
-
   return {
     props: {
       buildTimestamp,
@@ -991,7 +959,6 @@ export async function getStaticProps() {
       canonicalUrl,
       breadcrumbData,
       meta,
-      longTailKeywords,
       reviewDates,
       faqDates
     },

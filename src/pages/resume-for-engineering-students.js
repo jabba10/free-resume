@@ -304,19 +304,6 @@ const defaultMeta = {
   image: "https://professionalresumefree.com/images/engineering-resume-guide-og.jpg",
 };
 
-const defaultLongTailKeywords = [
-  "engineering student resume",
-  "engineering resume guide",
-  "engineering resume template",
-  "engineering resume builder",
-  "ATS friendly engineering resume",
-  "engineering resume format 2026",
-  "engineering student cv",
-  "technical resume guide",
-  "engineering fresher resume",
-  "engineering job resume"
-];
-
 const defaultBreadcrumbData = [
   {
     "@type": "ListItem",
@@ -353,7 +340,6 @@ const ResumeForEngineeringStudentsPage = ({
   canonicalUrl = "https://professionalresumefree.com/resume-for-engineering-students",
   breadcrumbData = defaultBreadcrumbData,
   meta = defaultMeta,
-  longTailKeywords = defaultLongTailKeywords,
   reviewDates = [],
   faqDates = []
 }) => {
@@ -376,13 +362,11 @@ const ResumeForEngineeringStudentsPage = ({
         {/* META DESCRIPTION */}
         <meta name="description" content={meta.description} />
         <meta name="author" content="Professional Resume Free Career Team" />
-        <meta name="keywords" content={longTailKeywords.join(', ')} />
         <meta name="copyright" content={`${CURRENT_YEAR} Professional Resume Free`} />
         
         {/* GEO OPTIMIZATION TAGS */}
         <meta name="chatgpt-fts:title" content={meta.title} />
         <meta name="chatgpt-fts:description" content={meta.description} />
-        <meta name="chatgpt-fts:keywords" content={longTailKeywords.slice(0, 4).join(', ')} />
         <meta name="chatgpt-fts:last-updated" content={safeCurrentDate} />
         <meta name="generator" content="Professional Resume Free - Engineering Resume Guide" />
         
@@ -430,7 +414,7 @@ const ResumeForEngineeringStudentsPage = ({
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={meta.title} />
         <meta name="twitter:description" content={meta.description} />
-        <meta name="twitter:image" content="https://professionalresumefree.com/images/engineering-resume-guide-twitter.jpg" />
+        <meta name="twitter:image" content={meta.image} />
         <meta name="twitter:image:alt" content="Engineering Student Resume Guide" />
         <meta name="twitter:site" content="@ProResumeFree" />
         <meta name="twitter:creator" content="@ProResumeFree" />
@@ -589,7 +573,7 @@ const ResumeForEngineeringStudentsPage = ({
         <section className="section" id="main-content" aria-labelledby="hero-heading">
           <div className="section-container">
             <div style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center' }}>
-              <div className="badge">✦ ENGINEERING STUDENT RESUME GUIDE 2026 • SOFTWARE • MECHANICAL • ELECTRICAL • CIVIL • CHEMICAL • FREE TEMPLATES</div>
+              <div className="badge">✦ ENGINEERING STUDENT RESUME GUIDE {CURRENT_YEAR} • SOFTWARE • MECHANICAL • ELECTRICAL • CIVIL • CHEMICAL • FREE TEMPLATES</div>
               <h1 id="hero-heading" style={{ fontSize: 'var(--font-size-display-lg)', fontFamily: 'var(--font-display)', fontWeight: 'var(--font-weight-extrabold)', lineHeight: 'var(--line-height-display)', marginBottom: '1.25rem' }}>
                 <span className="gradient-text">Engineering Student Resume</span> Guide: ATS Tips & Free Templates
               </h1>
@@ -610,7 +594,7 @@ const ResumeForEngineeringStudentsPage = ({
                 ))}
               </div>
               <div style={{marginTop: '20px', fontSize: '0.8rem', color: 'var(--text-muted)'}} aria-label="Page last updated">
-                <FiCalendar style={{marginRight: '4px', display: 'inline'}} /> Last updated: {safeCurrentDate} | Based on 2026 engineering hiring data
+                <FiCalendar style={{marginRight: '4px', display: 'inline'}} /> Last updated: {safeCurrentDate} | Based on {CURRENT_YEAR} engineering hiring data
               </div>
             </div>
           </div>
@@ -630,7 +614,7 @@ const ResumeForEngineeringStudentsPage = ({
         <div className="section-container">
           <div className="citation-card" style={{ background: 'rgba(100,181,246,0.05)', borderLeft: '3px solid var(--info-color)', padding: '1.25rem', borderRadius: '0 0.5rem 0.5rem 0', margin: '20px 0', maxWidth: '800px', marginLeft: 'auto', marginRight: 'auto' }}>
             <p style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)', margin: 0 }}><strong>Data Sources & Methodology:</strong> This guide synthesizes research from {aiCitations.map(s => s.source).join(', ')}. Engineering resume strategies are based on comprehensive analysis of job posting data, ATS parsing studies, and technical recruiter preference surveys.</p>
-            <small style={{ color: 'var(--text-muted)', display: 'block', marginTop: '8px' }}>Last verified: {safeCurrentDate} • Next update: April 2026</small>
+            <small style={{ color: 'var(--text-muted)', display: 'block', marginTop: '8px' }}>Last verified: {safeCurrentDate} • Next update: April {CURRENT_YEAR + 1}</small>
           </div>
         </div>
 
@@ -878,27 +862,26 @@ const ResumeForEngineeringStudentsPage = ({
           </div>
         </section>
 
-        {/* Internal Links Grid - Recommended Career Resources */}
+        {/* New Internal Links Section - Related Resume Guides */}
         <section className="section">
           <div className="section-container">
             <div className="section-header">
-              <h2 className="section-title">Recommended Career Resources</h2>
-              <p className="section-subtitle">Enhance your engineering job search with these specialized guides and tools.</p>
+              <h2 className="section-title">Related Resume Guides</h2>
+              <p className="section-subtitle">Explore more specialized guides to strengthen your engineering job application.</p>
             </div>
             <div className="geo-link-grid">
               {[
-                { href: "/free-ats-resume-checker", text: "Free ATS Resume Checker", iconName: "FiShield", desc: "Scan your engineering resume for ATS compatibility issues." },
-                { href: "/ats-friendly-technology-ai-and-machine-learning-engineering-resume-builder", text: "AI & ML Resume Builder", iconName: "FiCpu", desc: "Specialized templates for tech and AI engineering roles." },
-                { href: "/software-engineer-resume-example-and-writing-guide", text: "Software Engineer Resume", iconName: "FiCode", desc: "Developer-focused resume examples and writing guidance." },
-                { href: "/how-to-use-chatgpt-to-improve-your-resume-bullets-prompt-engineering-guide-2026", text: "ChatGPT Resume Guide", iconName: "FiZap", desc: "Use AI to write better engineering bullet points." },
-                { href: "/interview-tips", text: "Interview Preparation", iconName: "FiUserCheck", desc: "Prepare for technical and behavioral engineering interviews." }
+                { href: "/resume-for-diploma-students", text: "Diploma Student Resume Guide", iconName: "FiTool" },
+                { href: "/software-engineer-resume-template", text: "Software Engineer Resume Template", iconName: "FiCode" },
+                { href: "/software-engineer-resume-example-and-writing-guide", text: "Software Engineer Resume Guide", iconName: "FiTerminal" },
+                { href: "/resume-education-section", text: "Education Section Writing", iconName: "FiBookOpen" },
+                { href: "/resume-format-for-freshers", text: "Fresher Resume Format", iconName: "FiLayout" }
               ].map((link, i) => {
                 const IconComponent = ICON_MAP[link.iconName] || FiFileText;
                 return (
                   <Link key={i} href={link.href} className="geo-link-card">
                     <IconComponent size={24} style={{ marginBottom: '0.75rem', color: 'var(--accent-primary)' }} />
-                    <span style={{ fontSize: 'var(--font-size-body-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-primary)', lineHeight: '1.4', marginBottom: '0.25rem' }}>{link.text}</span>
-                    <span style={{ fontSize: 'var(--font-size-label-sm)', color: 'var(--text-muted)', lineHeight: '1.3' }}>{link.desc}</span>
+                    <span style={{ fontSize: 'var(--font-size-body-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-primary)', lineHeight: '1.4' }}>{link.text}</span>
                   </Link>
                 );
               })}
@@ -916,13 +899,13 @@ const ResumeForEngineeringStudentsPage = ({
               ))}
             </ul>
             <p style={{marginTop: '16px', fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)'}}><strong>Additional analysis:</strong> Engineering resume best practices calibrated against 10,000+ job postings, ATS compatibility testing across major platforms, and technical recruiter interviews across software, mechanical, electrical, civil, and chemical engineering disciplines.</p>
-            <small style={{ color: 'var(--text-muted)', display: 'block', marginTop: '8px' }}>Last full analysis: {safeCurrentDate} • Next update: April 2026</small>
+            <small style={{ color: 'var(--text-muted)', display: 'block', marginTop: '8px' }}>Last full analysis: {safeCurrentDate} • Next update: April {CURRENT_YEAR + 1}</small>
           </div>
         </div>
 
         {/* Footer Info */}
         <div style={{ padding: '0.75rem 0', backgroundColor: 'var(--bg-surface-lowest)', borderTop: '0.5px solid var(--border-gold-filament)', textAlign: 'center' }}>
-          <span className="text-small"><FiCalendar style={{ marginRight: '0.5rem', display: 'inline', verticalAlign: 'middle' }} /> Last updated: {safeCurrentDate} • Data updated {safeCurrentDate}. Next analysis scheduled for Q2 2026.</span>
+          <span className="text-small"><FiCalendar style={{ marginRight: '0.5rem', display: 'inline', verticalAlign: 'middle' }} /> Last updated: {safeCurrentDate} • Data updated {safeCurrentDate}. Next analysis scheduled for Q2 {CURRENT_YEAR + 1}.</span>
         </div>
 
         {/* Hidden metadata for crawlers */}
@@ -978,19 +961,6 @@ export async function getStaticProps() {
     image: "https://professionalresumefree.com/images/engineering-resume-guide-og.jpg",
   };
 
-  const longTailKeywords = [
-    "engineering student resume",
-    "engineering resume guide",
-    "engineering resume template",
-    "engineering resume builder",
-    "ATS friendly engineering resume",
-    "engineering resume format 2026",
-    "engineering student cv",
-    "technical resume guide",
-    "engineering fresher resume",
-    "engineering job resume"
-  ];
-
   return {
     props: {
       buildTimestamp,
@@ -999,7 +969,6 @@ export async function getStaticProps() {
       canonicalUrl,
       breadcrumbData,
       meta,
-      longTailKeywords,
       reviewDates,
       faqDates
     },

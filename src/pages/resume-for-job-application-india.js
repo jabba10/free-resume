@@ -159,7 +159,7 @@ const COMMON_MISTAKES = [
   { mistake: "Missing or Incomplete Certifications Section", problem: "Failing to list professional certifications or listing them without issuing body, date, and credential ID. Indian employers place significant value on certifications—82% consider them important in hiring decisions.", solution: "Create a dedicated 'Certifications & Professional Development' section. List each certification with: full name, issuing organization, date earned, expiration date (if applicable), and credential ID/URL for verification. Prioritize certifications relevant to your target role. Include ongoing certifications with 'In Progress—Expected [Month Year].'" }
 ];
 
-// NEW: CITY-SPECIFIC SALARY & JOB MARKET DATA
+// CITY-SPECIFIC SALARY & JOB MARKET DATA
 const CITY_MARKET_DATA = [
   { city: "Bangalore", flag: "🇮🇳", nickname: "Silicon Valley of India", dominantIndustries: "IT/Software, Startups, Biotechnology, Aerospace", avgSalaryRange: "₹8L-35L+", costOfLiving: "High", topEmployers: "Infosys, Wipro, Flipkart, Amazon, Microsoft, Google", keyResumeTip: "Emphasize tech stack depth, startup experience, and continuous learning through certifications and side projects" },
   { city: "Mumbai", flag: "🇮🇳", nickname: "Financial Capital", dominantIndustries: "Banking, Finance, Entertainment, Real Estate", avgSalaryRange: "₹6L-40L+", costOfLiving: "Very High", topEmployers: "HDFC Bank, ICICI Bank, Reliance Industries, TCS, Accenture", keyResumeTip: "For finance roles, highlight quantitative achievements and regulatory knowledge. For creative roles, include portfolio links" },
@@ -169,7 +169,7 @@ const CITY_MARKET_DATA = [
   { city: "Pune", flag: "🇮🇳", nickname: "Oxford of the East", dominantIndustries: "IT, Automotive, Education, Manufacturing", avgSalaryRange: "₹5L-28L+", costOfLiving: "Moderate", topEmployers: "Infosys, TCS, Volkswagen, Bajaj Auto, Cummins", keyResumeTip: "Automotive roles should highlight design tools (CATIA, SolidWorks). IT roles benefit from full-stack and DevOps experience" }
 ];
 
-// NEW: RESUME SECTION-BY-SECTION BUILDER GUIDE
+// RESUME SECTION-BY-SECTION BUILDER GUIDE
 const SECTION_BUILDER = [
   { section: "Professional Header", purpose: "Immediate identification and contact accessibility", content: "Full name (largest text on page, 16-18pt), professional title matching target role, phone with +91 country code, professional email, city/state (full address not needed), LinkedIn profile URL, GitHub/portfolio link (for tech roles)", indianContext: "Indian recruiters appreciate seeing your city—it helps assess relocation needs and local market knowledge. Never include father's name, date of birth, or marital status unless specifically required for government applications.", commonErrors: "Using unprofessional email; missing LinkedIn URL (increasingly expected in Indian corporate hiring); including full residential address" },
   { section: "Professional Summary", purpose: "3-4 line elevator pitch communicating your value proposition", content: "Sentence 1: Years of experience + primary domain/industry. Sentence 2: 2-3 key technical/domain competencies. Sentence 3: 1-2 significant quantified achievements. Sentence 4: Target role or career objective.", indianContext: "Indian recruiters value explicit mention of educational background in summaries: 'IIT Delhi Computer Science graduate with 8 years...' carries weight in the Indian market. Mention prestigious employers: 'Ex-TCS, Ex-Infosys.'", commonErrors: "Generic statements without specifics; using first-person pronouns (write in implied first person); exceeding 4 lines; failing to customize for each application" },
@@ -178,7 +178,7 @@ const SECTION_BUILDER = [
   { section: "Education", purpose: "Academic credentials verification and qualification baseline", content: "Degree name (spelled out and abbreviated), institution name, university/board, location, year of completion, percentage/CGPA if strong (above 60% or 6.0 CGPA). List in reverse chronological order.", indianContext: "Indian recruiters place high value on educational pedigree—mention IITs, NITs, IIMs, and other prestigious institutions prominently. Include 10th and 12th only if you're a fresher with less than 2 years experience.", commonErrors: "Including school details when you have a degree; listing education before experience when you have 3+ years experience; incorrect percentage/CGPA calculations" }
 ];
 
-// NEW: BEFORE & AFTER RESUME TRANSFORMATION
+// BEFORE & AFTER RESUME TRANSFORMATION
 const BEFORE_AFTER_EXAMPLE = {
   scenario: "Mid-Level IT Professional Applying to Bangalore MNC",
   before: `RAHUL SHARMA
@@ -250,7 +250,7 @@ CERTIFICATIONS
   ]
 };
 
-// NEW: INDIAN RECRUITMENT TIMELINE
+// INDIAN RECRUITMENT TIMELINE
 const RECRUITMENT_TIMELINE = [
   { stage: "Application Submission", timeframe: "Day 0", description: "Submit resume through company portal, Naukri.com, LinkedIn, or employee referral. Referrals receive 5x more attention in Indian hiring.", applicantAction: "Customize resume with keywords from job description. Follow up with HR contact if possible." },
   { stage: "ATS Screening", timeframe: "Day 1-7", description: "Resume parsed by ATS (Taleo, SAP SuccessFactors, Zoho Recruit, Darwinbox). 75% of applications filtered at this stage.", applicantAction: "Ensure .docx format, standard headings, and keyword match rate above 70%." },
@@ -260,7 +260,7 @@ const RECRUITMENT_TIMELINE = [
   { stage: "HR Interview & Offer", timeframe: "Day 30-45", description: "Final round covering salary expectations, notice period, cultural fit. Offer letter issued with 2-7 day acceptance window.", applicantAction: "Research market salary data. Have current CTC breakup ready. Negotiate based on complete package." }
 ];
 
-// NEW: TOP INDIAN JOB PORTALS COMPARISON
+// TOP INDIAN JOB PORTALS COMPARISON
 const JOB_PORTALS = [
   { portal: "Naukri.com", bestFor: "Mid to senior-level positions across all industries; IT, Banking, Manufacturing", uniqueFeature: "Largest Indian job portal with 70M+ registered users; Recruiter actions show profile visibility", profileTip: "Update resume monthly—recruiters filter by 'last updated.' Use Naukri's salary insights for negotiation" },
   { portal: "LinkedIn India", bestFor: "IT, Consulting, MNC roles; networking and employer branding", uniqueFeature: "Professional network with 100M+ Indian members; Easy Apply feature; recruiter InMail access", profileTip: "Maintain 'Open to Work' status. Post industry content to increase visibility. Get recommendations from colleagues" },
@@ -654,7 +654,7 @@ const ResumeForJobApplicationIndiaPage = ({ seoData }) => {
           </div>
         </section>
 
-        {/* NEW: City-Specific Market Data - Interactive */}
+        {/* City-Specific Market Data - Interactive */}
         <section className="section">
           <div className="section-container">
             <div className="section-header">
@@ -717,7 +717,7 @@ const ResumeForJobApplicationIndiaPage = ({ seoData }) => {
           </div>
         </section>
 
-        {/* NEW: Before & After Resume Transformation */}
+        {/* Before & After Resume Transformation */}
         <section className="section">
           <div className="section-container">
             <div className="section-header">
@@ -751,7 +751,7 @@ const ResumeForJobApplicationIndiaPage = ({ seoData }) => {
           </div>
         </section>
 
-        {/* NEW: Section-by-Section Builder - Interactive */}
+        {/* Section-by-Section Builder - Interactive */}
         <section className="section section-alt">
           <div className="section-container">
             <div className="section-header">
@@ -809,7 +809,7 @@ const ResumeForJobApplicationIndiaPage = ({ seoData }) => {
           </div>
         </section>
 
-        {/* NEW: Indian Recruitment Timeline */}
+        {/* Indian Recruitment Timeline */}
         <section className="section section-alt">
           <div className="section-container">
             <div className="section-header">
@@ -865,7 +865,7 @@ const ResumeForJobApplicationIndiaPage = ({ seoData }) => {
           </div>
         </section>
 
-        {/* NEW: Top Indian Job Portals */}
+        {/* Top Indian Job Portals */}
         <section className="section section-alt">
           <div className="section-container">
             <div className="section-header">
@@ -970,7 +970,7 @@ const ResumeForJobApplicationIndiaPage = ({ seoData }) => {
           </div>
         </section>
 
-        {/* Internal Links - ALL BROKEN LINKS REMOVED */}
+        {/* Internal Links - Related Resources */}
         <section className="section" style={{ background: 'var(--bg-surface-lowest)' }} aria-labelledby="resources-heading">
           <div className="section-container">
             <h2 id="resources-heading" className="section-title" style={{ textAlign: 'center', marginBottom: '2rem' }}>🔗 Related Resources for Indian Job Seekers</h2>
@@ -1064,47 +1064,29 @@ const ResumeForJobApplicationIndiaPage = ({ seoData }) => {
           </div>
         </section>
 
-        {/* NEW SECTION: 5 Randomly Selected Links from JSON for Internal Linking Boost */}
-        <section className="section" style={{ background: 'var(--bg-surface-lowest)', borderTop: '0.5px solid var(--border-gold-filament)' }} aria-labelledby="expand-toolkit-heading">
+        {/* NEW: Related Resume Guides Section */}
+        <section className="section" style={{ background: 'var(--bg-surface-lowest)', borderTop: '0.5px solid var(--border-gold-filament)' }} aria-labelledby="related-guides-heading">
           <div className="section-container">
-            <h2 id="expand-toolkit-heading" className="section-title" style={{ textAlign: 'left', marginBottom: '1.5rem' }}>Expand Your Career Toolkit</h2>
-            <div className="grid">
-              
-              {/* Link 1: Jobs Boards - High Value for Job Seekers */}
-              <Link href="/jobs-boards" className="card-executive">
-                <h3 style={{ marginBottom: '0.5rem', fontSize: '1.1rem' }}>Top Job Boards for India</h3>
-                <p style={{ color: 'var(--text-secondary)', marginBottom: '0.75rem', fontSize: '0.95rem' }}>Discover the best platforms to find opportunities in your sector.</p>
-                <span style={{ color: 'var(--accent-primary)', fontWeight: '500', fontSize: '0.9rem' }}>Browse Jobs <FiArrowRight style={{ marginLeft: '0.25rem', display: 'inline' }} /></span>
-              </Link>
-
-              {/* Link 2: Interview Tips - Next Step After Resume */}
-              <Link href="/interview-tips" className="card-executive">
-                <h3 style={{ marginBottom: '0.5rem', fontSize: '1.1rem' }}>Interview Preparation Tips</h3>
-                <p style={{ color: 'var(--text-secondary)', marginBottom: '0.75rem', fontSize: '0.95rem' }}>Ace your next interview with proven strategies and common questions.</p>
-                <span style={{ color: 'var(--accent-primary)', fontWeight: '500', fontSize: '0.9rem' }}>Get Tips <FiArrowRight style={{ marginLeft: '0.25rem', display: 'inline' }} /></span>
-              </Link>
-
-              {/* Link 3: How to Beat ATS - Critical for Indian MNCs */}
-              <Link href="/how-to-beat-the-ats-optimization-tips-for-modern-hiring-software" className="card-executive">
-                <h3 style={{ marginBottom: '0.5rem', fontSize: '1.1rem' }}>Beat the ATS Screening</h3>
-                <p style={{ color: 'var(--text-secondary)', marginBottom: '0.75rem', fontSize: '0.95rem' }}>Optimize your application for online government and corporate portals.</p>
-                <span style={{ color: 'var(--accent-primary)', fontWeight: '500', fontSize: '0.9rem' }}>Learn More <FiArrowRight style={{ marginLeft: '0.25rem', display: 'inline' }} /></span>
-              </Link>
-
-              {/* Link 4: Cover Letter Guides - Essential Companion */}
-              <Link href="/cover-letter-guides" className="card-executive">
-                <h3 style={{ marginBottom: '0.5rem', fontSize: '1.1rem' }}>Cover Letter Guides</h3>
-                <p style={{ color: 'var(--text-secondary)', marginBottom: '0.75rem', fontSize: '0.95rem' }}>Learn how to write compelling cover letters that get noticed.</p>
-                <span style={{ color: 'var(--accent-primary)', fontWeight: '500', fontSize: '0.9rem' }}>Read Guides <FiArrowRight style={{ marginLeft: '0.25rem', display: 'inline' }} /></span>
-              </Link>
-
-              {/* Link 5: Resume Formatting Guide - Technical Precision */}
-              <Link href="/resume-formatting-guide" className="card-executive">
-                <h3 style={{ marginBottom: '0.5rem', fontSize: '1.1rem' }}>Perfect Resume Formatting</h3>
-                <p style={{ color: 'var(--text-secondary)', marginBottom: '0.75rem', fontSize: '0.95rem' }}>Ensure your biodata meets strict layout standards for Indian recruiters.</p>
-                <span style={{ color: 'var(--accent-primary)', fontWeight: '500', fontSize: '0.9rem' }}>View Guide <FiArrowRight style={{ marginLeft: '0.25rem', display: 'inline' }} /></span>
-              </Link>
-
+            <div className="section-header">
+              <h2 id="related-guides-heading" className="section-title">Related Resume Guides</h2>
+              <p className="section-subtitle">Explore more specialized guides to strengthen your job application journey.</p>
+            </div>
+            <div className="geo-link-grid">
+              {[
+                { href: "/resume-format-india", text: "India Resume Format", iconName: "FiLayout" },
+                { href: "/resume-for-students-in-india", text: "Student Resume India", iconName: "FiBookOpen" },
+                { href: "/part-time-job-resume-india", text: "Part-Time Job Resume India", iconName: "FiClock" },
+                { href: "/resume-format-for-freshers", text: "Fresher Resume Format", iconName: "FiUserCheck" },
+                { href: "/resume-guide", text: "Resume Writing Guide", iconName: "FiFileText" }
+              ].map((link, i) => {
+                const IconComponent = ICON_MAP[link.iconName] || FiFileText;
+                return (
+                  <Link key={i} href={link.href} className="geo-link-card">
+                    <IconComponent size={24} style={{ marginBottom: '0.75rem', color: 'var(--accent-primary)' }} />
+                    <span style={{ fontSize: 'var(--font-size-body-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-primary)', lineHeight: '1.4' }}>{link.text}</span>
+                  </Link>
+                );
+              })}
             </div>
           </div>
         </section>

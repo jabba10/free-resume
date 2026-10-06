@@ -261,19 +261,6 @@ const defaultMeta = {
   image: "https://professionalresumefree.com/images/resume-12th-pass-guide-og.jpg",
 };
 
-const defaultLongTailKeywords = [
-  "resume for 12th pass",
-  "fresher resume",
-  "student resume",
-  "no experience resume",
-  "12th pass job resume",
-  "entry level resume",
-  "school pass resume",
-  "how to write resume for 12th pass",
-  "12th pass resume format",
-  "fresher resume examples"
-];
-
 const defaultBreadcrumbData = [
   {
     "@type": "ListItem",
@@ -310,7 +297,7 @@ const ResumeFor12thPassPage = ({
   canonicalUrl = "https://professionalresumefree.com/resume-for-12th-pass",
   breadcrumbData = defaultBreadcrumbData,
   meta = defaultMeta,
-  longTailKeywords = defaultLongTailKeywords,
+  longTailKeywords = [],
   reviewDates = [],
   faqDates = []
 }) => {
@@ -333,13 +320,11 @@ const ResumeFor12thPassPage = ({
         {/* META DESCRIPTION */}
         <meta name="description" content={meta.description} />
         <meta name="author" content="Professional Resume Free Career Team" />
-        <meta name="keywords" content={longTailKeywords.join(', ')} />
         <meta name="copyright" content={`${CURRENT_YEAR} Professional Resume Free`} />
         
         {/* GEO OPTIMIZATION TAGS */}
         <meta name="chatgpt-fts:title" content={meta.title} />
         <meta name="chatgpt-fts:description" content={meta.description} />
-        <meta name="chatgpt-fts:keywords" content={longTailKeywords.slice(0, 4).join(', ')} />
         <meta name="chatgpt-fts:last-updated" content={safeCurrentDate} />
         <meta name="generator" content="Professional Resume Free - Resume Guide" />
         
@@ -387,7 +372,7 @@ const ResumeFor12thPassPage = ({
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={meta.title} />
         <meta name="twitter:description" content={meta.description} />
-        <meta name="twitter:image" content="https://professionalresumefree.com/images/resume-12th-pass-guide-twitter.jpg" />
+        <meta name="twitter:image" content={meta.image} />
         <meta name="twitter:image:alt" content="Resume for 12th Pass Students Guide" />
         <meta name="twitter:site" content="@ProResumeFree" />
         <meta name="twitter:creator" content="@ProResumeFree" />
@@ -532,7 +517,7 @@ const ResumeFor12thPassPage = ({
         <section className="section" id="main-content" aria-labelledby="hero-heading">
           <div className="section-container">
             <div style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center' }}>
-              <div className="badge">✦ RESUME FOR 12TH PASS 2026 • COMMERCE • SCIENCE • ARTS • FREE TEMPLATES</div>
+              <div className="badge">✦ RESUME FOR 12TH PASS {CURRENT_YEAR} • COMMERCE • SCIENCE • ARTS • FREE TEMPLATES</div>
               <h1 id="hero-heading" style={{ fontSize: 'var(--font-size-display-lg)', fontFamily: 'var(--font-display)', fontWeight: 'var(--font-weight-extrabold)', lineHeight: 'var(--line-height-display)', marginBottom: '1.25rem' }}>
                 <span className="gradient-text">Resume for 12th Pass</span>: Complete Guide & Free Templates
               </h1>
@@ -573,7 +558,7 @@ const ResumeFor12thPassPage = ({
         <div className="section-container">
           <div className="citation-card" style={{ background: 'rgba(100,181,246,0.05)', borderLeft: '3px solid var(--info-color)', padding: '1.25rem', borderRadius: '0 0.5rem 0.5rem 0', margin: '20px 0', maxWidth: '800px', marginLeft: 'auto', marginRight: 'auto' }}>
             <p style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)', margin: 0 }}><strong>Data Sources & Methodology:</strong> This guide synthesizes research from {aiCitations.map(s => s.source).join(', ')}. Resume strategies are based on comprehensive analysis of entry-level hiring data, ATS parsing studies, and recruiter preference surveys.</p>
-            <small style={{ color: 'var(--text-muted)', display: 'block', marginTop: '8px' }}>Last verified: {safeCurrentDate} • Next update: April 2026</small>
+            <small style={{ color: 'var(--text-muted)', display: 'block', marginTop: '8px' }}>Last verified: {safeCurrentDate} • Next update: April {CURRENT_YEAR + 1}</small>
           </div>
         </div>
 
@@ -797,27 +782,26 @@ const ResumeFor12thPassPage = ({
           </div>
         </section>
 
-        {/* Internal Links Grid - Recommended Career Resources */}
+        {/* New Internal Links Section - Related Resume Guides */}
         <section className="section">
           <div className="section-container">
             <div className="section-header">
-              <h2 className="section-title">Recommended Career Resources</h2>
-              <p className="section-subtitle">Enhance your job search with these specialized guides and tools tailored for entry-level candidates.</p>
+              <h2 className="section-title">Related Resume Guides</h2>
+              <p className="section-subtitle">Explore more specialized guides to strengthen your job application.</p>
             </div>
             <div className="geo-link-grid">
               {[
-                { href: "/free-resume-builder", text: "Free Resume Builder", iconName: "FiEdit", desc: "Build a professional resume in minutes with guided templates." },
-                { href: "/basic-resume-format", text: "Basic Resume Format Guide", iconName: "FiLayout", desc: "Master the fundamentals of resume structure and layout." },
-                { href: "/interview-tips", text: "Interview Tips for 2026", iconName: "FiUserCheck", desc: "Prepare for interviews with proven strategies and practice questions." },
-                { href: "/how-to-write-a-resume-for-a-job", text: "How to Write a Resume", iconName: "FiFileText", desc: "Complete writing guide covering every resume section in detail." },
-                { href: "/jobs-search-tips", text: "Job Search Strategies", iconName: "FiSearch", desc: "Find hidden opportunities and maximize your application success rate." }
+                { href: "/resume-for-10th-pass", text: "10th Pass Resume Guide", iconName: "FiBookOpen" },
+                { href: "/resume-format-for-freshers", text: "Fresher Resume Format Guide", iconName: "FiLayout" },
+                { href: "/resume-for-diploma-students", text: "Diploma Student Resume Guide", iconName: "FiAward" },
+                { href: "/resume-for-job-application-india", text: "India Job Application Resume", iconName: "FiFileText" },
+                { href: "/resume-for-students-in-india", text: "Student Resume India Guide", iconName: "FiUserCheck" }
               ].map((link, i) => {
                 const IconComponent = ICON_MAP[link.iconName] || FiFileText;
                 return (
                   <Link key={i} href={link.href} className="geo-link-card">
                     <IconComponent size={24} style={{ marginBottom: '0.75rem', color: 'var(--accent-primary)' }} />
-                    <span style={{ fontSize: 'var(--font-size-body-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-primary)', lineHeight: '1.4', marginBottom: '0.25rem' }}>{link.text}</span>
-                    <span style={{ fontSize: 'var(--font-size-label-sm)', color: 'var(--text-muted)', lineHeight: '1.3' }}>{link.desc}</span>
+                    <span style={{ fontSize: 'var(--font-size-body-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-primary)', lineHeight: '1.4' }}>{link.text}</span>
                   </Link>
                 );
               })}
@@ -835,13 +819,13 @@ const ResumeFor12thPassPage = ({
               ))}
             </ul>
             <p style={{marginTop: '16px', fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)'}}><strong>Additional analysis:</strong> Resume strategies calibrated against entry-level hiring data from 50,000+ job seekers, ATS parsing studies across major platforms, and recruiter preference surveys from leading employers across India.</p>
-            <small style={{ color: 'var(--text-muted)', display: 'block', marginTop: '8px' }}>Last full analysis: {safeCurrentDate} • Next update: April 2026</small>
+            <small style={{ color: 'var(--text-muted)', display: 'block', marginTop: '8px' }}>Last full analysis: {safeCurrentDate} • Next update: April {CURRENT_YEAR + 1}</small>
           </div>
         </div>
 
         {/* Footer Info */}
         <div style={{ padding: '0.75rem 0', backgroundColor: 'var(--bg-surface-lowest)', borderTop: '0.5px solid var(--border-gold-filament)', textAlign: 'center' }}>
-          <span className="text-small"><FiCalendar style={{ marginRight: '0.5rem', display: 'inline', verticalAlign: 'middle' }} /> Last updated: {safeCurrentDate} • Data updated {safeCurrentDate}. Next analysis scheduled for Q2 2026.</span>
+          <span className="text-small"><FiCalendar style={{ marginRight: '0.5rem', display: 'inline', verticalAlign: 'middle' }} /> Last updated: {safeCurrentDate} • Data updated {safeCurrentDate}. Next analysis scheduled for Q2 {CURRENT_YEAR + 1}.</span>
         </div>
 
         {/* Hidden metadata for crawlers */}
@@ -897,19 +881,6 @@ export async function getStaticProps() {
     image: "https://professionalresumefree.com/images/resume-12th-pass-guide-og.jpg",
   };
 
-  const longTailKeywords = [
-    "resume for 12th pass",
-    "fresher resume",
-    "student resume",
-    "no experience resume",
-    "12th pass job resume",
-    "entry level resume",
-    "school pass resume",
-    "how to write resume for 12th pass",
-    "12th pass resume format",
-    "fresher resume examples"
-  ];
-
   return {
     props: {
       buildTimestamp,
@@ -918,7 +889,6 @@ export async function getStaticProps() {
       canonicalUrl,
       breadcrumbData,
       meta,
-      longTailKeywords,
       reviewDates,
       faqDates
     },

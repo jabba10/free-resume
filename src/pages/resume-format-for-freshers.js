@@ -157,7 +157,6 @@ const COMMON_MISTAKES = [
   { mistake: "Exceeding One Page or Using Poor Formatting", problem: "Submitting a 2-page resume as a fresher signals inability to prioritize information. Using creative templates with graphics, columns, or unusual fonts causes ATS parsing failures.", solution: "Maintain strict one-page formatting. If content exceeds one page, tighten language, remove less relevant information, and prioritize your strongest qualifications. Use clean, single-column layouts with standard section headings. Test your resume with a free ATS checker before submission." }
 ];
 
-// NEW: Before & After Resume Transformation
 const BEFORE_AFTER_EXAMPLE = {
   scenario: "Engineering Fresher Applying for Software Developer Role",
   before: `RAHUL SHARMA
@@ -242,7 +241,6 @@ ACHIEVEMENTS
   ]
 };
 
-// NEW: Industry-Specific Fresher Salary Guide
 const FRESHER_SALARY_GUIDE = [
   { industry: "IT & Software Development", avgStartingSalary: "₹3.5L-8L", highDemandRoles: "Software Developer, Full-Stack Developer, Data Analyst, DevOps Engineer", topRecruiters: "TCS, Infosys, Wipro, HCL, Tech Mahindra, startups", keyDifferentiator: "Portfolio projects, GitHub activity, hackathon participation, cloud certifications" },
   { industry: "Banking & Financial Services", avgStartingSalary: "₹3L-6L", highDemandRoles: "Business Analyst, Financial Analyst, Relationship Manager, Operations Executive", topRecruiters: "HDFC Bank, ICICI Bank, Axis Bank, Deloitte, EY, KPMG", keyDifferentiator: "Certifications (NISM, CFA Level 1), Excel proficiency, analytical projects, communication skills" },
@@ -250,7 +248,6 @@ const FRESHER_SALARY_GUIDE = [
   { industry: "Digital Marketing & Media", avgStartingSalary: "₹2.5L-5L", highDemandRoles: "Digital Marketing Executive, Content Writer, Social Media Manager, SEO Analyst", topRecruiters: "Digital agencies, e-commerce companies, media houses, startups", keyDifferentiator: "Personal brand/project, certifications (Google, HubSpot), content portfolio, analytics skills" }
 ];
 
-// NEW: ATS Score Optimization Table
 const ATS_OPTIMIZATION_GUIDE = [
   { element: "File Format", bestPractice: ".docx for online portals (85% compatibility); PDF for email applications", riskIfIgnored: "PDFs with graphics may not parse correctly on older ATS; some Indian ATS prefer .docx", quickFix: "Create both formats. Submit .docx through portals, PDF for direct emails." },
   { element: "Section Headings", bestPractice: "Use exactly: 'Professional Summary,' 'Technical Skills,' 'Education,' 'Projects,' 'Experience'", riskIfIgnored: "Creative headings cause ATS parsing failures—system cannot identify your qualifications", quickFix: "Audit your headings against this list. Replace creative headings with standard ones." },
@@ -258,7 +255,6 @@ const ATS_OPTIMIZATION_GUIDE = [
   { element: "Font & Format", bestPractice: "Arial, Calibri, or Garamond at 10-12pt; single column; no tables, graphics, or text boxes", riskIfIgnored: "Decorative fonts, graphics, and multi-column layouts cause character recognition errors", quickFix: "Convert to single-column layout. Replace decorative fonts with standard options." }
 ];
 
-// NEW: Fresher Job Search Timeline
 const JOB_SEARCH_TIMELINE = [
   { phase: "3-6 Months Before Graduation", actions: "Build your master resume with all projects and achievements; create LinkedIn and job portal profiles; research target companies and roles; identify skill gaps and pursue relevant certifications", keyMilestone: "Complete at least one professional certification" },
   { phase: "2-3 Months Before Graduation", actions: "Customize resume for different role types (3-4 versions); begin networking with alumni; attend campus placement preparation sessions; practice aptitude tests and technical interviews", keyMilestone: "Have 3-4 resume versions ready for different role types" },
@@ -297,7 +293,6 @@ const FAQS = [
   }
 ];
 
-// Long-tail keywords for GEO
 const longTailKeywords = [
   "resume format for freshers",
   "fresher resume format 2026",
@@ -321,7 +316,6 @@ const longTailKeywords = [
   "resume for fresh graduates"
 ];
 
-// People Also Ask for GEO
 const peopleAlsoAsk = [
   { question: "What is the best resume format for freshers in " + CURRENT_YEAR + "?", answer: "The combination/hybrid format is most effective for freshers, with an 85% success rate. It leads with a strong skills section before presenting education and any experience. This format addresses the core challenge freshers face: how to demonstrate capability without extensive work history." },
   { question: "How long should a fresher resume be?", answer: "One page is the firm standard for freshers. Hiring managers spend 6-7 seconds on initial screening. One-page fresher resumes receive 3x more interview invitations than multi-page versions. Every element on your resume should earn its place by communicating specific value." },
@@ -662,7 +656,7 @@ const ResumeFormatForFreshersPage = ({ seoData }) => {
           </div>
         </section>
 
-        {/* NEW: Before & After Resume Transformation */}
+        {/* Before & After Resume Transformation */}
         <section className="section">
           <div className="section-container">
             <div className="section-header">
@@ -775,7 +769,7 @@ const ResumeFormatForFreshersPage = ({ seoData }) => {
           </div>
         </section>
 
-        {/* NEW: Industry-Specific Salary Guide */}
+        {/* Industry-Specific Salary Guide */}
         <section className="section">
           <div className="section-container">
             <div className="section-header">
@@ -804,7 +798,7 @@ const ResumeFormatForFreshersPage = ({ seoData }) => {
           </div>
         </section>
 
-        {/* NEW: ATS Optimization Guide */}
+        {/* ATS Optimization Guide */}
         <section className="section section-alt">
           <div className="section-container">
             <div className="section-header">
@@ -831,7 +825,7 @@ const ResumeFormatForFreshersPage = ({ seoData }) => {
           </div>
         </section>
 
-        {/* NEW: Job Search Timeline */}
+        {/* Job Search Timeline */}
         <section className="section">
           <div className="section-container">
             <div className="section-header">
@@ -941,58 +935,6 @@ const ResumeFormatForFreshersPage = ({ seoData }) => {
           </div>
         </section>
 
-        {/* Internal Links - ALL BROKEN LINKS REMOVED */}
-        <section className="section section-alt" style={{ background: 'var(--bg-surface-lowest)' }} aria-labelledby="resources-heading">
-          <div className="section-container">
-            <h2 id="resources-heading" className="section-title" style={{ textAlign: 'center', marginBottom: '2rem' }}>🔗 Related Resources for Freshers</h2>
-            <div className="grid">
-              <Link href="/free-resume-score-checker" className="card-executive">
-                <h3 style={{ marginBottom: '0.5rem', fontSize: 'var(--font-size-title-md)' }}>Free Resume Score Checker</h3>
-                <p style={{ color: 'var(--text-secondary)', marginBottom: '0.75rem', fontSize: 'var(--font-size-body-sm)' }}>Get instant feedback on your resume quality</p>
-                <span style={{ color: 'var(--accent-primary)', fontWeight: '500' }}>Try it <FiArrowRight style={{ marginLeft: '0.25rem', display: 'inline' }} /></span>
-              </Link>
-              <Link href="/free-ats-resume-checker" className="card-executive">
-                <h3 style={{ marginBottom: '0.5rem', fontSize: 'var(--font-size-title-md)' }}>Free ATS Resume Checker</h3>
-                <p style={{ color: 'var(--text-secondary)', marginBottom: '0.75rem', fontSize: 'var(--font-size-body-sm)' }}>Check if your resume passes ATS screening</p>
-                <span style={{ color: 'var(--accent-primary)', fontWeight: '500' }}>Try it <FiArrowRight style={{ marginLeft: '0.25rem', display: 'inline' }} /></span>
-              </Link>
-            </div>
-          </div>
-        </section>
-
-        {/* Resource Hub */}
-        <section className="section" aria-labelledby="hub-heading">
-          <div className="section-container">
-            <h2 id="hub-heading" className="section-title" style={{ textAlign: 'center', marginBottom: '2rem' }}>Complete Fresher Career Resource Hub</h2>
-            <div className="grid">
-              <div className="card-executive">
-                <h3 style={{ fontSize: 'var(--font-size-title-md)', marginBottom: '1rem' }}>📚 Fresher Resume Guides</h3>
-                <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-                  <li><Link href="/how-to-create-a-resume-with-no-experience" className="geo-link-card" style={{ padding: '0.75rem' }}>Create a Resume with No Experience</Link></li>
-                  <li><Link href="/resume-for-engineering-students" className="geo-link-card" style={{ padding: '0.75rem' }}>Resume for Engineering Students</Link></li>
-                  <li><Link href="/resume-for-diploma-students" className="geo-link-card" style={{ padding: '0.75rem' }}>Resume for Diploma Students</Link></li>
-                </ul>
-              </div>
-              <div className="card-executive">
-                <h3 style={{ fontSize: 'var(--font-size-title-md)', marginBottom: '1rem' }}>⚡ AI & Modern Tools</h3>
-                <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-                  <li><Link href="/ai-resume-builders-how-to-use-artificial-intelligence-to-write-your-best-resume" className="geo-link-card" style={{ padding: '0.75rem' }}>AI Resume Builders Guide</Link></li>
-                  <li><Link href="/how-to-use-chatgpt-to-improve-your-resume-bullets-prompt-engineering-guide-2026" className="geo-link-card" style={{ padding: '0.75rem' }}>ChatGPT Resume Prompts</Link></li>
-                  <li><Link href="/free-action-verb-recommender" className="geo-link-card" style={{ padding: '0.75rem' }}>Action Verb Recommender</Link></li>
-                </ul>
-              </div>
-              <div className="card-executive">
-                <h3 style={{ fontSize: 'var(--font-size-title-md)', marginBottom: '1rem' }}>📊 Free Fresher Tools</h3>
-                <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-                  <li><Link href="/free-resume-score-checker" className="geo-link-card" style={{ padding: '0.75rem' }}>Resume Score Checker</Link></li>
-                  <li><Link href="/free-ats-resume-checker" className="geo-link-card" style={{ padding: '0.75rem' }}>ATS Resume Checker</Link></li>
-                  <li><Link href="/free-resume-keyword-matcher" className="geo-link-card" style={{ padding: '0.75rem' }}>Keyword Matcher Tool</Link></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </section>
-
         {/* CTA */}
         <section style={{ padding: 'var(--section-gap-lg) 0', background: 'linear-gradient(135deg, #1c1b1d 0%, #2a2a2c 100%)', textAlign: 'center', borderTop: '0.5px solid var(--border-gold-filament)', borderBottom: '0.5px solid var(--border-gold-filament)', position: 'relative', overflow: 'hidden' }} aria-labelledby="cta-heading">
           <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle at 50% 50%, rgba(242,202,80,0.05) 0%, transparent 70%)', pointerEvents: 'none' }} />
@@ -1017,47 +959,29 @@ const ResumeFormatForFreshersPage = ({ seoData }) => {
           </div>
         </section>
 
-        {/* NEW SECTION: 5 Randomly Selected Links for Internal Linking Boost */}
-        <section className="section" style={{ background: 'var(--bg-surface-lowest)', borderTop: '0.5px solid var(--border-gold-filament)' }} aria-labelledby="expand-toolkit-heading">
+        {/* NEW: Related Resume Guides Section */}
+        <section className="section" style={{ background: 'var(--bg-surface-lowest)', borderTop: '0.5px solid var(--border-gold-filament)' }} aria-labelledby="related-guides-heading">
           <div className="section-container">
-            <h2 id="expand-toolkit-heading" className="section-title" style={{ textAlign: 'left', marginBottom: '1.5rem' }}>Expand Your Career Toolkit</h2>
-            <div className="grid">
-              
-              {/* Link 1 */}
-              <Link href="/how-to-create-a-resume-with-no-experience" className="card-executive">
-                <h3 style={{ marginBottom: '0.5rem', fontSize: '1.1rem' }}>Resume with No Experience</h3>
-                <p style={{ color: 'var(--text-secondary)', marginBottom: '0.75rem', fontSize: '0.95rem' }}>Perfect for freshers: How to highlight potential over history.</p>
-                <span style={{ color: 'var(--accent-primary)', fontWeight: '500', fontSize: '0.9rem' }}>Learn How <FiArrowRight style={{ marginLeft: '0.25rem', display: 'inline' }} /></span>
-              </Link>
-
-              {/* Link 2 */}
-              <Link href="/interview-tips" className="card-executive">
-                <h3 style={{ marginBottom: '0.5rem', fontSize: '1.1rem' }}>Interview Preparation Tips</h3>
-                <p style={{ color: 'var(--text-secondary)', marginBottom: '0.75rem', fontSize: '0.95rem' }}>Ace your next interview with proven strategies and common questions.</p>
-                <span style={{ color: 'var(--accent-primary)', fontWeight: '500', fontSize: '0.9rem' }}>Get Tips <FiArrowRight style={{ marginLeft: '0.25rem', display: 'inline' }} /></span>
-              </Link>
-
-              {/* Link 3 */}
-              <Link href="/jobs-boards" className="card-executive">
-                <h3 style={{ marginBottom: '0.5rem', fontSize: '1.1rem' }}>Top Job Boards for 2026</h3>
-                <p style={{ color: 'var(--text-secondary)', marginBottom: '0.75rem', fontSize: '0.95rem' }}>Discover the best platforms to find entry-level and fresher roles.</p>
-                <span style={{ color: 'var(--accent-primary)', fontWeight: '500', fontSize: '0.9rem' }}>Browse Jobs <FiArrowRight style={{ marginLeft: '0.25rem', display: 'inline' }} /></span>
-              </Link>
-
-              {/* Link 4 */}
-              <Link href="/cover-letter-guides" className="card-executive">
-                <h3 style={{ marginBottom: '0.5rem', fontSize: '1.1rem' }}>Cover Letter Guides</h3>
-                <p style={{ color: 'var(--text-secondary)', marginBottom: '0.75rem', fontSize: '0.95rem' }}>Learn how to write compelling cover letters that get noticed.</p>
-                <span style={{ color: 'var(--accent-primary)', fontWeight: '500', fontSize: '0.9rem' }}>Read Guides <FiArrowRight style={{ marginLeft: '0.25rem', display: 'inline' }} /></span>
-              </Link>
-
-              {/* Link 5 */}
-              <Link href="/how-to-beat-the-ats-optimization-tips-for-modern-hiring-software" className="card-executive">
-                <h3 style={{ marginBottom: '0.5rem', fontSize: '1.1rem' }}>Beat the ATS Screening</h3>
-                <p style={{ color: 'var(--text-secondary)', marginBottom: '0.75rem', fontSize: '0.95rem' }}>Optimize your application for online government and corporate portals.</p>
-                <span style={{ color: 'var(--accent-primary)', fontWeight: '500', fontSize: '0.9rem' }}>Learn More <FiArrowRight style={{ marginLeft: '0.25rem', display: 'inline' }} /></span>
-              </Link>
-
+            <div className="section-header">
+              <h2 id="related-guides-heading" className="section-title">Related Resume Guides</h2>
+              <p className="section-subtitle">Explore more specialized guides to strengthen your job application journey.</p>
+            </div>
+            <div className="geo-link-grid">
+              {[
+                { href: "/resume-writing-for-beginners", text: "Resume Writing for Beginners", iconName: "FiEdit3" },
+                { href: "/resume-for-students-in-india", text: "Student Resume India", iconName: "FiBookOpen" },
+                { href: "/resume-education-section", text: "Education Section Writing", iconName: "FiAward" },
+                { href: "/resume-templates", text: "Resume Templates Collection", iconName: "FiLayout" },
+                { href: "/resume-guide", text: "Resume Writing Guide", iconName: "FiFileText" }
+              ].map((link, i) => {
+                const IconComponent = ICON_MAP[link.iconName] || FiFileText;
+                return (
+                  <Link key={i} href={link.href} className="geo-link-card">
+                    <IconComponent size={24} style={{ marginBottom: '0.75rem', color: 'var(--accent-primary)' }} />
+                    <span style={{ fontSize: 'var(--font-size-body-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-primary)', lineHeight: '1.4' }}>{link.text}</span>
+                  </Link>
+                );
+              })}
             </div>
           </div>
         </section>

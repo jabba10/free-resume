@@ -250,14 +250,6 @@ const defaultMeta = {
   image: "https://professionalresumefree.com/ats.jpeg",
 };
 
-const defaultLongTailKeywords = [
-  "resume for 10th pass students with no experience",
-  "how to make resume after 10th for first job",
-  "simple resume format for 10th pass freshers",
-  "best resume template for 10th pass candidates",
-  "entry level resume for 10th pass with skills"
-];
-
 const defaultBreadcrumbData = [
   {
     "@type": "ListItem",
@@ -273,6 +265,7 @@ const defaultBreadcrumbData = [
   }
 ];
 
+// Icon map used by the Related Resume Guides section
 const ICON_MAP = {
   FiHome, FiChevronRight, FiCalendar, FiClock, FiUsers, FiTrendingUp, FiFileText,
   FiEdit, FiStar, FiCheck, FiSearch, FiTarget, FiZap, FiDatabase, FiCpu, FiHeart,
@@ -294,7 +287,6 @@ const ResumeFor10thPassPage = ({
   canonicalUrl = "https://professionalresumefree.com/resume-for-10th-pass",
   breadcrumbData = defaultBreadcrumbData,
   meta = defaultMeta,
-  longTailKeywords = defaultLongTailKeywords,
   reviewDates = [],
   faqDates = []
 }) => {
@@ -317,12 +309,10 @@ const ResumeFor10thPassPage = ({
         {/* META DESCRIPTION */}
         <meta name="description" content={meta.description} />
         <meta name="author" content="Professional Resume Free" />
-        <meta name="keywords" content={longTailKeywords.join(', ')} />
         
         {/* GEO OPTIMIZATION TAGS */}
         <meta name="chatgpt-fts:title" content={meta.title} />
         <meta name="chatgpt-fts:description" content={meta.description} />
-        <meta name="chatgpt-fts:keywords" content={longTailKeywords.join(', ')} />
         <meta name="chatgpt-fts:last-updated" content={safeCurrentDate} />
         <meta name="generator" content="Professional Resume Free - Career Resources" />
         
@@ -489,7 +479,7 @@ const ResumeFor10thPassPage = ({
         <section className="section" id="main-content" aria-labelledby="hero-heading">
           <div className="section-container">
             <div style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center' }}>
-              <div className="badge">✦ RESUME FOR 10TH PASS 2026 • FREE TEMPLATES • NO EXPERIENCE NEEDED</div>
+              <div className="badge">✦ RESUME FOR 10TH PASS {CURRENT_YEAR} • FREE TEMPLATES • NO EXPERIENCE NEEDED</div>
               <h1 id="hero-heading" style={{ fontSize: 'var(--font-size-display-lg)', fontFamily: 'var(--font-display)', fontWeight: 'var(--font-weight-extrabold)', lineHeight: 'var(--line-height-display)', marginBottom: '1.25rem' }}>
                 <span className="gradient-text">Resume for 10th Pass</span>: Free Guide & Professional Templates
               </h1>
@@ -530,7 +520,7 @@ const ResumeFor10thPassPage = ({
         <div className="section-container">
           <div className="citation-card" style={{ background: 'rgba(100,181,246,0.05)', borderLeft: '3px solid var(--info-color)', padding: '1.25rem', borderRadius: '0 0.5rem 0.5rem 0', margin: '20px 0', maxWidth: '800px', marginLeft: 'auto', marginRight: 'auto' }}>
             <p style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)', margin: 0 }}><strong>Data Sources & Methodology:</strong> This guide synthesizes research from {aiCitations.map(s => s.source).join(', ')}. Resume strategies are based on comprehensive analysis of entry-level hiring data, ATS parsing studies, and recruiter preference surveys.</p>
-            <small style={{ color: 'var(--text-muted)', display: 'block', marginTop: '8px' }}>Last verified: {safeCurrentDate} • Next update: April 2026</small>
+            <small style={{ color: 'var(--text-muted)', display: 'block', marginTop: '8px' }}>Last verified: {safeCurrentDate} • Next update: April {CURRENT_YEAR + 1}</small>
           </div>
         </div>
 
@@ -770,27 +760,26 @@ const ResumeFor10thPassPage = ({
           </div>
         </section>
 
-        {/* Internal Links Grid - Recommended Career Resources */}
+        {/* Related Resume Guides - Internal Links */}
         <section className="section">
           <div className="section-container">
             <div className="section-header">
-              <h2 className="section-title">Recommended Career Resources</h2>
-              <p className="section-subtitle">Enhance your job search with these specialized guides and tools tailored for entry-level candidates.</p>
+              <h2 className="section-title">Related Resume Guides</h2>
+              <p className="section-subtitle">Explore more specialized guides to strengthen your job application.</p>
             </div>
             <div className="geo-link-grid">
               {[
-                { href: "/free-resume-score-checker", text: "Free Resume Score Checker", iconName: "FiAward", desc: "Get instant feedback on your resume quality and effectiveness." },
-                { href: "/free-resume-summary-generator", text: "Resume Summary Generator", iconName: "FiEdit3", desc: "Create a compelling career objective that captures attention." },
-                { href: "/free-resume-keyword-matcher", text: "Keyword Matcher Tool", iconName: "FiSearch", desc: "Optimize your resume with keywords from job descriptions." },
-                { href: "/cover-letter-guides", text: "Cover Letter Guides", iconName: "FiFileText", desc: "Complete your application package with professional cover letters." },
-                { href: "/interview-tips", text: "Interview Tips for 2026", iconName: "FiUserCheck", desc: "Prepare for interviews with proven strategies and practice." }
+                { href: "/resume-for-12th-pass", text: "12th Pass Resume Guide", iconName: "FiBookOpen" },
+                { href: "/resume-format-for-freshers", text: "Fresher Resume Format", iconName: "FiEdit3" },
+                { href: "/resume-for-job-application-india", text: "India Job Application Resume", iconName: "FiFileText" },
+                { href: "/resume-format-india", text: "India Resume Format", iconName: "FiLayout" },
+                { href: "/resume-writing-for-beginners", text: "Resume Writing for Beginners", iconName: "FiUserCheck" }
               ].map((link, i) => {
                 const IconComponent = ICON_MAP[link.iconName] || FiFileText;
                 return (
                   <Link key={i} href={link.href} className="geo-link-card">
                     <IconComponent size={24} style={{ marginBottom: '0.75rem', color: 'var(--accent-primary)' }} />
-                    <span style={{ fontSize: 'var(--font-size-body-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-primary)', lineHeight: '1.4', marginBottom: '0.25rem' }}>{link.text}</span>
-                    <span style={{ fontSize: 'var(--font-size-label-sm)', color: 'var(--text-muted)', lineHeight: '1.3' }}>{link.desc}</span>
+                    <span style={{ fontSize: 'var(--font-size-body-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-primary)', lineHeight: '1.4' }}>{link.text}</span>
                   </Link>
                 );
               })}
@@ -808,13 +797,13 @@ const ResumeFor10thPassPage = ({
               ))}
             </ul>
             <p style={{marginTop: '16px', fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)'}}><strong>Additional analysis:</strong> Resume strategies calibrated against entry-level hiring data from 50,000+ job seekers, ATS parsing studies across major platforms, and recruiter preference surveys from leading Indian employers.</p>
-            <small style={{ color: 'var(--text-muted)', display: 'block', marginTop: '8px' }}>Last full analysis: {safeCurrentDate} • Next update: April 2026</small>
+            <small style={{ color: 'var(--text-muted)', display: 'block', marginTop: '8px' }}>Last full analysis: {safeCurrentDate} • Next update: April {CURRENT_YEAR + 1}</small>
           </div>
         </div>
 
         {/* Footer Info */}
         <div style={{ padding: '0.75rem 0', backgroundColor: 'var(--bg-surface-lowest)', borderTop: '0.5px solid var(--border-gold-filament)', textAlign: 'center' }}>
-          <span className="text-small"><FiCalendar style={{ marginRight: '0.5rem', display: 'inline', verticalAlign: 'middle' }} /> Last updated: {safeCurrentDate} • Data updated {safeCurrentDate}. Next analysis scheduled for Q2 2026.</span>
+          <span className="text-small"><FiCalendar style={{ marginRight: '0.5rem', display: 'inline', verticalAlign: 'middle' }} /> Last updated: {safeCurrentDate} • Data updated {safeCurrentDate}. Next analysis scheduled for Q2 {CURRENT_YEAR + 1}.</span>
         </div>
 
         {/* Hidden metadata for crawlers */}
@@ -870,14 +859,6 @@ export async function getStaticProps() {
     image: "https://professionalresumefree.com/ats.jpeg",
   };
 
-  const longTailKeywords = [
-    "resume for 10th pass students with no experience",
-    "how to make resume after 10th for first job",
-    "simple resume format for 10th pass freshers",
-    "best resume template for 10th pass candidates",
-    "entry level resume for 10th pass with skills"
-  ];
-
   return {
     props: {
       buildTimestamp,
@@ -886,7 +867,6 @@ export async function getStaticProps() {
       canonicalUrl,
       breadcrumbData,
       meta,
-      longTailKeywords,
       reviewDates,
       faqDates
     },

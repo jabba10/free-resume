@@ -282,8 +282,8 @@ const aiCitations = [
 // DEFAULT PROPS FOR SSR/SSG SAFETY
 // ============================================================================
 const defaultMeta = {
-  title: "Resume Summary 2026: Complete Guide (60% More Views)",
-  description: "Master professional resume summaries with our 2026 guide. Expert templates, industry examples, and proven formulas to get 40% more interviews. Free resources included.",
+  title: `Resume Summary ${CURRENT_YEAR}: Complete Guide (60% More Views)`,
+  description: `Master professional resume summaries with our ${CURRENT_YEAR} guide. Expert templates, industry examples, and proven formulas to get 40% more interviews. Free resources included.`,
   url: "https://professionalresumefree.com/professional-resume-summary",
   siteName: "Professional Resume Free",
   image: "https://professionalresumefree.com/resume-summary-guide.jpg",
@@ -294,7 +294,7 @@ const defaultLongTailKeywords = [
   "resume summary examples",
   "how to write resume summary",
   "professional summary for resume",
-  "resume summary guide 2026",
+  `resume summary guide ${CURRENT_YEAR}`,
   "career summary examples"
 ];
 
@@ -378,7 +378,7 @@ const ProfessionalResumeSummaryPage = ({
         <meta property="og:image" content={meta.image} />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
-        <meta property="og:image:alt" content="Resume Summary Guide 2026 - Professional summary writing tips" />
+        <meta property="og:image:alt" content={`Resume Summary Guide ${CURRENT_YEAR} - Professional summary writing tips`} />
         <meta property="og:type" content="article" />
         <meta property="og:site_name" content="Professional Resume Free" />
         <meta property="og:updated_time" content={safeLastModifiedDate} />
@@ -396,7 +396,7 @@ const ProfessionalResumeSummaryPage = ({
         <meta name="twitter:title" content={meta.title} />
         <meta name="twitter:description" content={meta.description} />
         <meta name="twitter:image" content="https://professionalresumefree.com/twitter-resume-summary-guide.jpg" />
-        <meta name="twitter:image:alt" content="Resume Summary Guide 2026" />
+        <meta name="twitter:image:alt" content={`Resume Summary Guide ${CURRENT_YEAR}`} />
         <meta name="twitter:site" content="@ProResumeFree" />
         
         {/* ADDITIONAL META */}
@@ -457,7 +457,7 @@ const ProfessionalResumeSummaryPage = ({
                 {
                   "@type": "Article",
                   "headline": meta.title,
-                  "description": "Complete guide to writing professional resume summaries for the 2026 job market",
+                  "description": `Complete guide to writing professional resume summaries for the ${CURRENT_YEAR} job market`,
                   "image": meta.image,
                   "author": {
                     "@type": "Organization",
@@ -573,7 +573,7 @@ const ProfessionalResumeSummaryPage = ({
         <section className="section" id="main-content" aria-labelledby="hero-heading">
           <div className="section-container">
             <div style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center' }}>
-              <div className="badge">✦ RESUME SUMMARY GUIDE 2026 • COMPLETE GUIDE</div>
+              <div className="badge">✦ RESUME SUMMARY GUIDE {CURRENT_YEAR} • COMPLETE GUIDE</div>
               <h1 id="hero-heading" style={{ fontSize: 'var(--font-size-display-lg)', fontFamily: 'var(--font-display)', fontWeight: 'var(--font-weight-extrabold)', lineHeight: 'var(--line-height-display)', marginBottom: '1.25rem' }}>
                 Professional <span className="gradient-text">Resume Summary</span> Guide: 60% More Views
               </h1>
@@ -890,30 +890,26 @@ const ProfessionalResumeSummaryPage = ({
           </div>
         </section>
 
-        {/* Internal Links Grid */}
+        {/* New Internal Links Section */}
         <section className="section">
           <div className="section-container">
             <div className="section-header">
-              <h2 className="section-title">Recommended Career Resources</h2>
-              <p className="section-subtitle">Enhance your job search with these specialized guides and tools tailored for the 2026 market.</p>
+              <h2 className="section-title">Related Resume Summary Resources</h2>
+              <p className="section-subtitle">Continue exploring our expert guides on resume writing and career strategy</p>
             </div>
             <div className="geo-link-grid">
               {[
-                { href: "/resume-skills-section", text: "Master the Skills Section", iconName: "FiCpu", desc: "Learn how to categorize and highlight the core competencies that make your summary powerful." },
-                { href: "/how-to-describe-work-experience-on-resume", text: "Describe Work Experience", iconName: "FiBriefcase", desc: "Extract the high-impact achievements from your history to fuel your professional summary." },
-                { href: "/free-resume-keyword-matcher", text: "Free Keyword Matcher", iconName: "FiSearch", desc: "Ensure your summary contains the exact keywords recruiters and ATS algorithms are scanning for." },
-                { href: "/resume-objective-statement", text: "Resume Objective Guide", iconName: "FiTarget", desc: "Discover when to use an objective statement instead of a summary, especially for career changers." },
-                { href: "/how-to-beat-the-ats-optimization-tips-for-modern-hiring-software", text: "Beat the ATS Algorithms", iconName: "FiShield", desc: "Advanced tips to ensure your summary and full resume pass through automated screening software." }
-              ].map((link, i) => {
-                const IconComponent = ICON_MAP[link.iconName] || FiFileText;
-                return (
-                  <Link key={i} href={link.href} className="geo-link-card">
-                    <IconComponent size={24} style={{ marginBottom: '0.75rem', color: 'var(--accent-primary)' }} />
-                    <span style={{ fontSize: 'var(--font-size-body-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-primary)', lineHeight: '1.4', marginBottom: '0.25rem' }}>{link.text}</span>
-                    <span style={{ fontSize: 'var(--font-size-label-sm)', color: 'var(--text-muted)', lineHeight: '1.3' }}>{link.desc}</span>
-                  </Link>
-                );
-              })}
+                { href: "/resume-objective-statement", title: "Resume Objective Statement Guide" },
+                { href: "/the-death-of-the-objective-statement-what-to-write-instead", title: "Objective Statement Alternatives" },
+                { href: "/resume-skills-section", title: "Resume Skills Section" },
+                { href: "/what-to-put-on-a-resume", title: "What to Include on a Resume" },
+                { href: "/resume-guide", title: "Resume Writing Guide" }
+              ].map((link, i) => (
+                <Link key={i} href={link.href} className="geo-link-card">
+                  <FiArrowRight size={20} style={{ marginBottom: '0.75rem', color: 'var(--accent-primary)' }} />
+                  <span style={{ fontSize: 'var(--font-size-body-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-primary)', lineHeight: '1.4' }}>{link.title}</span>
+                </Link>
+              ))}
             </div>
           </div>
         </section>
@@ -935,6 +931,10 @@ const ProfessionalResumeSummaryPage = ({
         {/* Footer Info */}
         <div style={{ padding: '0.75rem 0', backgroundColor: 'var(--bg-surface-lowest)', borderTop: '0.5px solid var(--border-gold-filament)', textAlign: 'center' }}>
           <span className="text-small"><FiCalendar style={{ marginRight: '0.5rem', display: 'inline', verticalAlign: 'middle' }} /> Last updated: {safeCurrentDate} • Data updated {safeCurrentDate}. Next analysis scheduled for Q2 2026.</span>
+          <span className="text-small" style={{ marginLeft: '1rem' }}>
+            <FiAlertCircle size={12} style={{ marginRight: '0.25rem', display: 'inline', verticalAlign: 'middle' }} />
+            Summary guidance for informational purposes. Adapt strategies to your specific industry and experience level.
+          </span>
         </div>
 
         {/* Hidden metadata for crawlers */}
@@ -983,8 +983,8 @@ export async function getStaticProps() {
   ];
 
   const meta = {
-    title: "Resume Summary 2026: Complete Guide (60% More Views)",
-    description: "Master professional resume summaries with our 2026 guide. Expert templates, industry examples, and proven formulas to get 40% more interviews. Free resources included.",
+    title: `Resume Summary ${CURRENT_YEAR}: Complete Guide (60% More Views)`,
+    description: `Master professional resume summaries with our ${CURRENT_YEAR} guide. Expert templates, industry examples, and proven formulas to get 40% more interviews. Free resources included.`,
     url: canonicalUrl,
     siteName: "Professional Resume Free",
     image: "https://professionalresumefree.com/resume-summary-guide.jpg",
@@ -995,7 +995,7 @@ export async function getStaticProps() {
     "resume summary examples",
     "how to write resume summary",
     "professional summary for resume",
-    "resume summary guide 2026",
+    `resume summary guide ${CURRENT_YEAR}`,
     "career summary examples"
   ];
 

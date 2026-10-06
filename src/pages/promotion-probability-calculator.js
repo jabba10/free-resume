@@ -205,8 +205,8 @@ const aiCitations = [
 // DEFAULT PROPS FOR SSR/SSG SAFETY
 // ============================================================================
 const defaultMeta = {
-  title: "Free Promotion Probability Calculator 2026 - Estimate Your Chances | No Sign Up",
-  description: "Calculate your promotion probability with our free tool. Rate yourself on 6 key factors, adjust for company size, and get timeline estimates. Actionable recommendations included. 100% private.",
+  title: `Free Promotion Probability Calculator ${CURRENT_YEAR} - Estimate Your Chances | No Sign Up`,
+  description: `Calculate your promotion probability with our free tool. Rate yourself on 6 key factors, adjust for company size, and get timeline estimates. Actionable recommendations included. 100% private.`,
   url: "https://professionalresumefree.com/promotion-probability-calculator",
   siteName: "Professional Resume Free",
   image: "https://professionalresumefree.com/promotion-calculator-guide.jpg",
@@ -221,7 +221,7 @@ const defaultLongTailKeywords = [
   "career growth calculator",
   "job promotion predictor",
   "promotion timeline estimator",
-  "2026 promotion trends",
+  `${CURRENT_YEAR} promotion trends`,
   "career advancement probability"
 ];
 
@@ -505,7 +505,7 @@ const PromotionProbabilityCalculatorPage = ({
         <meta property="og:image" content={meta.image} />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
-        <meta property="og:image:alt" content="Promotion Probability Calculator 2026 - Free Career Advancement Tool" />
+        <meta property="og:image:alt" content={`Promotion Probability Calculator ${CURRENT_YEAR} - Free Career Advancement Tool`} />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="Professional Resume Free" />
         <meta property="og:updated_time" content={safeLastModifiedDate} />
@@ -523,7 +523,7 @@ const PromotionProbabilityCalculatorPage = ({
         <meta name="twitter:title" content={meta.title} />
         <meta name="twitter:description" content={meta.description} />
         <meta name="twitter:image" content={meta.image} />
-        <meta name="twitter:image:alt" content="Promotion Probability Calculator 2026 - Free Career Tool" />
+        <meta name="twitter:image:alt" content={`Promotion Probability Calculator ${CURRENT_YEAR} - Free Career Tool`} />
         <meta name="twitter:site" content="@ProResumeFree" />
         
         {/* ADDITIONAL META */}
@@ -693,7 +693,7 @@ const PromotionProbabilityCalculatorPage = ({
         <section className="section" id="main-content" aria-labelledby="hero-heading">
           <div className="section-container">
             <div style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center' }}>
-              <div className="badge">✦ FREE PROMOTION CALCULATOR 2026 • NO SIGN UP • INSTANT RESULTS</div>
+              <div className="badge">✦ FREE PROMOTION CALCULATOR {CURRENT_YEAR} • NO SIGN UP • INSTANT RESULTS</div>
               <h1 id="hero-heading" style={{ fontSize: 'var(--font-size-display-lg)', fontFamily: 'var(--font-display)', fontWeight: 'var(--font-weight-extrabold)', lineHeight: 'var(--line-height-display)', marginBottom: '1.25rem' }}>
                 Free <span className="gradient-text">Promotion Probability</span> Calculator {CURRENT_YEAR}
               </h1>
@@ -1147,30 +1147,26 @@ const PromotionProbabilityCalculatorPage = ({
           </div>
         </section>
 
-        {/* Internal Links Grid */}
+        {/* New Internal Links Section */}
         <section className="section">
           <div className="section-container">
             <div className="section-header">
-              <h2 className="section-title">Recommended Career Resources</h2>
-              <p className="section-subtitle">Enhance your career strategy with these specialized tools and guides</p>
+              <h2 className="section-title">Related Career Calculator Tools</h2>
+              <p className="section-subtitle">Explore our suite of free career assessment and planning calculators</p>
             </div>
             <div className="geo-link-grid">
               {[
-                { href: "/experience-level-calculator", text: "Experience Level Calculator", iconName: "FiClock", desc: "Determine your career stage and appropriate next-level targeting." },
-                { href: "/career-path-calculator", text: "Career Path Calculator", iconName: "FiTrendingUp", desc: "Map your career trajectory and identify optimal advancement routes." },
-                { href: "/job-fit-calculator", text: "Job Fit Calculator", iconName: "FiTarget", desc: "Assess how well your skills align with target positions." },
-                { href: "/free-ats-resume-checker", text: "Free ATS Resume Checker", iconName: "FiShield", desc: "Ensure your promotion-ready resume passes automated screening." },
-                { href: "/salary-calculator", text: "Free Salary Calculator", iconName: "FiDollarSign", desc: "Research competitive compensation for your next role level." }
-              ].map((link, i) => {
-                const IconComponent = ICON_MAP[link.iconName] || FiFileText;
-                return (
-                  <Link key={i} href={link.href} className="geo-link-card">
-                    <IconComponent size={24} style={{ marginBottom: '0.75rem', color: 'var(--accent-primary)' }} />
-                    <span style={{ fontSize: 'var(--font-size-body-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-primary)', lineHeight: '1.4', marginBottom: '0.25rem' }}>{link.text}</span>
-                    <span style={{ fontSize: 'var(--font-size-label-sm)', color: 'var(--text-muted)', lineHeight: '1.3' }}>{link.desc}</span>
-                  </Link>
-                );
-              })}
+                { href: "/job-fit-calculator", title: "Job Fit Score Calculator" },
+                { href: "/job-market-demand-calculator", title: "Job Market Demand Tool" },
+                { href: "/salary-calculator", title: "Salary Calculator" },
+                { href: "/resume-calculators", title: "All Resume Calculators" },
+                { href: "/career-achievement-calculator", title: "Career Achievement Calculator" }
+              ].map((link, i) => (
+                <Link key={i} href={link.href} className="geo-link-card">
+                  <FiArrowRight size={20} style={{ marginBottom: '0.75rem', color: 'var(--accent-primary)' }} />
+                  <span style={{ fontSize: 'var(--font-size-body-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-primary)', lineHeight: '1.4' }}>{link.title}</span>
+                </Link>
+              ))}
             </div>
           </div>
         </section>
@@ -1191,7 +1187,7 @@ const PromotionProbabilityCalculatorPage = ({
 
         {/* Footer Info */}
         <div style={{ padding: '0.75rem 0', backgroundColor: 'var(--bg-surface-lowest)', borderTop: '0.5px solid var(--border-gold-filament)', textAlign: 'center' }}>
-          <span className="text-small"><FiCalendar style={{ marginRight: '0.5rem', display: 'inline', verticalAlign: 'middle' }} /> Last updated: {safeCurrentDate} • Data updated {safeCurrentDate}. Next analysis scheduled for Q2 2026.</span>
+          <span className="text-small"><FiCalendar style={{ marginRight: '0.5rem', display: 'inline', verticalAlign: 'middle' }} /> Last updated: {safeCurrentDate} • Data updated {safeCurrentDate}. Next analysis scheduled for Q2 {CURRENT_YEAR}.</span>
           <span className="text-small" style={{ marginLeft: '1rem' }}>
             <FiAlertCircle size={12} style={{ marginRight: '0.25rem', display: 'inline', verticalAlign: 'middle' }} />
             Probability estimates are for planning purposes. Actual promotions depend on many organizational factors.
@@ -1244,8 +1240,8 @@ export async function getStaticProps() {
   ];
 
   const meta = {
-    title: "Free Promotion Probability Calculator 2026 - Estimate Your Chances | No Sign Up",
-    description: "Calculate your promotion probability with our free tool. Rate yourself on 6 key factors, adjust for company size, and get timeline estimates. Actionable recommendations included. 100% private.",
+    title: `Free Promotion Probability Calculator ${CURRENT_YEAR} - Estimate Your Chances | No Sign Up`,
+    description: `Calculate your promotion probability with our free tool. Rate yourself on 6 key factors, adjust for company size, and get timeline estimates. Actionable recommendations included. 100% private.`,
     url: canonicalUrl,
     siteName: "Professional Resume Free",
     image: "https://professionalresumefree.com/promotion-calculator-guide.jpg",
@@ -1260,7 +1256,7 @@ export async function getStaticProps() {
     "career growth calculator",
     "job promotion predictor",
     "promotion timeline estimator",
-    "2026 promotion trends",
+    `${CURRENT_YEAR} promotion trends`,
     "career advancement probability"
   ];
 

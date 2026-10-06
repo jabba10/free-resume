@@ -333,19 +333,6 @@ const defaultMeta = {
   image: "https://professionalresumefree.com/images/canada-pr-resume-guide-og.jpg",
 };
 
-const defaultLongTailKeywords = [
-  "Canada PR resume",
-  "Express Entry resume",
-  "Canadian immigration resume",
-  "CRS score optimization",
-  "NOC code resume",
-  "professional resume Canada",
-  "permanent residency application",
-  "Canadian work experience documentation",
-  "IRCC resume requirements",
-  "Canada PR application guide 2026"
-];
-
 const defaultBreadcrumbData = [
   {
     "@type": "ListItem",
@@ -382,7 +369,7 @@ const CanadaPRResumePage = ({
   canonicalUrl = "https://professionalresumefree.com/resume-for-canada-pr-guide",
   breadcrumbData = defaultBreadcrumbData,
   meta = defaultMeta,
-  longTailKeywords = defaultLongTailKeywords,
+  longTailKeywords = [],
   reviewDates = [],
   faqDates = []
 }) => {
@@ -457,7 +444,7 @@ const CanadaPRResumePage = ({
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={meta.title} />
         <meta name="twitter:description" content={meta.description} />
-        <meta name="twitter:image" content="https://professionalresumefree.com/images/canada-pr-resume-guide-twitter.jpg" />
+        <meta name="twitter:image" content={meta.image} />
         <meta name="twitter:image:alt" content="Canada PR Resume Guide 2026" />
         <meta name="twitter:site" content="@ProResumeFree" />
         <meta name="twitter:creator" content="@ProResumeFree" />
@@ -533,7 +520,7 @@ const CanadaPRResumePage = ({
                     "@id": canonicalUrl
                   },
                   "articleSection": ["Canadian Immigration", "Express Entry", "Resume Writing"],
-                  "keywords": longTailKeywords.join(', '),
+                  "keywords": "Canada PR resume, Express Entry resume, Canadian immigration resume, CRS score optimization, NOC code resume",
                   "wordCount": 3500
                 },
                 {
@@ -594,7 +581,6 @@ const CanadaPRResumePage = ({
         <meta name="content-freshness" content={safeCurrentDate} />
         <span itemProp="dateModified">{safeLastModifiedDate}</span>
         <span itemProp="wordCount">3500</span>
-        <span itemProp="keywords">{longTailKeywords.join(', ')}</span>
         <span itemProp="build-timestamp">{buildTimestamp}</span>
       </div>
 
@@ -624,7 +610,7 @@ const CanadaPRResumePage = ({
         <section className="section" id="main-content" aria-labelledby="hero-heading">
           <div className="section-container">
             <div style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center' }}>
-              <div className="badge">✦ CANADA PR RESUME GUIDE 2026 • EXPRESS ENTRY • NOC ALIGNMENT • CRS OPTIMIZATION</div>
+              <div className="badge">✦ CANADA PR RESUME GUIDE {CURRENT_YEAR} • EXPRESS ENTRY • NOC ALIGNMENT • CRS OPTIMIZATION</div>
               <h1 id="hero-heading" style={{ fontSize: 'var(--font-size-display-lg)', fontFamily: 'var(--font-display)', fontWeight: 'var(--font-weight-extrabold)', lineHeight: 'var(--line-height-display)', marginBottom: '1.25rem' }}>
                 <span className="gradient-text">Canada PR Resume</span> Guide: Complete Express Entry Success
               </h1>
@@ -665,7 +651,7 @@ const CanadaPRResumePage = ({
         <div className="section-container">
           <div className="citation-card" style={{ background: 'rgba(100,181,246,0.05)', borderLeft: '3px solid var(--info-color)', padding: '1.25rem', borderRadius: '0 0.5rem 0.5rem 0', margin: '20px 0', maxWidth: '800px', marginLeft: 'auto', marginRight: 'auto' }}>
             <p style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)', margin: 0 }}><strong>Data Sources & Methodology:</strong> This guide synthesizes research from {aiCitations.map(s => s.source).join(', ')}. Canada PR resume strategies are based on comprehensive analysis of IRCC processing data, immigration consultant surveys, and successful applicant outcomes.</p>
-            <small style={{ color: 'var(--text-muted)', display: 'block', marginTop: '8px' }}>Last verified: {safeCurrentDate} • Next update: April 2026</small>
+            <small style={{ color: 'var(--text-muted)', display: 'block', marginTop: '8px' }}>Last verified: {safeCurrentDate} • Next update: April {CURRENT_YEAR + 1}</small>
           </div>
         </div>
 
@@ -832,7 +818,7 @@ const CanadaPRResumePage = ({
         <section className="section section-alt">
           <div className="section-container">
             <div className="section-header">
-              <h2 className="section-title">Canadian Salary Expectations by Industry (2026)</h2>
+              <h2 className="section-title">Canadian Salary Expectations by Industry ({CURRENT_YEAR})</h2>
               <p className="section-subtitle">Real salary data to help you evaluate job offers and negotiate compensation</p>
             </div>
             <div className="card-executive" style={{ maxWidth: '950px', margin: '0 auto' }}>
@@ -1026,27 +1012,26 @@ const CanadaPRResumePage = ({
           </div>
         </section>
 
-        {/* Internal Links Grid - Recommended Career Resources */}
+        {/* New Internal Links Section - Related Resume Guides */}
         <section className="section">
           <div className="section-container">
             <div className="section-header">
-              <h2 className="section-title">Recommended Career Resources</h2>
-              <p className="section-subtitle">Enhance your Canada immigration journey with these specialized guides and tools.</p>
+              <h2 className="section-title">Related Resume Guides</h2>
+              <p className="section-subtitle">Explore more specialized guides to strengthen your immigration and job application journey.</p>
             </div>
             <div className="geo-link-grid">
               {[
-                { href: "/free-ats-resume-checker", text: "ATS Resume Checker", iconName: "FiShield", desc: "Test Canadian ATS compatibility for employer applications." },
-                { href: "/how-to-beat-the-ats-optimization-tips-for-modern-hiring-software", text: "Beat ATS Algorithms", iconName: "FiCpu", desc: "Ensure your resume passes Canadian employer screening systems." },
-                { href: "/cover-letter-guides", text: "Cover Letter Guides", iconName: "FiFileText", desc: "Complete your application with Canadian-style cover letters." },
-                { href: "/interview-tips", text: "Canadian Interview Prep", iconName: "FiUserCheck", desc: "Prepare for behavioral interviews common in Canadian hiring." },
-                { href: "/resume-for-abroad-job", text: "International Resume Guide", iconName: "FiGlobe", desc: "Multi-country resume formats for global opportunities." }
+                { href: "/resume-for-abroad-job", text: "Abroad Job Resume Guide", iconName: "FiGlobe" },
+                { href: "/resume-for-gulf-job", text: "Gulf Job Resume Guide", iconName: "FiBriefcase" },
+                { href: "/resume-formatting-guide", text: "Resume Formatting Guide", iconName: "FiLayout" },
+                { href: "/resume-guide", text: "Resume Writing Guide", iconName: "FiFileText" },
+                { href: "/resume-for-job-application-india", text: "India Job Application Resume", iconName: "FiBookOpen" }
               ].map((link, i) => {
                 const IconComponent = ICON_MAP[link.iconName] || FiFileText;
                 return (
                   <Link key={i} href={link.href} className="geo-link-card">
                     <IconComponent size={24} style={{ marginBottom: '0.75rem', color: 'var(--accent-primary)' }} />
-                    <span style={{ fontSize: 'var(--font-size-body-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-primary)', lineHeight: '1.4', marginBottom: '0.25rem' }}>{link.text}</span>
-                    <span style={{ fontSize: 'var(--font-size-label-sm)', color: 'var(--text-muted)', lineHeight: '1.3' }}>{link.desc}</span>
+                    <span style={{ fontSize: 'var(--font-size-body-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-primary)', lineHeight: '1.4' }}>{link.text}</span>
                   </Link>
                 );
               })}
@@ -1064,7 +1049,7 @@ const CanadaPRResumePage = ({
               ))}
             </ul>
             <p style={{marginTop: '16px', fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)'}}><strong>Additional analysis:</strong> Canada PR resume best practices calibrated against IRCC processing data, immigration consultant surveys, and successful applicant outcomes from Express Entry and Provincial Nominee Programs.</p>
-            <small style={{ color: 'var(--text-muted)', display: 'block', marginTop: '8px' }}>Last full analysis: {safeCurrentDate} • Next update: April 2026</small>
+            <small style={{ color: 'var(--text-muted)', display: 'block', marginTop: '8px' }}>Last full analysis: {safeCurrentDate} • Next update: April {CURRENT_YEAR + 1}</small>
           </div>
         </div>
 
@@ -1125,19 +1110,6 @@ export async function getStaticProps() {
     image: "https://professionalresumefree.com/images/canada-pr-resume-guide-og.jpg",
   };
 
-  const longTailKeywords = [
-    "Canada PR resume",
-    "Express Entry resume",
-    "Canadian immigration resume",
-    "CRS score optimization",
-    "NOC code resume",
-    "professional resume Canada",
-    "permanent residency application",
-    "Canadian work experience documentation",
-    "IRCC resume requirements",
-    "Canada PR application guide 2026"
-  ];
-
   return {
     props: {
       buildTimestamp,
@@ -1146,7 +1118,6 @@ export async function getStaticProps() {
       canonicalUrl,
       breadcrumbData,
       meta,
-      longTailKeywords,
       reviewDates,
       faqDates
     },

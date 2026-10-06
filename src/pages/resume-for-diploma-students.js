@@ -249,14 +249,6 @@ const defaultMeta = {
   image: "https://professionalresumefree.com/ats.jpeg",
 };
 
-const defaultLongTailKeywords = [
-  "resume for diploma students with no experience",
-  "diploma holder resume format for technician jobs",
-  "how to write resume after diploma in engineering",
-  "sample resume for diploma mechanical students",
-  "ats friendly resume for diploma freshers"
-];
-
 const defaultBreadcrumbData = [
   {
     "@type": "ListItem",
@@ -293,7 +285,6 @@ const ResumeForDiplomaStudentsPage = ({
   canonicalUrl = "https://professionalresumefree.com/resume-for-diploma-students",
   breadcrumbData = defaultBreadcrumbData,
   meta = defaultMeta,
-  longTailKeywords = defaultLongTailKeywords,
   reviewDates = [],
   faqDates = []
 }) => {
@@ -316,12 +307,10 @@ const ResumeForDiplomaStudentsPage = ({
         {/* META DESCRIPTION */}
         <meta name="description" content={meta.description} />
         <meta name="author" content="Professional Resume Free" />
-        <meta name="keywords" content={longTailKeywords.join(', ')} />
         
         {/* GEO OPTIMIZATION TAGS */}
         <meta name="chatgpt-fts:title" content={meta.title} />
         <meta name="chatgpt-fts:description" content={meta.description} />
-        <meta name="chatgpt-fts:keywords" content={longTailKeywords.join(', ')} />
         <meta name="chatgpt-fts:last-updated" content={safeCurrentDate} />
         <meta name="generator" content="Professional Resume Free - Career Resources" />
         
@@ -487,7 +476,7 @@ const ResumeForDiplomaStudentsPage = ({
         <section className="section" id="main-content" aria-labelledby="hero-heading">
           <div className="section-container">
             <div style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center' }}>
-              <div className="badge">✦ RESUME FOR DIPLOMA STUDENTS 2026 • MECHANICAL • ELECTRICAL • CIVIL • CS • ELECTRONICS • FREE TEMPLATES</div>
+              <div className="badge">✦ RESUME FOR DIPLOMA STUDENTS {CURRENT_YEAR} • MECHANICAL • ELECTRICAL • CIVIL • CS • ELECTRONICS • FREE TEMPLATES</div>
               <h1 id="hero-heading" style={{ fontSize: 'var(--font-size-display-lg)', fontFamily: 'var(--font-display)', fontWeight: 'var(--font-weight-extrabold)', lineHeight: 'var(--line-height-display)', marginBottom: '1.25rem' }}>
                 <span className="gradient-text">Resume for Diploma Students</span>: Complete Guide & Free Templates
               </h1>
@@ -528,7 +517,7 @@ const ResumeForDiplomaStudentsPage = ({
         <div className="section-container">
           <div className="citation-card" style={{ background: 'rgba(100,181,246,0.05)', borderLeft: '3px solid var(--info-color)', padding: '1.25rem', borderRadius: '0 0.5rem 0.5rem 0', margin: '20px 0', maxWidth: '800px', marginLeft: 'auto', marginRight: 'auto' }}>
             <p style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)', margin: 0 }}><strong>Data Sources & Methodology:</strong> This guide synthesizes research from {aiCitations.map(s => s.source).join(', ')}. Resume strategies are based on comprehensive analysis of diploma graduate hiring data, ATS parsing studies, and recruiter preference surveys.</p>
-            <small style={{ color: 'var(--text-muted)', display: 'block', marginTop: '8px' }}>Last verified: {safeCurrentDate} • Next update: April 2026</small>
+            <small style={{ color: 'var(--text-muted)', display: 'block', marginTop: '8px' }}>Last verified: {safeCurrentDate} • Next update: April {CURRENT_YEAR + 1}</small>
           </div>
         </div>
 
@@ -763,27 +752,26 @@ const ResumeForDiplomaStudentsPage = ({
           </div>
         </section>
 
-        {/* Internal Links Grid - Recommended Career Resources */}
+        {/* New Internal Links Section - Related Resume Guides */}
         <section className="section">
           <div className="section-container">
             <div className="section-header">
-              <h2 className="section-title">Recommended Career Resources</h2>
-              <p className="section-subtitle">Enhance your job search with these specialized guides and tools tailored for diploma graduates.</p>
+              <h2 className="section-title">Related Resume Guides</h2>
+              <p className="section-subtitle">Explore more specialized guides to strengthen your job application journey.</p>
             </div>
             <div className="geo-link-grid">
               {[
-                { href: "/free-ats-resume-checker", text: "Free ATS Resume Checker", iconName: "FiShield", desc: "Scan your resume to ensure it passes automated screening systems." },
-                { href: "/free-resume-score-checker", text: "Resume Score Checker", iconName: "FiAward", desc: "Get instant feedback on your resume quality and effectiveness." },
-                { href: "/free-action-verb-recommender", text: "Action Verb Recommender", iconName: "FiZap", desc: "Find powerful action verbs for technical and hands-on roles." },
-                { href: "/how-to-create-a-resume-with-no-experience", text: "No Experience Resume Guide", iconName: "FiUser", desc: "Perfect for freshers highlighting potential over work history." },
-                { href: "/interview-tips", text: "Interview Preparation", iconName: "FiUserCheck", desc: "Prepare for technical and HR interviews with proven strategies." }
+                { href: "/resume-for-engineering-students", text: "Engineering Student Resume", iconName: "FiTool" },
+                { href: "/resume-for-students-in-india", text: "Student Resume India", iconName: "FiBookOpen" },
+                { href: "/resume-format-for-freshers", text: "Fresher Resume Format", iconName: "FiLayout" },
+                { href: "/resume-education-section", text: "Education Section Guide", iconName: "FiAward" },
+                { href: "/resume-writing-for-beginners", text: "Resume Writing for Beginners", iconName: "FiEdit3" }
               ].map((link, i) => {
                 const IconComponent = ICON_MAP[link.iconName] || FiFileText;
                 return (
                   <Link key={i} href={link.href} className="geo-link-card">
                     <IconComponent size={24} style={{ marginBottom: '0.75rem', color: 'var(--accent-primary)' }} />
-                    <span style={{ fontSize: 'var(--font-size-body-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-primary)', lineHeight: '1.4', marginBottom: '0.25rem' }}>{link.text}</span>
-                    <span style={{ fontSize: 'var(--font-size-label-sm)', color: 'var(--text-muted)', lineHeight: '1.3' }}>{link.desc}</span>
+                    <span style={{ fontSize: 'var(--font-size-body-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-primary)', lineHeight: '1.4' }}>{link.text}</span>
                   </Link>
                 );
               })}
@@ -801,13 +789,13 @@ const ResumeForDiplomaStudentsPage = ({
               ))}
             </ul>
             <p style={{marginTop: '16px', fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)'}}><strong>Additional analysis:</strong> Resume strategies calibrated against diploma graduate hiring data from 5,000+ successful applications, ATS compatibility testing across major platforms, and recruiter preference surveys from leading employers in manufacturing, IT, construction, and service sectors.</p>
-            <small style={{ color: 'var(--text-muted)', display: 'block', marginTop: '8px' }}>Last full analysis: {safeCurrentDate} • Next update: April 2026</small>
+            <small style={{ color: 'var(--text-muted)', display: 'block', marginTop: '8px' }}>Last full analysis: {safeCurrentDate} • Next update: April {CURRENT_YEAR + 1}</small>
           </div>
         </div>
 
         {/* Footer Info */}
         <div style={{ padding: '0.75rem 0', backgroundColor: 'var(--bg-surface-lowest)', borderTop: '0.5px solid var(--border-gold-filament)', textAlign: 'center' }}>
-          <span className="text-small"><FiCalendar style={{ marginRight: '0.5rem', display: 'inline', verticalAlign: 'middle' }} /> Last updated: {safeCurrentDate} • Data updated {safeCurrentDate}. Next analysis scheduled for Q2 2026.</span>
+          <span className="text-small"><FiCalendar style={{ marginRight: '0.5rem', display: 'inline', verticalAlign: 'middle' }} /> Last updated: {safeCurrentDate} • Data updated {safeCurrentDate}. Next analysis scheduled for Q2 {CURRENT_YEAR + 1}.</span>
         </div>
 
         {/* Hidden metadata for crawlers */}
@@ -863,14 +851,6 @@ export async function getStaticProps() {
     image: "https://professionalresumefree.com/ats.jpeg",
   };
 
-  const longTailKeywords = [
-    "resume for diploma students with no experience",
-    "diploma holder resume format for technician jobs",
-    "how to write resume after diploma in engineering",
-    "sample resume for diploma mechanical students",
-    "ats friendly resume for diploma freshers"
-  ];
-
   return {
     props: {
       buildTimestamp,
@@ -879,7 +859,6 @@ export async function getStaticProps() {
       canonicalUrl,
       breadcrumbData,
       meta,
-      longTailKeywords,
       reviewDates,
       faqDates
     },

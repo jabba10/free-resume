@@ -8,7 +8,7 @@ import {
   FiSearch, FiEdit, FiClipboard, FiLayout, FiTrendingUp,
   FiGlobe, FiFlag, FiBook, FiActivity, FiClock, FiBarChart2,
   FiThumbsUp, FiLayers, FiUsers, FiCheckCircle, FiZap,
-  FiDatabase, FiTool, FiAlertCircle
+  FiDatabase, FiTool, FiAlertCircle, FiMapPin
 } from 'react-icons/fi';
 
 // ============================================================================
@@ -108,7 +108,7 @@ const executiveDesignTokens = `
   @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(242,202,80,0.4); } 70% { box-shadow: 0 0 0 10px rgba(242,202,80,0); } 100% { box-shadow: 0 0 0 0 rgba(242,202,80,0); } }
   @media (max-width:640px) { .btn-primary,.btn-outline { width:100%; min-width:auto; } .calculator-link-card { flex-direction:column; text-align:center; } }
   
-  /* ===== ADDED: PILLAR LINKS SECTION ===== */
+  /* ===== PILLAR LINKS SECTION ===== */
   .pillar-links-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -121,7 +121,7 @@ const executiveDesignTokens = `
     backdrop-filter: blur(var(--glass-blur));
     -webkit-backdrop-filter: blur(var(--glass-blur));
     border: var(--card-border);
-    border-radius: var(--radius-xl);
+    border-radius: 0.5rem;
     padding: 1.25rem 1.5rem;
     text-decoration: none;
     color: inherit;
@@ -138,7 +138,7 @@ const executiveDesignTokens = `
     color: inherit;
   }
   .pillar-link-card span {
-    font-weight: var(--font-weight-medium);
+    font-weight: var(--font-weight-semibold);
     color: var(--text-primary);
     font-size: var(--font-size-body-sm);
   }
@@ -209,6 +209,13 @@ const RESUME_CALCULATORS = [
         description: 'Rate yourself on key job factors. Get weighted compatibility scores and improvement recommendations.',
         icon: 'FiThumbsUp',
         badge: 'Strategic'
+      },
+      {
+        href: '/salary-calculator',
+        title: 'Salary Calculator',
+        description: 'Calculate your market value with industry benchmarks, experience adjustments, and location factors.',
+        icon: 'FiDollarSign',
+        badge: 'Essential'
       }
     ]
   },
@@ -236,6 +243,13 @@ const RESUME_CALCULATORS = [
         description: 'Plan your career trajectory with 10-year salary projections, skill roadmaps, and growth forecasts.',
         icon: 'FiActivity',
         badge: 'Comprehensive'
+      },
+      {
+        href: '/cost-of-living-calculator',
+        title: 'Cost of Living Calculator',
+        description: 'Compare cost of living across cities to make informed relocation and salary negotiation decisions.',
+        icon: 'FiMapPin',
+        badge: 'Valuable'
       }
     ]
   },
@@ -316,8 +330,8 @@ const aiCitations = [
 // DEFAULT PROPS FOR SSR/SSG SAFETY
 // ============================================================================
 const defaultMeta = {
-  title: "Free Resume Calculators 2026 - 15+ Tools to Optimize Your Resume | No Sign Up",
-  description: "Access 15+ free resume calculators and tools. Evaluate resume strength, check ATS compatibility, assess skills gaps, calculate market value, and more. All 100% free, private, no sign-up required.",
+  title: `Free Resume Calculators ${CURRENT_YEAR} - 15+ Tools to Optimize Your Resume | No Sign Up`,
+  description: `Access 15+ free resume calculators and tools. Evaluate resume strength, check ATS compatibility, assess skills gaps, calculate market value, and more. All 100% free, private, no sign-up required.`,
   url: "https://professionalresumefree.com/resume-calculators",
   siteName: "Professional Resume Free",
   image: "https://professionalresumefree.com/resume-calculators-guide.jpg",
@@ -334,7 +348,7 @@ const defaultLongTailKeywords = [
   "career calculators",
   "resume assessment",
   "resume improvement tools",
-  "2026 resume tools",
+  `${CURRENT_YEAR} resume tools`,
   "professional resume calculators"
 ];
 
@@ -358,7 +372,7 @@ const ICON_MAP = {
   FiShield, FiStar, FiAward, FiGrid, FiArrowRight, FiSearch, FiEdit,
   FiClipboard, FiLayout, FiTrendingUp, FiGlobe, FiFlag, FiBook, FiActivity,
   FiClock, FiBarChart2, FiThumbsUp, FiLayers, FiUsers, FiCheckCircle,
-  FiZap, FiDatabase, FiTool, FiAlertCircle
+  FiZap, FiDatabase, FiTool, FiAlertCircle, FiMapPin
 };
 
 // ============================================================================
@@ -425,7 +439,7 @@ const ResumeCalculatorsPage = ({
         <meta property="og:image" content={meta.image} />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
-        <meta property="og:image:alt" content="Free Resume Calculators 2026 - 15+ Tools to Optimize Your Resume" />
+        <meta property="og:image:alt" content={`Free Resume Calculators ${CURRENT_YEAR} - 15+ Tools to Optimize Your Resume`} />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="Professional Resume Free" />
         <meta property="og:updated_time" content={safeLastModifiedDate} />
@@ -443,7 +457,7 @@ const ResumeCalculatorsPage = ({
         <meta name="twitter:title" content={meta.title} />
         <meta name="twitter:description" content={meta.description} />
         <meta name="twitter:image" content={meta.image} />
-        <meta name="twitter:image:alt" content="Free Resume Calculators 2026 - Career Tools Hub" />
+        <meta name="twitter:image:alt" content={`Free Resume Calculators ${CURRENT_YEAR} - Career Tools Hub`} />
         <meta name="twitter:site" content="@ProResumeFree" />
         
         {/* ADDITIONAL META */}
@@ -549,7 +563,7 @@ const ResumeCalculatorsPage = ({
                 <meta itemProp="position" content="1" />
               </li>
               <li aria-hidden="true"><FiChevronRight size={14} /></li>
-              <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
+              <li itemProp="listItemElement" itemScope itemType="https://schema.org/ListItem">
                 <span itemProp="name" aria-current="page"><FiFileText size={14} style={{marginRight: '4px'}} /> Resume Calculators</span>
                 <meta itemProp="position" content="2" />
               </li>
@@ -561,7 +575,7 @@ const ResumeCalculatorsPage = ({
         <section className="section" id="main-content" aria-labelledby="hero-heading">
           <div className="section-container">
             <div style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center' }}>
-              <div className="badge">✦ FREE RESUME CALCULATORS 2026 • NO SIGN UP • INSTANT RESULTS</div>
+              <div className="badge">✦ FREE RESUME CALCULATORS {CURRENT_YEAR} • NO SIGN UP • INSTANT RESULTS</div>
               <h1 id="hero-heading" style={{ fontSize: 'var(--font-size-display-lg)', fontFamily: 'var(--font-display)', fontWeight: 'var(--font-weight-extrabold)', lineHeight: 'var(--line-height-display)', marginBottom: '1.25rem' }}>
                 Free <span className="gradient-text">Resume Calculators</span> {CURRENT_YEAR}
               </h1>
@@ -578,7 +592,7 @@ const ResumeCalculatorsPage = ({
               </div>
               <div className="grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))' }} aria-label="Key statistics">
                 {[
-                  { value: "15+", label: "Free Calculators" }, 
+                  { value: "16+", label: "Free Calculators" }, 
                   { value: "4", label: "Categories" }, 
                   { value: "100%", label: "Private & Secure" }, 
                   { value: "Instant", label: "Results" }
@@ -618,7 +632,7 @@ const ResumeCalculatorsPage = ({
           <div className="section-container">
             <div className="section-header">
               <h2 className="section-title">All Resume Calculators</h2>
-              <p className="section-subtitle">Browse our complete collection of 15+ free resume tools organized by category</p>
+              <p className="section-subtitle">Browse our complete collection of 16+ free resume tools organized by category</p>
             </div>
 
             {RESUME_CALCULATORS.map((category, catIdx) => {
@@ -700,7 +714,7 @@ const ResumeCalculatorsPage = ({
                 { icon: 'FiShield', title: '100% Private & Secure', desc: 'All calculations happen in your browser. Your resume data is never uploaded, stored, or shared with anyone.', stat: 'Privacy First' },
                 { icon: 'FiZap', title: 'Instant Results', desc: 'Get immediate feedback and scores. No waiting, no email required, no registration needed.', stat: 'Real-Time' },
                 { icon: 'FiTarget', title: 'Data-Driven Insights', desc: 'Calculations based on industry standards, hiring trends, and verified market data for accurate assessments.', stat: 'Accurate' },
-                { icon: 'FiGrid', title: 'Comprehensive Suite', desc: '15+ specialized tools covering every aspect of resume optimization from strength to format to market value.', stat: 'Complete' },
+                { icon: 'FiGrid', title: 'Comprehensive Suite', desc: '16+ specialized tools covering every aspect of resume optimization from strength to format to market value.', stat: 'Complete' },
                 { icon: 'FiStar', title: 'Actionable Recommendations', desc: 'Every calculator provides specific, prioritized suggestions you can implement immediately to improve.', stat: 'Practical' },
                 { icon: 'FiGlobe', title: 'Global Coverage', desc: 'Country-specific formats, international resume standards, and immigration-focused tools for global careers.', stat: 'Worldwide' }
               ].map((feature, i) => {
@@ -760,38 +774,6 @@ const ResumeCalculatorsPage = ({
           </div>
         </section>
 
-        {/* ===== NEW: PILLAR LINKS SECTION ===== */}
-        <section className="section section-alt">
-          <div className="section-container">
-            <div className="section-header">
-              <h2 className="section-title">More Free Resume Resources</h2>
-              <p className="section-subtitle">Explore our complete suite of free resume tools and resources</p>
-            </div>
-            <div className="pillar-links-grid">
-              <Link href="/free-resume-builder" className="pillar-link-card">
-                <span>🚀 Free Resume Builder — Start Now</span>
-                <FiArrowRight className="arrow-icon" size={18} />
-              </Link>
-              <Link href="/resume-templates" className="pillar-link-card">
-                <span>📄 Browse 46+ ATS-Friendly Resume Templates</span>
-                <FiArrowRight className="arrow-icon" size={18} />
-              </Link>
-              <Link href="/free-resume-tools" className="pillar-link-card">
-                <span>🛠️ 12+ Free Resume Tools</span>
-                <FiArrowRight className="arrow-icon" size={18} />
-              </Link>
-              <Link href="/usa-jobs-resume-directory" className="pillar-link-card">
-                <span>🇺🇸 USA Jobs Resume Directory</span>
-                <FiArrowRight className="arrow-icon" size={18} />
-              </Link>
-              <Link href="/complete-resume-resource-library" className="pillar-link-card">
-                <span>📚 Complete Resume Resource Library</span>
-                <FiArrowRight className="arrow-icon" size={18} />
-              </Link>
-            </div>
-          </div>
-        </section>
-
         {/* CTA */}
         <section style={{ padding: 'var(--section-gap-lg) 0', background: 'linear-gradient(135deg, #1c1b1d 0%, #2a2a2c 100%)', textAlign: 'center', borderTop: '0.5px solid var(--border-gold-filament)', borderBottom: '0.5px solid var(--border-gold-filament)', position: 'relative', overflow: 'hidden' }}>
           <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle at 50% 50%, rgba(242,202,80,0.05) 0%, transparent 70%)', pointerEvents: 'none' }} />
@@ -809,32 +791,26 @@ const ResumeCalculatorsPage = ({
           </div>
         </section>
 
-        {/* Related Tools Grid */}
+        {/* New Internal Links Section */}
         <section className="section">
           <div className="section-container">
             <div className="section-header">
-              <h2 className="section-title">Recommended Career Resources</h2>
-              <p className="section-subtitle">Enhance your job search with these specialized guides and tools</p>
+              <h2 className="section-title">Related Resume Calculator Tools</h2>
+              <p className="section-subtitle">Explore our most popular resume assessment and optimization calculators</p>
             </div>
-            <div className="grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))' }}>
+            <div className="pillar-links-grid">
               {[
-                { href: "/salary-calculator", text: "Free Salary Calculator", iconName: "FiDollarSign", desc: "Convert hourly to annual salary with tax estimates and industry benchmarks." },
-                { href: "/career-path-calculator", text: "Career Path Calculator", iconName: "FiTrendingUp", desc: "Plan your career trajectory with 10-year growth projections." },
-                { href: "/free-ats-resume-checker", text: "Free ATS Resume Checker", iconName: "FiShield", desc: "Ensure your optimized resume passes automated screening systems." },
-                { href: "/job-market-demand-calculator", text: "Job Market Demand Calculator", iconName: "FiBarChart2", desc: "Check demand trends for tech roles and emerging positions." },
-                { href: "/immigration-points-calculator", text: "Immigration Points Calculator", iconName: "FiFlag", desc: "Calculate skilled migration points for Canada, Australia, UK, and NZ." }
-              ].map((link, i) => {
-                const IconComponent = ICON_MAP[link.iconName] || FiFileText;
-                return (
-                  <Link key={i} href={link.href} className="card-executive" style={{ textAlign: 'center', textDecoration: 'none' }}>
-                    <div style={{ width: '56px', height: '56px', background: 'rgba(242,202,80,0.1)', borderRadius: '0.125rem', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1rem', border: '0.5px solid var(--border-gold-filament)', color: 'var(--accent-primary)', flexShrink: 0 }}>
-                      <IconComponent size={28} />
-                    </div>
-                    <h3 style={{ fontSize: 'var(--font-size-body-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-primary)', marginBottom: '0.5rem' }}>{link.text}</h3>
-                    <p style={{ fontSize: 'var(--font-size-label-sm)', color: 'var(--text-secondary)' }}>{link.desc}</p>
-                  </Link>
-                );
-              })}
+                { href: "/job-fit-calculator", title: "Job Fit Calculator" },
+                { href: "/salary-calculator", title: "Salary Calculator" },
+                { href: "/resume-strength-calculator", title: "Resume Strength Calculator" },
+                { href: "/resume-length-calculator", title: "Resume Length Calculator" },
+                { href: "/skill-gap-calculator", title: "Skill Gap Calculator" }
+              ].map((link, i) => (
+                <Link key={i} href={link.href} className="pillar-link-card">
+                  <span>{link.title}</span>
+                  <FiArrowRight className="arrow-icon" size={18} />
+                </Link>
+              ))}
             </div>
           </div>
         </section>
@@ -855,7 +831,7 @@ const ResumeCalculatorsPage = ({
 
         {/* Footer Info */}
         <div style={{ padding: '0.75rem 0', backgroundColor: 'var(--bg-surface-lowest)', borderTop: '0.5px solid var(--border-gold-filament)', textAlign: 'center' }}>
-          <span className="text-small"><FiCalendar style={{ marginRight: '0.5rem', display: 'inline', verticalAlign: 'middle' }} /> Last updated: {safeCurrentDate} • Data updated {safeCurrentDate}. Next analysis scheduled for Q2 2026.</span>
+          <span className="text-small"><FiCalendar style={{ marginRight: '0.5rem', display: 'inline', verticalAlign: 'middle' }} /> Last updated: {safeCurrentDate} • Data updated {safeCurrentDate}. Next analysis scheduled for Q2 {CURRENT_YEAR}.</span>
           <span className="text-small" style={{ marginLeft: '1rem' }}>
             <FiCheckCircle size={12} style={{ marginRight: '0.25rem', display: 'inline', verticalAlign: 'middle', color: 'var(--success-color)' }} />
             All tools are 100% free and private
@@ -908,8 +884,8 @@ export async function getStaticProps() {
   ];
 
   const meta = {
-    title: "Free Resume Calculators 2026 - 15+ Tools to Optimize Your Resume | No Sign Up",
-    description: "Access 15+ free resume calculators and tools. Evaluate resume strength, check ATS compatibility, assess skills gaps, calculate market value, and more. All 100% free, private, no sign-up required.",
+    title: `Free Resume Calculators ${CURRENT_YEAR} - 15+ Tools to Optimize Your Resume | No Sign Up`,
+    description: `Access 15+ free resume calculators and tools. Evaluate resume strength, check ATS compatibility, assess skills gaps, calculate market value, and more. All 100% free, private, no sign-up required.`,
     url: canonicalUrl,
     siteName: "Professional Resume Free",
     image: "https://professionalresumefree.com/resume-calculators-guide.jpg",
@@ -926,7 +902,7 @@ export async function getStaticProps() {
     "career calculators",
     "resume assessment",
     "resume improvement tools",
-    "2026 resume tools",
+    `${CURRENT_YEAR} resume tools`,
     "professional resume calculators"
   ];
 

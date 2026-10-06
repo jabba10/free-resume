@@ -239,17 +239,6 @@ const defaultMeta = {
   image: "https://professionalresumefree.com/images/og-gulf-resume-guide.jpg",
 };
 
-const defaultLongTailKeywords = [
-  "Gulf job resume",
-  "Middle East resume",
-  "GCC resume format",
-  "UAE job application",
-  "Saudi Arabia resume",
-  "Qatar job CV",
-  "Kuwait employment resume",
-  "Gulf country resume tips"
-];
-
 const defaultBreadcrumbData = [
   {
     "@type": "ListItem",
@@ -287,7 +276,6 @@ const ResumeForGulfJobPage = ({
   canonicalUrl = "https://professionalresumefree.com/resume-for-gulf-job",
   breadcrumbData = defaultBreadcrumbData,
   meta = defaultMeta,
-  longTailKeywords = defaultLongTailKeywords,
   reviewDates = [],
   faqDates = []
 }) => {
@@ -310,12 +298,10 @@ const ResumeForGulfJobPage = ({
         {/* META DESCRIPTION */}
         <meta name="description" content={meta.description} />
         <meta name="author" content="Professional Resume Free" />
-        <meta name="keywords" content={longTailKeywords.join(', ')} />
         
         {/* GEO OPTIMIZATION TAGS */}
         <meta name="chatgpt-fts:title" content={meta.title} />
         <meta name="chatgpt-fts:description" content={meta.description} />
-        <meta name="chatgpt-fts:keywords" content={longTailKeywords.slice(0, 5).join(', ')} />
         <meta name="chatgpt-fts:last-updated" content={safeCurrentDate} />
         <meta name="generator" content="Professional Resume Free - Gulf Job Platform" />
         
@@ -359,7 +345,7 @@ const ResumeForGulfJobPage = ({
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={meta.title} />
         <meta name="twitter:description" content={meta.description} />
-        <meta name="twitter:image" content="https://professionalresumefree.com/images/twitter-gulf-resume-guide.jpg" />
+        <meta name="twitter:image" content={meta.image} />
         <meta name="twitter:image:alt" content="Resume for Gulf Job Guide 2026" />
         <meta name="twitter:site" content="@ProResumeFree" />
         <meta name="twitter:creator" content="@ProResumeFree" />
@@ -455,8 +441,6 @@ const ResumeForGulfJobPage = ({
         <meta name="build-timestamp" content={buildTimestamp} />
         <meta name="content-freshness" content={safeCurrentDate} />
         <span itemProp="dateModified">{safeLastModifiedDate}</span>
-        <span itemProp="wordCount">3500</span>
-        <span itemProp="keywords">{longTailKeywords.join(', ')}</span>
         <span itemProp="build-timestamp">{buildTimestamp}</span>
       </div>
 
@@ -486,7 +470,7 @@ const ResumeForGulfJobPage = ({
         <section className="section" id="main-content" aria-labelledby="hero-heading">
           <div className="section-container">
             <div style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center' }}>
-              <div className="badge">✦ RESUME FOR GULF JOB 2026 • UAE • SAUDI ARABIA • QATAR • KUWAIT • OMAN • BAHRAIN • GCC GUIDE</div>
+              <div className="badge">✦ RESUME FOR GULF JOB {CURRENT_YEAR} • UAE • SAUDI ARABIA • QATAR • KUWAIT • OMAN • BAHRAIN • GCC GUIDE</div>
               <h1 id="hero-heading" style={{ fontSize: 'var(--font-size-display-lg)', fontFamily: 'var(--font-display)', fontWeight: 'var(--font-weight-extrabold)', lineHeight: 'var(--line-height-display)', marginBottom: '1.25rem' }}>
                 <span className="gradient-text">Resume for Gulf Job</span>: Complete GCC Guide & Free Templates
               </h1>
@@ -516,7 +500,7 @@ const ResumeForGulfJobPage = ({
         {/* Article Meta Information */}
         <div className="section-container">
           <div className="article-meta" style={{ display: 'flex', gap: '24px', justifyContent: 'center', margin: '24px 0', flexWrap: 'wrap', padding: '16px 0', borderTop: '0.5px solid var(--border-gold-filament)', borderBottom: '0.5px solid var(--border-gold-filament)' }}>
-            <span className="meta-item" style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text-muted)', fontSize: '0.95rem' }}>✓ EEAT-Optimized Content · 2026 Updated</span>
+            <span className="meta-item" style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text-muted)', fontSize: '0.95rem' }}>✓ EEAT-Optimized Content · {CURRENT_YEAR} Updated</span>
             <span className="meta-item" style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text-muted)', fontSize: '0.95rem' }}>✓ Gulf Market Intelligence</span>
             <span className="meta-item" style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text-muted)', fontSize: '0.95rem' }}><FiCalendar /> Updated: {safeCurrentDate}</span>
           </div>
@@ -526,7 +510,7 @@ const ResumeForGulfJobPage = ({
         <div className="section-container">
           <div className="citation-card" style={{ background: 'rgba(100,181,246,0.05)', borderLeft: '3px solid var(--info-color)', padding: '1.25rem', borderRadius: '0 0.5rem 0.5rem 0', margin: '20px 0', maxWidth: '800px', marginLeft: 'auto', marginRight: 'auto' }}>
             <p style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)', margin: 0 }}><strong>Data Sources & Methodology:</strong> This guide synthesizes research from {aiCitations.map(s => s.source).join(', ')}. Gulf resume strategies are based on comprehensive analysis of regional hiring practices, recruiter surveys, and successful applicant outcomes across all six GCC countries.</p>
-            <small style={{ color: 'var(--text-muted)', display: 'block', marginTop: '8px' }}>Last verified: {safeCurrentDate} • Next update: April 2026</small>
+            <small style={{ color: 'var(--text-muted)', display: 'block', marginTop: '8px' }}>Last verified: {safeCurrentDate} • Next update: April {CURRENT_YEAR + 1}</small>
           </div>
         </div>
 
@@ -728,27 +712,26 @@ const ResumeForGulfJobPage = ({
           </div>
         </section>
 
-        {/* Internal Links Grid - Recommended Career Resources */}
+        {/* New Internal Links Section - Related Resume Guides */}
         <section className="section">
           <div className="section-container">
             <div className="section-header">
-              <h2 className="section-title">Recommended Career Resources</h2>
-              <p className="section-subtitle">Enhance your Gulf job search with these specialized guides and tools.</p>
+              <h2 className="section-title">Related Resume Guides</h2>
+              <p className="section-subtitle">Explore more specialized guides to strengthen your Gulf job application journey.</p>
             </div>
             <div className="geo-link-grid">
               {[
-                { href: "/free-ats-resume-checker", text: "Free ATS Resume Checker", iconName: "FiShield", desc: "Test your Gulf resume for ATS compatibility with regional systems." },
-                { href: "/how-to-beat-the-ats-optimization-tips-for-modern-hiring-software", text: "Beat ATS Algorithms", iconName: "FiCpu", desc: "Optimize for Gulf employer screening and filtering systems." },
-                { href: "/cover-letter-guides", text: "Cover Letter Guides", iconName: "FiFileText", desc: "Write Gulf-style cover letters that complement your resume." },
-                { href: "/interview-tips", text: "Interview Preparation", iconName: "FiUserCheck", desc: "Prepare for Gulf-specific interview formats and cultural expectations." },
-                { href: "/resume-for-abroad-job", text: "International Resume Guide", iconName: "FiGlobe", desc: "Multi-country resume formats for global job applications." }
+                { href: "/resume-for-abroad-job", text: "Abroad Job Resume Guide", iconName: "FiGlobe" },
+                { href: "/resume-for-canada-pr-guide", text: "Canada PR Resume Guide", iconName: "FiShield" },
+                { href: "/resume-formatting-guide", text: "Resume Formatting Guide", iconName: "FiLayout" },
+                { href: "/resume-guide", text: "Resume Guide", iconName: "FiFileText" },
+                { href: "/jobs-boards", text: "Job Boards Directory", iconName: "FiSearch" }
               ].map((link, i) => {
                 const IconComponent = ICON_MAP[link.iconName] || FiFileText;
                 return (
                   <Link key={i} href={link.href} className="geo-link-card">
                     <IconComponent size={24} style={{ marginBottom: '0.75rem', color: 'var(--accent-primary)' }} />
-                    <span style={{ fontSize: 'var(--font-size-body-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-primary)', lineHeight: '1.4', marginBottom: '0.25rem' }}>{link.text}</span>
-                    <span style={{ fontSize: 'var(--font-size-label-sm)', color: 'var(--text-muted)', lineHeight: '1.3' }}>{link.desc}</span>
+                    <span style={{ fontSize: 'var(--font-size-body-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-primary)', lineHeight: '1.4' }}>{link.text}</span>
                   </Link>
                 );
               })}
@@ -766,7 +749,7 @@ const ResumeForGulfJobPage = ({
               ))}
             </ul>
             <p style={{marginTop: '16px', fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)'}}><strong>Additional analysis:</strong> Gulf resume best practices calibrated against hiring data from all six GCC countries, recruiter surveys, and successful applicant outcomes across healthcare, construction, IT, and education sectors.</p>
-            <small style={{ color: 'var(--text-muted)', display: 'block', marginTop: '8px' }}>Last full analysis: {safeCurrentDate} • Next update: April 2026</small>
+            <small style={{ color: 'var(--text-muted)', display: 'block', marginTop: '8px' }}>Last full analysis: {safeCurrentDate} • Next update: April {CURRENT_YEAR + 1}</small>
           </div>
         </div>
 
@@ -828,17 +811,6 @@ export async function getStaticProps() {
     image: "https://professionalresumefree.com/images/og-gulf-resume-guide.jpg",
   };
 
-  const longTailKeywords = [
-    "Gulf job resume",
-    "Middle East resume",
-    "GCC resume format",
-    "UAE job application",
-    "Saudi Arabia resume",
-    "Qatar job CV",
-    "Kuwait employment resume",
-    "Gulf country resume tips"
-  ];
-
   return {
     props: {
       buildTimestamp,
@@ -847,11 +819,10 @@ export async function getStaticProps() {
       canonicalUrl,
       breadcrumbData,
       meta,
-      longTailKeywords,
       reviewDates,
       faqDates
     },
-    revalidate: 7200 // ISR: revalidate every 2 hours (matching Page 1's 7200)
+    revalidate: 7200 // ISR: revalidate every 2 hours
   };
 }
 

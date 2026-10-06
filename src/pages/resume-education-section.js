@@ -299,8 +299,8 @@ const aiCitations = [
 // DEFAULT PROPS FOR SSR/SSG SAFETY
 // ============================================================================
 const defaultMeta = {
-  title: "Resume Education Section Guide 2026 - Format, Examples & ATS Tips | ProfessionalResumeFree",
-  description: "Learn how to write a powerful resume education section with professional formats, real examples, and ATS optimization strategies. Expert guide for students, graduates & professionals.",
+  title: `Resume Education Section Guide ${CURRENT_YEAR} - Format, Examples & ATS Tips | ProfessionalResumeFree`,
+  description: `Learn how to write a powerful resume education section with professional formats, real examples, and ATS optimization strategies. Expert guide for students, graduates & professionals.`,
   url: "https://professionalresumefree.com/resume-education-section",
   siteName: "ProfessionalResumeFree",
   image: "https://professionalresumefree.com/images/resume-education-section-guide-og.jpg",
@@ -428,7 +428,7 @@ const ResumeEducationSectionPage = ({
         <meta name="twitter:title" content={meta.title} />
         <meta name="twitter:description" content={meta.description} />
         <meta name="twitter:image" content={meta.image} />
-        <meta name="twitter:image:alt" content="Resume Education Section Guide 2026" />
+        <meta name="twitter:image:alt" content={`Resume Education Section Guide ${CURRENT_YEAR}`} />
         <meta name="twitter:site" content="@profresumefree" />
         
         {/* ADDITIONAL META */}
@@ -604,7 +604,7 @@ const ResumeEducationSectionPage = ({
         <section className="section" id="main-content" aria-labelledby="hero-heading">
           <div className="section-container">
             <div style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center' }}>
-              <div className="badge">✦ RESUME EDUCATION SECTION GUIDE 2026 • ATS-OPTIMIZED • STUDENT TO EXECUTIVE</div>
+              <div className="badge">✦ RESUME EDUCATION SECTION GUIDE {CURRENT_YEAR} • ATS-OPTIMIZED • STUDENT TO EXECUTIVE</div>
               <h1 id="hero-heading" style={{ fontSize: 'var(--font-size-display-lg)', fontFamily: 'var(--font-display)', fontWeight: 'var(--font-weight-extrabold)', lineHeight: 'var(--line-height-display)', marginBottom: '1.25rem' }}>
                 <span className="gradient-text">Resume Education Section</span> Guide: ATS Format & Expert Tips
               </h1>
@@ -866,30 +866,26 @@ const ResumeEducationSectionPage = ({
           </div>
         </section>
 
-        {/* Internal Links Grid - Recommended Career Resources */}
+        {/* New Internal Links Section */}
         <section className="section">
           <div className="section-container">
             <div className="section-header">
-              <h2 className="section-title">Recommended Career Resources</h2>
-              <p className="section-subtitle">Enhance your job search with these specialized guides and tools tailored for the 2026 market.</p>
+              <h2 className="section-title">Related Resume Education Resources</h2>
+              <p className="section-subtitle">Continue exploring our expert guides for students, graduates, and career changers</p>
             </div>
             <div className="geo-link-grid">
               {[
-                { href: "/free-ats-resume-checker", text: "Free ATS Resume Checker", iconName: "FiShield", desc: "Scan your education section to ensure it passes automated screening systems." },
-                { href: "/ats-friendly-technology-ai-and-machine-learning-engineering-resume-builder", text: "AI & ML Resume Builder", iconName: "FiCpu", desc: "Specialized templates for LLM Engineers and Data Scientists." },
-                { href: "/how-to-use-chatgpt-to-improve-your-resume-bullets-prompt-engineering-guide-2026", text: "ChatGPT Resume Guide", iconName: "FiZap", desc: "Use AI to write better bullet points that pass ATS filters." },
-                { href: "/how-to-pass-the-ai-resume-screen-2026-ats-algorithms-explained", text: "Beat AI Resume Screening", iconName: "FiMonitor", desc: "Understand how 2026 ATS algorithms parse your education data." },
-                { href: "/ats-friendly-software-developer-and-software-engineer-resume-builder", text: "Software Engineer Resume", iconName: "FiCode", desc: "Optimized formats for Full Stack and Backend developers." }
-              ].map((link, i) => {
-                const IconComponent = ICON_MAP[link.iconName] || FiFileText;
-                return (
-                  <Link key={i} href={link.href} className="geo-link-card">
-                    <IconComponent size={24} style={{ marginBottom: '0.75rem', color: 'var(--accent-primary)' }} />
-                    <span style={{ fontSize: 'var(--font-size-body-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-primary)', lineHeight: '1.4', marginBottom: '0.25rem' }}>{link.text}</span>
-                    <span style={{ fontSize: 'var(--font-size-label-sm)', color: 'var(--text-muted)', lineHeight: '1.3' }}>{link.desc}</span>
-                  </Link>
-                );
-              })}
+                { href: "/resume-format-for-freshers", title: "Fresher Resume Format" },
+                { href: "/resume-for-diploma-students", title: "Diploma Student Resume" },
+                { href: "/resume-for-engineering-students", title: "Engineering Student Resume" },
+                { href: "/resume-for-students-in-india", title: "Student Resume India" },
+                { href: "/what-to-put-on-a-resume", title: "What to Put on a Resume" }
+              ].map((link, i) => (
+                <Link key={i} href={link.href} className="geo-link-card">
+                  <FiArrowRight size={20} style={{ marginBottom: '0.75rem', color: 'var(--accent-primary)' }} />
+                  <span style={{ fontSize: 'var(--font-size-body-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-primary)', lineHeight: '1.4' }}>{link.title}</span>
+                </Link>
+              ))}
             </div>
           </div>
         </section>
@@ -911,6 +907,10 @@ const ResumeEducationSectionPage = ({
         {/* Footer Info */}
         <div style={{ padding: '0.75rem 0', backgroundColor: 'var(--bg-surface-lowest)', borderTop: '0.5px solid var(--border-gold-filament)', textAlign: 'center' }}>
           <span className="text-small"><FiCalendar style={{ marginRight: '0.5rem', display: 'inline', verticalAlign: 'middle' }} /> Last updated: {safeCurrentDate} • Data updated {safeCurrentDate}. Next analysis scheduled for Q2 2026.</span>
+          <span className="text-small" style={{ marginLeft: '1rem' }}>
+            <FiAlertCircle size={12} style={{ marginRight: '0.25rem', display: 'inline', verticalAlign: 'middle' }} />
+            Education section guidance for informational purposes. Adapt strategies to your specific industry and role.
+          </span>
         </div>
 
         {/* Hidden metadata for crawlers */}
@@ -959,8 +959,8 @@ export async function getStaticProps() {
   ];
 
   const meta = {
-    title: "Resume Education Section Guide 2026 - Format, Examples & ATS Tips | ProfessionalResumeFree",
-    description: "Learn how to write a powerful resume education section with professional formats, real examples, and ATS optimization strategies. Expert guide for students, graduates & professionals.",
+    title: `Resume Education Section Guide ${CURRENT_YEAR} - Format, Examples & ATS Tips | ProfessionalResumeFree`,
+    description: `Learn how to write a powerful resume education section with professional formats, real examples, and ATS optimization strategies. Expert guide for students, graduates & professionals.`,
     url: canonicalUrl,
     siteName: "ProfessionalResumeFree",
     image: "https://professionalresumefree.com/images/resume-education-section-guide-og.jpg",
@@ -991,7 +991,7 @@ export async function getStaticProps() {
       reviewDates,
       faqDates
     },
-    revalidate: 7200 // ISR: revalidate every 2 hours (matching Page 1's 7200)
+    revalidate: 7200 // ISR: revalidate every 2 hours
   };
 }
 

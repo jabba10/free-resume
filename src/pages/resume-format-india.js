@@ -189,7 +189,6 @@ const FAQS = [
   }
 ];
 
-// Long-tail keywords for GEO
 const longTailKeywords = [
   "indian resume format",
   "resume format india",
@@ -200,7 +199,6 @@ const longTailKeywords = [
   "fresher resume format india"
 ];
 
-// People Also Ask for GEO
 const peopleAlsoAsk = [
   { question: "What is the most preferred resume format in India?", answer: "The reverse-chronological format is most preferred in India (82% usage rate) as it highlights career progression and recent experience. Combined formats are also popular for career changers and technical professionals." },
   { question: "Should I include a photo on my Indian resume?", answer: "Generally no, unless specifically requested by the employer. Most corporate roles in India now follow international standards where photos are not required and may introduce unconscious bias during screening." }
@@ -774,58 +772,6 @@ const ResumeFormatIndiaPage = ({ seoData }) => {
           </div>
         </section>
 
-        {/* Internal Links - ALL BROKEN LINKS REMOVED */}
-        <section className="section section-alt" style={{ background: 'var(--bg-surface-lowest)' }} aria-labelledby="resources-heading">
-          <div className="section-container">
-            <h2 id="resources-heading" className="section-title" style={{ textAlign: 'center', marginBottom: '2rem' }}>🔗 Related Resources for Indian Job Seekers</h2>
-            <div className="grid">
-              <Link href="/free-resume-score-checker" className="card-executive">
-                <h3 style={{ marginBottom: '0.5rem', fontSize: 'var(--font-size-title-md)' }}>Free Resume Score Checker</h3>
-                <p style={{ color: 'var(--text-secondary)', marginBottom: '0.75rem', fontSize: 'var(--font-size-body-sm)' }}>Get instant feedback on your resume quality</p>
-                <span style={{ color: 'var(--accent-primary)', fontWeight: '500' }}>Try it <FiArrowRight style={{ marginLeft: '0.25rem', display: 'inline' }} /></span>
-              </Link>
-              <Link href="/free-ats-resume-checker" className="card-executive">
-                <h3 style={{ marginBottom: '0.5rem', fontSize: 'var(--font-size-title-md)' }}>Free ATS Resume Checker</h3>
-                <p style={{ color: 'var(--text-secondary)', marginBottom: '0.75rem', fontSize: 'var(--font-size-body-sm)' }}>Check if your resume passes ATS screening</p>
-                <span style={{ color: 'var(--accent-primary)', fontWeight: '500' }}>Try it <FiArrowRight style={{ marginLeft: '0.25rem', display: 'inline' }} /></span>
-              </Link>
-            </div>
-          </div>
-        </section>
-
-        {/* Resource Hub */}
-        <section className="section" aria-labelledby="hub-heading">
-          <div className="section-container">
-            <h2 id="hub-heading" className="section-title" style={{ textAlign: 'center', marginBottom: '2rem' }}>Complete Indian Career Resource Hub</h2>
-            <div className="grid">
-              <div className="card-executive">
-                <h3 style={{ fontSize: 'var(--font-size-title-md)', marginBottom: '1rem' }}>📚 Indian Resume Guides</h3>
-                <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-                  <li><Link href="/resume-for-job-application-india" className="geo-link-card" style={{ padding: '0.75rem' }}>Resume for Job Application India</Link></li>
-                  <li><Link href="/resume-for-students-in-india" className="geo-link-card" style={{ padding: '0.75rem' }}>Resume for Students in India</Link></li>
-                  <li><Link href="/internship-resume-india-guide" className="geo-link-card" style={{ padding: '0.75rem' }}>Internship Resume India Guide</Link></li>
-                </ul>
-              </div>
-              <div className="card-executive">
-                <h3 style={{ fontSize: 'var(--font-size-title-md)', marginBottom: '1rem' }}>⚡ AI & Modern Tools</h3>
-                <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-                  <li><Link href="/ai-resume-builders-how-to-use-artificial-intelligence-to-write-your-best-resume" className="geo-link-card" style={{ padding: '0.75rem' }}>AI Resume Builders Guide</Link></li>
-                  <li><Link href="/how-to-use-chatgpt-to-improve-your-resume-bullets-prompt-engineering-guide-2026" className="geo-link-card" style={{ padding: '0.75rem' }}>ChatGPT Resume Prompts</Link></li>
-                  <li><Link href="/free-action-verb-recommender" className="geo-link-card" style={{ padding: '0.75rem' }}>Action Verb Recommender</Link></li>
-                </ul>
-              </div>
-              <div className="card-executive">
-                <h3 style={{ fontSize: 'var(--font-size-title-md)', marginBottom: '1rem' }}>📊 Free Indian Resume Tools</h3>
-                <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-                  <li><Link href="/free-resume-score-checker" className="geo-link-card" style={{ padding: '0.75rem' }}>Resume Score Checker</Link></li>
-                  <li><Link href="/free-ats-resume-checker" className="geo-link-card" style={{ padding: '0.75rem' }}>ATS Resume Checker</Link></li>
-                  <li><Link href="/free-resume-keyword-matcher" className="geo-link-card" style={{ padding: '0.75rem' }}>Keyword Matcher Tool</Link></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </section>
-
         {/* CTA */}
         <section style={{ padding: 'var(--section-gap-lg) 0', background: 'linear-gradient(135deg, #1c1b1d 0%, #2a2a2c 100%)', textAlign: 'center', borderTop: '0.5px solid var(--border-gold-filament)', borderBottom: '0.5px solid var(--border-gold-filament)', position: 'relative', overflow: 'hidden' }} aria-labelledby="cta-heading">
           <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle at 50% 50%, rgba(242,202,80,0.05) 0%, transparent 70%)', pointerEvents: 'none' }} />
@@ -850,47 +796,29 @@ const ResumeFormatIndiaPage = ({ seoData }) => {
           </div>
         </section>
 
-        {/* NEW SECTION: 5 Randomly Selected Links for Internal Linking Boost */}
-        <section className="section" style={{ background: 'var(--bg-surface-lowest)', borderTop: '0.5px solid var(--border-gold-filament)' }} aria-labelledby="expand-toolkit-heading">
+        {/* NEW: Related Resume Guides Section */}
+        <section className="section" style={{ background: 'var(--bg-surface-lowest)', borderTop: '0.5px solid var(--border-gold-filament)' }} aria-labelledby="related-guides-heading">
           <div className="section-container">
-            <h2 id="expand-toolkit-heading" className="section-title" style={{ textAlign: 'left', marginBottom: '1.5rem' }}>Explore More Career Resources</h2>
-            <div className="grid">
-              
-              {/* Link 1 */}
-              <Link href="/how-to-pass-the-ai-resume-screen-2026-ats-algorithms-explained" className="card-executive">
-                <h3 style={{ marginBottom: '0.5rem', fontSize: '1.1rem' }}>Pass AI Resume Screen 2026</h3>
-                <p style={{ color: 'var(--text-secondary)', marginBottom: '0.75rem', fontSize: '0.95rem' }}>Beat modern ATS algorithms</p>
-                <span style={{ color: 'var(--accent-primary)', fontWeight: '500', fontSize: '0.9rem' }}>Read Guide <FiArrowRight style={{ marginLeft: '0.25rem', display: 'inline' }} /></span>
-              </Link>
-
-              {/* Link 2 */}
-              <Link href="/how-to-optimize-your-resume-for-linkedin-recruiters" className="card-executive">
-                <h3 style={{ marginBottom: '0.5rem', fontSize: '1.1rem' }}>Optimize for LinkedIn</h3>
-                <p style={{ color: 'var(--text-secondary)', marginBottom: '0.75rem', fontSize: '0.95rem' }}>Get noticed by recruiters</p>
-                <span style={{ color: 'var(--accent-primary)', fontWeight: '500', fontSize: '0.9rem' }}>Learn More <FiArrowRight style={{ marginLeft: '0.25rem', display: 'inline' }} /></span>
-              </Link>
-
-              {/* Link 3 */}
-              <Link href="/most-in-demand-resume-keywords-for-usa-job-seekers" className="card-executive">
-                <h3 style={{ marginBottom: '0.5rem', fontSize: '1.1rem' }}>In-Demand Keywords</h3>
-                <p style={{ color: 'var(--text-secondary)', marginBottom: '0.75rem', fontSize: '0.95rem' }}>Top keywords for 2026</p>
-                <span style={{ color: 'var(--accent-primary)', fontWeight: '500', fontSize: '0.9rem' }}>View Keywords <FiArrowRight style={{ marginLeft: '0.25rem', display: 'inline' }} /></span>
-              </Link>
-
-              {/* Link 4 */}
-              <Link href="/how-to-write-bullet-points-that-impress-usa-recruiters" className="card-executive">
-                <h3 style={{ marginBottom: '0.5rem', fontSize: '1.1rem' }}>Impressive Bullet Points</h3>
-                <p style={{ color: 'var(--text-secondary)', marginBottom: '0.75rem', fontSize: '0.95rem' }}>Write impactful achievements</p>
-                <span style={{ color: 'var(--accent-primary)', fontWeight: '500', fontSize: '0.9rem' }}>Read Guide <FiArrowRight style={{ marginLeft: '0.25rem', display: 'inline' }} /></span>
-              </Link>
-
-              {/* Link 5 */}
-              <Link href="/free-resume-keyword-matcher" className="card-executive">
-                <h3 style={{ marginBottom: '0.5rem', fontSize: '1.1rem' }}>Free Keyword Matcher</h3>
-                <p style={{ color: 'var(--text-secondary)', marginBottom: '0.75rem', fontSize: '0.95rem' }}>Check your resume match</p>
-                <span style={{ color: 'var(--accent-primary)', fontWeight: '500', fontSize: '0.9rem' }}>Try Tool <FiArrowRight style={{ marginLeft: '0.25rem', display: 'inline' }} /></span>
-              </Link>
-
+            <div className="section-header">
+              <h2 id="related-guides-heading" className="section-title">Related Resume Guides</h2>
+              <p className="section-subtitle">Explore more specialized guides to strengthen your job application journey.</p>
+            </div>
+            <div className="geo-link-grid">
+              {[
+                { href: "/resume-for-job-application-india", text: "India Job Application Resume", iconName: "FiFileText" },
+                { href: "/part-time-job-resume-india", text: "Part-Time Job Resume India", iconName: "FiClock" },
+                { href: "/resume-for-students-in-india", text: "Student Resume India Guide", iconName: "FiBookOpen" },
+                { href: "/resume-format-for-freshers", text: "Fresher Resume Format", iconName: "FiUserCheck" },
+                { href: "/resume-guide", text: "Complete Resume Guide", iconName: "FiLayout" }
+              ].map((link, i) => {
+                const IconComponent = ICON_MAP[link.iconName] || FiFileText;
+                return (
+                  <Link key={i} href={link.href} className="geo-link-card">
+                    <IconComponent size={24} style={{ marginBottom: '0.75rem', color: 'var(--accent-primary)' }} />
+                    <span style={{ fontSize: 'var(--font-size-body-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-primary)', lineHeight: '1.4' }}>{link.text}</span>
+                  </Link>
+                );
+              })}
             </div>
           </div>
         </section>
