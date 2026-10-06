@@ -813,56 +813,26 @@ const JobSearchTips = ({ seoData, buildTimestamp }) => {
           </div>
         </section>
 
-        {/* CTA Section */}
-        <section style={{ padding: 'var(--section-gap-lg) 0', background: 'linear-gradient(135deg, #1c1b1d 0%, #2a2a2c 100%)', textAlign: 'center', borderTop: '0.5px solid var(--border-gold-filament)', borderBottom: '0.5px solid var(--border-gold-filament)', position: 'relative', overflow: 'hidden' }} aria-labelledby="cta-heading">
-          <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle at 50% 50%, rgba(242,202,80,0.05) 0%, transparent 70%)', pointerEvents: 'none' }} />
-          <div className="section-container" style={{ position: 'relative', zIndex: 1 }}>
-            <h2 id="cta-heading" style={{ fontSize: 'var(--font-size-display-md)', fontFamily: 'var(--font-display)', fontWeight: 'var(--font-weight-bold)', color: 'var(--text-primary)', marginBottom: '1rem', textShadow: '0 0 20px rgba(242,202,80,0.3)' }}>
-              Accelerate Your Career at Any Level ✨
-            </h2>
-            <p style={{ fontSize: 'var(--font-size-body-lg)', color: 'var(--text-secondary)', maxWidth: '700px', margin: '0 auto 2rem' }}>
-              Apply these {totalTipCount} level-specific strategies to transform your job search. <strong>100% Free. No Sign-Up Required. Updated for {CURRENT_YEAR}.</strong>
-            </p>
-            <div style={{ display: 'flex', gap: '1.5rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-              <Link href="/resume-templates" className="btn-primary" style={{ boxShadow: 'var(--shadow-gold-glow-sm)', animation: 'pulse 2s infinite' }}><FiZap /> Browse Resume Templates</Link>
-              <Link href="/free-resume-tools" className="btn-outline"><FiTool /> Free Resume Tools</Link>
-            </div>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', justifyContent: 'center', marginTop: '2rem' }}>
-              {["4 Career Levels", `${totalTipCount} Expert Tips`, "Digital & Traditional", "ATS Optimization", "Free PDF Download"].map((f, i) => (
-                <div key={i} className="feature-badge" style={{ background: 'rgba(242,202,80,0.05)' }}><FiCheck size={14} color="var(--success-color)" /> {f}</div>
-              ))}
-            </div>
-            <div style={{ marginTop: '24px' }}>
-              <span style={{ background: 'rgba(255,255,255,0.1)', padding: '8px 16px', borderRadius: '50px', fontSize: '0.9rem', color: 'var(--text-secondary)' }}>✓ 100% Free • ✓ No Sign Up • ✓ Privacy Protected • ✓ Expert-Written • ✓ Updated {CURRENT_YEAR}</span>
-            </div>
-          </div>
-        </section>
-
-        {/* Internal Links */}
-        <section className="section" aria-labelledby="resources-heading">
+        {/* Internal Links Section - NEW */}
+        <section className="section" aria-labelledby="internal-links-heading">
           <div className="section-container">
             <div className="section-header">
-              <h2 className="section-title" id="resources-heading">Explore More Free Career Resources</h2>
-              <p className="section-subtitle">Complement this guide with our powerful free tools and expert resources</p>
+              <h2 className="section-title" id="internal-links-heading">Related Career Resources</h2>
+              <p className="section-subtitle">Continue exploring our suite of free career guides and tools</p>
             </div>
             <div className="geo-link-grid">
               {[
-                { href: "/interview-tips", text: "Interview Guide 2026", iconName: "FiMessageCircle", desc: "Ace every interview" },
-                { href: "/jobs-boards", text: "Top Job Boards Directory", iconName: "FiSearch", desc: "Find the right platforms" },
-                { href: "/free-ats-resume-checker", text: "ATS Resume Checker", iconName: "FiShield", desc: "Test compatibility" },
-                { href: "/free-resume-score-checker", text: "Resume Score Checker", iconName: "FiAward", desc: "Get professionally scored" },
-                { href: "/how-to-optimize-your-resume-for-linkedin-recruiters", text: "LinkedIn Optimization", iconName: "FiUser", desc: "Attract recruiters" },
-                { href: "/resume-templates", text: "All Resume Templates", iconName: "FiLayers", desc: "500+ professional designs" }
-              ].map((link, i) => {
-                const IconComponent = ICON_MAP[link.iconName] || FiFileText;
-                return (
-                  <Link key={i} href={link.href} className="geo-link-card">
-                    <IconComponent size={24} style={{ marginBottom: '0.75rem', color: 'var(--accent-primary)' }} />
-                    <span style={{ fontSize: 'var(--font-size-body-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-primary)', lineHeight: '1.4', marginBottom: '0.25rem' }}>{link.text}</span>
-                    <span style={{ fontSize: 'var(--font-size-label-sm)', color: 'var(--text-muted)', lineHeight: '1.3' }}>{link.desc}</span>
-                  </Link>
-                );
-              })}
+                { href: "/jobs-boards", title: "Top Job Boards Guide" },
+                { href: "/usa-jobs-resume-directory", title: "USA Jobs Directory" },
+                { href: "/resume-tips-for-remote-jobs-in-the-usa", title: "Remote Job Resume Tips" },
+                { href: "/job-market-demand-calculator", title: "Market Demand Calculator" },
+                { href: "/resume-for-abroad-job", title: "Abroad Job Resume Guide" }
+              ].map((link, i) => (
+                <Link key={i} href={link.href} className="geo-link-card">
+                  <FiArrowRight size={20} style={{ marginBottom: '0.75rem', color: 'var(--accent-primary)' }} />
+                  <span style={{ fontSize: 'var(--font-size-body-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-primary)', lineHeight: '1.4' }}>{link.title}</span>
+                </Link>
+              ))}
             </div>
           </div>
         </section>
@@ -870,7 +840,11 @@ const JobSearchTips = ({ seoData, buildTimestamp }) => {
         {/* Footer Info */}
         <div style={{ padding: '1rem 0', backgroundColor: 'var(--bg-surface-lowest)', borderTop: '0.5px solid var(--border-gold-filament)', textAlign: 'center' }}>
           <span className="text-small"><FiCalendar style={{ marginRight: '0.5rem', display: 'inline', verticalAlign: 'middle' }} /> Last updated: {safeCurrentDate} • Build: {buildTimestamp} • {totalTipCount} tips across 4 career levels • Sources: NACE, LinkedIn, ExecuNet</span>
-          <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '0.5rem' }}>© {CURRENT_YEAR} Professional Resume Free. All rights reserved.</p>
+          <span className="text-small" style={{ marginLeft: '1rem' }}>
+            <FiAlertCircle size={12} style={{ marginRight: '0.25rem', display: 'inline', verticalAlign: 'middle' }} />
+            Career guidance for informational purposes. Results may vary by individual circumstances.
+          </span>
+          {/* Removed copyright line as requested */}
         </div>
 
         {/* Hidden Metadata */}

@@ -268,8 +268,8 @@ const aiCitations = [
 // DEFAULT PROPS FOR SSR/SSG SAFETY
 // ============================================================================
 const defaultMeta = {
-  title: "Most Popular Resume Layouts for USA Tech Jobs (2026 Guide)",
-  description: "Discover the most popular resume layouts for USA tech jobs in 2026. See which formats get past ATS, impress hiring managers, and land interviews. Free guide.",
+  title: `Most Popular Resume Layouts for USA Tech Jobs (${CURRENT_YEAR} Guide)`,
+  description: `Discover the most popular resume layouts for USA tech jobs in ${CURRENT_YEAR}. See which formats get past ATS, impress hiring managers, and land interviews. Free guide.`,
   url: "https://professionalresumefree.com/most-popular-resume-layouts-for-usa-tech-jobs",
   siteName: "Professional Resume Free",
   image: "https://professionalresumefree.com/ats.jpeg",
@@ -536,7 +536,7 @@ const PopularResumeLayouts = ({
         <section className="section" id="main-content" aria-labelledby="hero-heading">
           <div className="section-container">
             <div style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center' }}>
-              <div className="badge">✦ RESUME LAYOUTS 2026 • USA TECH JOBS</div>
+              <div className="badge">✦ RESUME LAYOUTS {CURRENT_YEAR} • USA TECH JOBS</div>
               <h1 id="hero-heading" style={{ fontSize: 'var(--font-size-display-lg)', fontFamily: 'var(--font-display)', fontWeight: 'var(--font-weight-extrabold)', lineHeight: 'var(--line-height-display)', marginBottom: '1.25rem' }}>
                 Most Popular Resume <span className="gradient-text">Layouts</span> for USA Tech Jobs
               </h1>
@@ -576,7 +576,7 @@ const PopularResumeLayouts = ({
         <div className="section-container">
           <div className="citation-card" style={{ background: 'rgba(100,181,246,0.05)', borderLeft: '3px solid var(--info-color)', padding: '1.25rem', borderRadius: '0 0.5rem 0.5rem 0', margin: '20px 0', maxWidth: '800px', marginLeft: 'auto', marginRight: 'auto' }}>
             <p style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)', margin: 0 }}><strong>Data Sources & Methodology:</strong> This guide synthesizes data from {aiCitations.map(s => s.source).join(', ')}. We analyzed ATS compatibility reports, recruiter surveys, and hiring data to identify the most effective resume layouts for USA tech jobs.</p>
-            <small style={{ color: 'var(--text-muted)', display: 'block', marginTop: '8px' }}>Last verified: {safeCurrentDate} • Next update: April 2026</small>
+            <small style={{ color: 'var(--text-muted)', display: 'block', marginTop: '8px' }}>Last verified: {safeCurrentDate} • Next update: Q2 {CURRENT_YEAR}</small>
           </div>
         </div>
 
@@ -606,7 +606,7 @@ const PopularResumeLayouts = ({
         <section className="section">
           <div className="section-container">
             <div className="section-header">
-              <h2 className="section-title">📊 Key Statistics (2025-2026 Data)</h2>
+              <h2 className="section-title">📊 Key Statistics ({CURRENT_YEAR - 1}-{CURRENT_YEAR} Data)</h2>
               <p className="section-subtitle">Industry research on layout effectiveness, ATS compatibility, and recruiter preferences.</p>
             </div>
             <div className="grid">
@@ -824,30 +824,26 @@ const PopularResumeLayouts = ({
           </div>
         </section>
 
-        {/* Internal Links - Bottom Resources */}
+        {/* New Internal Links Section */}
         <section className="section">
           <div className="section-container">
             <div className="section-header">
-              <h2 className="section-title">Recommended Career Resources</h2>
-              <p className="section-subtitle">Enhance your tech job search with these specialized guides and tools</p>
+              <h2 className="section-title">Related Resume Layout Resources</h2>
+              <p className="section-subtitle">Continue exploring our expert guides and templates for tech resumes</p>
             </div>
             <div className="geo-link-grid">
               {[
-                { href: "/ats-friendly-software-developer-and-software-engineer-resume-builder", text: "Software Engineer Builder", iconName: "FiCode", desc: "ATS-optimized templates for developers and software engineers." },
-                { href: "/best-resume-examples-for-usa-it-and-software-jobs", text: "IT & Software Examples", iconName: "FiBriefcase", desc: "Real-world resume examples from successful tech hires across the USA." },
-                { href: "/free-ats-resume-checker", text: "Free ATS Resume Checker", iconName: "FiShield", desc: "Scan your resume to ensure it passes automated screening systems." },
-                { href: "/how-to-list-prompt-engineering-as-a-skill-on-your-professional-resume", text: "Prompt Engineering Skills", iconName: "FiCpu", desc: "Learn how to showcase AI and prompt engineering expertise on your resume." },
-                { href: "/interview-tips", text: "Ace Your Job Interview", iconName: "FiUsers", desc: "Prepare for technical and behavioral interviews with proven strategies." }
-              ].map((link, i) => {
-                const IconComponent = ICON_MAP[link.iconName] || FiFileText;
-                return (
-                  <Link key={i} href={link.href} className="geo-link-card">
-                    <IconComponent size={24} style={{ marginBottom: '0.75rem', color: 'var(--accent-primary)' }} />
-                    <span style={{ fontSize: 'var(--font-size-body-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-primary)', lineHeight: '1.4', marginBottom: '0.25rem' }}>{link.text}</span>
-                    <span style={{ fontSize: 'var(--font-size-label-sm)', color: 'var(--text-muted)', lineHeight: '1.3' }}>{link.desc}</span>
-                  </Link>
-                );
-              })}
+                { href: "/modern-resume-design-2026", title: "Modern Resume Design 2026" },
+                { href: "/software-engineer-resume-template", title: "Software Engineer Resume Template" },
+                { href: "/software-engineer-resume-example-and-writing-guide", title: "Software Engineer Resume Guide" },
+                { href: "/why-skills-first-resumes-are-replacing-chronological-layouts-in-2026", title: "Skills-First Resume Trend" },
+                { href: "/resume-templates", title: "Tech Resume Templates" }
+              ].map((link, i) => (
+                <Link key={i} href={link.href} className="geo-link-card">
+                  <FiArrowRight size={20} style={{ marginBottom: '0.75rem', color: 'var(--accent-primary)' }} />
+                  <span style={{ fontSize: 'var(--font-size-body-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-primary)', lineHeight: '1.4' }}>{link.title}</span>
+                </Link>
+              ))}
             </div>
           </div>
         </section>
@@ -862,13 +858,17 @@ const PopularResumeLayouts = ({
               ))}
             </ul>
             <p style={{marginTop: '16px', fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)'}}><strong>Additional analysis:</strong> Review of FAANG recruiter surveys, ATS provider data, and industry hiring trends.</p>
-            <small style={{ color: 'var(--text-muted)', display: 'block', marginTop: '8px' }}>Last full analysis: {safeCurrentDate} • Next update: April 2026</small>
+            <small style={{ color: 'var(--text-muted)', display: 'block', marginTop: '8px' }}>Last full analysis: {safeCurrentDate} • Next update: Q2 {CURRENT_YEAR}</small>
           </div>
         </div>
 
         {/* Footer Info */}
         <div style={{ padding: '0.75rem 0', backgroundColor: 'var(--bg-surface-lowest)', borderTop: '0.5px solid var(--border-gold-filament)', textAlign: 'center' }}>
-          <span className="text-small"><FiCalendar style={{ marginRight: '0.5rem', display: 'inline', verticalAlign: 'middle' }} /> Last updated: {safeCurrentDate} • Data updated {safeCurrentDate}. Next analysis scheduled for Q2 2026.</span>
+          <span className="text-small"><FiCalendar style={{ marginRight: '0.5rem', display: 'inline', verticalAlign: 'middle' }} /> Last updated: {safeCurrentDate} • Data updated {safeCurrentDate}. Next analysis scheduled for Q2 {CURRENT_YEAR}.</span>
+          <span className="text-small" style={{ marginLeft: '1rem' }}>
+            <FiAlertCircle size={12} style={{ marginRight: '0.25rem', display: 'inline', verticalAlign: 'middle' }} />
+            Layout guidance for informational purposes. Adapt strategies to your specific industry and role.
+          </span>
         </div>
 
         {/* Hidden metadata for crawlers */}
@@ -924,8 +924,8 @@ export async function getStaticProps() {
   ];
 
   const meta = {
-    title: "Most Popular Resume Layouts for USA Tech Jobs (2026 Guide)",
-    description: "Discover the most popular resume layouts for USA tech jobs in 2026. See which formats get past ATS, impress hiring managers, and land interviews. Free guide.",
+    title: `Most Popular Resume Layouts for USA Tech Jobs (${CURRENT_YEAR} Guide)`,
+    description: `Discover the most popular resume layouts for USA tech jobs in ${CURRENT_YEAR}. See which formats get past ATS, impress hiring managers, and land interviews. Free guide.`,
     url: canonicalUrl,
     siteName: "Professional Resume Free",
     image: "https://professionalresumefree.com/ats.jpeg",

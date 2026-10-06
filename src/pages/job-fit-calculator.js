@@ -1076,43 +1076,38 @@ const JobFitCalculatorPage = ({ seoData, buildTimestamp }) => {
           </div>
         </section>
 
-        {/* Internal Links */}
-        <section className="section" aria-labelledby="resources-heading">
+        {/* Internal Links Section - REPLACES THE OLD "Explore More" SECTION */}
+        <section className="section" aria-labelledby="internal-links-heading">
           <div className="section-container">
             <div className="section-header">
-              <h2 className="section-title" id="resources-heading">Explore More Free Career Assessment Tools</h2>
-              <p className="section-subtitle">Complement your job fit assessment with these powerful career resources</p>
+              <h2 className="section-title" id="internal-links-heading">Related Career Tools</h2>
+              <p className="section-subtitle">Continue exploring our suite of free career assessment resources</p>
             </div>
             <div className="geo-link-grid">
               {[
-                { href: "/skill-gap-calculator", text: "Skill Gap Calculator", iconName: "FiTarget", desc: "Identify missing skills" },
-                { href: "/resume-strength-calculator", text: "Resume Strength Calculator", iconName: "FiFileText", desc: "Evaluate your resume" },
-                { href: "/career-path-calculator", text: "Career Path Calculator", iconName: "FiTrendingUp", desc: "Explore career trajectories" },
-                { href: "/salary-calculator", text: "Free Salary Calculator", iconName: "FiDollarSign", desc: "Know your market value" },
-                { href: "/promotion-probability-calculator", text: "Promotion Calculator", iconName: "FiAward", desc: "Assess readiness" },
-                { href: "/experience-level-calculator", text: "Experience Level Tool", iconName: "FiBarChart2", desc: "Determine your level" }
-              ].map((link, i) => {
-                const IconComponent = ICON_MAP[link.iconName] || FiFileText;
-                return (
-                  <Link key={i} href={link.href} className="geo-link-card">
-                    <IconComponent size={24} style={{ marginBottom: '0.75rem', color: 'var(--accent-primary)' }} />
-                    <span style={{ fontSize: 'var(--font-size-body-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-primary)', lineHeight: '1.4', marginBottom: '0.25rem' }}>{link.text}</span>
-                    <span style={{ fontSize: 'var(--font-size-label-sm)', color: 'var(--text-muted)', lineHeight: '1.3' }}>{link.desc}</span>
-                  </Link>
-                );
-              })}
+                { href: "/resume-calculators", title: "All Resume Calculators Hub" },
+                { href: "/job-market-demand-calculator", title: "Job Market Demand Calculator" },
+                { href: "/skill-gap-calculator", title: "Skill Gap Calculator" },
+                { href: "/promotion-probability-calculator", title: "Promotion Probability Calculator" },
+                { href: "/resume-strength-calculator", title: "Resume Strength Calculator" }
+              ].map((link, i) => (
+                <Link key={i} href={link.href} className="geo-link-card">
+                  <FiArrowRight size={20} style={{ marginBottom: '0.75rem', color: 'var(--accent-primary)' }} />
+                  <span style={{ fontSize: 'var(--font-size-body-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-primary)', lineHeight: '1.4' }}>{link.title}</span>
+                </Link>
+              ))}
             </div>
           </div>
         </section>
 
-        {/* Footer Info */}
+        {/* Footer Info - REMOVED OLD CONTENT AS REQUESTED */}
         <div style={{ padding: '1rem 0', backgroundColor: 'var(--bg-surface-lowest)', borderTop: '0.5px solid var(--border-gold-filament)', textAlign: 'center' }}>
           <span className="text-small"><FiCalendar style={{ marginRight: '0.5rem', display: 'inline', verticalAlign: 'middle' }} /> Last updated: {safeCurrentDate} • Build: {buildTimestamp} • Sources: SHRM, LinkedIn, HBR</span>
           <span className="text-small" style={{ marginLeft: '1rem' }}>
             <FiAlertCircle size={12} style={{ marginRight: '0.25rem', display: 'inline', verticalAlign: 'middle' }} />
             Self-assessment tool. Use alongside professional career guidance.
           </span>
-          <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '0.5rem' }}>© {CURRENT_YEAR} Professional Resume Free. All rights reserved.</p>
+          {/* Removed copyright line as requested */}
         </div>
 
         {/* Hidden Metadata */}

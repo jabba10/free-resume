@@ -843,39 +843,37 @@ const ModernResumeDesign2026 = ({ seoData, buildTimestamp }) => {
           </div>
         </section>
 
-        {/* Internal Links */}
-        <section className="section" aria-labelledby="resources-heading">
+        {/* New Internal Links Section */}
+        <section className="section" aria-labelledby="internal-links-heading">
           <div className="section-container">
             <div className="section-header">
-              <h2 className="section-title" id="resources-heading">Explore More Future Career Resources</h2>
-              <p className="section-subtitle">Complement this guide with our powerful free tools and expert resources</p>
+              <h2 className="section-title" id="internal-links-heading">Related Resume Design Resources</h2>
+              <p className="section-subtitle">Continue exploring our expert guides and templates for modern resumes</p>
             </div>
             <div className="geo-link-grid">
               {[
-                { href: "/resume-trends-in-the-usa-for-2026", text: "USA Resume Trends 2026", iconName: "FiTrendingUp", desc: "National hiring trends" },
-                { href: "/how-to-pass-the-ai-resume-screen-2026-ats-algorithms-explained", text: "Pass AI Resume Screens", iconName: "FiCpu", desc: "Beat automated screening" },
-                { href: "/most-popular-resume-layouts-for-usa-tech-jobs", text: "Popular Tech Layouts", iconName: "FiCode", desc: "Tech industry favorites" },
-                { href: "/why-skills-first-resumes-are-replacing-chronological-layouts-in-2026", text: "Skills-First Guide", iconName: "FiLayers", desc: "Modern format strategy" },
-                { href: "/complete-resume-resource-library", text: "Complete Resource Library", iconName: "FiBookOpen", desc: "All guides in one place" },
-                { href: "/resume-templates", text: "All Resume Templates", iconName: "FiFileText", desc: "500+ professional designs" }
-              ].map((link, i) => {
-                const IconComponent = ICON_MAP[link.iconName] || FiFileText;
-                return (
-                  <Link key={i} href={link.href} className="geo-link-card">
-                    <IconComponent size={24} style={{ marginBottom: '0.75rem', color: 'var(--accent-primary)' }} />
-                    <span style={{ fontSize: 'var(--font-size-body-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-primary)', lineHeight: '1.4', marginBottom: '0.25rem' }}>{link.text}</span>
-                    <span style={{ fontSize: 'var(--font-size-label-sm)', color: 'var(--text-muted)', lineHeight: '1.3' }}>{link.desc}</span>
-                  </Link>
-                );
-              })}
+                { href: "/resume-trends-in-the-usa-for-2026", title: "USA Resume Trends 2026" },
+                { href: "/most-popular-resume-layouts-for-usa-tech-jobs", title: "Popular Tech Resume Layouts" },
+                { href: "/resume-templates", title: "Modern Resume Templates" },
+                { href: "/simple-resume-template", title: "Simple Resume Template" },
+                { href: "/why-skills-first-resumes-are-replacing-chronological-layouts-in-2026", title: "Skills-First Resume Layouts" }
+              ].map((link, i) => (
+                <Link key={i} href={link.href} className="geo-link-card">
+                  <FiArrowRight size={20} style={{ marginBottom: '0.75rem', color: 'var(--accent-primary)' }} />
+                  <span style={{ fontSize: 'var(--font-size-body-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-primary)', lineHeight: '1.4' }}>{link.title}</span>
+                </Link>
+              ))}
             </div>
           </div>
         </section>
 
-        {/* Footer Info */}
+        {/* Footer Info - copyright line removed */}
         <div style={{ padding: '1rem 0', backgroundColor: 'var(--bg-surface-lowest)', borderTop: '0.5px solid var(--border-gold-filament)', textAlign: 'center' }}>
           <span className="text-small"><FiCalendar style={{ marginRight: '0.5rem', display: 'inline', verticalAlign: 'middle' }} /> Last updated: {safeCurrentDate} • Build: {buildTimestamp} • 4 trends • 6 principles • 3 phases • Sources: Gartner, LinkedIn, SHRM</span>
-          <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '0.5rem' }}>© {CURRENT_YEAR} Professional Resume Free. All rights reserved.</p>
+          <span className="text-small" style={{ marginLeft: '1rem' }}>
+            <FiAlertCircle size={12} style={{ marginRight: '0.25rem', display: 'inline', verticalAlign: 'middle' }} />
+            Design guidance for informational purposes. Adapt strategies to your industry and role.
+          </span>
         </div>
 
         {/* Hidden Metadata */}

@@ -257,8 +257,8 @@ const aiCitations = [
 // DEFAULT PROPS FOR SSR/SSG SAFETY
 // ============================================================================
 const defaultMeta = {
-  title: "One-Page Resume Template 2026: Free Guide & ATS Examples",
-  description: "Master one-page resumes with our free 2026 guide. ATS-optimized templates, expert strategies, and space-saving techniques. 34% more interviews. No sign-up.",
+  title: `One-Page Resume Template ${CURRENT_YEAR}: Free Guide & ATS Examples`,
+  description: `Master one-page resumes with our free ${CURRENT_YEAR} guide. ATS-optimized templates, expert strategies, and space-saving techniques. 34% more interviews. No sign-up.`,
   url: "https://professionalresumefree.com/one-page-resume-template",
   siteName: "Professional Resume Free",
   image: "https://professionalresumefree.com/ats.jpeg",
@@ -521,7 +521,7 @@ const OnePageResumeTemplate = ({
         <section className="section" id="main-content" aria-labelledby="hero-heading">
           <div className="section-container">
             <div style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center' }}>
-              <div className="badge">✦ ONE-PAGE RESUME TEMPLATE 2026 • FREE GUIDE</div>
+              <div className="badge">✦ ONE-PAGE RESUME TEMPLATE {CURRENT_YEAR} • FREE GUIDE</div>
               <h1 id="hero-heading" style={{ fontSize: 'var(--font-size-display-lg)', fontFamily: 'var(--font-display)', fontWeight: 'var(--font-weight-extrabold)', lineHeight: 'var(--line-height-display)', marginBottom: '1.25rem' }}>
                 One-Page <span className="gradient-text">Resume</span> Template Guide
               </h1>
@@ -562,7 +562,7 @@ const OnePageResumeTemplate = ({
         <div className="section-container">
           <div className="citation-card" style={{ background: 'rgba(100,181,246,0.05)', borderLeft: '3px solid var(--info-color)', padding: '1.25rem', borderRadius: '0 0.5rem 0.5rem 0', margin: '20px 0', maxWidth: '800px', marginLeft: 'auto', marginRight: 'auto' }}>
             <p style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)', margin: 0 }}><strong>Data Sources & Methodology:</strong> This guide synthesizes data from {aiCitations.map(s => s.source).join(', ')}. We analyzed recruiter preference surveys, ATS compatibility reports, and eye-tracking studies to identify the most effective one-page resume strategies.</p>
-            <small style={{ color: 'var(--text-muted)', display: 'block', marginTop: '8px' }}>Last verified: {safeCurrentDate} • Next update: April 2026</small>
+            <small style={{ color: 'var(--text-muted)', display: 'block', marginTop: '8px' }}>Last verified: {safeCurrentDate} • Next update: Q2 {CURRENT_YEAR}</small>
           </div>
         </div>
 
@@ -592,7 +592,7 @@ const OnePageResumeTemplate = ({
         <section className="section">
           <div className="section-container">
             <div className="section-header">
-              <h2 className="section-title">📊 Key Statistics (2023-2025 Data)</h2>
+              <h2 className="section-title">📊 Key Statistics ({CURRENT_YEAR - 2}-{CURRENT_YEAR} Data)</h2>
               <p className="section-subtitle">Industry research on one-page resume effectiveness, recruiter preferences, and ATS compatibility.</p>
             </div>
             <div className="grid">
@@ -845,30 +845,26 @@ const OnePageResumeTemplate = ({
           </div>
         </section>
 
-        {/* Internal Links - Bottom Resources */}
+        {/* New Internal Links Section */}
         <section className="section">
           <div className="section-container">
             <div className="section-header">
-              <h2 className="section-title">Recommended Career Resources</h2>
-              <p className="section-subtitle">Enhance your job search with these specialized guides and tools tailored for the 2026 market.</p>
+              <h2 className="section-title">Related Resume Template Resources</h2>
+              <p className="section-subtitle">Continue exploring our expert guides and templates for one-page resumes</p>
             </div>
             <div className="geo-link-grid">
               {[
-                { href: "/free-resume-word-and-character-counter", text: "Resume Word Counter", iconName: "FiMaximize", desc: "Precisely track your resume length to ensure it fits perfectly on one page without overcrowding." },
-                { href: "/how-to-write-a-professional-summary-that-hooks-recruiters-in-6-seconds", text: "Write a Hooking Summary", iconName: "FiMessageSquare", desc: "Craft a powerful 3-line summary that captures recruiter attention immediately in the top third of your page." },
-                { href: "/free-ats-resume-checker", text: "Free ATS Resume Checker", iconName: "FiShield", desc: "Scan your resume to ensure it passes automated screening systems used by 98% of Fortune 500 companies." },
-                { href: "/best-fonts-and-designs-for-usa-resumes", text: "Best Resume Fonts", iconName: "FiType", desc: "Discover space-efficient, ATS-friendly fonts that maximize readability and professional appearance." },
-                { href: "/how-long-should-a-resume-be-usa-recruiter-insights", text: "Resume Length Insights", iconName: "FiBarChart2", desc: "Get data-backed answers on whether one page is right for your specific experience level and industry." }
-              ].map((link, i) => {
-                const IconComponent = ICON_MAP[link.iconName] || FiFileText;
-                return (
-                  <Link key={i} href={link.href} className="geo-link-card">
-                    <IconComponent size={24} style={{ marginBottom: '0.75rem', color: 'var(--accent-primary)' }} />
-                    <span style={{ fontSize: 'var(--font-size-body-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-primary)', lineHeight: '1.4', marginBottom: '0.25rem' }}>{link.text}</span>
-                    <span style={{ fontSize: 'var(--font-size-label-sm)', color: 'var(--text-muted)', lineHeight: '1.3' }}>{link.desc}</span>
-                  </Link>
-                );
-              })}
+                { href: "/simple-resume-template", title: "Simple One-Page Template" },
+                { href: "/resume-templates", title: "Resume Template Collection" },
+                { href: "/resume-length-calculator", title: "Resume Length Calculator" },
+                { href: "/resume-format-for-freshers", title: "Fresher Resume Format" },
+                { href: "/resume-formatting-guide", title: "Resume Formatting Guide" }
+              ].map((link, i) => (
+                <Link key={i} href={link.href} className="geo-link-card">
+                  <FiArrowRight size={20} style={{ marginBottom: '0.75rem', color: 'var(--accent-primary)' }} />
+                  <span style={{ fontSize: 'var(--font-size-body-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-primary)', lineHeight: '1.4' }}>{link.title}</span>
+                </Link>
+              ))}
             </div>
           </div>
         </section>
@@ -883,13 +879,17 @@ const OnePageResumeTemplate = ({
               ))}
             </ul>
             <p style={{marginTop: '16px', fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)'}}><strong>Additional analysis:</strong> Review of 5,000+ successful one-page resumes and recruiter preference surveys across major industries.</p>
-            <small style={{ color: 'var(--text-muted)', display: 'block', marginTop: '8px' }}>Last full analysis: {safeCurrentDate} • Next update: April 2026</small>
+            <small style={{ color: 'var(--text-muted)', display: 'block', marginTop: '8px' }}>Last full analysis: {safeCurrentDate} • Next update: Q2 {CURRENT_YEAR}</small>
           </div>
         </div>
 
         {/* Footer Info */}
         <div style={{ padding: '0.75rem 0', backgroundColor: 'var(--bg-surface-lowest)', borderTop: '0.5px solid var(--border-gold-filament)', textAlign: 'center' }}>
-          <span className="text-small"><FiCalendar style={{ marginRight: '0.5rem', display: 'inline', verticalAlign: 'middle' }} /> Last updated: {safeCurrentDate} • Data updated {safeCurrentDate}. Next analysis scheduled for Q2 2026.</span>
+          <span className="text-small"><FiCalendar style={{ marginRight: '0.5rem', display: 'inline', verticalAlign: 'middle' }} /> Last updated: {safeCurrentDate} • Data updated {safeCurrentDate}. Next analysis scheduled for Q2 {CURRENT_YEAR}.</span>
+          <span className="text-small" style={{ marginLeft: '1rem' }}>
+            <FiAlertCircle size={12} style={{ marginRight: '0.25rem', display: 'inline', verticalAlign: 'middle' }} />
+            Resume guidance for informational purposes. Adapt strategies to your specific industry and experience level.
+          </span>
         </div>
 
         {/* Hidden metadata for crawlers */}
@@ -938,8 +938,8 @@ export async function getStaticProps() {
   ];
 
   const meta = {
-    title: "One-Page Resume Template 2026: Free Guide & ATS Examples",
-    description: "Master one-page resumes with our free 2026 guide. ATS-optimized templates, expert strategies, and space-saving techniques. 34% more interviews. No sign-up.",
+    title: `One-Page Resume Template ${CURRENT_YEAR}: Free Guide & ATS Examples`,
+    description: `Master one-page resumes with our free ${CURRENT_YEAR} guide. ATS-optimized templates, expert strategies, and space-saving techniques. 34% more interviews. No sign-up.`,
     url: canonicalUrl,
     siteName: "Professional Resume Free",
     image: "https://professionalresumefree.com/ats.jpeg",

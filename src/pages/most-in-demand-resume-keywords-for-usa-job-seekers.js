@@ -525,12 +525,12 @@ const MostInDemandKeywords = ({
         <section className="section" id="main-content" aria-labelledby="hero-heading">
           <div className="section-container">
             <div style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center' }}>
-              <div className="badge">✦ RESUME KEYWORDS 2026 • USA JOB MARKET</div>
+              <div className="badge">✦ RESUME KEYWORDS {CURRENT_YEAR} • USA JOB MARKET</div>
               <h1 id="hero-heading" style={{ fontSize: 'var(--font-size-display-lg)', fontFamily: 'var(--font-display)', fontWeight: 'var(--font-weight-extrabold)', lineHeight: 'var(--line-height-display)', marginBottom: '1.25rem' }}>
                 Most In-Demand <span className="gradient-text">Resume Keywords</span> for USA Job Seekers
               </h1>
               <p style={{ fontSize: 'var(--font-size-body-lg)', color: 'var(--text-secondary)', marginBottom: '2rem', maxWidth: '800px', margin: '0 auto 2rem' }}>
-                Discover the most impactful resume keywords for the 2026 USA job market. This data-backed guide reveals which terms employers and ATS systems are searching for, how to incorporate them effectively, and strategies to maximize your interview callbacks.
+                Discover the most impactful resume keywords for the {CURRENT_YEAR} USA job market. This data-backed guide reveals which terms employers and ATS systems are searching for, how to incorporate them effectively, and strategies to maximize your interview callbacks.
               </p>
               <div className="hero-actions" style={{ display: 'flex', gap: '1.5rem', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '2rem' }}>
                 <Link href="/resume-templates" className="btn-primary" style={{ boxShadow: 'var(--shadow-gold-glow-sm)' }}>
@@ -566,7 +566,7 @@ const MostInDemandKeywords = ({
         <div className="section-container">
           <div className="citation-card" style={{ background: 'rgba(100,181,246,0.05)', borderLeft: '3px solid var(--info-color)', padding: '1.25rem', borderRadius: '0 0.5rem 0.5rem 0', margin: '20px 0', maxWidth: '800px', marginLeft: 'auto', marginRight: 'auto' }}>
             <p style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)', margin: 0 }}><strong>Data Sources & Methodology:</strong> This guide synthesizes search data and hiring analytics from {aiCitations.map(s => s.source).join(', ')}. We analyzed millions of job postings and applications to identify the most impactful resume keywords for USA job seekers.</p>
-            <small style={{ color: 'var(--text-muted)', display: 'block', marginTop: '8px' }}>Last verified: {safeCurrentDate} • Next update: April 2026</small>
+            <small style={{ color: 'var(--text-muted)', display: 'block', marginTop: '8px' }}>Last verified: {safeCurrentDate} • Next update: Q2 {CURRENT_YEAR}</small>
           </div>
         </div>
 
@@ -596,7 +596,7 @@ const MostInDemandKeywords = ({
         <section className="section">
           <div className="section-container">
             <div className="section-header">
-              <h2 className="section-title">📊 Key Statistics (2025-2026 Data)</h2>
+              <h2 className="section-title">📊 Key Statistics ({CURRENT_YEAR - 1}-{CURRENT_YEAR} Data)</h2>
               <p className="section-subtitle">Industry research on keyword impact, trends, and optimization effectiveness.</p>
             </div>
             <div className="grid">
@@ -807,30 +807,26 @@ const MostInDemandKeywords = ({
           </div>
         </section>
 
-        {/* Internal Links - Bottom Resources */}
+        {/* New Internal Links Section */}
         <section className="section">
           <div className="section-container">
             <div className="section-header">
-              <h2 className="section-title">Recommended Career Resources</h2>
-              <p className="section-subtitle">Enhance your job search with these specialized guides and tools tailored for the 2026 market.</p>
+              <h2 className="section-title">Related Resume Keyword Resources</h2>
+              <p className="section-subtitle">Continue exploring our expert guides and tools for ATS success</p>
             </div>
             <div className="geo-link-grid">
               {[
-                { href: "/free-ats-resume-checker", text: "Free ATS Resume Checker", iconName: "FiShield", desc: "Scan your resume to ensure it passes automated screening systems used by 98% of Fortune 500 companies." },
-                { href: "/how-to-write-a-federal-resume-for-usa-government-jobs", text: "Federal Resume Guide", iconName: "FiFlag", desc: "Specialized guide for USA government jobs requiring specific formatting and detailed keyword usage." },
-                { href: "/free-resume-bullet-point-generator", text: "Bullet Point Generator", iconName: "FiZap", desc: "Generate keyword-rich, achievement-based bullet points instantly with AI-powered writing." },
-                { href: "/resume-tips-for-remote-jobs-in-the-usa", text: "Remote Job Tips", iconName: "FiMonitor", desc: "Optimize your keywords for the growing remote work market in the USA." },
-                { href: "/interview-tips", text: "Ace Your Job Interview", iconName: "FiUsers", desc: "Prepare for the next stage with proven strategies for answering tough questions and negotiating offers." }
-              ].map((link, i) => {
-                const IconComponent = ICON_MAP[link.iconName] || FiFileText;
-                return (
-                  <Link key={i} href={link.href} className="geo-link-card">
-                    <IconComponent size={24} style={{ marginBottom: '0.75rem', color: 'var(--accent-primary)' }} />
-                    <span style={{ fontSize: 'var(--font-size-body-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-primary)', lineHeight: '1.4', marginBottom: '0.25rem' }}>{link.text}</span>
-                    <span style={{ fontSize: 'var(--font-size-label-sm)', color: 'var(--text-muted)', lineHeight: '1.3' }}>{link.desc}</span>
-                  </Link>
-                );
-              })}
+                { href: "/keywords-for-resume", title: "Keywords for Resume Guide" },
+                { href: "/resume-keywords-finder", title: "Keywords Finder Tool" },
+                { href: "/top-skills-employers-in-the-usa-want-on-resumes", title: "Top USA Employer Skills" },
+                { href: "/resume-skills-section", title: "Skills Section Writing Guide" },
+                { href: "/resume-guide", title: "Resume Guide" }
+              ].map((link, i) => (
+                <Link key={i} href={link.href} className="geo-link-card">
+                  <FiArrowRight size={20} style={{ marginBottom: '0.75rem', color: 'var(--accent-primary)' }} />
+                  <span style={{ fontSize: 'var(--font-size-body-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-primary)', lineHeight: '1.4' }}>{link.title}</span>
+                </Link>
+              ))}
             </div>
           </div>
         </section>
@@ -845,13 +841,17 @@ const MostInDemandKeywords = ({
               ))}
             </ul>
             <p style={{marginTop: '16px', fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)'}}><strong>Additional analysis:</strong> Review of 50,000+ resume-related searches and 25,000+ rejected applications across major ATS platforms.</p>
-            <small style={{ color: 'var(--text-muted)', display: 'block', marginTop: '8px' }}>Last full analysis: {safeCurrentDate} • Next update: April 2026</small>
+            <small style={{ color: 'var(--text-muted)', display: 'block', marginTop: '8px' }}>Last full analysis: {safeCurrentDate} • Next update: Q2 {CURRENT_YEAR}</small>
           </div>
         </div>
 
         {/* Footer Info */}
         <div style={{ padding: '0.75rem 0', backgroundColor: 'var(--bg-surface-lowest)', borderTop: '0.5px solid var(--border-gold-filament)', textAlign: 'center' }}>
-          <span className="text-small"><FiCalendar style={{ marginRight: '0.5rem', display: 'inline', verticalAlign: 'middle' }} /> Last updated: {safeCurrentDate} • Data updated {safeCurrentDate}. Next analysis scheduled for Q2 2026.</span>
+          <span className="text-small"><FiCalendar style={{ marginRight: '0.5rem', display: 'inline', verticalAlign: 'middle' }} /> Last updated: {safeCurrentDate} • Data updated {safeCurrentDate}. Next analysis scheduled for Q2 {CURRENT_YEAR}.</span>
+          <span className="text-small" style={{ marginLeft: '1rem' }}>
+            <FiAlertCircle size={12} style={{ marginRight: '0.25rem', display: 'inline', verticalAlign: 'middle' }} />
+            Keyword guidance for informational purposes. Results may vary by industry and role.
+          </span>
         </div>
 
         {/* Hidden metadata for crawlers */}
@@ -897,8 +897,8 @@ export async function getStaticProps() {
   ];
 
   const meta = {
-    title: "Most In-Demand Resume Keywords for USA Job Seekers 2026",
-    description: "Complete guide to the most in-demand resume keywords for USA job seekers in 2026. Learn which keywords employers search for, ATS optimization strategies, and industry-specific terms.",
+    title: `Most In-Demand Resume Keywords for USA Job Seekers ${CURRENT_YEAR}`,
+    description: `Complete guide to the most in-demand resume keywords for USA job seekers in ${CURRENT_YEAR}. Learn which keywords employers search for, ATS optimization strategies, and industry-specific terms.`,
     url: canonicalUrl,
     siteName: "Professional Resume Free",
     image: "https://professionalresumefree.com/ats.jpeg",
@@ -911,7 +911,7 @@ export async function getStaticProps() {
     "USA job seekers",
     "resume optimization",
     "keyword strategy",
-    "2026 hiring trends"
+    `${CURRENT_YEAR} hiring trends`
   ];
 
   return {

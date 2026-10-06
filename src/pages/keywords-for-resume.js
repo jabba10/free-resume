@@ -865,39 +865,37 @@ const KeywordsForResume = ({ seoData, buildTimestamp }) => {
           </div>
         </section>
 
-        {/* Internal Links */}
-        <section className="section" aria-labelledby="resources-heading">
+        {/* New Internal Links Section */}
+        <section className="section" aria-labelledby="internal-links-heading">
           <div className="section-container">
             <div className="section-header">
-              <h2 className="section-title" id="resources-heading">Continue Your Resume Mastery in {CURRENT_YEAR}</h2>
-              <p className="section-subtitle">Explore more of our expertly crafted resources to perfect your job application</p>
+              <h2 className="section-title" id="internal-links-heading">Related Resume Keyword Resources</h2>
+              <p className="section-subtitle">Continue exploring our expert guides and tools for ATS success</p>
             </div>
             <div className="geo-link-grid">
               {[
-                { href: "/free-ats-resume-checker", text: "ATS Resume Checker", iconName: "FiShield", desc: "Test your resume's compatibility" },
-                { href: "/free-resume-keyword-density-analyzer-tool", text: "Keyword Density Analyzer", iconName: "FiBarChart2", desc: "Check your keyword balance" },
-                { href: "/most-in-demand-resume-keywords-for-usa-job-seekers", text: "USA Keyword Trends", iconName: "FiTrendingUp", desc: "2026 trending keywords" },
-                { href: "/free-resume-score-checker", text: "Resume Score Checker", iconName: "FiAward", desc: "Get your resume professionally graded" },
-                { href: "/how-to-tailor-your-resume-for-any-usa-job-posting", text: "Tailor Your Resume", iconName: "FiEdit", desc: "Customize for each application" },
-                { href: "/resume-templates", text: "All Resume Templates", iconName: "FiLayers", desc: "500+ beautiful ATS-ready designs" }
-              ].map((link, i) => {
-                const IconComponent = ICON_MAP[link.iconName] || FiFileText;
-                return (
-                  <Link key={i} href={link.href} className="geo-link-card">
-                    <IconComponent size={24} style={{ marginBottom: '0.75rem', color: 'var(--accent-primary)' }} />
-                    <span style={{ fontSize: 'var(--font-size-body-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-primary)', lineHeight: '1.4', marginBottom: '0.25rem' }}>{link.text}</span>
-                    <span style={{ fontSize: 'var(--font-size-label-sm)', color: 'var(--text-muted)', lineHeight: '1.3' }}>{link.desc}</span>
-                  </Link>
-                );
-              })}
+                { href: "/resume-keywords-finder", title: "Resume Keywords Finder Tool" },
+                { href: "/most-in-demand-resume-keywords-for-usa-job-seekers", title: "In-Demand USA Resume Keywords" },
+                { href: "/top-skills-employers-in-the-usa-want-on-resumes", title: "Top Skills Employers Want" },
+                { href: "/resume-skills-section", title: "Resume Skills Section Guide" },
+                { href: "/resume-guide", title: "Complete Resume Guide" }
+              ].map((link, i) => (
+                <Link key={i} href={link.href} className="geo-link-card">
+                  <FiArrowRight size={20} style={{ marginBottom: '0.75rem', color: 'var(--accent-primary)' }} />
+                  <span style={{ fontSize: 'var(--font-size-body-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-primary)', lineHeight: '1.4' }}>{link.title}</span>
+                </Link>
+              ))}
             </div>
           </div>
         </section>
 
-        {/* Footer Info */}
+        {/* Footer Info - copyright line removed */}
         <div style={{ padding: '1rem 0', backgroundColor: 'var(--bg-surface-lowest)', borderTop: '0.5px solid var(--border-gold-filament)', textAlign: 'center' }}>
           <span className="text-small"><FiCalendar style={{ marginRight: '0.5rem', display: 'inline', verticalAlign: 'middle' }} /> Last updated: {safeCurrentDate} • Build: {buildTimestamp} • {totalKeywordCount}+ keywords across 8 industries • Sources: JobScan, SHRM, LinkedIn</span>
-          <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '0.5rem' }}>© {CURRENT_YEAR} Professional Resume Free. All rights reserved.</p>
+          <span className="text-small" style={{ marginLeft: '1rem' }}>
+            <FiAlertCircle size={12} style={{ marginRight: '0.25rem', display: 'inline', verticalAlign: 'middle' }} />
+            Keyword guidance for informational purposes. Results may vary by industry and role.
+          </span>
         </div>
 
         {/* Hidden Metadata */}

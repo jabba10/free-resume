@@ -246,8 +246,8 @@ const FAQS = [
 // DEFAULT PROPS FOR SSR/SSG SAFETY
 // ============================================================================
 const defaultMeta = {
-  title: "Part-Time Job Resume India 2026: Complete Guide & Templates",
-  description: "Complete 2026 guide for creating winning part-time job resumes in India. Get ATS-friendly templates, formatting tips, and industry-specific examples to land your ideal part-time position.",
+  title: `Part-Time Job Resume India ${CURRENT_YEAR}: Complete Guide & Templates`,
+  description: `Complete ${CURRENT_YEAR} guide for creating winning part-time job resumes in India. Get ATS-friendly templates, formatting tips, and industry-specific examples to land your ideal part-time position.`,
   url: "https://professionalresumefree.com/part-time-job-resume-india",
   siteName: "Professional Resume Free",
   image: "https://professionalresumefree.com/images/part-time-resume-guide-india-og.jpg",
@@ -517,7 +517,7 @@ const PartTimeJobResumeIndiaPage = ({
         <section className="section" id="main-content" aria-labelledby="hero-heading">
           <div className="section-container">
             <div style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center' }}>
-              <div className="badge">✦ PART-TIME JOB RESUME INDIA 2026 • COMPLETE GUIDE</div>
+              <div className="badge">✦ PART-TIME JOB RESUME INDIA {CURRENT_YEAR} • COMPLETE GUIDE</div>
               <h1 id="hero-heading" style={{ fontSize: 'var(--font-size-display-lg)', fontFamily: 'var(--font-display)', fontWeight: 'var(--font-weight-extrabold)', lineHeight: 'var(--line-height-display)', marginBottom: '1.25rem' }}>
                 Part-Time Job <span className="gradient-text">Resume</span> for India
               </h1>
@@ -538,7 +538,7 @@ const PartTimeJobResumeIndiaPage = ({
                 ))}
               </div>
               <div style={{marginTop: '20px', fontSize: '0.8rem', color: 'var(--text-muted)'}} aria-label="Page last updated">
-                <FiCalendar style={{marginRight: '4px', display: 'inline'}} /> Last updated: {safeCurrentDate} | Based on 2026 Indian job market data
+                <FiCalendar style={{marginRight: '4px', display: 'inline'}} /> Last updated: {safeCurrentDate} | Based on {CURRENT_YEAR} Indian job market data
               </div>
             </div>
           </div>
@@ -871,37 +871,37 @@ const PartTimeJobResumeIndiaPage = ({
           </div>
         </section>
 
-        {/* Internal Links - Bottom Resources */}
+        {/* New Internal Links Section */}
         <section className="section">
           <div className="section-container">
             <div className="section-header">
-              <h2 className="section-title">Recommended Career Resources</h2>
-              <p className="section-subtitle">Enhance your job search with these specialized guides and tools tailored for the Indian market</p>
+              <h2 className="section-title">Related Resume Resources for India</h2>
+              <p className="section-subtitle">Continue exploring our expert guides tailored for the Indian job market</p>
             </div>
             <div className="geo-link-grid">
               {[
-                { href: "/how-to-create-a-resume-with-no-experience", text: "No Experience Resume", iconName: "FiBookOpen", desc: "Perfect for students and freshers entering the job market for the first time." },
-                { href: "/resume-tips-for-usa-college-students-and-graduates", text: "Student & Graduate Tips", iconName: "FiUser", desc: "Specialized advice for students seeking part-time roles or internships." },
-                { href: "/free-resume-objective-generator", text: "Free Objective Generator", iconName: "FiTarget", desc: "Create a compelling career objective instantly for your part-time application." },
-                { href: "/ats-friendly-retail-associate-resume-builder", text: "Retail Resume Builder", iconName: "FiBriefcase", desc: "Specialized template for one of the most common part-time industries in India." },
-                { href: "/jobs-search-tips", text: "Job Search Mastery", iconName: "FiSearch", desc: "Strategic advice on where and how to find legitimate part-time opportunities." }
-              ].map((link, i) => {
-                const IconComponent = ICON_MAP[link.iconName] || FiFileText;
-                return (
-                  <Link key={i} href={link.href} className="geo-link-card">
-                    <IconComponent size={24} style={{ marginBottom: '0.75rem', color: 'var(--accent-primary)' }} />
-                    <span style={{ fontSize: 'var(--font-size-body-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-primary)', lineHeight: '1.4', marginBottom: '0.25rem' }}>{link.text}</span>
-                    <span style={{ fontSize: 'var(--font-size-label-sm)', color: 'var(--text-muted)', lineHeight: '1.3' }}>{link.desc}</span>
-                  </Link>
-                );
-              })}
+                { href: "/resume-for-job-application-india", title: "India Job Application Resume" },
+                { href: "/resume-format-india", title: "India Resume Format" },
+                { href: "/resume-for-students-in-india", title: "Student Resume India Guide" },
+                { href: "/resume-for-10th-pass", title: "10th Pass Resume Guide" },
+                { href: "/resume-for-12th-pass", title: "12th Pass Resume Guide" }
+              ].map((link, i) => (
+                <Link key={i} href={link.href} className="geo-link-card">
+                  <FiArrowRight size={20} style={{ marginBottom: '0.75rem', color: 'var(--accent-primary)' }} />
+                  <span style={{ fontSize: 'var(--font-size-body-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-primary)', lineHeight: '1.4' }}>{link.title}</span>
+                </Link>
+              ))}
             </div>
           </div>
         </section>
 
         {/* Footer Info */}
         <div style={{ padding: '0.75rem 0', backgroundColor: 'var(--bg-surface-lowest)', borderTop: '0.5px solid var(--border-gold-filament)', textAlign: 'center' }}>
-          <span className="text-small"><FiCalendar style={{ marginRight: '0.5rem', display: 'inline', verticalAlign: 'middle' }} /> Last updated: {safeCurrentDate} • Data updated {safeCurrentDate}. Next analysis scheduled for Q2 2026.</span>
+          <span className="text-small"><FiCalendar style={{ marginRight: '0.5rem', display: 'inline', verticalAlign: 'middle' }} /> Last updated: {safeCurrentDate} • Data updated {safeCurrentDate}. Next analysis scheduled for Q2 {CURRENT_YEAR}.</span>
+          <span className="text-small" style={{ marginLeft: '1rem' }}>
+            <FiAlertCircle size={12} style={{ marginRight: '0.25rem', display: 'inline', verticalAlign: 'middle' }} />
+            Resume guidance for informational purposes. Adapt strategies to your specific industry and experience level.
+          </span>
         </div>
 
         {/* Hidden metadata for crawlers */}
@@ -950,8 +950,8 @@ export async function getStaticProps() {
   ];
 
   const meta = {
-    title: "Part-Time Job Resume India 2026: Complete Guide & Templates",
-    description: "Complete 2026 guide for creating winning part-time job resumes in India. Get ATS-friendly templates, formatting tips, and industry-specific examples to land your ideal part-time position.",
+    title: `Part-Time Job Resume India ${CURRENT_YEAR}: Complete Guide & Templates`,
+    description: `Complete ${CURRENT_YEAR} guide for creating winning part-time job resumes in India. Get ATS-friendly templates, formatting tips, and industry-specific examples to land your ideal part-time position.`,
     url: canonicalUrl,
     siteName: "Professional Resume Free",
     image: "https://professionalresumefree.com/images/part-time-resume-guide-india-og.jpg",

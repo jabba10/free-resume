@@ -393,7 +393,7 @@ const MostGoogledResumeQuestions = ({
         <section className="section" id="main-content" aria-labelledby="hero-heading">
           <div className="section-container">
             <div style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center' }}>
-              <div className="badge">✦ GOOGLE SEARCH DATA 2026 • TOP 10 QUESTIONS</div>
+              <div className="badge">✦ GOOGLE SEARCH DATA {CURRENT_YEAR} • TOP 10 QUESTIONS</div>
               <h1 id="hero-heading" style={{ fontSize: 'var(--font-size-display-lg)', fontFamily: 'var(--font-display)', fontWeight: 'var(--font-weight-extrabold)', lineHeight: 'var(--line-height-display)', marginBottom: '1.25rem' }}>
                 Most Googled <span className="gradient-text">Resume Questions</span> in the USA
               </h1>
@@ -434,8 +434,8 @@ const MostGoogledResumeQuestions = ({
         {/* AI Source Citation Banner */}
         <div className="section-container">
           <div className="citation-card" style={{ background: 'rgba(100,181,246,0.05)', borderLeft: '3px solid var(--info-color)', padding: '1.25rem', borderRadius: '0 0.5rem 0.5rem 0', margin: '20px 0', maxWidth: '800px', marginLeft: 'auto', marginRight: 'auto' }}>
-            <p style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)', margin: 0 }}><strong>Data Sources & Methodology:</strong> This guide synthesizes search data from Google Keyword Planner 2026, Indeed Resume Data 2025-2026, Professional Resume Free Search Analytics, and LinkedIn Career Research 2026. We analyzed 24+ million annual searches to identify the most common resume questions Americans ask.</p>
-            <small style={{ color: 'var(--text-muted)', display: 'block', marginTop: '8px' }}>Last verified: {safeCurrentDate} • Next update: April 2026</small>
+            <p style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)', margin: 0 }}><strong>Data Sources & Methodology:</strong> This guide synthesizes search data from Google Keyword Planner {CURRENT_YEAR}, Indeed Resume Data, Professional Resume Free Search Analytics, and LinkedIn Career Research. We analyzed 24+ million annual searches to identify the most common resume questions Americans ask.</p>
+            <small style={{ color: 'var(--text-muted)', display: 'block', marginTop: '8px' }}>Last verified: {safeCurrentDate} • Next update scheduled</small>
           </div>
         </div>
 
@@ -538,7 +538,7 @@ const MostGoogledResumeQuestions = ({
             </div>
             <div className="insight-box-purple" style={{ maxWidth: '800px', margin: '2rem auto 0', textAlign: 'center' }}>
               <p style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--purple-accent)' }}>
-                <strong>Key Insight:</strong> The fastest-growing resume searches reflect technological and societal shifts—AI integration, mobile optimization, video content, and remote work. Staying ahead of these trends gives you a competitive advantage in the 2026 job market.
+                <strong>Key Insight:</strong> The fastest-growing resume searches reflect technological and societal shifts—AI integration, mobile optimization, video content, and remote work. Staying ahead of these trends gives you a competitive advantage in the {CURRENT_YEAR} job market.
               </p>
             </div>
           </div>
@@ -587,30 +587,26 @@ const MostGoogledResumeQuestions = ({
           </div>
         </section>
 
-        {/* Internal Links - Bottom Resources */}
+        {/* New Internal Links Section */}
         <section className="section">
           <div className="section-container">
             <div className="section-header">
-              <h2 className="section-title">Recommended Career Resources</h2>
-              <p className="section-subtitle">Enhance your job search with these specialized guides and tools tailored for the 2026 market.</p>
+              <h2 className="section-title">Related Resume Question Resources</h2>
+              <p className="section-subtitle">Continue exploring our expert guides answering the most common resume questions</p>
             </div>
             <div className="geo-link-grid">
               {[
-                { href: "/free-ats-resume-checker", text: "Free ATS Resume Checker", iconName: "FiShield", desc: "Scan your resume to ensure it passes automated screening systems used by 98% of Fortune 500 companies." },
-                { href: "/how-to-write-a-resume", text: "How to Write a Resume", iconName: "FiEdit", desc: "A complete step-by-step guide to crafting a compelling resume that highlights your strengths and experience." },
-                { href: "/resume-formatting-guide", text: "Resume Formatting Guide", iconName: "FiLayers", desc: "Master the visual layout, fonts, and spacing to create a professional document that recruiters love to read." },
-                { href: "/ats-friendly-tech-resume-builder", text: "Tech Resume Builder", iconName: "FiCode", desc: "Specialized builder for software engineers and developers to showcase projects and technical stacks effectively." },
-                { href: "/interview-tips", text: "Ace Your Job Interview", iconName: "FiUsers", desc: "Prepare for the next stage with proven strategies for answering tough questions and negotiating offers." }
-              ].map((link, i) => {
-                const IconComponent = ICON_MAP[link.iconName] || FiFileText;
-                return (
-                  <Link key={i} href={link.href} className="geo-link-card">
-                    <IconComponent size={24} style={{ marginBottom: '0.75rem', color: 'var(--accent-primary)' }} />
-                    <span style={{ fontSize: 'var(--font-size-body-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-primary)', lineHeight: '1.4', marginBottom: '0.25rem' }}>{link.text}</span>
-                    <span style={{ fontSize: 'var(--font-size-label-sm)', color: 'var(--text-muted)', lineHeight: '1.3' }}>{link.desc}</span>
-                  </Link>
-                );
-              })}
+                { href: "/what-should-a-resume-look-like", title: "What Should a Resume Look Like" },
+                { href: "/what-to-put-on-a-resume", title: "What to Put on a Resume" },
+                { href: "/resume-mistakes-americans-make-and-how-to-fix-them", title: "Common Resume Mistakes" },
+                { href: "/resume-vs-cv-key-differences-and-when-to-use-which", title: "Resume vs CV Differences" },
+                { href: "/resume-writing-for-beginners", title: "Resume Writing for Beginners" }
+              ].map((link, i) => (
+                <Link key={i} href={link.href} className="geo-link-card">
+                  <FiArrowRight size={20} style={{ marginBottom: '0.75rem', color: 'var(--accent-primary)' }} />
+                  <span style={{ fontSize: 'var(--font-size-body-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-primary)', lineHeight: '1.4' }}>{link.title}</span>
+                </Link>
+              ))}
             </div>
           </div>
         </section>
@@ -620,19 +616,19 @@ const MostGoogledResumeQuestions = ({
           <div className="citation-card" style={{ background: 'rgba(100,181,246,0.05)', borderLeft: '3px solid var(--info-color)', padding: '1.25rem', borderRadius: '0 0.5rem 0.5rem 0', maxWidth: '800px', marginLeft: 'auto', marginRight: 'auto' }}>
             <p style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)', margin: 0 }}><strong>Complete Data Sources & Methodology:</strong></p>
             <ul style={{marginTop: '12px', marginLeft: '20px', color: 'var(--text-muted)', fontSize: 'var(--font-size-body-sm)'}}>
-              <li style={{marginBottom: '8px'}}><strong>Google Keyword Planner 2026:</strong> 12-month search volume data for resume-related queries</li>
-              <li style={{marginBottom: '8px'}}><strong>Indeed Resume Data 2025-2026:</strong> Analysis of most-viewed resume help articles</li>
+              <li style={{marginBottom: '8px'}}><strong>Google Keyword Planner {CURRENT_YEAR}:</strong> 12-month search volume data for resume-related queries</li>
+              <li style={{marginBottom: '8px'}}><strong>Indeed Resume Data:</strong> Analysis of most-viewed resume help articles</li>
               <li style={{marginBottom: '8px'}}><strong>Professional Resume Free Search Analytics:</strong> Internal data on user questions and searches</li>
-              <li style={{marginBottom: '8px'}}><strong>LinkedIn Career Research 2026:</strong> Trends in job seeker questions and concerns</li>
+              <li style={{marginBottom: '8px'}}><strong>LinkedIn Career Research:</strong> Trends in job seeker questions and concerns</li>
             </ul>
             <p style={{marginTop: '16px', fontSize: 'var(--font-size-body-sm)', color: 'var(--text-secondary)'}}><strong>Additional analysis:</strong> Review of 50,000+ resume-related searches and 10,000+ user questions to Professional Resume Free.</p>
-            <small style={{ color: 'var(--text-muted)', display: 'block', marginTop: '8px' }}>Last full analysis: {safeCurrentDate} • Next update: April 2026</small>
+            <small style={{ color: 'var(--text-muted)', display: 'block', marginTop: '8px' }}>Last full analysis: {safeCurrentDate} • Next update scheduled quarterly</small>
           </div>
         </div>
 
         {/* Footer Info */}
         <div style={{ padding: '0.75rem 0', backgroundColor: 'var(--bg-surface-lowest)', borderTop: '0.5px solid var(--border-gold-filament)', textAlign: 'center' }}>
-          <span className="text-small"><FiCalendar style={{ marginRight: '0.5rem', display: 'inline', verticalAlign: 'middle' }} /> Last updated: {safeCurrentDate} • Data updated {safeCurrentDate}. Next analysis scheduled for Q2 2026.</span>
+          <span className="text-small"><FiCalendar style={{ marginRight: '0.5rem', display: 'inline', verticalAlign: 'middle' }} /> Last updated: {safeCurrentDate} • Data updated {safeCurrentDate}. Next analysis scheduled for Q2 {CURRENT_YEAR}.</span>
         </div>
 
         {/* Hidden metadata for crawlers */}

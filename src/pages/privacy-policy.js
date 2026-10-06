@@ -10,7 +10,7 @@ import {
   FiGlobe, FiCheckCircle, FiXCircle, FiActivity, FiZap,
   FiInfo, FiSmartphone, FiCopy, FiRefreshCw, FiThumbsUp,
   FiMonitor, FiSun, FiMoon, FiCoffee, FiCompass, FiAnchor,
-  FiMail // Added FiMail here
+  FiMail
 } from 'react-icons/fi';
 
 // ============================================================================
@@ -349,30 +349,26 @@ const PrivacyPolicy = ({ seoData }) => {
           </div>
         </section>
 
-        {/* Internal Links */}
+        {/* New Internal Links Section */}
         <section className="section">
           <div className="section-container">
             <div className="section-header">
-              <h2 className="section-title">Explore More Resources</h2>
-              <p className="section-subtitle">Discover our free tools and guides designed with the same privacy-first approach</p>
+              <h2 className="section-title">Continue Your Resume Journey</h2>
+              <p className="section-subtitle">Explore our privacy-first resume tools and comprehensive guides</p>
             </div>
             <div className="geo-link-grid">
               {[
-                { href: "/resume-templates", text: "Resume Templates", iconName: "FiFileText", desc: "Build privately" },
-                { href: "/free-resume-tools", text: "Free Resume Tools", iconName: "FiTool", desc: "No sign-up needed" },
-                { href: "/how-to-write-a-resume", text: "Resume Writing Guide", iconName: "FiBookOpen", desc: "Expert guidance" },
-                { href: "/free-ats-resume-checker", text: "ATS Resume Checker", iconName: "FiShield", desc: "Test compatibility" },
-                { href: "/contact", text: "Contact Us", iconName: "FiMail", desc: "Get in touch" },
-                { href: "/", text: "Home Page", iconName: "FiHome", desc: "Start building" }
-              ].map((link, i) => {
-                const IconComponent = ICON_MAP[link.iconName] || FiFileText;
-                return (
-                  <Link key={i} href={link.href} className="geo-link-card">
-                    <IconComponent size={20} style={{ marginBottom: '0.625rem', color: 'var(--accent-primary)' }} />
-                    <span style={{ fontSize: 'var(--font-size-label-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-secondary)', lineHeight: '1.4' }}>{link.text}</span>
-                  </Link>
-                );
-              })}
+                { href: "/resume-guide", title: "Comprehensive Resume Guide" },
+                { href: "/resume-calculators", title: "Resume Calculators" },
+                { href: "/resume-templates", title: "Resume Templates Library" },
+                { href: "/what-to-put-on-a-resume", title: "What to Put on a Resume" },
+                { href: "/resume-formatting-guide", title: "Resume Formatting Guide" }
+              ].map((link, i) => (
+                <Link key={i} href={link.href} className="geo-link-card">
+                  <FiArrowRight size={20} style={{ marginBottom: '0.75rem', color: 'var(--accent-primary)' }} />
+                  <span style={{ fontSize: 'var(--font-size-body-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-primary)', lineHeight: '1.4' }}>{link.title}</span>
+                </Link>
+              ))}
             </div>
           </div>
         </section>

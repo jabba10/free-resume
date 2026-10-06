@@ -702,35 +702,38 @@ const JobMarketDemandCalculatorPage = ({ seoData, buildTimestamp }) => {
           </div>
         </section>
 
-        <section className="section" aria-labelledby="resources-heading">
+        {/* Internal Links Section - NEW */}
+        <section className="section" aria-labelledby="internal-links-heading">
           <div className="section-container">
             <div className="section-header">
-              <h2 className="section-title" id="resources-heading">Explore More Free Career Analysis Tools</h2>
-              <p className="section-subtitle">Complement your market research with these powerful career resources</p>
+              <h2 className="section-title" id="internal-links-heading">Related Career Tools</h2>
+              <p className="section-subtitle">Continue exploring our suite of free career assessment resources</p>
             </div>
             <div className="geo-link-grid">
               {[
-                { href: "/career-path-calculator", text: "Career Path Calculator", iconName: "FiTrendingUp", desc: "Explore career trajectories" },
-                { href: "/salary-calculator", text: "Salary Calculator", iconName: "FiDollarSign", desc: "Know your market value" },
-                { href: "/skill-gap-calculator", text: "Skill Gap Calculator", iconName: "FiTarget", desc: "Identify missing skills" },
-                { href: "/job-fit-calculator", text: "Job Fit Calculator", iconName: "FiSearch", desc: "Assess role compatibility" },
-                { href: "/resume-strength-calculator", text: "Resume Strength Tool", iconName: "FiFileText", desc: "Evaluate your resume" },
-                { href: "/promotion-probability-calculator", text: "Promotion Calculator", iconName: "FiAward", desc: "Assess readiness" }
-              ].map((link, i) => {
-                const Icon = ICON_MAP[link.iconName] || FiFileText;
-                return <Link key={i} href={link.href} className="geo-link-card">
-                  <Icon size={24} style={{ marginBottom: '0.75rem', color: 'var(--accent-primary)' }} />
-                  <span style={{ fontSize: 'var(--font-size-body-sm)', fontWeight: 600, color: 'var(--text-primary)', lineHeight: '1.4', marginBottom: '0.25rem' }}>{link.text}</span>
-                  <span style={{ fontSize: '0.6875rem', color: 'var(--text-muted)', lineHeight: '1.3' }}>{link.desc}</span>
-                </Link>;
-              })}
+                { href: "/job-fit-calculator", title: "Job Fit Calculator" },
+                { href: "/salary-calculator", title: "Salary Calculator" },
+                { href: "/promotion-probability-calculator", title: "Promotion Probability Tool" },
+                { href: "/skill-gap-calculator", title: "Skill Gap Analysis Tool" },
+                { href: "/resume-calculators", title: "Resume Calculators Collection" }
+              ].map((link, i) => (
+                <Link key={i} href={link.href} className="geo-link-card">
+                  <FiArrowRight size={20} style={{ marginBottom: '0.75rem', color: 'var(--accent-primary)' }} />
+                  <span style={{ fontSize: 'var(--font-size-body-sm)', fontWeight: 600, color: 'var(--text-primary)', lineHeight: '1.4' }}>{link.title}</span>
+                </Link>
+              ))}
             </div>
           </div>
         </section>
 
+        {/* Footer Info - Cleaned Up */}
         <div style={{ padding: '1rem 0', backgroundColor: 'var(--bg-surface-lowest)', borderTop: '0.5px solid var(--border-gold-filament)', textAlign: 'center' }}>
           <span className="text-small"><FiCalendar style={{ marginRight: '0.5rem', display: 'inline', verticalAlign: 'middle' }} /> Last updated: {safeCurrentDate} • Build: {buildTimestamp} • Sources: BLS, LinkedIn, Indeed</span>
-          <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '0.5rem' }}>© {CURRENT_YEAR} Professional Resume Free. All rights reserved.</p>
+          <span className="text-small" style={{ marginLeft: '1rem' }}>
+            <FiAlertCircle size={12} style={{ marginRight: '0.25rem', display: 'inline', verticalAlign: 'middle' }} />
+            Market data for informational purposes. Use alongside professional career guidance.
+          </span>
+          {/* Removed copyright line as requested */}
         </div>
 
         {/* Hidden Metadata */}
