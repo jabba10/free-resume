@@ -972,35 +972,6 @@ const ResumeStrengthCalculatorPage = ({ seoData }) => {
           </div>
         </section>
 
-        {/* Internal Links Grid */}
-        <section className="section">
-          <div className="section-container">
-            <div className="section-header">
-              <h2 className="section-title">🔗 Complete Your Resume Toolkit</h2>
-              <p className="section-subtitle">Access our full suite of free resume tools and resources</p>
-            </div>
-            <div className="geo-link-grid">
-              {[
-                { href: "/free-ats-resume-checker", text: "Free ATS Resume Checker", iconName: "FiShield", desc: "Test against real ATS systems" },
-                { href: "/free-resume-score-checker", text: "Resume Score Checker", iconName: "FiAward", desc: "Get instant quality feedback" },
-                { href: "/resume-formatting-guide", text: "Resume Formatting Guide", iconName: "FiLayout", desc: "Professional layout standards" },
-                { href: "/resume-keywords-finder", text: "Resume Keywords Finder", iconName: "FiSearch", desc: "Find the right keywords" },
-                { href: "/free-resume-builder", text: "Free Resume Builder", iconName: "FiEdit", desc: "Build your resume" },
-                { href: "/free-action-verb-recommender", text: "Action Verb Recommender", iconName: "FiZap", desc: "Powerful resume verbs" }
-              ].map((link, i) => {
-                const IconComponent = ICON_MAP[link.iconName] || FiFileText;
-                return (
-                  <Link key={i} href={link.href} className="geo-link-card" style={{ flexDirection: 'column', gap: '0.5rem' }}>
-                    <IconComponent size={24} style={{ color: 'var(--accent-primary)' }} />
-                    <span style={{ fontSize: 'var(--font-size-body-sm)', fontWeight: '600', color: 'var(--text-primary)', lineHeight: '1.3' }}>{link.text}</span>
-                    <span style={{ fontSize: 'var(--font-size-label-sm)', color: 'var(--text-muted)', lineHeight: '1.3' }}>{link.desc}</span>
-                  </Link>
-                );
-              })}
-            </div>
-          </div>
-        </section>
-
         {/* CTA */}
         <section style={{ padding: 'var(--section-gap-lg) 0', background: 'linear-gradient(135deg, #1c1b1d 0%, #2a2a2c 100%)', textAlign: 'center', borderTop: '0.5px solid var(--border-gold-filament)', borderBottom: '0.5px solid var(--border-gold-filament)', position: 'relative', overflow: 'hidden' }} aria-labelledby="cta-heading">
           <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle at 50% 50%, rgba(242,202,80,0.05) 0%, transparent 70%)', pointerEvents: 'none' }} />
@@ -1021,31 +992,29 @@ const ResumeStrengthCalculatorPage = ({ seoData }) => {
           </div>
         </section>
 
-        {/* NEW SECTION: Internal Linking Boost */}
-        <section className="section" style={{ background: 'var(--bg-surface-lowest)', borderTop: '0.5px solid var(--border-gold-filament)' }} aria-labelledby="expand-toolkit-heading">
+        {/* NEW SECTION: Related Resume Calculators */}
+        <section className="section" style={{ background: 'var(--bg-surface-lowest)', borderTop: '0.5px solid var(--border-gold-filament)' }} aria-labelledby="related-calculators-heading">
           <div className="section-container">
-            <h2 id="expand-toolkit-heading" className="section-title" style={{ textAlign: 'left', marginBottom: '1.5rem' }}>Expand Your Career Toolkit</h2>
-            <div className="grid">
-              <Link href="/resume-templates" className="card-executive">
-                <h3 style={{ marginBottom: '0.5rem', fontSize: '1.1rem' }}>ATS-Optimized Resume Templates</h3>
-                <p style={{ color: 'var(--text-secondary)', marginBottom: '0.75rem', fontSize: '0.95rem' }}>Professionally designed templates that pass automated screening.</p>
-                <span style={{ color: 'var(--accent-primary)', fontWeight: '500', fontSize: '0.9rem' }}>Browse Templates <FiArrowRight style={{ marginLeft: '0.25rem', display: 'inline' }} /></span>
-              </Link>
-              <Link href="/resume-guide" className="card-executive">
-                <h3 style={{ marginBottom: '0.5rem', fontSize: '1.1rem' }}>Complete ATS Resume Guide</h3>
-                <p style={{ color: 'var(--text-secondary)', marginBottom: '0.75rem', fontSize: '0.95rem' }}>Master ATS optimization with proven strategies and real examples.</p>
-                <span style={{ color: 'var(--accent-primary)', fontWeight: '500', fontSize: '0.9rem' }}>Read Guide <FiArrowRight style={{ marginLeft: '0.25rem', display: 'inline' }} /></span>
-              </Link>
-              <Link href="/interview-tips" className="card-executive">
-                <h3 style={{ marginBottom: '0.5rem', fontSize: '1.1rem' }}>Interview Preparation Tips</h3>
-                <p style={{ color: 'var(--text-secondary)', marginBottom: '0.75rem', fontSize: '0.95rem' }}>Ace your next interview with proven strategies and common questions.</p>
-                <span style={{ color: 'var(--accent-primary)', fontWeight: '500', fontSize: '0.9rem' }}>Get Tips <FiArrowRight style={{ marginLeft: '0.25rem', display: 'inline' }} /></span>
-              </Link>
-              <Link href="/how-to-beat-the-ats-optimization-tips-for-modern-hiring-software" className="card-executive">
-                <h3 style={{ marginBottom: '0.5rem', fontSize: '1.1rem' }}>Beat the ATS Screening</h3>
-                <p style={{ color: 'var(--text-secondary)', marginBottom: '0.75rem', fontSize: '0.95rem' }}>Advanced optimization tips to ensure your resume passes automated screening.</p>
-                <span style={{ color: 'var(--accent-primary)', fontWeight: '500', fontSize: '0.9rem' }}>Learn More <FiArrowRight style={{ marginLeft: '0.25rem', display: 'inline' }} /></span>
-              </Link>
+            <div className="section-header">
+              <h2 id="related-calculators-heading" className="section-title">Related Resume Calculators</h2>
+              <p className="section-subtitle">Explore more specialized calculators to strengthen your job application journey.</p>
+            </div>
+            <div className="geo-link-grid">
+              {[
+                { href: "/resume-value-calculator", text: "Resume Value Calculator", iconName: "FiDollarSign" },
+                { href: "/resume-achievement-calculator", text: "Achievement Calculator", iconName: "FiAward" },
+                { href: "/resume-length-calculator", text: "Resume Length Calculator", iconName: "FiBarChart2" },
+                { href: "/resume-calculators", text: "Resume Calculators Hub", iconName: "FiGrid" },
+                { href: "/job-fit-calculator", text: "Job Fit Calculator", iconName: "FiTarget" }
+              ].map((link, i) => {
+                const IconComponent = ICON_MAP[link.iconName] || FiFileText;
+                return (
+                  <Link key={i} href={link.href} className="geo-link-card">
+                    <IconComponent size={24} style={{ marginBottom: '0.75rem', color: 'var(--accent-primary)' }} />
+                    <span style={{ fontSize: 'var(--font-size-body-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-primary)', lineHeight: '1.4' }}>{link.text}</span>
+                  </Link>
+                );
+              })}
             </div>
           </div>
         </section>

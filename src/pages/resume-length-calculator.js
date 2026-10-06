@@ -104,7 +104,7 @@ const executiveDesignTokens = `
 const CURRENT_YEAR = new Date().getFullYear();
 
 const LENGTH_GUIDELINES = {
-  'entry': { name: 'Entry Level (0-3 years)', minPages: 1, maxPages: 1, maxBulletsPerRole: 4, targetWords: 300, description: 'One page is standard for entry-level candidates. Demonstrates conciseness and prioritization\u2014qualities valued in entry-level hires.' },
+  'entry': { name: 'Entry Level (0-3 years)', minPages: 1, maxPages: 1, maxBulletsPerRole: 4, targetWords: 300, description: 'One page is standard for entry-level candidates. Demonstrates conciseness and prioritization—qualities valued in entry-level hires.' },
   'mid': { name: 'Mid-Career (3-10 years)', minPages: 1, maxPages: 2, maxBulletsPerRole: 6, targetWords: 500, description: '1-2 pages depending on experience depth. Use the second page only if you have genuinely differentiating content.' },
   'senior': { name: 'Senior (10-15 years)', minPages: 2, maxPages: 2, maxBulletsPerRole: 8, targetWords: 700, description: 'Two pages recommended for senior professionals. Focus 80% of content on the last 5-7 years of experience.' },
   'executive': { name: 'Executive (15+ years)', minPages: 2, maxPages: 3, maxBulletsPerRole: 10, targetWords: 900, description: '2-3 pages acceptable for executives. Lead with enterprise-level impact and strategic contributions.' },
@@ -123,30 +123,29 @@ const FEATURES = [
   { icon: 'FiFileText', title: 'Precision Word Count Targets', desc: 'Know the exact word count range that maximizes recruiter engagement. Resumes with optimal word counts receive 40% more attention from hiring managers.', stat: 'Precise' },
   { icon: 'FiTarget', title: 'Bullet Point Density Analysis', desc: 'Learn exactly how many bullet points per role optimize readability while satisfying ATS keyword requirements. Balance information density with scannability.', stat: 'ATS-Friendly' },
   { icon: 'FiAlertTriangle', title: 'Real-Time Length Diagnostics', desc: 'Instant alerts if your resume is too long or too short for your experience level. Get actionable recommendations to fix length issues immediately.', stat: 'Essential' },
-  { icon: 'FiBarChart2', title: 'Content Estimation Engine', desc: "Our calculator estimates your resume\u2019s page count and word count based on your input parameters, helping you plan before you write.", stat: 'Predictive' },
+  { icon: 'FiBarChart2', title: 'Content Estimation Engine', desc: "Our calculator estimates your resume's page count and word count based on your input parameters, helping you plan before you write.", stat: 'Predictive' },
   { icon: 'FiShield', title: 'Complete Privacy Protection', desc: 'All calculations happen in your browser. No data is ever stored, transmitted, or shared. Your resume details remain completely confidential.', stat: '100% Private' }
 ];
 
 const FAQS = [
   { 
     question: "How many pages should my resume be in " + CURRENT_YEAR + "?", 
-    answer: "Resume length follows clear experience-based guidelines. Entry-level candidates (0-3 years) should maintain a single page\u2014this demonstrates conciseness and prioritization. Mid-career professionals (3-10 years) can use 1-2 pages, but only extend to page two if you have genuinely differentiating content. Senior professionals (10-15 years) should use 2 pages to document leadership experience and strategic impact. Executives (15+ years) may extend to 2-3 pages for enterprise-level achievements. Academic CVs can be 2-5+ pages due to comprehensive publication and research documentation requirements. Critical rule: never exceed these guidelines. Recruiters interpret excessive length as inability to prioritize\u201443% of resumes are rejected for incorrect length alone." 
+    answer: "Resume length follows clear experience-based guidelines. Entry-level candidates (0-3 years) should maintain a single page—this demonstrates conciseness and prioritization. Mid-career professionals (3-10 years) can use 1-2 pages, but only extend to page two if you have genuinely differentiating content. Senior professionals (10-15 years) should use 2 pages to document leadership experience and strategic impact. Executives (15+ years) may extend to 2-3 pages for enterprise-level achievements. Academic CVs can be 2-5+ pages due to comprehensive publication and research documentation requirements. Critical rule: never exceed these guidelines. Recruiters interpret excessive length as inability to prioritize—43% of resumes are rejected for incorrect length alone." 
   },
   { 
     question: "How many bullet points should I include per role on my resume?", 
     answer: "Bullet point density follows a hierarchy based on role recency and relevance. For your most recent or most relevant position, include 4-6 achievement-focused bullets with quantified outcomes. For earlier or less relevant positions, 2-3 bullets may suffice. Entry-level candidates should use 3-4 bullets per role; mid-career professionals 4-6 bullets; senior professionals 6-8 bullets; and executives up to 10 bullets for their most significant roles. Every bullet point must earn its place by communicating specific, measurable value. Never include bullets that simply describe responsibilities without demonstrating impact. Use our calculator to determine the optimal bullet count for your experience level." 
   },
   { 
-    question: "What\u2019s the ideal word count for a professional resume?", 
-    answer: "Optimal word counts vary by experience level. Entry-level: 250-350 words for a focused single page. Mid-career: 400-600 words to document career progression and achievements. Senior: 600-800 words for comprehensive leadership documentation. Executive: 800-1,000 words for enterprise-level impact. Academic CVs can exceed 1,000 words due to publication requirements. Quality and relevance matter more than hitting an exact number\u2014every word should communicate specific value. Resumes within these ranges receive significantly more recruiter attention and have higher ATS pass rates. Use our calculator to determine your target word count based on your experience level." 
+    question: "What's the ideal word count for a professional resume?", 
+    answer: "Optimal word counts vary by experience level. Entry-level: 250-350 words for a focused single page. Mid-career: 400-600 words to document career progression and achievements. Senior: 600-800 words for comprehensive leadership documentation. Executive: 800-1,000 words for enterprise-level impact. Academic CVs can exceed 1,000 words due to publication requirements. Quality and relevance matter more than hitting an exact number—every word should communicate specific value. Resumes within these ranges receive significantly more recruiter attention and have higher ATS pass rates. Use our calculator to determine your target word count based on your experience level." 
   },
   { 
     question: "Why is resume length so important for job applications?", 
-    answer: "Resume length directly impacts your candidacy in three critical ways. First, recruiters spend an average of 7.4 seconds on initial resume screening\u2014a document of appropriate length can be fully scanned in this window, while an overly long resume guarantees that important content goes unseen. Second, 43% of resumes are rejected for formatting issues including incorrect length before content is evaluated. Third, Applicant Tracking Systems (ATS) process resumes more reliably when they fall within expected length parameters\u2014excessively long or short documents may trigger parsing errors. The right length signals professionalism, prioritization ability, and understanding of industry norms. Our calculator ensures your resume meets these expectations for your specific experience level." 
+    answer: "Resume length directly impacts your candidacy in three critical ways. First, recruiters spend an average of 7.4 seconds on initial resume screening—a document of appropriate length can be fully scanned in this window, while an overly long resume guarantees that important content goes unseen. Second, 43% of resumes are rejected for formatting issues including incorrect length before content is evaluated. Third, Applicant Tracking Systems (ATS) process resumes more reliably when they fall within expected length parameters—excessively long or short documents may trigger parsing errors. The right length signals professionalism, prioritization ability, and understanding of industry norms. Our calculator ensures your resume meets these expectations for your specific experience level." 
   }
 ];
 
-// Long-tail keywords for GEO
 const longTailKeywords = [
   "resume length calculator",
   "how long should my resume be",
@@ -194,7 +193,7 @@ const ResumeLengthCalculatorPage = ({ seoData }) => {
     const estimatedWords = roles * bullets * 35;
     
     const warnings = [];
-    if (pageStatus === 'too-long') warnings.push('Your resume may be too long for your experience level. Consider condensing to ' + recommendedPages + ' pages. Recruiters spend only 7.4 seconds on initial screening\u2014excessive length guarantees important content goes unseen.');
+    if (pageStatus === 'too-long') warnings.push('Your resume may be too long for your experience level. Consider condensing to ' + recommendedPages + ' pages. Recruiters spend only 7.4 seconds on initial screening—excessive length guarantees important content goes unseen.');
     if (pageStatus === 'too-short') warnings.push('Your resume is shorter than recommended. Consider adding more detail to key roles with quantified achievements and specific metrics.');
     if (wordStatus === 'too-long') warnings.push('Word count exceeds recommendations. Remove redundant content and focus exclusively on your most impactful achievements. Every word should communicate specific value.');
     if (wordStatus === 'too-short') warnings.push('Word count is below target. Add more quantified achievements using the CAR method (Challenge-Action-Result) with specific numbers and outcomes.');
@@ -414,7 +413,7 @@ const ResumeLengthCalculatorPage = ({ seoData }) => {
           <div className="section-container">
             <div style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center' }}>
               <div className="badge" aria-label="Trust indicators">
-                <FiStar style={{ marginRight: '0.5rem', display: 'inline' }} /> \uD83D\uDCCF Free Tool \u2022 No Sign Up \u2022 Instant Results \u2022 {CURRENT_YEAR}
+                <FiStar style={{ marginRight: '0.5rem', display: 'inline' }} /> 📏 Free Tool • No Sign Up • Instant Results • {CURRENT_YEAR}
               </div>
               
               {/* SINGLE H1 TAG */}
@@ -422,7 +421,7 @@ const ResumeLengthCalculatorPage = ({ seoData }) => {
                 Free <span className="gradient-text">Resume Length Calculator</span> {CURRENT_YEAR}: Find Your Optimal Pages
               </h1>
               <p style={{ fontSize: 'var(--font-size-body-lg)', color: 'var(--text-secondary)', maxWidth: '800px', margin: '0 auto 2rem' }}>
-                Find the <strong>optimal resume length</strong> for your experience level with personalized page count, word count, and bullet point recommendations. Based on recruiter behavior studies and ATS compatibility research, this calculator ensures your resume meets industry expectations. <strong>100% Free. No Sign-Up. Complete Privacy.</strong> All calculations happen in your browser\u2014no data is ever stored or transmitted.
+                Find the <strong>optimal resume length</strong> for your experience level with personalized page count, word count, and bullet point recommendations. Based on recruiter behavior studies and ATS compatibility research, this calculator ensures your resume meets industry expectations. <strong>100% Free. No Sign-Up. Complete Privacy.</strong> All calculations happen in your browser—no data is ever stored or transmitted.
               </p>
               
               <div className="grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))' }}>
@@ -454,10 +453,10 @@ const ResumeLengthCalculatorPage = ({ seoData }) => {
             <div className="hook-banner">
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.75rem', marginBottom: '0.75rem', flexWrap: 'wrap' }}>
                 <FiAlertCircle size={24} color="var(--accent-primary)" />
-                <h2 style={{ fontSize: 'var(--font-size-headline-lg)', margin: 0, fontFamily: 'var(--font-body)' }}>43% of Resumes Are Rejected for Incorrect Length\u2014Before Content Is Ever Evaluated</h2>
+                <h2 style={{ fontSize: 'var(--font-size-headline-lg)', margin: 0, fontFamily: 'var(--font-body)' }}>43% of Resumes Are Rejected for Incorrect Length—Before Content Is Ever Evaluated</h2>
               </div>
               <p style={{ fontSize: 'var(--font-size-body-lg)', color: 'var(--text-secondary)', maxWidth: '700px', margin: '0 auto' }}>
-                Resume length is not a matter of preference\u2014it\u2019s a critical filtering criterion. <strong>Recruiters spend an average of 7.4 seconds on initial resume screening</strong>, and a document of inappropriate length either overwhelms or underwhelms in that critical window. <strong>43% of resumes are rejected for formatting issues including incorrect length</strong> before any human evaluates the actual content. An entry-level candidate submitting a 3-page resume signals poor judgment. A senior executive cramming 15 years of experience onto a single page undersells their value. This calculator provides the exact length parameters for your experience level, ensuring your resume meets the expectations that determine whether your qualifications ever get read.
+                Resume length is not a matter of preference—it's a critical filtering criterion. <strong>Recruiters spend an average of 7.4 seconds on initial resume screening</strong>, and a document of inappropriate length either overwhelms or underwhelms in that critical window. <strong>43% of resumes are rejected for formatting issues including incorrect length</strong> before any human evaluates the actual content. An entry-level candidate submitting a 3-page resume signals poor judgment. A senior executive cramming 15 years of experience onto a single page undersells their value. This calculator provides the exact length parameters for your experience level, ensuring your resume meets the expectations that determine whether your qualifications ever get read.
               </p>
             </div>
           </div>
@@ -486,7 +485,7 @@ const ResumeLengthCalculatorPage = ({ seoData }) => {
               {results && (
                 <div className="result-box" style={{ animation: 'slideUp 0.5s' }}>
                   <div className="gold-divider"></div>
-                  <h3 style={{ color: 'var(--accent-primary)', textAlign: 'center', marginBottom: '1rem' }}>\uD83D\uDCCF Length Analysis: {results.guidelines.name}</h3>
+                  <h3 style={{ color: 'var(--accent-primary)', textAlign: 'center', marginBottom: '1rem' }}>📏 Length Analysis: {results.guidelines.name}</h3>
                   
                   <div className="grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))', marginTop: '0' }}>
                     <div className="stat-card">
@@ -503,7 +502,7 @@ const ResumeLengthCalculatorPage = ({ seoData }) => {
                     </div>
                     <div className="stat-card">
                       <div className="stat-number" style={{ color: results.pageStatus === 'optimal' ? 'var(--success-color)' : results.pageStatus === 'too-long' ? 'var(--error-color)' : 'var(--warning-color)' }}>
-                        {results.pageStatus === 'optimal' ? '\u2713' : results.pageStatus === 'too-long' ? 'Long' : 'Short'}
+                        {results.pageStatus === 'optimal' ? '✓' : results.pageStatus === 'too-long' ? 'Long' : 'Short'}
                       </div>
                       <div className="stat-label">Page Status</div>
                     </div>
@@ -512,7 +511,7 @@ const ResumeLengthCalculatorPage = ({ seoData }) => {
                   {results.warnings.length > 0 && (
                     <>
                       <div className="gold-divider"></div>
-                      <h3 style={{ color: 'var(--warning-color)', marginBottom: '0.75rem' }}>\u26A0\uFE0F Recommendations</h3>
+                      <h3 style={{ color: 'var(--warning-color)', marginBottom: '0.75rem' }}>⚠️ Recommendations</h3>
                       {results.warnings.map((w, idx) => (
                         <div key={idx} className="recommendation-item">
                           <FiAlertTriangle size={16} color="var(--warning-color)" style={{ flexShrink: 0 }} />
@@ -565,7 +564,7 @@ const ResumeLengthCalculatorPage = ({ seoData }) => {
         <section className="section">
           <div className="section-container">
             <div className="section-header">
-              <h2 className="section-title">\u2753 Frequently Asked Questions About Resume Length</h2>
+              <h2 className="section-title">❓ Frequently Asked Questions About Resume Length</h2>
               <p className="section-subtitle">Expert answers based on recruiter research and industry standards</p>
             </div>
             <div className="faq-grid">
@@ -573,40 +572,11 @@ const ResumeLengthCalculatorPage = ({ seoData }) => {
                 <div key={i} className={`faq-item ${activeFaq === i ? 'active' : ''}`} onClick={() => setActiveFaq(activeFaq === i ? null : i)} role="button" tabIndex={0} onKeyPress={(e) => e.key === 'Enter' && setActiveFaq(activeFaq === i ? null : i)} aria-expanded={activeFaq === i}>
                   <div className="faq-question">
                     <h3 style={{ fontSize: 'var(--font-size-body-sm)', fontWeight: '600', margin: 0, flex: 1 }}>{faq.question}</h3>
-                    <span style={{ fontSize: '1.5rem', color: activeFaq === i ? 'var(--accent-primary)' : 'var(--text-muted)' }}>{activeFaq === i ? '\u2212' : '+'}</span>
+                    <span style={{ fontSize: '1.5rem', color: activeFaq === i ? 'var(--accent-primary)' : 'var(--text-muted)' }}>{activeFaq === i ? '−' : '+'}</span>
                   </div>
                   {activeFaq === i && <div className="faq-answer"><p style={{ lineHeight: '1.7' }}>{faq.answer}</p><small className="text-small">Updated: {safeCurrentDate}</small></div>}
                 </div>
               ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Internal Links Grid */}
-        <section className="section section-alt">
-          <div className="section-container">
-            <div className="section-header">
-              <h2 className="section-title">\uD83D\uDD17 Complete Your Resume Optimization Toolkit</h2>
-              <p className="section-subtitle">Access our full suite of free resume tools and resources</p>
-            </div>
-            <div className="geo-link-grid">
-              {[
-                { href: "/free-ats-resume-checker", text: "Free ATS Resume Checker", iconName: "FiShield", desc: "Test your resume against real ATS systems" },
-                { href: "/free-resume-score-checker", text: "Resume Score Checker", iconName: "FiAward", desc: "Get instant quality feedback" },
-                { href: "/resume-formatting-guide", text: "Resume Formatting Guide", iconName: "FiLayout", desc: "Professional layout standards" },
-                { href: "/resume-keywords-finder", text: "Resume Keywords Finder", iconName: "FiSearch", desc: "Find the right keywords" },
-                { href: "/free-resume-summary-generator", text: "Summary Generator", iconName: "FiEdit", desc: "Create compelling summaries" },
-                { href: "/free-action-verb-recommender", text: "Action Verb Recommender", iconName: "FiZap", desc: "Powerful resume verbs" }
-              ].map((link, i) => {
-                const IconComponent = ICON_MAP[link.iconName] || FiFileText;
-                return (
-                  <Link key={i} href={link.href} className="geo-link-card" style={{ flexDirection: 'column', gap: '0.5rem' }}>
-                    <IconComponent size={24} style={{ color: 'var(--accent-primary)' }} />
-                    <span style={{ fontSize: 'var(--font-size-body-sm)', fontWeight: '600', color: 'var(--text-primary)', lineHeight: '1.3' }}>{link.text}</span>
-                    <span style={{ fontSize: 'var(--font-size-label-sm)', color: 'var(--text-muted)', lineHeight: '1.3' }}>{link.desc}</span>
-                  </Link>
-                );
-              })}
             </div>
           </div>
         </section>
@@ -623,40 +593,33 @@ const ResumeLengthCalculatorPage = ({ seoData }) => {
               <Link href="/free-resume-builder" className="btn-primary" style={{ boxShadow: 'var(--shadow-gold-glow-sm)' }}><FiEdit /> Build Your Resume</Link>
               <Link href="/free-resume-tools" className="btn-outline"><FiTool /> Explore Free Tools</Link>
             </div>
-            <p style={{ marginTop: '1.5rem', fontSize: 'var(--font-size-body-sm)', color: 'var(--text-muted)' }}>\u2713 No credit card required \u2022 \u2713 Free forever \u2022 \u2713 5 experience levels \u2022 \u2713 Instant results</p>
+            <p style={{ marginTop: '1.5rem', fontSize: 'var(--font-size-body-sm)', color: 'var(--text-muted)' }}>✓ No credit card required • ✓ Free forever • ✓ 5 experience levels • ✓ Instant results</p>
           </div>
         </section>
 
-        {/* NEW SECTION: Internal Linking Boost */}
-        <section className="section" style={{ background: 'var(--bg-surface-lowest)', borderTop: '0.5px solid var(--border-gold-filament)' }} aria-labelledby="expand-toolkit-heading">
+        {/* NEW SECTION: Related Resume Guides */}
+        <section className="section" style={{ background: 'var(--bg-surface-lowest)', borderTop: '0.5px solid var(--border-gold-filament)' }} aria-labelledby="related-guides-heading">
           <div className="section-container">
-            <h2 id="expand-toolkit-heading" className="section-title" style={{ textAlign: 'left', marginBottom: '1.5rem' }}>Expand Your Career Toolkit</h2>
-            <div className="grid">
-              <Link href="/resume-templates" className="card-executive">
-                <h3 style={{ marginBottom: '0.5rem', fontSize: '1.1rem' }}>ATS-Optimized Resume Templates</h3>
-                <p style={{ color: 'var(--text-secondary)', marginBottom: '0.75rem', fontSize: '0.95rem' }}>Professionally designed templates that pass automated screening.</p>
-                <span style={{ color: 'var(--accent-primary)', fontWeight: '500', fontSize: '0.9rem' }}>Browse Templates <FiArrowRight style={{ marginLeft: '0.25rem', display: 'inline' }} /></span>
-              </Link>
-              <Link href="/resume-guide" className="card-executive">
-                <h3 style={{ marginBottom: '0.5rem', fontSize: '1.1rem' }}>Complete ATS Resume Guide</h3>
-                <p style={{ color: 'var(--text-secondary)', marginBottom: '0.75rem', fontSize: '0.95rem' }}>Master ATS optimization with proven strategies and real examples.</p>
-                <span style={{ color: 'var(--accent-primary)', fontWeight: '500', fontSize: '0.9rem' }}>Read Guide <FiArrowRight style={{ marginLeft: '0.25rem', display: 'inline' }} /></span>
-              </Link>
-              <Link href="/how-to-write-a-resume" className="card-executive">
-                <h3 style={{ marginBottom: '0.5rem', fontSize: '1.1rem' }}>How to Write a Resume</h3>
-                <p style={{ color: 'var(--text-secondary)', marginBottom: '0.75rem', fontSize: '0.95rem' }}>Comprehensive step-by-step content writing masterclass.</p>
-                <span style={{ color: 'var(--accent-primary)', fontWeight: '500', fontSize: '0.9rem' }}>Learn More <FiArrowRight style={{ marginLeft: '0.25rem', display: 'inline' }} /></span>
-              </Link>
-              <Link href="/interview-tips" className="card-executive">
-                <h3 style={{ marginBottom: '0.5rem', fontSize: '1.1rem' }}>Interview Preparation Tips</h3>
-                <p style={{ color: 'var(--text-secondary)', marginBottom: '0.75rem', fontSize: '0.95rem' }}>Ace your next interview with proven strategies and common questions.</p>
-                <span style={{ color: 'var(--accent-primary)', fontWeight: '500', fontSize: '0.9rem' }}>Get Tips <FiArrowRight style={{ marginLeft: '0.25rem', display: 'inline' }} /></span>
-              </Link>
-              <Link href="/how-to-beat-the-ats-optimization-tips-for-modern-hiring-software" className="card-executive">
-                <h3 style={{ marginBottom: '0.5rem', fontSize: '1.1rem' }}>Beat the ATS Screening</h3>
-                <p style={{ color: 'var(--text-secondary)', marginBottom: '0.75rem', fontSize: '0.95rem' }}>Advanced optimization tips to ensure your resume passes automated screening.</p>
-                <span style={{ color: 'var(--accent-primary)', fontWeight: '500', fontSize: '0.9rem' }}>Learn More <FiArrowRight style={{ marginLeft: '0.25rem', display: 'inline' }} /></span>
-              </Link>
+            <div className="section-header">
+              <h2 id="related-guides-heading" className="section-title">Related Resume Guides</h2>
+              <p className="section-subtitle">Explore more specialized guides to strengthen your job application journey.</p>
+            </div>
+            <div className="geo-link-grid">
+              {[
+                { href: "/one-page-resume-template", text: "One-Page Resume Template", iconName: "FiFileText" },
+                { href: "/resume-formatting-guide", text: "Resume Formatting Guide", iconName: "FiLayout" },
+                { href: "/resume-strength-calculator", text: "Resume Strength Calculator", iconName: "FiBarChart2" },
+                { href: "/resume-calculators", text: "Resume Calculators Hub", iconName: "FiGrid" },
+                { href: "/what-should-a-resume-look-like", text: "What a Resume Should Look Like", iconName: "FiEye" }
+              ].map((link, i) => {
+                const IconComponent = ICON_MAP[link.iconName] || FiFileText;
+                return (
+                  <Link key={i} href={link.href} className="geo-link-card" style={{ flexDirection: 'column', gap: '0.5rem' }}>
+                    <IconComponent size={24} style={{ color: 'var(--accent-primary)' }} />
+                    <span style={{ fontSize: 'var(--font-size-body-sm)', fontWeight: '600', color: 'var(--text-primary)', lineHeight: '1.3' }}>{link.text}</span>
+                  </Link>
+                );
+              })}
             </div>
           </div>
         </section>
@@ -670,7 +633,7 @@ const ResumeLengthCalculatorPage = ({ seoData }) => {
 
         {/* Footer Info */}
         <div style={{ padding: '0.75rem 0', backgroundColor: 'var(--bg-surface-lowest)', borderTop: '0.5px solid var(--border-gold-filament)', textAlign: 'center' }}>
-          <span className="text-small"><FiCalendar style={{ marginRight: '0.5rem', display: 'inline', verticalAlign: 'middle' }} /> Data Freshness: Last updated {safeCurrentDate} \u2022 Sources: Recruiter behavior studies, ATS platform documentation, industry standards \u2022 Next update: {new Date(safeBuildTimestamp + 7 * 24 * 60 * 60 * 1000).toISOString().split('T')[0]}</span>
+          <span className="text-small"><FiCalendar style={{ marginRight: '0.5rem', display: 'inline', verticalAlign: 'middle' }} /> Data Freshness: Last updated {safeCurrentDate} • Sources: Recruiter behavior studies, ATS platform documentation, industry standards • Next update: {new Date(safeBuildTimestamp + 7 * 24 * 60 * 60 * 1000).toISOString().split('T')[0]}</span>
         </div>
       </main>
     </>

@@ -256,7 +256,7 @@ const INDUSTRY_TIPS = [
   }
 ];
 
-// NEW: Top ATS Platforms Comparison
+// ATS Platforms Comparison
 const ATS_PLATFORMS = [
   { platform: "Workday", marketShare: "28%", usedBy: "Fortune 500, large enterprises, tech companies", keyFeatures: "Advanced NLP parsing, skills cloud matching, internal mobility tracking", optimizationTips: ["Use standard section headings (Workday is trained on conventional labels)", "Include both spelled-out terms and abbreviations (e.g., 'Search Engine Optimization (SEO)')", "Maintain consistent job title formatting across all positions"] },
   { platform: "Taleo (Oracle)", marketShare: "22%", usedBy: "Large corporations, government agencies, healthcare organizations", keyFeatures: "Keyword density analysis, experience level matching, education verification", optimizationTips: ["Avoid headers/footers for critical information (Taleo cannot parse them)", "Use .docx format (Taleo's preferred format)", "Include exact job titles as they appear in the posting"] },
@@ -264,7 +264,7 @@ const ATS_PLATFORMS = [
   { platform: "Greenhouse", marketShare: "12%", usedBy: "Tech startups, mid-size companies, progressive organizations", keyFeatures: "Structured interviewing integration, diversity analytics, candidate experience focus", optimizationTips: ["Include GitHub/portfolio links (Greenhouse parses these effectively)", "Use skills-based keywords (Greenhouse emphasizes competency over chronology)", "Keep formatting clean and simple (Greenhouse penalizes complex layouts)"] }
 ];
 
-// NEW: Resume Score Card System
+// Resume Score Card System
 const RESUME_SCORING = [
   { category: "ATS Compatibility", weight: "30%", whatItMeasures: "File format, section headings, keyword density, parsing accuracy", targetScore: "90%+", commonFailurePoints: "Creative headings, PDF issues, missing keywords, complex formatting" },
   { category: "Content Quality", weight: "35%", whatItMeasures: "Achievement quantification, CAR method usage, action verb strength, relevance", targetScore: "85%+", commonFailurePoints: "Responsibility lists, vague language, missing metrics, generic statements" },
@@ -272,7 +272,7 @@ const RESUME_SCORING = [
   { category: "Customization Level", weight: "15%", whatItMeasures: "Job description alignment, keyword integration, role-specific emphasis, company research", targetScore: "80%+", commonFailurePoints: "Generic resumes, missing target keywords, no company-specific content" }
 ];
 
-// NEW: Action Verb Library by Category
+// Action Verb Library by Category
 const ACTION_VERBS = [
   { category: "Leadership & Management", verbs: ["Directed", "Orchestrated", "Spearheaded", "Championed", "Mentored", "Guided", "Supervised", "Coordinated", "Delegated", "Empowered"] },
   { category: "Achievement & Results", verbs: ["Accelerated", "Generated", "Delivered", "Exceeded", "Maximized", "Optimized", "Streamlined", "Transformed", "Revitalized", "Catapulted"] },
@@ -280,7 +280,7 @@ const ACTION_VERBS = [
   { category: "Analysis & Problem-Solving", verbs: ["Diagnosed", "Investigated", "Evaluated", "Forecasted", "Identified", "Resolved", "Troubleshot", "Audited", "Assessed", "Calculated"] }
 ];
 
-// NEW: Resume Length Guidelines by Experience
+// Resume Length Guidelines by Experience
 const LENGTH_GUIDELINES = [
   { experienceLevel: "Entry Level / Fresher (0-3 years)", recommendedPages: "1 page", rationale: "Demonstrates conciseness and prioritization—qualities valued in entry-level hires. Forces focus on strongest qualifications.", atsImpact: "Single-page resumes parse more reliably across all ATS platforms", recruiterPerception: "Appropriate for experience level; signals ability to communicate efficiently" },
   { experienceLevel: "Mid-Level Professional (3-10 years)", recommendedPages: "1-2 pages", rationale: "Sufficient space for career progression and quantified achievements without overwhelming recruiters.", atsImpact: "ATS handles 1-2 pages well; ensure second page contains genuinely differentiating content", recruiterPerception: "Standard and expected for mid-career professionals" },
@@ -323,7 +323,6 @@ const FAQS = [
   }
 ];
 
-// Long-tail keywords for GEO
 const longTailKeywords = [
   "ATS resume",
   "beat applicant tracking system",
@@ -340,7 +339,6 @@ const longTailKeywords = [
   "keyword optimization"
 ];
 
-// People Also Ask for GEO
 const peopleAlsoAsk = [
   { question: "How do I know if my resume is truly ATS-friendly?", answer: "Test your resume with multiple ATS checker tools, ensure proper keyword density (2-3%), verify correct formatting, and test with different file formats. The most reliable method is to check for proper parsing of all information by running it through simulated ATS systems. Look for tools that provide specific parsing reports." },
   { question: "Should I include a professional summary or objective statement?", answer: "Always include a professional summary (2-3 lines) highlighting key achievements and skills with relevant keywords. Avoid generic objective statements. A well-crafted summary helps ATS identify your key qualifications and improves human scanability by 40%." },
@@ -633,7 +631,7 @@ const ResumeGuidePage = ({ seoData }) => {
           </div>
         </section>
 
-        {/* NEW: ATS Platforms Comparison - Interactive */}
+        {/* ATS Platforms Comparison - Interactive */}
         <section className="section">
           <div className="section-container">
             <div className="section-header">
@@ -756,7 +754,7 @@ const ResumeGuidePage = ({ seoData }) => {
           </div>
         </section>
 
-        {/* NEW: Resume Scoring System */}
+        {/* Resume Scoring System */}
         <section className="section section-alt">
           <div className="section-container">
             <div className="section-header">
@@ -788,7 +786,7 @@ const ResumeGuidePage = ({ seoData }) => {
           </div>
         </section>
 
-        {/* NEW: Action Verb Library - Interactive */}
+        {/* Action Verb Library - Interactive */}
         <section className="section">
           <div className="section-container">
             <div className="section-header">
@@ -825,7 +823,7 @@ const ResumeGuidePage = ({ seoData }) => {
           </div>
         </section>
 
-        {/* NEW: Resume Length Guidelines */}
+        {/* Resume Length Guidelines */}
         <section className="section section-alt">
           <div className="section-container">
             <div className="section-header">
@@ -985,58 +983,6 @@ const ResumeGuidePage = ({ seoData }) => {
           </div>
         </section>
 
-        {/* Internal Links - ALL BROKEN LINKS REMOVED */}
-        <section className="section section-alt" style={{ background: 'var(--bg-surface-lowest)' }} aria-labelledby="resources-heading">
-          <div className="section-container">
-            <h2 id="resources-heading" className="section-title" style={{ textAlign: 'center', marginBottom: '2rem' }}>🔗 Continue Reading</h2>
-            <div className="grid">
-              <Link href="/resume-templates" className="card-executive">
-                <h3 style={{ marginBottom: '0.5rem', fontSize: 'var(--font-size-title-md)' }}>ATS-Optimized Resume Templates</h3>
-                <p style={{ color: 'var(--text-secondary)', marginBottom: '0.75rem', fontSize: 'var(--font-size-body-sm)' }}>Choose from our collection of ATS-optimized resume templates</p>
-                <span style={{ color: 'var(--accent-primary)', fontWeight: '500' }}>Read More <FiArrowRight style={{ marginLeft: '0.25rem', display: 'inline' }} /></span>
-              </Link>
-              <Link href="/free-resume-tools" className="card-executive">
-                <h3 style={{ marginBottom: '0.5rem', fontSize: 'var(--font-size-title-md)' }}>Free Resume Tools</h3>
-                <p style={{ color: 'var(--text-secondary)', marginBottom: '0.75rem', fontSize: 'var(--font-size-body-sm)' }}>Access our free ATS checkers, keyword analyzers, and formatting tools</p>
-                <span style={{ color: 'var(--accent-primary)', fontWeight: '500' }}>Read More <FiArrowRight style={{ marginLeft: '0.25rem', display: 'inline' }} /></span>
-              </Link>
-            </div>
-          </div>
-        </section>
-
-        {/* Resource Hub */}
-        <section className="section" aria-labelledby="hub-heading">
-          <div className="section-container">
-            <h2 id="hub-heading" className="section-title" style={{ textAlign: 'center', marginBottom: '2rem' }}>Complete Your Professional Resume Toolkit</h2>
-            <div className="grid">
-              <div className="card-executive">
-                <h3 style={{ fontSize: 'var(--font-size-title-md)', marginBottom: '1rem' }}>📚 Resume Writing Guides</h3>
-                <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-                  <li><Link href="/how-to-write-a-resume" className="geo-link-card" style={{ padding: '0.75rem' }}>Complete Resume Writing Guide</Link></li>
-                  <li><Link href="/resume-formatting-guide" className="geo-link-card" style={{ padding: '0.75rem' }}>Resume Formatting Guide</Link></li>
-                  <li><Link href="/how-to-create-a-resume-with-no-experience" className="geo-link-card" style={{ padding: '0.75rem' }}>Resume with No Experience</Link></li>
-                </ul>
-              </div>
-              <div className="card-executive">
-                <h3 style={{ fontSize: 'var(--font-size-title-md)', marginBottom: '1rem' }}>⚡ AI & Modern Tools</h3>
-                <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-                  <li><Link href="/ai-resume-builders-how-to-use-artificial-intelligence-to-write-your-best-resume" className="geo-link-card" style={{ padding: '0.75rem' }}>AI Resume Builders Guide</Link></li>
-                  <li><Link href="/how-to-use-chatgpt-to-improve-your-resume-bullets-prompt-engineering-guide-2026" className="geo-link-card" style={{ padding: '0.75rem' }}>ChatGPT Resume Prompts</Link></li>
-                  <li><Link href="/free-action-verb-recommender" className="geo-link-card" style={{ padding: '0.75rem' }}>Action Verb Recommender</Link></li>
-                </ul>
-              </div>
-              <div className="card-executive">
-                <h3 style={{ fontSize: 'var(--font-size-title-md)', marginBottom: '1rem' }}>📊 Free Resume Tools</h3>
-                <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-                  <li><Link href="/free-resume-score-checker" className="geo-link-card" style={{ padding: '0.75rem' }}>Resume Score Checker</Link></li>
-                  <li><Link href="/free-ats-resume-checker" className="geo-link-card" style={{ padding: '0.75rem' }}>ATS Resume Checker</Link></li>
-                  <li><Link href="/free-resume-keyword-matcher" className="geo-link-card" style={{ padding: '0.75rem' }}>Keyword Matcher Tool</Link></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </section>
-
         {/* CTA Section */}
         <section style={{ padding: 'var(--section-gap-lg) 0', background: 'linear-gradient(135deg, #1c1b1d 0%, #2a2a2c 100%)', textAlign: 'center', borderTop: '0.5px solid var(--border-gold-filament)', borderBottom: '0.5px solid var(--border-gold-filament)', position: 'relative', overflow: 'hidden' }} aria-labelledby="cta-heading">
           <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle at 50% 50%, rgba(242,202,80,0.05) 0%, transparent 70%)', pointerEvents: 'none' }} />
@@ -1061,47 +1007,29 @@ const ResumeGuidePage = ({ seoData }) => {
           </div>
         </section>
 
-        {/* NEW SECTION: 5 Randomly Selected Links for Internal Linking Boost */}
-        <section className="section" style={{ background: 'var(--bg-surface-lowest)', borderTop: '0.5px solid var(--border-gold-filament)' }} aria-labelledby="expand-toolkit-heading">
+        {/* NEW SECTION: Related Resume Guides */}
+        <section className="section" style={{ background: 'var(--bg-surface-lowest)', borderTop: '0.5px solid var(--border-gold-filament)' }} aria-labelledby="related-guides-heading">
           <div className="section-container">
-            <h2 id="expand-toolkit-heading" className="section-title" style={{ textAlign: 'left', marginBottom: '1.5rem' }}>Expand Your Career Toolkit</h2>
-            <div className="grid">
-              
-              {/* Link 1 */}
-              <Link href="/how-to-create-a-resume-with-no-experience" className="card-executive">
-                <h3 style={{ marginBottom: '0.5rem', fontSize: '1.1rem' }}>Resume with No Experience</h3>
-                <p style={{ color: 'var(--text-secondary)', marginBottom: '0.75rem', fontSize: '0.95rem' }}>Perfect for freshers: How to highlight potential over history.</p>
-                <span style={{ color: 'var(--accent-primary)', fontWeight: '500', fontSize: '0.9rem' }}>Learn How <FiArrowRight style={{ marginLeft: '0.25rem', display: 'inline' }} /></span>
-              </Link>
-
-              {/* Link 2 */}
-              <Link href="/interview-tips" className="card-executive">
-                <h3 style={{ marginBottom: '0.5rem', fontSize: '1.1rem' }}>Interview Preparation Tips</h3>
-                <p style={{ color: 'var(--text-secondary)', marginBottom: '0.75rem', fontSize: '0.95rem' }}>Ace your next interview with proven strategies and common questions.</p>
-                <span style={{ color: 'var(--accent-primary)', fontWeight: '500', fontSize: '0.9rem' }}>Get Tips <FiArrowRight style={{ marginLeft: '0.25rem', display: 'inline' }} /></span>
-              </Link>
-
-              {/* Link 3 */}
-              <Link href="/jobs-boards" className="card-executive">
-                <h3 style={{ marginBottom: '0.5rem', fontSize: '1.1rem' }}>Top Job Boards for 2026</h3>
-                <p style={{ color: 'var(--text-secondary)', marginBottom: '0.75rem', fontSize: '0.95rem' }}>Discover the best platforms to find entry-level and fresher roles.</p>
-                <span style={{ color: 'var(--accent-primary)', fontWeight: '500', fontSize: '0.9rem' }}>Browse Jobs <FiArrowRight style={{ marginLeft: '0.25rem', display: 'inline' }} /></span>
-              </Link>
-
-              {/* Link 4 */}
-              <Link href="/cover-letter-guides" className="card-executive">
-                <h3 style={{ marginBottom: '0.5rem', fontSize: '1.1rem' }}>Cover Letter Guides</h3>
-                <p style={{ color: 'var(--text-secondary)', marginBottom: '0.75rem', fontSize: '0.95rem' }}>Learn how to write compelling cover letters that get noticed.</p>
-                <span style={{ color: 'var(--accent-primary)', fontWeight: '500', fontSize: '0.9rem' }}>Read Guides <FiArrowRight style={{ marginLeft: '0.25rem', display: 'inline' }} /></span>
-              </Link>
-
-              {/* Link 5 */}
-              <Link href="/how-to-beat-the-ats-optimization-tips-for-modern-hiring-software" className="card-executive">
-                <h3 style={{ marginBottom: '0.5rem', fontSize: '1.1rem' }}>Beat the ATS Screening</h3>
-                <p style={{ color: 'var(--text-secondary)', marginBottom: '0.75rem', fontSize: '0.95rem' }}>Optimize your application for online government and corporate portals.</p>
-                <span style={{ color: 'var(--accent-primary)', fontWeight: '500', fontSize: '0.9rem' }}>Learn More <FiArrowRight style={{ marginLeft: '0.25rem', display: 'inline' }} /></span>
-              </Link>
-
+            <div className="section-header">
+              <h2 id="related-guides-heading" className="section-title">Related Resume Guides</h2>
+              <p className="section-subtitle">Explore more specialized guides to strengthen your job application journey.</p>
+            </div>
+            <div className="geo-link-grid">
+              {[
+                { href: "/resume-writing-for-beginners", text: "Resume Writing for Beginners", iconName: "FiEdit3" },
+                { href: "/what-to-put-on-a-resume", text: "What to Put on a Resume", iconName: "FiClipboard" },
+                { href: "/resume-formatting-guide", text: "Resume Formatting Guide", iconName: "FiLayout" },
+                { href: "/resume-mistakes-americans-make-and-how-to-fix-them", text: "Common Resume Mistakes", iconName: "FiAlertCircle" },
+                { href: "/resume-trends-in-the-usa-for-2026", text: "Resume Trends 2026", iconName: "FiTrendingUp" }
+              ].map((link, i) => {
+                const IconComponent = ICON_MAP[link.iconName] || FiFileText;
+                return (
+                  <Link key={i} href={link.href} className="geo-link-card">
+                    <IconComponent size={24} style={{ marginBottom: '0.75rem', color: 'var(--accent-primary)' }} />
+                    <span style={{ fontSize: 'var(--font-size-body-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-primary)', lineHeight: '1.4' }}>{link.text}</span>
+                  </Link>
+                );
+              })}
             </div>
           </div>
         </section>

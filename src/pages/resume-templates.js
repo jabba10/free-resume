@@ -37,7 +37,8 @@ import {
   FiCoffee,
   FiActivity,
   FiPenTool,
-  FiLayout
+  FiLayout,
+  FiAlignLeft
 } from 'react-icons/fi';
 import { 
   FaBuilding, 
@@ -926,6 +927,7 @@ const executiveDesignTokens = `
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 1.25rem;
     margin-top: 1.25rem;
+    width: 100%;
   }
   
   .related-link-card {
@@ -941,6 +943,9 @@ const executiveDesignTokens = `
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-height: 80px;
   }
   
   .related-link-card:hover {
@@ -954,9 +959,9 @@ const executiveDesignTokens = `
   .related-link-title {
     font-weight: var(--font-weight-semibold);
     font-size: var(--font-size-title-md);
-    margin-bottom: 0.5rem;
     display: block;
     color: var(--text-primary);
+    margin-bottom: 0.25rem;
   }
   
   .related-link-desc {
@@ -1002,95 +1007,6 @@ const ResumeTemplates = ({
 
   // Optimized title - 62 characters
   const optimizedTitle = `ATS-Friendly Resume Templates ${new Date().getFullYear()}: Professional Templates`;
-
-  // Selected Links for Internal Linking (SEO/GEO Boost)
-  const relatedLinks = [
-    {
-      href: "/modern-resume-design-2026",
-      title: "Modern Resume Design Trends 2026",
-      desc: "Explore contemporary layouts that balance visual appeal with ATS compatibility for creative and tech roles."
-    },
-    {
-      href: "/how-to-create-a-resume-with-no-experience",
-      title: "Resume Guide for No Experience",
-      desc: "Step-by-step instructions for students and career changers to build a strong resume without work history."
-    },
-    {
-      href: "/ats-friendly-data-analyst-resume-builder",
-      title: "Data Analyst Resume Builder",
-      desc: "Specialized templates highlighting SQL, Python, and visualization skills for data professionals."
-    },
-    {
-      href: "/ats-friendly-project-manager-resume-builder",
-      title: "Project Manager Resume Templates",
-      desc: "Showcase your PMP certification and leadership achievements with these targeted layouts."
-    },
-    {
-      href: "/functional-resume-templates",
-      title: "Functional Resume Templates",
-      desc: "Skill-based formats ideal for career pivots or hiding employment gaps while highlighting capabilities."
-    }
-  ];
-
-  // Pillar to Cluster Links for SEO
-  const pillarToClusterLinks = [
-    {
-      anchor_text: "Free Resume Builder — Start Now",
-      url: "/free-resume-builder"
-    },
-    {
-      anchor_text: "Resume Calculators — 15+ Tools",
-      url: "/resume-calculators"
-    },
-    {
-      anchor_text: "Free Resume Tools Suite",
-      url: "/free-resume-tools"
-    },
-    {
-      anchor_text: "USA Jobs Resume Directory",
-      url: "/usa-jobs-resume-directory"
-    },
-    {
-      anchor_text: "Complete Resume Resource Library",
-      url: "/complete-resume-resource-library"
-    }
-  ];
-
-  // Contextual Tool Links for SEO
-  const contextualToolLinks = [
-    {
-      anchor_text: "ATS Resume Checker",
-      url: "/free-ats-resume-checker"
-    },
-    {
-      anchor_text: "Resume Score Checker",
-      url: "/free-resume-score-checker"
-    },
-    {
-      anchor_text: "Resume Formatting Guide",
-      url: "/resume-formatting-guide"
-    },
-    {
-      anchor_text: "Best ATS Format 2026",
-      url: "/best-ats-resume-format-2026"
-    },
-    {
-      anchor_text: "Keywords for Resume",
-      url: "/keywords-for-resume"
-    },
-    {
-      anchor_text: "Resume Keywords Finder",
-      url: "/resume-keywords-finder"
-    },
-    {
-      anchor_text: "Cover Letter Guides",
-      url: "/cover-letter-guides"
-    },
-    {
-      anchor_text: "How to Write a Professional Summary",
-      url: "/how-to-write-a-professional-summary-that-hooks-recruiters-in-6-seconds"
-    }
-  ];
 
   // Template categories data with ALL industry-specific links
   const templateCategories = [
@@ -2038,69 +1954,6 @@ const ResumeTemplates = ({
           </div>
         </section>
 
-        {/* Related Internal Links Section */}
-        <section className="section">
-          <div className="section-container">
-            <div className="section-header">
-              <h2 className="section-title">More Specialized Resume Resources</h2>
-              <p className="section-subtitle">
-                Explore additional guides and templates tailored to specific career needs and modern design trends.
-              </p>
-            </div>
-            
-            <div className="related-links-grid">
-              {relatedLinks.map((link, index) => (
-                <Link href={link.href} key={index} className="related-link-card">
-                  <span className="related-link-title">{link.title}</span>
-                  <span className="related-link-desc">{link.desc}</span>
-                </Link>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Boost Your Application Success Section */}
-        <section className="section section-alt">
-          <div className="section-container">
-            <div className="section-header">
-              <h2 className="section-title">Boost Your Application Success</h2>
-              <p className="section-subtitle">
-                Explore these additional resources to maximize your job search effectiveness
-              </p>
-            </div>
-            
-            {/* Pillar to Cluster Links */}
-            <div className="related-links-grid">
-              {pillarToClusterLinks.map((link, index) => (
-                <Link href={link.url} key={index} className="related-link-card">
-                  <span className="related-link-title">{link.anchor_text}</span>
-                </Link>
-              ))}
-            </div>
-
-            {/* Contextual Tool Links */}
-            <div style={{ marginTop: '2rem', width: '100%' }}>
-              <h3 style={{
-                fontSize: 'var(--font-size-title-lg)',
-                fontFamily: 'var(--font-display)',
-                fontWeight: 'var(--font-weight-semibold)',
-                color: 'var(--text-primary)',
-                marginBottom: '1.5rem',
-                textAlign: 'center'
-              }}>
-                Related Tools & Guides
-              </h3>
-              <div className="related-links-grid">
-                {contextualToolLinks.map((link, index) => (
-                  <Link href={link.url} key={index} className="related-link-card">
-                    <span className="related-link-title">{link.anchor_text}</span>
-                  </Link>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-
         {/* Final CTA Section */}
         <section className="cta-section" aria-labelledby="cta-title">
           <div className="section-container">
@@ -2129,10 +1982,37 @@ const ResumeTemplates = ({
           </div>
         </section>
 
+        {/* NEW SECTION: Related Resume Templates */}
+        <section className="section" style={{ background: 'var(--bg-surface-lowest)', borderTop: '0.5px solid var(--border-gold-filament)' }} aria-labelledby="related-templates-heading">
+          <div className="section-container">
+            <div className="section-header">
+              <h2 id="related-templates-heading" className="section-title">Related Resume Templates</h2>
+              <p className="section-subtitle">Explore more specialized templates to strengthen your job application journey.</p>
+            </div>
+            <div className="related-links-grid">
+              {[
+                { href: "/simple-resume-template", title: "Simple Resume Template", icon: "FiFileText" },
+                { href: "/one-page-resume-template", title: "One-Page Resume Template", icon: "FiLayout" },
+                { href: "/modern-resume-design-2026", title: "Modern Resume Design 2026", icon: "FiPenTool" },
+                { href: "/software-engineer-resume-template", title: "Software Engineer Resume Template", icon: "FiCode" },
+                { href: "/resume-formatting-guide", title: "Resume Formatting Guide", icon: "FiAlignLeft" }
+              ].map((link, i) => {
+                const IconComponent = ICON_MAP[link.icon] || FiFileText;
+                return (
+                  <Link key={i} href={link.href} className="related-link-card">
+                    <IconComponent size={24} style={{ marginBottom: '0.5rem', color: 'var(--accent-primary)' }} />
+                    <span className="related-link-title">{link.title}</span>
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
         {/* Hidden metadata for crawlers */}
         <div style={{ display: 'none' }}>
           <span itemProp="last-updated">{safeCurrentDate}</span>
-          <span itemProp="build-timestamp">{buildTimestamp}</span>
+          <span itemProp="build-timestamp" content={buildTimestamp} />
           <span itemProp="keywords">{seoKeywords.join(', ')}</span>
         </div>
       </main>
@@ -2222,5 +2102,14 @@ export async function getStaticProps() {
     revalidate: 7200,
   };
 }
+
+// Icon Map for the new section
+const ICON_MAP = {
+  FiFileText,
+  FiLayout,
+  FiPenTool,
+  FiCode,
+  FiAlignLeft
+};
 
 export default ResumeTemplates;
