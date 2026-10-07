@@ -14,7 +14,7 @@ import {
   FiBarChart2, FiClipboard, FiEye, FiUserCheck, FiCode, FiPenTool,
   FiActivity, FiType, FiAlignLeft, FiHash, FiTrendingUp as FiTrend,
   FiMonitor, FiAlertCircle, FiCheckCircle, FiMail, FiPhone, FiMapPin,
-  FiLinkedin, FiGithub, FiCloud, FiTerminal, FiGlobe
+  FiLinkedin, FiGithub, FiCloud, FiTerminal, FiGlobe, FiHelpCircle
 } from 'react-icons/fi';
 
 // ============================================================================
@@ -346,13 +346,38 @@ const COMMON_MISTAKES = [
   "Applying US resume formatting conventions (no personal details, achievement-only bullets) to UK/EU CVs"
 ];
 
-const RELATED_LINKS = [
-  { href: "/resume-templates", title: "Professional Resume Templates", desc: "ATS-optimized templates designed for US, UK, and international job markets with proper formatting for each region." },
-  { href: "/free-resume-tools", title: "Free Resume Building Tools", desc: "AI-powered resume builder, keyword matcher, and score checker to optimize your document for any job market." },
-  { href: "/cover-letter-guides", title: "Cover Letter Writing Guides", desc: "Learn how to write compelling cover letters that complement your resume or CV for international applications." },
-  { href: "/how-to-write-a-federal-resume-for-usa-government-jobs", title: "Federal Resume Guide (USA)", desc: "Specialized guidance for US government positions requiring the unique federal resume format with CCAR methodology." },
-  { href: "/interview-tips", title: "International Interview Preparation", desc: "Prepare for interviews across different cultures with country-specific etiquette and expectation guides." },
-  { href: "/free-ats-resume-checker", title: "Free ATS Resume Checker", desc: "Test your resume against applicant tracking systems used by major employers worldwide before submitting." }
+// NEW INTERNAL LINKS FOR THIS PAGE
+const INTERNAL_LINKS = [
+  {
+    url: "/resume-guide",
+    title: "Resume Writing Guide",
+    description: "Complete step-by-step guide to writing a professional resume.",
+    icon: "FiBookOpen"
+  },
+  {
+    url: "/what-should-a-resume-look-like",
+    title: "What a Resume Should Look Like",
+    description: "Visual and structural examples of an ideal resume.",
+    icon: "FiEye"
+  },
+  {
+    url: "/resume-formatting-guide",
+    title: "Resume Formatting Guide",
+    description: "Formatting rules for maximum ATS and recruiter readability.",
+    icon: "FiLayout"
+  },
+  {
+    url: "/resume-writing-for-beginners",
+    title: "Resume Writing for Beginners",
+    description: "Perfect starting point if you have never written a resume.",
+    icon: "FiEdit3"
+  },
+  {
+    url: "/most-googled-resume-questions-in-the-usa",
+    title: "Most-Googled Resume Questions",
+    description: "Answers to the top resume questions job seekers ask.",
+    icon: "FiHelpCircle"
+  }
 ];
 
 // ============================================================================
@@ -366,7 +391,8 @@ const ICON_MAP = {
   FiSave, FiPrinter, FiRefreshCw, FiInfo, FiChevronDown, FiChevronUp, FiPlus, FiMinus,
   FiLock, FiSmile, FiBarChart2, FiClipboard, FiEye, FiUserCheck, FiCode, FiPenTool,
   FiActivity, FiType, FiAlignLeft, FiHash, FiTrend, FiMonitor, FiAlertCircle,
-  FiCheckCircle, FiMail, FiPhone, FiMapPin, FiLinkedin, FiGithub, FiCloud, FiTerminal, FiGlobe
+  FiCheckCircle, FiMail, FiPhone, FiMapPin, FiLinkedin, FiGithub, FiCloud, FiTerminal, FiGlobe,
+  FiHelpCircle
 };
 
 // ============================================================================
@@ -415,8 +441,8 @@ const ResumeVsCVPage = ({ seoData }) => {
         <html lang="en" />
         
         {/* OPTIMIZED TITLE - 62 characters (BELOW 70 LIMIT) */}
-        <title>Resume vs CV: Key Differences & Global Standards Guide 2026</title>
-        <meta name="title" content="Resume vs CV: Key Differences & Global Standards Guide 2026" />
+        <title>Resume vs CV: Key Differences & Global Standards Guide {CURRENT_YEAR}</title>
+        <meta name="title" content={`Resume vs CV: Key Differences & Global Standards Guide ${CURRENT_YEAR}`} />
         
         {/* META DESCRIPTION */}
         <meta name="description" content={`Complete guide to Resume vs CV differences with global standards for US, UK, and EU job markets. Learn when to use each document with examples and international requirements for ${CURRENT_YEAR}.`} />
@@ -424,7 +450,7 @@ const ResumeVsCVPage = ({ seoData }) => {
         <meta name="author" content="Professional Resume Free" />
         
         {/* GEO OPTIMIZATION TAGS */}
-        <meta name="chatgpt-fts:title" content="Resume vs CV: Key Differences & Global Standards Guide 2026" />
+        <meta name="chatgpt-fts:title" content={`Resume vs CV: Key Differences & Global Standards Guide ${CURRENT_YEAR}`} />
         <meta name="chatgpt-fts:description" content={`Complete guide to Resume vs CV differences with global standards for US, UK, and EU job markets. Learn when to use each document with ${CURRENT_YEAR} examples.`} />
         <meta name="chatgpt-fts:keywords" content="resume vs cv, difference between resume and cv, when to use resume vs cv, cv vs resume comparison, us resume format, uk cv format, european cv standards, global job application documents, international job application guide" />
         <meta name="chatgpt-fts:last-updated" content={safeCurrentDate} />
@@ -449,7 +475,7 @@ const ResumeVsCVPage = ({ seoData }) => {
         <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
         
         {/* OPEN GRAPH */}
-        <meta property="og:title" content="Resume vs CV: Key Differences & Global Standards Guide 2026" />
+        <meta property="og:title" content={`Resume vs CV: Key Differences & Global Standards Guide ${CURRENT_YEAR}`} />
         <meta property="og:description" content={`Complete guide to Resume vs CV differences with global standards for US, UK, and EU job markets. Learn when to use each document with ${CURRENT_YEAR} examples.`} />
         <meta property="og:image" content={productImage} />
         <meta property="og:url" content={canonicalUrl} />
@@ -494,7 +520,7 @@ const ResumeVsCVPage = ({ seoData }) => {
                 {
                   "@type": "Article",
                   "@id": articleId,
-                  "headline": "Resume vs CV: Key Differences & Global Standards Guide 2026",
+                  "headline": `Resume vs CV: Key Differences & Global Standards Guide ${CURRENT_YEAR}`,
                   "description": `A comprehensive guide explaining the differences between resumes and CVs, when to use each document, and global standards for US, UK, EU, and other international job markets. Updated for ${CURRENT_YEAR}.`,
                   "image": productImage,
                   "author": {
@@ -980,22 +1006,22 @@ const ResumeVsCVPage = ({ seoData }) => {
           </div>
         </section>
 
-        {/* Internal Links */}
-        <section className="section" aria-labelledby="resources-heading">
+        {/* ===== NEW INTERNAL LINKS SECTION ===== */}
+        <section className="section" style={{ background: 'var(--bg-surface-lowest)', borderTop: '0.5px solid var(--border-gold-filament)' }} aria-labelledby="internal-links-heading">
           <div className="section-container">
             <div className="section-header">
-              <h2 id="resources-heading" className="section-title">Expand Your Job Search Toolkit</h2>
-              <p className="section-subtitle">Complement your resume or CV with these essential resources for a successful international job search</p>
+              <h2 id="internal-links-heading" className="section-title">Related Resume Writing Guides</h2>
+              <p className="section-subtitle">Master every aspect of resume writing with these comprehensive resources</p>
             </div>
-            <div className="geo-link-grid">
-              {RELATED_LINKS.map((link, i) => {
-                const icons = [FiFileText, FiTool, FiEdit3, FiShield, FiUserCheck, FiSearch];
-                const IconComponent = icons[i] || FiFileText;
+            <div className="grid">
+              {INTERNAL_LINKS.map((link, i) => {
+                const Icon = ICON_MAP[link.icon] || FiFileText;
                 return (
-                  <Link key={i} href={link.href} className="geo-link-card">
-                    <IconComponent size={20} style={{ marginBottom: '0.625rem', color: 'var(--accent-primary)' }} />
-                    <span style={{ fontSize: 'var(--font-size-label-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-secondary)', lineHeight: '1.4', marginBottom: '0.25rem' }}>{link.title}</span>
-                    <span style={{ fontSize: 'var(--font-size-label-sm)', color: 'var(--text-muted)', lineHeight: '1.4' }}>{link.desc}</span>
+                  <Link key={i} href={link.url} className="card-executive" style={{ textAlign: 'center', padding: '2rem 1.5rem' }}>
+                    <Icon size={28} color="var(--accent-primary)" style={{ marginBottom: '1rem' }} />
+                    <h3 style={{ fontSize: 'var(--font-size-title-md)', marginBottom: '0.5rem' }}>{link.title}</h3>
+                    <p style={{ color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)', marginBottom: '0.75rem' }}>{link.description}</p>
+                    <span style={{ color: 'var(--accent-primary)', fontWeight: '500', fontSize: '0.9rem' }}>Read Guide <FiArrowRight style={{ marginLeft: '0.25rem', display: 'inline' }} /></span>
                   </Link>
                 );
               })}

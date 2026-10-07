@@ -198,13 +198,38 @@ const PRE_SUBMISSION_CHECKLIST = [
   "Education section includes relevant coursework and academic achievements"
 ];
 
-const RELATED_LINKS = [
-  { href: "/resume-templates", title: "Beginner Resume Templates", desc: "ATS-optimized templates designed specifically for first-time job seekers with limited experience. Guided formatting ensures you include everything employers look for." },
-  { href: "/free-resume-tools", title: "Free Resume Building Tools", desc: "AI-powered resume builder, keyword matcher, and score checker to help beginners create professional documents without prior experience." },
-  { href: "/how-to-create-a-resume-with-no-experience", title: "No Experience Resume Guide", desc: "Detailed strategies for creating compelling resumes when you have zero paid work experience, with examples and templates." },
-  { href: "/free-cover-letter-generator", title: "Free Cover Letter Generator", desc: "Create matching cover letters that complement your beginner resume and explain your potential to employers." },
-  { href: "/interview-tips", title: "Interview Preparation for Beginners", desc: "First-time interview guidance covering common questions, professional etiquette, and how to discuss your limited experience confidently." },
-  { href: "/free-ats-resume-checker", title: "Free ATS Resume Checker", desc: "Test your beginner resume against applicant tracking systems to ensure it passes automated screening before you submit." }
+// NEW INTERNAL LINKS FOR THIS PAGE
+const INTERNAL_LINKS = [
+  {
+    url: "/resume-format-for-freshers",
+    title: "Fresher Resume Format",
+    description: "Tailored format guide for freshers entering the job market.",
+    icon: "FiUserCheck"
+  },
+  {
+    url: "/what-to-put-on-a-resume",
+    title: "What to Put on a Resume",
+    description: "Section-by-section checklist of what belongs on a resume.",
+    icon: "FiClipboard"
+  },
+  {
+    url: "/resume-guide",
+    title: "Resume Writing Guide",
+    description: "Full-length resume writing guide covering all levels.",
+    icon: "FiBookOpen"
+  },
+  {
+    url: "/resume-formatting-guide",
+    title: "Resume Formatting Guide",
+    description: "Formatting rules that keep your resume clean and ATS-friendly.",
+    icon: "FiLayout"
+  },
+  {
+    url: "/resume-templates",
+    title: "Resume Templates",
+    description: "Free professional resume templates ready to download.",
+    icon: "FiFileText"
+  }
 ];
 
 // ============================================================================
@@ -261,8 +286,8 @@ const ResumeWritingForBeginnersPage = ({ seoData }) => {
         <html lang="en" />
         
         {/* OPTIMIZED TITLE - 62 characters */}
-        <title>Resume Writing for Beginners: Complete Step-by-Step Guide 2026</title>
-        <meta name="title" content="Resume Writing for Beginners: Complete Step-by-Step Guide 2026" />
+        <title>Resume Writing for Beginners: Complete Step-by-Step Guide {CURRENT_YEAR}</title>
+        <meta name="title" content={`Resume Writing for Beginners: Complete Step-by-Step Guide ${CURRENT_YEAR}`} />
         
         {/* META DESCRIPTION */}
         <meta name="description" content={`First-time resume writing made easy! Learn how to create your first professional resume with no experience. Beginner-friendly guide with free ATS-optimized templates, examples, and tips for ${CURRENT_YEAR}. Start your career today!`} />
@@ -270,7 +295,7 @@ const ResumeWritingForBeginnersPage = ({ seoData }) => {
         <meta name="author" content="Professional Resume Free" />
         
         {/* GEO OPTIMIZATION TAGS */}
-        <meta name="chatgpt-fts:title" content="Resume Writing for Beginners: Complete Step-by-Step Guide 2026" />
+        <meta name="chatgpt-fts:title" content={`Resume Writing for Beginners: Complete Step-by-Step Guide ${CURRENT_YEAR}`} />
         <meta name="chatgpt-fts:description" content={`First-time resume writing made easy! Learn how to create your first professional resume with no experience. Beginner-friendly guide with free templates for ${CURRENT_YEAR}.`} />
         <meta name="chatgpt-fts:keywords" content="resume writing, beginner resume, first resume, no experience resume, student resume" />
         <meta name="chatgpt-fts:last-updated" content={safeCurrentDate} />
@@ -298,7 +323,7 @@ const ResumeWritingForBeginnersPage = ({ seoData }) => {
         <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
         
         {/* OPEN GRAPH */}
-        <meta property="og:title" content="Resume Writing for Beginners: Complete Step-by-Step Guide 2026" />
+        <meta property="og:title" content={`Resume Writing for Beginners: Complete Step-by-Step Guide ${CURRENT_YEAR}`} />
         <meta property="og:description" content={`First-time resume writing made simple. Beginner guide with free ATS-optimized templates and examples for job seekers with no experience. Updated for ${CURRENT_YEAR}.`} />
         <meta property="og:url" content={canonicalUrl} />
         <meta property="og:type" content="article" />
@@ -321,7 +346,7 @@ const ResumeWritingForBeginnersPage = ({ seoData }) => {
         
         {/* TWITTER CARD */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Resume Writing for Beginners: Complete Step-by-Step Guide 2026" />
+        <meta name="twitter:title" content={`Resume Writing for Beginners: Complete Step-by-Step Guide ${CURRENT_YEAR}`} />
         <meta name="twitter:description" content={`Beginner-friendly resume guide with free templates for first-time job seekers. Learn to create a professional resume with no experience. Updated for ${CURRENT_YEAR}.`} />
         <meta name="twitter:image" content="https://professionalresumefree.com/images/beginner-resume-guide-twitter.jpg" />
         <meta name="twitter:image:alt" content="Beginner Resume Writing Guide" />
@@ -355,7 +380,7 @@ const ResumeWritingForBeginnersPage = ({ seoData }) => {
                   "@type": "WebPage",
                   "@id": `${canonicalUrl}#webpage`,
                   "url": canonicalUrl,
-                  "name": "Resume Writing for Beginners: Complete Step-by-Step Guide 2026",
+                  "name": `Resume Writing for Beginners: Complete Step-by-Step Guide ${CURRENT_YEAR}`,
                   "description": `Beginner-friendly guide to creating your first professional resume with no prior experience. Learn resume writing basics, formatting, and tips for job seekers with limited experience. Updated for ${CURRENT_YEAR}.`,
                   "datePublished": safePublishDate,
                   "dateModified": safeLastModifiedDate,
@@ -415,7 +440,7 @@ const ResumeWritingForBeginnersPage = ({ seoData }) => {
                 {
                   "@type": "Article",
                   "@id": articleId,
-                  "headline": "Resume Writing for Beginners: Complete Step-by-Step Guide 2026",
+                  "headline": `Resume Writing for Beginners: Complete Step-by-Step Guide ${CURRENT_YEAR}`,
                   "description": `Beginner-friendly guide to creating your first professional resume with no prior experience. Learn resume writing basics, formatting, and tips for job seekers with limited experience. Updated for ${CURRENT_YEAR}.`,
                   "image": [
                     productImage,
@@ -945,22 +970,22 @@ const ResumeWritingForBeginnersPage = ({ seoData }) => {
           </div>
         </section>
 
-        {/* Internal Links */}
-        <section className="section" aria-labelledby="resources-heading">
+        {/* ===== NEW INTERNAL LINKS SECTION ===== */}
+        <section className="section" style={{ background: 'var(--bg-surface-lowest)', borderTop: '0.5px solid var(--border-gold-filament)' }} aria-labelledby="internal-links-heading">
           <div className="section-container">
             <div className="section-header">
-              <h2 id="resources-heading" className="section-title">Explore More Career Resources</h2>
-              <p className="section-subtitle">Complement this guide with our powerful free tools and beginner-focused resources</p>
+              <h2 id="internal-links-heading" className="section-title">Related Beginner Resume Resources</h2>
+              <p className="section-subtitle">Continue building your resume skills with these in-depth guides</p>
             </div>
-            <div className="geo-link-grid">
-              {RELATED_LINKS.map((link, i) => {
-                const icons = [FiFileText, FiTool, FiBookOpen, FiEdit3, FiUserCheck, FiSearch];
-                const IconComponent = icons[i] || FiFileText;
+            <div className="grid">
+              {INTERNAL_LINKS.map((link, i) => {
+                const Icon = ICON_MAP[link.icon] || FiFileText;
                 return (
-                  <Link key={i} href={link.href} className="geo-link-card">
-                    <IconComponent size={20} style={{ marginBottom: '0.625rem', color: 'var(--accent-primary)' }} />
-                    <span style={{ fontSize: 'var(--font-size-label-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-secondary)', lineHeight: '1.4', marginBottom: '0.25rem' }}>{link.title}</span>
-                    <span style={{ fontSize: 'var(--font-size-label-sm)', color: 'var(--text-muted)', lineHeight: '1.4' }}>{link.desc}</span>
+                  <Link key={i} href={link.url} className="card-executive" style={{ textAlign: 'center', padding: '2rem 1.5rem' }}>
+                    <Icon size={28} color="var(--accent-primary)" style={{ marginBottom: '1rem' }} />
+                    <h3 style={{ fontSize: 'var(--font-size-title-md)', marginBottom: '0.5rem' }}>{link.title}</h3>
+                    <p style={{ color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)', marginBottom: '0.75rem' }}>{link.description}</p>
+                    <span style={{ color: 'var(--accent-primary)', fontWeight: '500', fontSize: '0.9rem' }}>Read More <FiArrowRight style={{ marginLeft: '0.25rem', display: 'inline' }} /></span>
                   </Link>
                 );
               })}

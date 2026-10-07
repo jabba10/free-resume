@@ -154,21 +154,38 @@ const TESTIMONIALS = [
   { quote: "The comparison table between weak and strong resumes was eye-opening. I rewrote my bullet points following the impact-focused approach and got 5x more callbacks. The difference was immediate and measurable.", metric: "5x More Callbacks", name: "James L.", role: "Backend Engineer", company: "Fintech Company" }
 ];
 
-const RELATED_LINKS = [
-  { href: "/resume-templates", title: "Software Engineer Resume Templates", desc: "ATS-optimized templates specifically designed for software engineering roles with proper technical section layouts.", icon: FiCode },
-  { href: "/free-ats-resume-checker", title: "Free ATS Resume Checker", desc: "Test your software engineer resume against major ATS platforms to ensure maximum parsing compatibility.", icon: FiSearch },
-  { href: "/free-resume-keyword-matcher", title: "Free Resume Keyword Matcher", desc: "Match your resume keywords with job descriptions to optimize for ATS screening algorithms.", icon: FiTarget },
-  { href: "/free-resume-score-checker", title: "Free Resume Score Checker", desc: "Get instant feedback on your resume quality with actionable improvement recommendations.", icon: FiAward },
-  { href: "/how-to-write-a-resume", title: "Complete Resume Writing Guide", desc: "Comprehensive step-by-step guide covering every aspect of professional resume writing.", icon: FiBookOpen },
-  { href: "/interview-tips", title: "Interview Preparation Guide", desc: "Prepare for technical and behavioral interviews with proven strategies and common question frameworks.", icon: FiUserCheck }
-];
-
-const FOOTER_LINKS = [
-  { href: "/ats-friendly-data-analyst-resume-builder", title: "Data Analyst Resume Builder" },
-  { href: "/ats-friendly-technology-ai-and-machine-learning-engineering-resume-builder", title: "AI & ML Engineering Resume" },
-  { href: "/how-to-list-prompt-engineering-as-a-skill-on-your-professional-resume", title: "List Prompt Engineering Skill" },
-  { href: "/free-action-verb-recommender", title: "Free Action Verb Recommender" },
-  { href: "/resume-formatting-guide", title: "Resume Formatting Guide" }
+// NEW INTERNAL LINKS FOR THIS PAGE
+const INTERNAL_LINKS = [
+  {
+    url: "/software-engineer-resume-example-and-writing-guide",
+    title: "Software Engineer Resume Guide",
+    description: "In-depth guide with examples, tips and ATS strategies.",
+    icon: "FiBookOpen"
+  },
+  {
+    url: "/most-popular-resume-layouts-for-usa-tech-jobs",
+    title: "Popular Tech Resume Layouts",
+    description: "Resume layouts USA tech employers prefer in 2026.",
+    icon: "FiLayout"
+  },
+  {
+    url: "/resume-templates",
+    title: "Resume Templates Collection",
+    description: "Browse the full library of free ATS-optimized templates.",
+    icon: "FiFileText"
+  },
+  {
+    url: "/modern-resume-design-2026",
+    title: "Modern Resume Design 2026",
+    description: "Current design trends for professional resumes.",
+    icon: "FiEdit3"
+  },
+  {
+    url: "/resume-skills-section",
+    title: "Resume Skills Section",
+    description: "Build a skills section that passes ATS and impresses.",
+    icon: "FiCode"
+  }
 ];
 
 // ============================================================================
@@ -225,8 +242,8 @@ const SoftwareEngineerResumeTemplatePage = ({ seoData }) => {
         <html lang="en" />
         
         {/* OPTIMIZED TITLE - 70 characters exactly */}
-        <title>Software Engineer Resume Template 2026: Free ATS-Optimized Guide</title>
-        <meta name="title" content="Software Engineer Resume Template 2026: Free ATS-Optimized Guide" />
+        <title>Software Engineer Resume Template {CURRENT_YEAR}: Free ATS-Optimized Guide</title>
+        <meta name="title" content={`Software Engineer Resume Template ${CURRENT_YEAR}: Free ATS-Optimized Guide`} />
         
         {/* META DESCRIPTION */}
         <meta name="description" content={`Master the software engineer resume template with expert tips, examples, and ATS strategies to land interviews fast. Free ${CURRENT_YEAR} guide with proven templates and real-world examples.`} />
@@ -234,7 +251,7 @@ const SoftwareEngineerResumeTemplatePage = ({ seoData }) => {
         <meta name="author" content="Professional Resume Free" />
         
         {/* GEO OPTIMIZATION TAGS */}
-        <meta name="chatgpt-fts:title" content="Software Engineer Resume Template 2026: Free ATS-Optimized Guide" />
+        <meta name="chatgpt-fts:title" content={`Software Engineer Resume Template ${CURRENT_YEAR}: Free ATS-Optimized Guide`} />
         <meta name="chatgpt-fts:description" content={`Master the software engineer resume template with expert tips, examples, and ATS strategies to land interviews fast. Free ${CURRENT_YEAR} guide.`} />
         <meta name="chatgpt-fts:keywords" content="software engineer resume template 2026, ats friendly resume for software developers, software engineer resume example with projects, how to write resume for software engineer job, best resume format for software engineers" />
         <meta name="chatgpt-fts:last-updated" content={safeCurrentDate} />
@@ -260,14 +277,14 @@ const SoftwareEngineerResumeTemplatePage = ({ seoData }) => {
         <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
         
         {/* OPEN GRAPH */}
-        <meta property="og:title" content="Software Engineer Resume Template 2026: Free ATS-Optimized Guide" />
+        <meta property="og:title" content={`Software Engineer Resume Template ${CURRENT_YEAR}: Free ATS-Optimized Guide`} />
         <meta property="og:description" content={`Master the software engineer resume template with expert tips, examples, and ATS strategies to land interviews fast. Free ${CURRENT_YEAR} guide with proven templates.`} />
         <meta property="og:url" content={canonicalUrl} />
         <meta property="og:type" content="article" />
         <meta property="og:image" content={productImage} />
         <meta property="og:image:width" content="800" />
         <meta property="og:image:height" content="450" />
-        <meta property="og:image:alt" content="Software Engineer Resume Template 2026 Guide" />
+        <meta property="og:image:alt" content={`Software Engineer Resume Template ${CURRENT_YEAR} Guide`} />
         <meta property="og:site_name" content="Professional Resume Free" />
         <meta property="og:locale" content="en_US" />
         <meta property="og:locale:alternate" content="en_GB" />
@@ -284,7 +301,7 @@ const SoftwareEngineerResumeTemplatePage = ({ seoData }) => {
         
         {/* TWITTER CARD */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Software Engineer Resume Template 2026: Free Guide" />
+        <meta name="twitter:title" content={`Software Engineer Resume Template ${CURRENT_YEAR}: Free Guide`} />
         <meta name="twitter:description" content={`Master the software engineer resume template with expert tips. Free ATS-optimized ${CURRENT_YEAR} guide with proven templates.`} />
         <meta name="twitter:image" content={productImage} />
         <meta name="twitter:image:alt" content="Software Engineer Resume Template Guide" />
@@ -317,7 +334,7 @@ const SoftwareEngineerResumeTemplatePage = ({ seoData }) => {
                 {
                   "@type": "Article",
                   "@id": articleId,
-                  "headline": "Software Engineer Resume Template 2026: Free ATS-Optimized Guide",
+                  "headline": `Software Engineer Resume Template ${CURRENT_YEAR}: Free ATS-Optimized Guide`,
                   "description": `Master the software engineer resume template with expert tips, examples, and ATS strategies to land interviews fast. Free ${CURRENT_YEAR} guide with proven templates.`,
                   "image": productImage,
                   "author": {
@@ -364,7 +381,7 @@ const SoftwareEngineerResumeTemplatePage = ({ seoData }) => {
                   "@type": "WebPage",
                   "@id": canonicalUrl,
                   "url": canonicalUrl,
-                  "name": "Software Engineer Resume Template 2026",
+                  "name": `Software Engineer Resume Template ${CURRENT_YEAR}`,
                   "description": `Master the software engineer resume template with expert tips, examples, and ATS strategies to land interviews fast. Free ${CURRENT_YEAR} guide.`,
                   "dateModified": safeLastModifiedDate
                 },
@@ -810,41 +827,25 @@ const SoftwareEngineerResumeTemplatePage = ({ seoData }) => {
           </div>
         </section>
 
-        {/* Internal Links */}
-        <section className="section" aria-labelledby="resources-heading">
+        {/* ===== NEW INTERNAL LINKS SECTION ===== */}
+        <section className="section" style={{ background: 'var(--bg-surface-lowest)', borderTop: '0.5px solid var(--border-gold-filament)' }} aria-labelledby="internal-links-heading">
           <div className="section-container">
             <div className="section-header">
-              <h2 id="resources-heading" className="section-title">Explore More Career Resources</h2>
-              <p className="section-subtitle">Complement this guide with our powerful free tools and tech-focused resources</p>
+              <h2 id="internal-links-heading" className="section-title">Related Software Engineer Resume Resources</h2>
+              <p className="section-subtitle">Continue optimizing your resume with these expert guides and templates</p>
             </div>
-            <div className="geo-link-grid">
-              {RELATED_LINKS.map((link, i) => {
-                const IconComponent = link.icon || FiFileText;
+            <div className="grid">
+              {INTERNAL_LINKS.map((link, i) => {
+                const Icon = ICON_MAP[link.icon] || FiFileText;
                 return (
-                  <Link key={i} href={link.href} className="geo-link-card">
-                    <IconComponent size={20} style={{ marginBottom: '0.625rem', color: 'var(--accent-primary)' }} />
-                    <span style={{ fontSize: 'var(--font-size-label-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-secondary)', lineHeight: '1.4', marginBottom: '0.25rem' }}>{link.title}</span>
-                    <span style={{ fontSize: 'var(--font-size-label-sm)', color: 'var(--text-muted)', lineHeight: '1.4' }}>{link.desc}</span>
+                  <Link key={i} href={link.url} className="card-executive" style={{ textAlign: 'center', padding: '2rem 1.5rem' }}>
+                    <Icon size={28} color="var(--accent-primary)" style={{ marginBottom: '1rem' }} />
+                    <h3 style={{ fontSize: 'var(--font-size-title-md)', marginBottom: '0.5rem' }}>{link.title}</h3>
+                    <p style={{ color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)', marginBottom: '0.75rem' }}>{link.description}</p>
+                    <span style={{ color: 'var(--accent-primary)', fontWeight: '500', fontSize: '0.9rem' }}>Read More <FiArrowRight style={{ marginLeft: '0.25rem', display: 'inline' }} /></span>
                   </Link>
                 );
               })}
-            </div>
-          </div>
-        </section>
-
-        {/* Footer SEO Links */}
-        <section className="section section-alt" aria-labelledby="footer-links-heading">
-          <div className="section-container">
-            <div className="section-header">
-              <h2 id="footer-links-heading" className="section-title">Explore More Resume Guides</h2>
-            </div>
-            <div className="geo-link-grid">
-              {FOOTER_LINKS.map((link, i) => (
-                <Link key={i} href={link.href} className="geo-link-card">
-                  <FiChevronRight size={20} style={{ marginBottom: '0.625rem', color: 'var(--accent-primary)' }} />
-                  <span style={{ fontSize: 'var(--font-size-label-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-secondary)', lineHeight: '1.4' }}>{link.title}</span>
-                </Link>
-              ))}
             </div>
           </div>
         </section>

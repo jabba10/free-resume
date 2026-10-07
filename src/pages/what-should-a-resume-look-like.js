@@ -232,21 +232,38 @@ const COLOR_GUIDELINES = [
   { element: "Accent Lines/Dividers", recommendation: "Dark gray or thin black", reasoning: "Subtle horizontal rules can separate sections elegantly. Avoid bright colors or thick lines that distract from content." }
 ];
 
-const RELATED_LINKS = [
-  { href: "/resume-templates", title: "Professionally Formatted Templates", desc: "Resume templates with perfect margins, fonts, and layouts already built in—no guesswork required.", icon: FiLayout },
-  { href: "/free-resume-tools", title: "Free Resume Formatting Tools", desc: "ATS checker, formatting validator, and design tools to ensure your resume meets all professional standards.", icon: FiTool },
-  { href: "/basic-resume-format", title: "Basic Resume Format Guide", desc: "Fundamental formatting rules and structure for creating clean, professional resumes from scratch.", icon: FiFileText },
-  { href: "/chronological-resume-example", title: "Chronological Resume Example", desc: "Complete example of the most widely accepted resume format with proper formatting throughout.", icon: FiList },
-  { href: "/resume-skills-section", title: "Resume Skills Section Guide", desc: "How to format and organize your skills section for maximum impact and optimal ATS scoring.", icon: FiTarget },
-  { href: "/how-to-describe-work-experience-on-resume", title: "Work Experience Description Guide", desc: "Format your experience section with proper bullet points, metrics, and achievement statements.", icon: FiBriefcase }
-];
-
-const FOOTER_LINKS = [
-  { href: "/how-to-beat-the-ats-optimization-tips-for-modern-hiring-software", title: "Beat the ATS Optimization Guide" },
-  { href: "/best-fonts-and-designs-for-usa-resumes", title: "Best Fonts & Designs Guide" },
-  { href: "/resume-formatting-guide", title: "Complete Resume Formatting Guide" },
-  { href: "/free-ats-resume-checker", title: "Free ATS Resume Checker" },
-  { href: "/how-to-write-a-resume", title: "Complete Resume Writing Guide" }
+// NEW INTERNAL LINKS FOR THIS PAGE
+const INTERNAL_LINKS = [
+  {
+    href: "/resume-formatting-guide",
+    title: "Resume Formatting Guide",
+    desc: "The complete reference for professional resume formatting rules.",
+    icon: FiLayout
+  },
+  {
+    href: "/simple-resume-template",
+    title: "Simple Resume Template",
+    desc: "Clean ATS-friendly template with all formatting built in.",
+    icon: FiFileText
+  },
+  {
+    href: "/one-page-resume-template",
+    title: "One-Page Resume Template",
+    desc: "Concise single-page template for modern job seekers.",
+    icon: FiLayout
+  },
+  {
+    href: "/what-to-put-on-a-resume",
+    title: "What to Put on a Resume",
+    desc: "Section-by-section checklist of what belongs on a resume.",
+    icon: FiClipboard
+  },
+  {
+    href: "/resume-mistakes-americans-make-and-how-to-fix-them",
+    title: "Common Resume Mistakes",
+    desc: "The most common USA resume errors and how to fix them.",
+    icon: FiAlertCircle
+  }
 ];
 
 // ============================================================================
@@ -315,7 +332,13 @@ const ResumeFormattingGuidePage = ({ seoData }) => {
     date.setDate(date.getDate() - (i * 15 + 30));
     return date.toISOString().split('T')[0];
   });
-  const safeAdditionalInternalLinks = additionalInternalLinks || RELATED_LINKS;
+  // Normalize links to handle both `href` and `url` keys
+  const safeAdditionalInternalLinks = (additionalInternalLinks || INTERNAL_LINKS).map(link => ({
+    href: link.href || link.url || "#",
+    title: link.title || "Resource",
+    desc: link.desc || link.description || "",
+    icon: link.icon || FiFileText
+  }));
   
   const articleId = `${safeCanonicalUrl}#article`;
 
@@ -388,7 +411,7 @@ const ResumeFormattingGuidePage = ({ seoData }) => {
         <meta property="og:image" content={safeMeta.image} />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
-        <meta property="og:image:alt" content="Resume Formatting Guide 2026 with Visual Examples" />
+        <meta property="og:image:alt" content={`Resume Formatting Guide ${CURRENT_YEAR} with Visual Examples`} />
         <meta property="og:url" content={safeCanonicalUrl} />
         <meta property="og:type" content="article" />
         <meta property="og:site_name" content={safeMeta.siteName} />
@@ -410,7 +433,7 @@ const ResumeFormattingGuidePage = ({ seoData }) => {
         <meta name="twitter:title" content={safeMeta.title} />
         <meta name="twitter:description" content={safeMeta.description} />
         <meta name="twitter:image" content={safeMeta.image} />
-        <meta name="twitter:image:alt" content="Resume Formatting Guide 2026" />
+        <meta name="twitter:image:alt" content={`Resume Formatting Guide ${CURRENT_YEAR}`} />
         <meta name="twitter:site" content="@ProfResumeFree" />
         <meta name="twitter:creator" content="@ProfResumeFree" />
         
@@ -957,37 +980,25 @@ const ResumeFormattingGuidePage = ({ seoData }) => {
           </div>
         </section>
 
-        {/* Internal Links */}
-        <section className="section" aria-labelledby="resources-heading">
+        {/* ===== NEW INTERNAL LINKS SECTION ===== */}
+        <section className="section" style={{ background: 'var(--bg-surface-lowest)', borderTop: '0.5px solid var(--border-gold-filament)' }} aria-labelledby="internal-links-heading">
           <div className="section-container">
-            <h2 id="resources-heading" className="section-title" style={{textAlign: 'center', marginBottom: '2rem'}}>🔗 Explore More Career Resources</h2>
-            <p className="section-subtitle" style={{marginBottom: '2rem'}}>Complement this guide with our powerful free tools and formatting resources</p>
-            <div className="geo-link-grid">
+            <div className="section-header">
+              <h2 id="internal-links-heading" className="section-title">Related Resume Formatting & Template Resources</h2>
+              <p className="section-subtitle">Continue building your resume with these comprehensive guides and templates</p>
+            </div>
+            <div className="grid">
               {safeAdditionalInternalLinks.map((link, i) => {
-                const IconComponent = link.icon || FiFileText;
+                const Icon = typeof link.icon === 'string' ? (ICON_MAP[link.icon] || FiFileText) : (link.icon || FiFileText);
                 return (
-                  <Link key={i} href={link.href} className="geo-link-card">
-                    <IconComponent size={20} style={{ marginBottom: '0.625rem', color: 'var(--accent-primary)' }} />
-                    <span style={{ fontSize: 'var(--font-size-label-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-secondary)', lineHeight: '1.4', marginBottom: '0.25rem' }}>{link.title}</span>
-                    <span style={{ fontSize: 'var(--font-size-label-sm)', color: 'var(--text-muted)', lineHeight: '1.4' }}>{link.desc}</span>
+                  <Link key={i} href={link.href} className="card-executive" style={{ textAlign: 'center', padding: '2rem 1.5rem' }}>
+                    <Icon size={28} color="var(--accent-primary)" style={{ marginBottom: '1rem' }} />
+                    <h3 style={{ fontSize: 'var(--font-size-title-md)', marginBottom: '0.5rem' }}>{link.title}</h3>
+                    <p style={{ color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)', marginBottom: '0.75rem' }}>{link.desc}</p>
+                    <span style={{ color: 'var(--accent-primary)', fontWeight: '500', fontSize: '0.9rem' }}>Read More <FiArrowRight style={{ marginLeft: '0.25rem', display: 'inline' }} /></span>
                   </Link>
                 );
               })}
-            </div>
-          </div>
-        </section>
-
-        {/* Footer SEO Links */}
-        <section className="section section-alt">
-          <div className="section-container">
-            <h3 style={{ fontSize: '1.2rem', marginBottom: '1.5rem', fontWeight: '600', textAlign: 'center', fontFamily: 'var(--font-body)' }}>Explore More Resume Guides</h3>
-            <div className="geo-link-grid">
-              {FOOTER_LINKS.map((link, i) => (
-                <Link key={i} href={link.href} className="geo-link-card">
-                  <FiChevronRight size={20} style={{ marginBottom: '0.625rem', color: 'var(--accent-primary)' }} />
-                  <span style={{ fontSize: 'var(--font-size-label-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-secondary)', lineHeight: '1.4' }}>{link.title}</span>
-                </Link>
-              ))}
             </div>
           </div>
         </section>
@@ -1011,7 +1022,7 @@ const ResumeFormattingGuidePage = ({ seoData }) => {
 };
 
 // ============================================================================
-// GET STATIC PROPS - Enhanced with Page 1 ISR Strategy
+// GET STATIC PROPS
 // ============================================================================
 export async function getStaticProps() {
   const buildTimestamp = Date.now();
@@ -1050,8 +1061,8 @@ export async function getStaticProps() {
   ];
 
   const meta = {
-    title: "Resume Formatting Guide 2026: What Should a Resume Look Like?",
-    description: "Learn proper resume formatting with visual examples. Guide to standard margins, font sizes, professional layouts, and formatting best practices for 2026.",
+    title: `Resume Formatting Guide ${CURRENT_YEAR}: What Should a Resume Look Like?`,
+    description: `Learn proper resume formatting with visual examples. Guide to standard margins, font sizes, professional layouts, and formatting best practices for ${CURRENT_YEAR}.`,
     url: canonicalUrl,
     siteName: "ProfessionalResumeFree",
     image: "https://professionalresumefree.com/images/resume-formatting-preview.jpg",

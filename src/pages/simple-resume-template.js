@@ -201,12 +201,38 @@ const RELATED_LINKS = [
   { href: "/ai-resume-builders-how-to-use-artificial-intelligence-to-write-your-best-resume", title: "AI Resume Builders Guide", desc: "Learn how to leverage artificial intelligence tools to create, optimize, and perfect your professional resume." }
 ];
 
-const FOOTER_LINKS = [
-  { href: "/how-to-create-a-resume-with-no-experience", title: "No Experience Resume Guide", desc: "Entry-level strategies" },
-  { href: "/chronological-resume-example", title: "Chronological Resume Example", desc: "Standard format reference" },
-  { href: "/one-page-resume-template", title: "One Page Resume Template", desc: "Concise single-page design" },
-  { href: "/keywords-for-resume", title: "Resume Keywords Guide", desc: "ATS keyword optimization" },
-  { href: "/how-to-use-chatgpt-to-improve-your-resume-bullets-prompt-engineering-guide-2026", title: "ChatGPT Resume Bullets Guide", desc: "AI-powered bullet writing" }
+// NEW INTERNAL LINKS FOR THIS PAGE
+const INTERNAL_LINKS = [
+  {
+    url: "/one-page-resume-template",
+    title: "One-Page Resume Template",
+    description: "Concise single-page template for modern job seekers.",
+    icon: "FiFileText"
+  },
+  {
+    url: "/resume-templates",
+    title: "Resume Template Collection",
+    description: "Browse our full library of ATS-optimized templates.",
+    icon: "FiGrid"
+  },
+  {
+    url: "/resume-formatting-guide",
+    title: "Resume Formatting Guide",
+    description: "Complete guide to resume spacing, fonts, and layout.",
+    icon: "FiLayout"
+  },
+  {
+    url: "/resume-format-for-freshers",
+    title: "Fresher Resume Format",
+    description: "Format guide designed for freshers and entry-level candidates.",
+    icon: "FiUserCheck"
+  },
+  {
+    url: "/what-should-a-resume-look-like",
+    title: "What a Resume Should Look Like",
+    description: "Visual and structural examples of an ideal resume.",
+    icon: "FiEye"
+  }
 ];
 
 // ============================================================================
@@ -261,8 +287,8 @@ const SimpleResumeTemplatePage = ({ seoData }) => {
         <html lang="en" />
         
         {/* OPTIMIZED TITLE - Exactly 70 characters */}
-        <title>Simple Resume Template 2026: Complete Guide (47% More Interviews)</title>
-        <meta name="title" content="Simple Resume Template 2026: Complete Guide (47% More Interviews)" />
+        <title>Simple Resume Template {CURRENT_YEAR}: Complete Guide (47% More Interviews)</title>
+        <meta name="title" content={`Simple Resume Template ${CURRENT_YEAR}: Complete Guide (47% More Interviews)`} />
         
         {/* META DESCRIPTION */}
         <meta name="description" content={`Download simple resume templates for ${CURRENT_YEAR}. Clean, ATS-friendly designs with 94% pass rate. Get 47% more interviews with our proven templates. Free downloads, no sign-up required.`} />
@@ -298,7 +324,7 @@ const SimpleResumeTemplatePage = ({ seoData }) => {
         <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
         
         {/* OPEN GRAPH */}
-        <meta property="og:title" content="Simple Resume Template 2026: Complete Guide (47% More Interviews)" />
+        <meta property="og:title" content={`Simple Resume Template ${CURRENT_YEAR}: Complete Guide (47% More Interviews)`} />
         <meta property="og:description" content={`Get ${CURRENT_YEAR}'s best simple resume templates. Clean, professional designs that pass ATS and impress recruiters. Free downloads included.`} />
         <meta property="og:url" content={canonicalUrl} />
         <meta property="og:image" content={productImage} />
@@ -322,7 +348,7 @@ const SimpleResumeTemplatePage = ({ seoData }) => {
         
         {/* TWITTER CARD */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Simple Resume Template 2026: Complete Guide (47% More Interviews)" />
+        <meta name="twitter:title" content={`Simple Resume Template ${CURRENT_YEAR}: Complete Guide (47% More Interviews)`} />
         <meta name="twitter:description" content={`Get ${CURRENT_YEAR}'s best simple resume templates. Clean, professional designs that pass ATS and impress recruiters. Free downloads.`} />
         <meta name="twitter:image" content="https://professionalresumefree.com/twitter-simple-resume-guide.jpg" />
         <meta name="twitter:image:alt" content="Simple Resume Template Guide 2026" />
@@ -356,7 +382,7 @@ const SimpleResumeTemplatePage = ({ seoData }) => {
                   "@type": "WebPage",
                   "@id": canonicalUrl,
                   "url": canonicalUrl,
-                  "name": "Simple Resume Template 2026: Complete Guide",
+                  "name": `Simple Resume Template ${CURRENT_YEAR}: Complete Guide`,
                   "description": `Complete guide to simple resume templates with free downloads and ATS optimization tips. Updated for ${CURRENT_YEAR}.`,
                   "dateModified": safeLastModifiedDate,
                   "datePublished": "2024-01-01",
@@ -408,7 +434,7 @@ const SimpleResumeTemplatePage = ({ seoData }) => {
                 {
                   "@type": "Article",
                   "@id": articleId,
-                  "headline": "Simple Resume Template 2026: Complete Guide",
+                  "headline": `Simple Resume Template ${CURRENT_YEAR}: Complete Guide`,
                   "description": `Comprehensive guide to simple resume templates with free downloads and customization instructions. Updated for ${CURRENT_YEAR}.`,
                   "image": productImage,
                   "author": {
@@ -790,19 +816,25 @@ const SimpleResumeTemplatePage = ({ seoData }) => {
           </div>
         </section>
 
-        {/* Footer SEO Links */}
-        <section className="section section-alt" aria-labelledby="footer-links-heading">
+        {/* ===== NEW INTERNAL LINKS SECTION ===== */}
+        <section className="section section-alt" style={{ borderTop: '0.5px solid var(--border-gold-filament)' }} aria-labelledby="internal-links-heading">
           <div className="section-container">
             <div className="section-header">
-              <h2 id="footer-links-heading" className="section-title">Explore More Resume Guides</h2>
+              <h2 id="internal-links-heading" className="section-title">Related Resume Template Guides</h2>
+              <p className="section-subtitle">Continue exploring templates and formatting resources to perfect your resume</p>
             </div>
-            <div className="geo-link-grid">
-              {FOOTER_LINKS.map((link, i) => (
-                <Link key={i} href={link.href} className="geo-link-card">
-                  <FiChevronRight size={20} style={{ marginBottom: '0.625rem', color: 'var(--accent-primary)' }} />
-                  <span style={{ fontSize: 'var(--font-size-label-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-secondary)', lineHeight: '1.4' }}>{link.title}</span>
-                </Link>
-              ))}
+            <div className="grid">
+              {INTERNAL_LINKS.map((link, i) => {
+                const Icon = ICON_MAP[link.icon] || FiFileText;
+                return (
+                  <Link key={i} href={link.url} className="card-executive" style={{ textAlign: 'center', padding: '2rem 1.5rem' }}>
+                    <Icon size={28} color="var(--accent-primary)" style={{ marginBottom: '1rem' }} />
+                    <h3 style={{ fontSize: 'var(--font-size-title-md)', marginBottom: '0.5rem' }}>{link.title}</h3>
+                    <p style={{ color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)', marginBottom: '0.75rem' }}>{link.description}</p>
+                    <span style={{ color: 'var(--accent-primary)', fontWeight: '500', fontSize: '0.9rem' }}>Read More <FiArrowRight style={{ marginLeft: '0.25rem', display: 'inline' }} /></span>
+                  </Link>
+                );
+              })}
             </div>
           </div>
         </section>

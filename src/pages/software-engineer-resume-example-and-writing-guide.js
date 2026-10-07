@@ -180,21 +180,38 @@ const INDUSTRY_VARIATIONS = [
   { title: "Data Engineering", focus: "ETL pipelines, data warehousing (Snowflake, BigQuery), big data technologies (Spark, Hadoop), database optimization, data modeling, cloud data services, streaming platforms (Kafka, Kinesis)" }
 ];
 
+// NEW INTERNAL LINKS FOR THIS PAGE
 const INTERNAL_LINKS = [
-  { href: "/resume-templates", title: "Software Engineer Resume Templates", desc: "ATS-optimized templates specifically designed for software engineering roles with proper technical section layouts and keyword integration.", icon: "FiCode" },
-  { href: "/free-resume-tools", title: "Free Resume Building Tools", desc: "AI-powered resume builder, technical keyword matcher, and ATS checker calibrated for software engineering applications.", icon: "FiTool" },
-  { href: "/ats-friendly-technology-ai-and-machine-learning-engineering-resume-builder", title: "AI & ML Engineering Resume Builder", desc: "Advanced templates for AI/ML engineers with sections for research publications, model deployment, and technical papers.", icon: "FiCpu" },
-  { href: "/how-to-use-chatgpt-to-improve-your-resume-bullets-prompt-engineering-guide-2026", title: "ChatGPT Resume Bullets Guide", desc: "Master prompt engineering to generate perfect technical achievement bullets that sound human and impactful.", icon: "FiZap" },
-  { href: "/top-skills-employers-in-the-usa-want-on-resumes", title: "Top USA Employer Skills 2026", desc: "Discover the exact technical and soft skills American employers are prioritizing in their hiring algorithms.", icon: "FiTarget" },
-  { href: "/free-ats-resume-checker", title: "Free ATS Resume Checker", desc: "Test your software engineer resume against major ATS platforms before submitting to ensure maximum parsing compatibility.", icon: "FiSearch" }
-];
-
-const FOOTER_LINKS = [
-  { href: "/how-to-beat-the-ats-optimization-tips-for-modern-hiring-software", title: "Beat the ATS Optimization Guide" },
-  { href: "/ats-friendly-data-analyst-resume-builder", title: "Data Analyst Resume Builder" },
-  { href: "/resume-tips-for-remote-jobs-in-the-usa", title: "Remote Job Resume Tips" },
-  { href: "/ats-friendly-project-manager-resume-builder", title: "Project Manager Resume Builder" },
-  { href: "/resume-formatting-guide", title: "Resume Formatting Guide" }
+  {
+    url: "/software-engineer-resume-template",
+    title: "Software Engineer Resume Template",
+    description: "ATS-optimized template built specifically for software engineers.",
+    icon: "FiFileText"
+  },
+  {
+    url: "/most-popular-resume-layouts-for-usa-tech-jobs",
+    title: "Popular Tech Resume Layouts",
+    description: "The resume layouts USA tech employers prefer in 2026.",
+    icon: "FiLayout"
+  },
+  {
+    url: "/resume-skills-section",
+    title: "Skills Section Guide",
+    description: "Build a skills section that passes ATS and impresses recruiters.",
+    icon: "FiCode"
+  },
+  {
+    url: "/resume-guide",
+    title: "Resume Writing Guide",
+    description: "Complete step-by-step resume writing guide.",
+    icon: "FiBookOpen"
+  },
+  {
+    url: "/why-skills-first-resumes-are-replacing-chronological-layouts-in-2026",
+    title: "Skills-First Resume Layouts",
+    description: "Why skills-first layouts are replacing chronological resumes.",
+    icon: "FiTrend"
+  }
 ];
 
 // ============================================================================
@@ -249,8 +266,8 @@ const SoftwareEngineerResumeGuidePage = ({ seoData }) => {
         <html lang="en" />
         
         {/* OPTIMIZED TITLE - Exactly 70 characters */}
-        <title>Software Engineer Resume Guide 2026: Examples & Tips (70 chars)</title>
-        <meta name="title" content="Software Engineer Resume Guide 2026: Examples & Tips (70 chars)" />
+        <title>Software Engineer Resume Guide {CURRENT_YEAR}: Examples & Tips (70 chars)</title>
+        <meta name="title" content={`Software Engineer Resume Guide ${CURRENT_YEAR}: Examples & Tips (70 chars)`} />
         
         {/* META DESCRIPTION */}
         <meta name="description" content={`Master software engineer resume writing with our definitive ${CURRENT_YEAR} guide. Includes ATS-optimized examples, templates, and expert strategies based on 10,000+ successful tech resumes.`} />
@@ -295,7 +312,7 @@ const SoftwareEngineerResumeGuidePage = ({ seoData }) => {
         <meta property="og:image" content={productImage} />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
-        <meta property="og:image:alt" content="Software Engineer Resume Example & Writing Guide 2026" />
+        <meta property="og:image:alt" content={`Software Engineer Resume Example & Writing Guide ${CURRENT_YEAR}`} />
         <meta property="og:locale" content="en_US" />
         <meta property="og:locale:alternate" content="en_GB" />
         <meta property="og:locale:alternate" content="en_CA" />
@@ -314,7 +331,7 @@ const SoftwareEngineerResumeGuidePage = ({ seoData }) => {
         <meta name="twitter:title" content={`Software Engineer Resume Example & Writing Guide ${CURRENT_YEAR}`} />
         <meta name="twitter:description" content={`Complete guide with ATS-optimized software engineer resume examples, templates, and expert writing tips. Updated for ${CURRENT_YEAR}.`} />
         <meta name="twitter:image" content={productImage} />
-        <meta name="twitter:image:alt" content="Software Engineer Resume Guide 2026" />
+        <meta name="twitter:image:alt" content={`Software Engineer Resume Guide ${CURRENT_YEAR}`} />
         <meta name="twitter:creator" content="@ProfResumeFree" />
         <meta name="twitter:site" content="@ProfResumeFree" />
         
@@ -767,41 +784,25 @@ const SoftwareEngineerResumeGuidePage = ({ seoData }) => {
           </div>
         </section>
 
-        {/* Internal Links */}
-        <section className="section" aria-labelledby="resources-heading">
+        {/* ===== NEW INTERNAL LINKS SECTION ===== */}
+        <section className="section" style={{ background: 'var(--bg-surface-lowest)', borderTop: '0.5px solid var(--border-gold-filament)' }} aria-labelledby="internal-links-heading">
           <div className="section-container">
             <div className="section-header">
-              <h2 id="resources-heading" className="section-title">Continue Your Preparation Journey</h2>
-              <p className="section-subtitle">Complement this guide with our powerful free tools and tech-focused resources</p>
+              <h2 id="internal-links-heading" className="section-title">Related Software Engineer Resume Resources</h2>
+              <p className="section-subtitle">Continue optimizing your software engineer resume with these expert guides</p>
             </div>
-            <div className="geo-link-grid">
+            <div className="grid">
               {INTERNAL_LINKS.map((link, i) => {
-                const IconComponent = ICON_MAP[link.icon] || FiFileText;
+                const Icon = ICON_MAP[link.icon] || FiFileText;
                 return (
-                  <Link key={i} href={link.href} className="geo-link-card">
-                    <IconComponent size={20} style={{ marginBottom: '0.625rem', color: 'var(--accent-primary)' }} />
-                    <span style={{ fontSize: 'var(--font-size-label-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-secondary)', lineHeight: '1.4', marginBottom: '0.25rem' }}>{link.title}</span>
-                    <span style={{ fontSize: 'var(--font-size-label-sm)', color: 'var(--text-muted)', lineHeight: '1.4' }}>{link.desc}</span>
+                  <Link key={i} href={link.url} className="card-executive" style={{ textAlign: 'center', padding: '2rem 1.5rem' }}>
+                    <Icon size={28} color="var(--accent-primary)" style={{ marginBottom: '1rem' }} />
+                    <h3 style={{ fontSize: 'var(--font-size-title-md)', marginBottom: '0.5rem' }}>{link.title}</h3>
+                    <p style={{ color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)', marginBottom: '0.75rem' }}>{link.description}</p>
+                    <span style={{ color: 'var(--accent-primary)', fontWeight: '500', fontSize: '0.9rem' }}>Read More <FiArrowRight style={{ marginLeft: '0.25rem', display: 'inline' }} /></span>
                   </Link>
                 );
               })}
-            </div>
-          </div>
-        </section>
-
-        {/* Footer SEO Links */}
-        <section className="section section-alt" aria-labelledby="footer-links-heading">
-          <div className="section-container">
-            <div className="section-header">
-              <h2 id="footer-links-heading" className="section-title">Explore More Resume Guides</h2>
-            </div>
-            <div className="geo-link-grid">
-              {FOOTER_LINKS.map((link, i) => (
-                <Link key={i} href={link.href} className="geo-link-card">
-                  <FiChevronRight size={20} style={{ marginBottom: '0.625rem', color: 'var(--accent-primary)' }} />
-                  <span style={{ fontSize: 'var(--font-size-label-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-secondary)', lineHeight: '1.4' }}>{link.title}</span>
-                </Link>
-              ))}
             </div>
           </div>
         </section>

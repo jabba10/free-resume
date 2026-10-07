@@ -160,21 +160,28 @@ const TESTIMONIALS = [
   { quote: "As a freelance UX designer with 8 clients over 4 years, my chronological resume looked scattered. The skills-first approach grouped my work under 'User Research,' 'Interaction Design,' and 'Design Systems'—showing depth rather than fragmentation. My interview rate tripled, and I landed a full-time Fintech role.", metric: "3x Interview Increase", name: "Marcus T.", role: "Lead UX Designer", company: "Verified via Portfolio" }
 ];
 
-const RELATED_LINKS = [
-  { href: "/resume-templates", title: "Skills-First Resume Templates", desc: "Research-backed templates with hybrid format optimized for ATS and hiring manager preferences.", icon: FiLayout },
-  { href: "/free-resume-tools", title: "Free Resume Research Tools", desc: "ATS checkers, skill analyzers, and competency audit tools based on our research findings.", icon: FiTool },
-  { href: "/how-to-describe-work-experience-on-resume", title: "Work Experience Guide", desc: "Learn how to frame your chronological history to support your skills-first narrative.", icon: FiBriefcase },
-  { href: "/best-resume-examples-for-career-changers-in-the-usa", title: "Career Changer Resume Examples", desc: "Real-world examples of professionals who successfully pivoted industries using skills-based layouts.", icon: FiUserCheck },
-  { href: "/resume-tips-for-usa-college-students-and-graduates", title: "Student & Graduate Resume Tips", desc: "Why students benefit most from skills-first formats when they lack extensive work history.", icon: FiBookOpen },
-  { href: "/most-popular-resume-layouts-for-usa-tech-jobs", title: "Tech Job Resume Layouts", desc: "Data-driven breakdown of which formats yield highest interview rates in technology sector.", icon: FiCode }
-];
-
-const FOOTER_LINKS = [
-  { href: "/free-resume-formatting-checker", title: "Free Resume Formatting Checker" },
-  { href: "/resume-formatting-guide", title: "Resume Formatting Guide" },
-  { href: "/how-to-write-a-resume", title: "Complete Resume Writing Guide" },
-  { href: "/free-ats-resume-checker", title: "Free ATS Resume Checker" },
-  { href: "/interview-tips", title: "Interview Preparation Guide" }
+// Updated internal links as requested
+const INTERNAL_LINKS = [
+  {
+    url: "/resume-skills-section",
+    title: "Resume Skills Section Guide"
+  },
+  {
+    url: "/modern-resume-design-2026",
+    title: "Modern Resume Design 2026"
+  },
+  {
+    url: "/most-popular-resume-layouts-for-usa-tech-jobs",
+    title: "Popular Tech Resume Layouts"
+  },
+  {
+    url: "/resume-trends-in-the-usa-for-2026",
+    title: "USA Resume Trends 2026"
+  },
+  {
+    url: "/top-skills-employers-in-the-usa-want-on-resumes",
+    title: "Top Employer Skills"
+  }
 ];
 
 // ============================================================================
@@ -273,7 +280,7 @@ const SkillsFirstResumePage = ({ seoData }) => {
     date.setDate(date.getDate() - (i * 15 + 30));
     return date.toISOString().split('T')[0];
   });
-  const safeAdditionalInternalLinks = additionalInternalLinks || RELATED_LINKS;
+  const safeAdditionalInternalLinks = additionalInternalLinks || INTERNAL_LINKS;
   
   const articleId = `${safeCanonicalUrl}#article`;
 
@@ -899,34 +906,15 @@ const SkillsFirstResumePage = ({ seoData }) => {
           </div>
         </section>
 
-        {/* Internal Links */}
-        <section className="section" aria-labelledby="resources-heading">
+        {/* Updated Internal Links Section */}
+        <section className="section" aria-labelledby="internal-links-heading">
           <div className="section-container">
-            <h2 id="resources-heading" className="section-title" style={{textAlign: 'center', marginBottom: '2rem'}}>🔗 Deepen Your Research</h2>
-            <p className="section-subtitle" style={{marginBottom: '2rem'}}>Explore these specialized guides to further refine your resume strategy</p>
+            <h2 id="internal-links-heading" className="section-title" style={{textAlign: 'center', marginBottom: '2rem'}}>Related Resume Resources</h2>
+            <p className="section-subtitle" style={{marginBottom: '2rem'}}>Explore our comprehensive guides to build a perfect resume</p>
             <div className="geo-link-grid">
-              {safeAdditionalInternalLinks.map((link, i) => {
-                const IconComponent = link.icon || FiFileText;
-                return (
-                  <Link key={i} href={link.href} className="geo-link-card">
-                    <IconComponent size={20} style={{ marginBottom: '0.625rem', color: 'var(--accent-primary)' }} />
-                    <span style={{ fontSize: 'var(--font-size-label-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-secondary)', lineHeight: '1.4', marginBottom: '0.25rem' }}>{link.title}</span>
-                    <span style={{ fontSize: 'var(--font-size-label-sm)', color: 'var(--text-muted)', lineHeight: '1.4' }}>{link.desc}</span>
-                  </Link>
-                );
-              })}
-            </div>
-          </div>
-        </section>
-
-        {/* Footer SEO Links */}
-        <section className="section section-alt">
-          <div className="section-container">
-            <h3 style={{ fontSize: '1.2rem', marginBottom: '1.5rem', fontWeight: '600', textAlign: 'center', fontFamily: 'var(--font-body)' }}>Explore More Resume Guides</h3>
-            <div className="geo-link-grid">
-              {FOOTER_LINKS.map((link, i) => (
-                <Link key={i} href={link.href} className="geo-link-card">
-                  <FiChevronRight size={20} style={{ marginBottom: '0.625rem', color: 'var(--accent-primary)' }} />
+              {safeAdditionalInternalLinks.map((link, i) => (
+                <Link key={i} href={link.url} className="geo-link-card">
+                  <FiFileText size={20} style={{ marginBottom: '0.625rem', color: 'var(--accent-primary)' }} />
                   <span style={{ fontSize: 'var(--font-size-label-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-secondary)', lineHeight: '1.4' }}>{link.title}</span>
                 </Link>
               ))}
@@ -998,8 +986,8 @@ export async function getStaticProps() {
   ];
 
   const meta = {
-    title: "Why Skills-First Resumes Are Replacing Chronological Layouts in 2026",
-    description: "Comprehensive analysis: Why skills-first resumes outperform chronological formats in 2026. Expert insights, ATS data, and implementation strategies from career industry professionals.",
+    title: `Why Skills-First Resumes Are Replacing Chronological Layouts in ${CURRENT_YEAR}`,
+    description: `Comprehensive analysis: Why skills-first resumes outperform chronological formats in ${CURRENT_YEAR}. Expert insights, ATS data, and implementation strategies from career industry professionals.`,
     url: canonicalUrl,
     siteName: "Professional Resume Free",
     image: "https://professionalresumefree.com/ats.jpeg",

@@ -186,13 +186,38 @@ const TESTIMONIALS = [
   { quote: "I've been in IT for 15 years and thought my skills were timeless. This guide showed me that cloud computing and AI literacy are now essential, even for traditional infrastructure roles. I added these to my resume and immediately started getting calls from recruiters.", metric: "IT Infrastructure → Cloud", name: "David K.", role: "Cloud Infrastructure Manager", company: "Healthcare Technology" }
 ];
 
-const RELATED_LINKS = [
-  { href: "/resume-templates", title: "Skills-Optimized Templates", desc: "Resume templates designed to highlight your most valuable skills with proper category grouping.", icon: FiFileText },
-  { href: "/free-resume-tools", title: "Free Skills Analysis Tools", desc: "Skills analyzer, keyword matcher, and ATS checker to optimize your resume's skills section.", icon: FiTool },
-  { href: "/how-to-write-bullet-points-that-impress-usa-recruiters", title: "Impressive Bullet Points Guide", desc: "Learn the CAR method to turn your skills into measurable achievements hiring managers love.", icon: FiEdit3 },
-  { href: "/resume-trends-in-the-usa-for-2026", title: "Resume Trends USA 2026", desc: "Stay ahead with the latest formatting and content trends dominating the US job market.", icon: FiTrendingUp },
-  { href: "/best-fonts-and-designs-for-usa-resumes", title: "Best Fonts & Designs Guide", desc: "Ensure your resume looks professional and passes ATS parsing with our typography guide.", icon: FiType },
-  { href: "/how-to-tailor-your-resume-for-any-usa-job-posting", title: "Resume Tailoring Guide", desc: "Step-by-step guide to customizing your skills section for specific job postings efficiently.", icon: FiTarget }
+// NEW INTERNAL LINKS FOR THIS PAGE — using href/desc keys consistently
+const INTERNAL_LINKS = [
+  {
+    href: "/resume-skills-section",
+    title: "Resume Skills Section Guide",
+    desc: "Build a skills section that passes ATS and impresses recruiters.",
+    icon: "FiLayers"
+  },
+  {
+    href: "/keywords-for-resume",
+    title: "Keywords for Resume",
+    desc: "Master keyword selection for modern ATS-driven hiring.",
+    icon: "FiSearch"
+  },
+  {
+    href: "/most-in-demand-resume-keywords-for-usa-job-seekers",
+    title: "In-Demand Resume Keywords",
+    desc: "The top keywords USA employers search for in 2026.",
+    icon: "FiTarget"
+  },
+  {
+    href: "/resume-keywords-finder",
+    title: "Keywords Finder Tool",
+    desc: "Free tool to find the right keywords for any job posting.",
+    icon: "FiZap"
+  },
+  {
+    href: "/job-market-demand-calculator",
+    title: "Job Market Demand Tool",
+    desc: "Measure demand and competition for your target role.",
+    icon: "FiTrendingUp"
+  }
 ];
 
 const FOOTER_LINKS = [
@@ -299,7 +324,13 @@ const TopSkillsPage = ({ seoData }) => {
     date.setDate(date.getDate() - (i * 15 + 30));
     return date.toISOString().split('T')[0];
   });
-  const safeAdditionalInternalLinks = additionalInternalLinks || RELATED_LINKS;
+  // FIX: Normalize link keys so both fallback and props use `href` and `desc`
+  const safeAdditionalInternalLinks = (additionalInternalLinks || INTERNAL_LINKS).map(link => ({
+    href: link.href || link.url || "#",
+    title: link.title || "Resource",
+    desc: link.desc || link.description || "",
+    icon: link.icon || "FiFileText"
+  }));
   
   const articleId = `${safeCanonicalUrl}#article`;
 
@@ -358,7 +389,7 @@ const TopSkillsPage = ({ seoData }) => {
         
         {/* TWITTER CARD */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Top Skills Employers Want: 2026 Research" />
+        <meta name="twitter:title" content={`Top Skills Employers Want: ${CURRENT_YEAR} Research`} />
         <meta name="twitter:description" content="Data-driven analysis of the most in-demand skills by US employers." />
         <meta name="twitter:image" content={safeMeta.image} />
         <meta name="twitter:site" content="@ProResumeFree" />
@@ -951,19 +982,22 @@ const TopSkillsPage = ({ seoData }) => {
           </div>
         </section>
 
-        {/* Internal Links */}
-        <section className="section" aria-labelledby="resources-heading">
+        {/* ===== NEW INTERNAL LINKS SECTION ===== */}
+        <section className="section" style={{ background: 'var(--bg-surface-lowest)', borderTop: '0.5px solid var(--border-gold-filament)' }} aria-labelledby="internal-links-heading">
           <div className="section-container">
-            <h2 id="resources-heading" className="section-title" style={{textAlign: 'center', marginBottom: '2rem'}}>🔗 Deepen Your Research</h2>
-            <p className="section-subtitle" style={{marginBottom: '2rem'}}>Explore these specialized guides to further refine your resume strategy and maximize your interview potential</p>
-            <div className="geo-link-grid">
+            <div className="section-header">
+              <h2 id="internal-links-heading" className="section-title">Related Skills & Keywords Resources</h2>
+              <p className="section-subtitle">Continue optimizing your resume with these targeted guides and tools</p>
+            </div>
+            <div className="grid">
               {safeAdditionalInternalLinks.map((link, i) => {
-                const IconComponent = link.icon || FiFileText;
+                const Icon = ICON_MAP[link.icon] || FiFileText;
                 return (
-                  <Link key={i} href={link.href} className="geo-link-card">
-                    <IconComponent size={20} style={{ marginBottom: '0.625rem', color: 'var(--accent-primary)' }} />
-                    <span style={{ fontSize: 'var(--font-size-label-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-secondary)', lineHeight: '1.4', marginBottom: '0.25rem' }}>{link.title}</span>
-                    <span style={{ fontSize: 'var(--font-size-label-sm)', color: 'var(--text-muted)', lineHeight: '1.4' }}>{link.desc}</span>
+                  <Link key={i} href={link.href} className="card-executive" style={{ textAlign: 'center', padding: '2rem 1.5rem' }}>
+                    <Icon size={28} color="var(--accent-primary)" style={{ marginBottom: '1rem' }} />
+                    <h3 style={{ fontSize: 'var(--font-size-title-md)', marginBottom: '0.5rem' }}>{link.title}</h3>
+                    <p style={{ color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)', marginBottom: '0.75rem' }}>{link.desc}</p>
+                    <span style={{ color: 'var(--accent-primary)', fontWeight: '500', fontSize: '0.9rem' }}>Explore <FiArrowRight style={{ marginLeft: '0.25rem', display: 'inline' }} /></span>
                   </Link>
                 );
               })}
@@ -972,9 +1006,9 @@ const TopSkillsPage = ({ seoData }) => {
         </section>
 
         {/* Footer SEO Links */}
-        <section className="section section-alt">
+        <section className="section" aria-labelledby="footer-links-heading">
           <div className="section-container">
-            <h3 style={{ fontSize: '1.2rem', marginBottom: '1.5rem', fontWeight: '600', textAlign: 'center', fontFamily: 'var(--font-body)' }}>Explore More Resume Guides</h3>
+            <h2 id="footer-links-heading" className="section-title" style={{textAlign: 'center', marginBottom: '2rem'}}>Explore More Resume Guides</h2>
             <div className="geo-link-grid">
               {FOOTER_LINKS.map((link, i) => (
                 <Link key={i} href={link.href} className="geo-link-card">
@@ -1005,7 +1039,7 @@ const TopSkillsPage = ({ seoData }) => {
 };
 
 // ============================================================================
-// GET STATIC PROPS - FIXED: All data defined inline to avoid ReferenceError
+// GET STATIC PROPS - FIXED: using href/desc keys consistently
 // ============================================================================
 export async function getStaticProps() {
   const buildTimestamp = Date.now();
@@ -1049,8 +1083,8 @@ export async function getStaticProps() {
   ];
 
   const meta = {
-    title: "Top Skills Employers in the USA Want on Resumes: 2026 Research",
-    description: "Data-driven analysis of the most in-demand skills by US employers. Based on labor market research, job posting analytics, and hiring manager surveys for 2026.",
+    title: `Top Skills Employers in the USA Want on Resumes: ${CURRENT_YEAR} Research`,
+    description: `Data-driven analysis of the most in-demand skills by US employers. Based on labor market research, job posting analytics, and hiring manager surveys for ${CURRENT_YEAR}.`,
     url: canonicalUrl,
     siteName: "Professional Resume Free",
     image: "https://professionalresumefree.com/skills-research.jpg",
@@ -1092,7 +1126,6 @@ export async function getStaticProps() {
     }
   ];
 
-  // Inline FAQ items - no external constant references
   const faqItems = [
     { question: "What methodology was used to identify top skills?", answer: "Our research team analyzed 5.2 million unique job postings from major US job boards (Indeed, LinkedIn, Glassdoor) from January-March 2026. We used natural language processing to extract skill requirements, then ranked by frequency and cross-referenced with salary data and industry growth projections. The data was validated against Bureau of Labor Statistics occupational outlook reports and surveys of 1,500 hiring managers." },
     { question: "How do skill requirements vary by industry?", answer: "Technology roles prioritize programming languages (Python, Java), cloud computing (AWS/Azure), and AI/ML skills. Healthcare emphasizes patient care, electronic health records, and regulatory compliance. Communication appears as a top requirement across ALL industries." },
@@ -1102,21 +1135,19 @@ export async function getStaticProps() {
     { question: "How do ATS systems evaluate skills on resumes?", answer: "Modern ATS platforms use semantic matching and contextual analysis. Skills mentioned multiple times receive higher relevance scores. Including relevant certifications alongside skills increases ATS confidence scoring by approximately 23%." }
   ];
 
-  // Inline testimonials - no external constant references
   const testimonials = [
     { quote: "I was applying to marketing roles without success. After analyzing job postings, I realized I was missing 'marketing analytics' and 'SEO' from my skills section. I completed two certifications, updated my resume, and landed a Senior Marketing Manager role within 6 weeks with a 22% salary increase.", metric: "Marketing → Marketing Analytics", name: "Amanda P.", role: "Senior Marketing Manager", company: "E-commerce Company", date: reviewDates[0] },
     { quote: "As a recent graduate, I didn't know which skills to highlight. This research helped me understand that employers in business analysis value SQL and data visualization above all. I emphasized my coursework in these areas and received 4 interviews in 3 weeks.", metric: "Recent Graduate Success", name: "Michael T.", role: "Junior Business Analyst", company: "Financial Services Firm", date: reviewDates[1] },
     { quote: "I've been in IT for 15 years and thought my skills were timeless. This guide showed me that cloud computing and AI literacy are now essential. I added these to my resume and immediately started getting calls from recruiters.", metric: "IT Infrastructure → Cloud", name: "David K.", role: "Cloud Infrastructure Manager", company: "Healthcare Technology", date: reviewDates[2] }
   ];
 
-  // Inline additional internal links - no external constant references
+  // UPDATED: internal links use `href` and `desc` keys consistently
   const additionalInternalLinks = [
-    { href: "/resume-templates", title: "Skills-Optimized Templates", desc: "Resume templates designed to highlight your most valuable skills with proper category grouping." },
-    { href: "/free-resume-tools", title: "Free Skills Analysis Tools", desc: "Skills analyzer, keyword matcher, and ATS checker to optimize your resume's skills section." },
-    { href: "/how-to-write-bullet-points-that-impress-usa-recruiters", title: "Impressive Bullet Points Guide", desc: "Learn the CAR method to turn your skills into measurable achievements hiring managers love." },
-    { href: "/resume-trends-in-the-usa-for-2026", title: "Resume Trends USA 2026", desc: "Stay ahead with the latest formatting and content trends dominating the US job market." },
-    { href: "/best-fonts-and-designs-for-usa-resumes", title: "Best Fonts & Designs Guide", desc: "Ensure your resume looks professional and passes ATS parsing with our typography guide." },
-    { href: "/how-to-tailor-your-resume-for-any-usa-job-posting", title: "Resume Tailoring Guide", desc: "Step-by-step guide to customizing your skills section for specific job postings efficiently." }
+    { href: "/resume-skills-section", title: "Resume Skills Section Guide", desc: "Build a skills section that passes ATS and impresses recruiters.", icon: "FiLayers" },
+    { href: "/keywords-for-resume", title: "Keywords for Resume", desc: "Master keyword selection for modern ATS-driven hiring.", icon: "FiSearch" },
+    { href: "/most-in-demand-resume-keywords-for-usa-job-seekers", title: "In-Demand Resume Keywords", desc: "The top keywords USA employers search for in 2026.", icon: "FiTarget" },
+    { href: "/resume-keywords-finder", title: "Keywords Finder Tool", desc: "Free tool to find the right keywords for any job posting.", icon: "FiZap" },
+    { href: "/job-market-demand-calculator", title: "Job Market Demand Tool", desc: "Measure demand and competition for your target role.", icon: "FiTrendingUp" }
   ];
 
   return {

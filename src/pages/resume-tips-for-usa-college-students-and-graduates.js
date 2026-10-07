@@ -198,7 +198,7 @@ const JOB_SEARCH_TIMELINE = [
   { phase: "Senior Year—Spring Semester", actions: "Continue applications while interviewing. Follow up on pending applications. Consider backup options and plan B roles. Negotiate offers professionally. Prepare for transition from student to professional.", keyMilestone: "Accept job offer by graduation or within 3 months after" }
 ];
 
-// NEW: Action Verb Library for Students
+// Action Verb Library for Students
 const ACTION_VERB_LIBRARY = [
   { category: "Leadership & Initiative", verbs: ["Led", "Founded", "Launched", "Spearheaded", "Organized", "Coordinated", "Directed", "Championed", "Established", "Orchestrated"] },
   { category: "Achievement & Results", verbs: ["Increased", "Improved", "Reduced", "Generated", "Achieved", "Exceeded", "Delivered", "Accelerated", "Maximized", "Streamlined"] },
@@ -206,7 +206,7 @@ const ACTION_VERB_LIBRARY = [
   { category: "Creation & Development", verbs: ["Created", "Developed", "Designed", "Built", "Produced", "Authored", "Programmed", "Engineered", "Constructed", "Formulated"] }
 ];
 
-// NEW: Skills by Major
+// Skills by Major
 const SKILLS_BY_MAJOR = [
   { major: "Business Administration", technicalSkills: "Excel Advanced, Financial Modeling, CRM Software (Salesforce, HubSpot), Data Visualization (Tableau, Power BI), Project Management Tools (Asana, Trello)", softSkills: "Presentation skills, Negotiation, Client relationship management, Strategic thinking, Cross-functional collaboration", certifications: "Bloomberg Market Concepts, Google Analytics, Six Sigma Yellow Belt, Microsoft Office Specialist" },
   { major: "Computer Science", technicalSkills: "Python, Java, JavaScript/TypeScript, SQL, Git/GitHub, AWS/Azure basics, Docker, REST APIs, Agile/Scrum", softSkills: "Problem-solving, Debugging, Technical documentation, Code review, Algorithmic thinking", certifications: "AWS Cloud Practitioner, Google IT Support, Oracle Java Certification, CompTIA Security+" },
@@ -214,7 +214,7 @@ const SKILLS_BY_MAJOR = [
   { major: "Biology/Pre-Med", technicalSkills: "Laboratory techniques (PCR, Gel Electrophoresis), Microscopy, Data analysis (SPSS, R), Electronic Health Records (EHR) systems, Medical terminology", softSkills: "Attention to detail, Research methodology, Scientific writing, Patient communication, Ethical reasoning", certifications: "CPR/BLS, CNA, EMT-Basic, Phlebotomy Technician, Clinical Research Coordinator" }
 ];
 
-// NEW: Common Student Resume Questions with Detailed Answers
+// Common Student Resume Questions with Detailed Answers
 const COMMON_QUESTIONS = [
   { question: "How do I handle multiple internships at the same company?", answer: "List each internship as a separate entry with different dates and titles to show progression. Example: 'Marketing Intern (Summer 2024)' and 'Marketing Coordinator Intern (Summer 2025)' at the same company demonstrates growth and increasing responsibility. Use different bullet points for each role to show expanded duties." },
   { question: "Should I include my part-time restaurant/retail job if it's not related to my career?", answer: "Yes—but frame it to highlight transferable skills. 'Server at Olive Garden' becomes 'Customer Service Professional: Managed 8-table section during peak hours, resolved customer concerns independently, trained 5 new team members, and consistently received 5-star reviews for service excellence.' These roles demonstrate reliability, communication, and work ethic that employers value." },
@@ -673,7 +673,7 @@ const ResumeTipsForCollegeStudentsPage = ({ seoData }) => {
           </div>
         </section>
 
-        {/* NEW: Action Verb Library */}
+        {/* Action Verb Library */}
         <section className="section section-alt">
           <div className="section-container">
             <div className="section-header">
@@ -705,7 +705,7 @@ const ResumeTipsForCollegeStudentsPage = ({ seoData }) => {
           </div>
         </section>
 
-        {/* NEW: Skills by Major */}
+        {/* Skills by Major */}
         <section className="section">
           <div className="section-container">
             <div className="section-header">
@@ -812,7 +812,7 @@ const ResumeTipsForCollegeStudentsPage = ({ seoData }) => {
           </div>
         </section>
 
-        {/* NEW: Common Student Resume Questions */}
+        {/* Common Student Resume Questions */}
         <section className="section">
           <div className="section-container">
             <div className="section-header">
@@ -909,58 +909,6 @@ const ResumeTipsForCollegeStudentsPage = ({ seoData }) => {
           </div>
         </section>
 
-        {/* Internal Links - ALL BROKEN LINKS REMOVED */}
-        <section className="section section-alt" style={{ background: 'var(--bg-surface-lowest)' }} aria-labelledby="resources-heading">
-          <div className="section-container">
-            <h2 id="resources-heading" className="section-title" style={{ textAlign: 'center', marginBottom: '2rem' }}>🔗 Complete Your Student Career Toolkit</h2>
-            <div className="grid">
-              <Link href="/free-ats-resume-checker" className="card-executive">
-                <h3 style={{ marginBottom: '0.5rem', fontSize: 'var(--font-size-title-md)' }}>ATS Resume Checker</h3>
-                <p style={{ color: 'var(--text-secondary)', marginBottom: '0.75rem', fontSize: 'var(--font-size-body-sm)' }}>Test your resume compatibility</p>
-                <span style={{ color: 'var(--accent-primary)', fontWeight: '500' }}>Try it <FiArrowRight style={{ marginLeft: '0.25rem', display: 'inline' }} /></span>
-              </Link>
-              <Link href="/how-to-create-a-resume-with-no-experience" className="card-executive">
-                <h3 style={{ marginBottom: '0.5rem', fontSize: 'var(--font-size-title-md)' }}>No Experience Resume Guide</h3>
-                <p style={{ color: 'var(--text-secondary)', marginBottom: '0.75rem', fontSize: 'var(--font-size-body-sm)' }}>Perfect for students</p>
-                <span style={{ color: 'var(--accent-primary)', fontWeight: '500' }}>Try it <FiArrowRight style={{ marginLeft: '0.25rem', display: 'inline' }} /></span>
-              </Link>
-            </div>
-          </div>
-        </section>
-
-        {/* Resource Hub */}
-        <section className="section" aria-labelledby="hub-heading">
-          <div className="section-container">
-            <h2 id="hub-heading" className="section-title" style={{ textAlign: 'center', marginBottom: '2rem' }}>Complete Student Career Resource Hub</h2>
-            <div className="grid">
-              <div className="card-executive">
-                <h3 style={{ fontSize: 'var(--font-size-title-md)', marginBottom: '1rem' }}>📚 Student Resume Guides</h3>
-                <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-                  <li><Link href="/free-resume-score-checker" className="geo-link-card" style={{ padding: '0.75rem' }}>Resume Score Checker</Link></li>
-                  <li><Link href="/free-resume-keyword-matcher" className="geo-link-card" style={{ padding: '0.75rem' }}>Keyword Matcher Tool</Link></li>
-                  <li><Link href="/interview-tips" className="geo-link-card" style={{ padding: '0.75rem' }}>Interview Preparation</Link></li>
-                </ul>
-              </div>
-              <div className="card-executive">
-                <h3 style={{ fontSize: 'var(--font-size-title-md)', marginBottom: '1rem' }}>⚡ AI & Modern Tools</h3>
-                <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-                  <li><Link href="/ai-resume-builders-how-to-use-artificial-intelligence-to-write-your-best-resume" className="geo-link-card" style={{ padding: '0.75rem' }}>AI Resume Builders Guide</Link></li>
-                  <li><Link href="/how-to-use-chatgpt-to-improve-your-resume-bullets-prompt-engineering-guide-2026" className="geo-link-card" style={{ padding: '0.75rem' }}>ChatGPT Resume Prompts</Link></li>
-                  <li><Link href="/free-action-verb-recommender" className="geo-link-card" style={{ padding: '0.75rem' }}>Action Verb Recommender</Link></li>
-                </ul>
-              </div>
-              <div className="card-executive">
-                <h3 style={{ fontSize: 'var(--font-size-title-md)', marginBottom: '1rem' }}>📊 Free Student Tools</h3>
-                <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-                  <li><Link href="/free-resume-score-checker" className="geo-link-card" style={{ padding: '0.75rem' }}>Resume Score Checker</Link></li>
-                  <li><Link href="/free-ats-resume-checker" className="geo-link-card" style={{ padding: '0.75rem' }}>ATS Resume Checker</Link></li>
-                  <li><Link href="/free-resume-summary-generator" className="geo-link-card" style={{ padding: '0.75rem' }}>Summary Generator</Link></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </section>
-
         {/* CTA */}
         <section style={{ padding: 'var(--section-gap-lg) 0', background: 'linear-gradient(135deg, #1c1b1d 0%, #2a2a2c 100%)', textAlign: 'center', borderTop: '0.5px solid var(--border-gold-filament)', borderBottom: '0.5px solid var(--border-gold-filament)', position: 'relative', overflow: 'hidden' }} aria-labelledby="cta-heading">
           <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle at 50% 50%, rgba(242,202,80,0.05) 0%, transparent 70%)', pointerEvents: 'none' }} />
@@ -983,47 +931,29 @@ const ResumeTipsForCollegeStudentsPage = ({ seoData }) => {
           </div>
         </section>
 
-        {/* NEW SECTION: 5 Randomly Selected Links for Internal Linking Boost */}
-        <section className="section" style={{ background: 'var(--bg-surface-lowest)', borderTop: '0.5px solid var(--border-gold-filament)' }} aria-labelledby="expand-toolkit-heading">
+        {/* NEW SECTION: Related Student Resources */}
+        <section className="section" style={{ background: 'var(--bg-surface-lowest)', borderTop: '0.5px solid var(--border-gold-filament)' }} aria-labelledby="related-resources-heading">
           <div className="section-container">
-            <h2 id="expand-toolkit-heading" className="section-title" style={{ textAlign: 'left', marginBottom: '1.5rem' }}>Expand Your Career Toolkit</h2>
-            <div className="grid">
-              
-              {/* Link 1 */}
-              <Link href="/how-to-create-a-resume-with-no-experience" className="card-executive">
-                <h3 style={{ marginBottom: '0.5rem', fontSize: '1.1rem' }}>Resume with No Experience</h3>
-                <p style={{ color: 'var(--text-secondary)', marginBottom: '0.75rem', fontSize: '0.95rem' }}>Perfect for students: How to highlight potential over history.</p>
-                <span style={{ color: 'var(--accent-primary)', fontWeight: '500', fontSize: '0.9rem' }}>Learn How <FiArrowRight style={{ marginLeft: '0.25rem', display: 'inline' }} /></span>
-              </Link>
-
-              {/* Link 2 */}
-              <Link href="/interview-tips" className="card-executive">
-                <h3 style={{ marginBottom: '0.5rem', fontSize: '1.1rem' }}>Interview Preparation Tips</h3>
-                <p style={{ color: 'var(--text-secondary)', marginBottom: '0.75rem', fontSize: '0.95rem' }}>Ace your next interview with proven strategies and common questions.</p>
-                <span style={{ color: 'var(--accent-primary)', fontWeight: '500', fontSize: '0.9rem' }}>Get Tips <FiArrowRight style={{ marginLeft: '0.25rem', display: 'inline' }} /></span>
-              </Link>
-
-              {/* Link 3 */}
-              <Link href="/jobs-boards" className="card-executive">
-                <h3 style={{ marginBottom: '0.5rem', fontSize: '1.1rem' }}>Top Job Boards for 2026</h3>
-                <p style={{ color: 'var(--text-secondary)', marginBottom: '0.75rem', fontSize: '0.95rem' }}>Discover the best platforms to find entry-level and student roles.</p>
-                <span style={{ color: 'var(--accent-primary)', fontWeight: '500', fontSize: '0.9rem' }}>Browse Jobs <FiArrowRight style={{ marginLeft: '0.25rem', display: 'inline' }} /></span>
-              </Link>
-
-              {/* Link 4 */}
-              <Link href="/cover-letter-guides" className="card-executive">
-                <h3 style={{ marginBottom: '0.5rem', fontSize: '1.1rem' }}>Cover Letter Guides</h3>
-                <p style={{ color: 'var(--text-secondary)', marginBottom: '0.75rem', fontSize: '0.95rem' }}>Learn how to write compelling cover letters that get noticed.</p>
-                <span style={{ color: 'var(--accent-primary)', fontWeight: '500', fontSize: '0.9rem' }}>Read Guides <FiArrowRight style={{ marginLeft: '0.25rem', display: 'inline' }} /></span>
-              </Link>
-
-              {/* Link 5 */}
-              <Link href="/how-to-beat-the-ats-optimization-tips-for-modern-hiring-software" className="card-executive">
-                <h3 style={{ marginBottom: '0.5rem', fontSize: '1.1rem' }}>Beat the ATS Screening</h3>
-                <p style={{ color: 'var(--text-secondary)', marginBottom: '0.75rem', fontSize: '0.95rem' }}>Optimize your application for online government and corporate portals.</p>
-                <span style={{ color: 'var(--accent-primary)', fontWeight: '500', fontSize: '0.9rem' }}>Learn More <FiArrowRight style={{ marginLeft: '0.25rem', display: 'inline' }} /></span>
-              </Link>
-
+            <div className="section-header">
+              <h2 id="related-resources-heading" className="section-title">Related Student Resources</h2>
+              <p className="section-subtitle">Explore more specialized guides to strengthen your student job application journey.</p>
+            </div>
+            <div className="geo-link-grid">
+              {[
+                { href: "/resume-format-for-freshers", text: "Fresher Resume Format", iconName: "FiUserCheck" },
+                { href: "/resume-for-students-in-india", text: "Student Resume India Guide", iconName: "FiBookOpen" },
+                { href: "/resume-writing-for-beginners", text: "Resume Writing for Beginners", iconName: "FiEdit3" },
+                { href: "/resume-tips-for-remote-jobs-in-the-usa", text: "Remote Jobs Resume Tips", iconName: "FiGlobe" },
+                { href: "/resume-education-section", text: "Education Section Guide", iconName: "FiAward" }
+              ].map((link, i) => {
+                const IconComponent = ICON_MAP[link.iconName] || FiFileText;
+                return (
+                  <Link key={i} href={link.href} className="geo-link-card">
+                    <IconComponent size={24} style={{ marginBottom: '0.75rem', color: 'var(--accent-primary)' }} />
+                    <span style={{ fontSize: 'var(--font-size-body-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-primary)', lineHeight: '1.4' }}>{link.text}</span>
+                  </Link>
+                );
+              })}
             </div>
           </div>
         </section>

@@ -149,7 +149,7 @@ const ROLE_BULLETS = [
   { roleType: "Creative & Marketing", bullets: ["Coordinated with remote designers, writers, and videographers across 4 countries using Figma, Slack, and Asana to deliver 50+ campaigns annually", "Managed virtual content calendar and approval workflow for distributed team, publishing 200+ pieces with 98% on-time delivery", "Led remote brainstorming sessions using Miro, generating 100+ campaign ideas with 30% implementation rate and 25% average ROI improvement", "Built remote brand guidelines and asset library in Notion, reducing creative asset requests by 45% through self-service access"] }
 ];
 
-// NEW: Complete Remote Resume Section-by-Section Builder
+// Complete Remote Resume Section-by-Section Builder
 const REMOTE_RESUME_SECTIONS = [
   { 
     section: "Professional Summary for Remote Roles", 
@@ -174,7 +174,7 @@ const REMOTE_RESUME_SECTIONS = [
   }
 ];
 
-// NEW: Remote Work Hiring Manager Priorities
+// Remote Work Hiring Manager Priorities
 const HIRING_MANAGER_PRIORITIES = [
   { priority: "Proven Remote Productivity", weight: "Critical (95%)", evidence: "Quantified output achieved while working remotely—projects completed, deadlines met, goals exceeded without in-person supervision", howToDemonstrate: "Include metrics in every bullet point: 'Delivered 15 projects remotely over 2 years with 100% on-time completion rate.' Compare productivity: 'Increased output by 25% after transitioning to fully remote work.'" },
   { priority: "Communication Clarity (Written)", weight: "Critical (92%)", evidence: "Examples of clear, effective written communication that reduced ambiguity, saved time, and kept distributed teams aligned", howToDemonstrate: "Quantify communication impact: 'Authored weekly async updates that reduced status meetings by 40%.' 'Created documentation that decreased repetitive questions by 60%.' 'Maintained 4-hour average email response time.'" },
@@ -183,7 +183,7 @@ const HIRING_MANAGER_PRIORITIES = [
   { priority: "Cultural Adaptability Across Distance", weight: "Moderate-High (78%)", evidence: "Experience working across cultures, time zones, and geographies with sensitivity and effectiveness", howToDemonstrate: "Mention geographic diversity: 'Collaborated with teams in 6 countries across 3 continents.' 'Adapted communication style for colleagues from 12 different cultural backgrounds.' 'Scheduled meetings accommodating 8+ hour time differences.'" }
 ];
 
-// NEW: Remote Resume Checklist (10-Point Pre-Submission)
+// Remote Resume Checklist (10-Point Pre-Submission)
 const REMOTE_CHECKLIST = [
   "Does your professional summary explicitly mention remote experience or readiness?",
   "Have you added a dedicated 'Remote Collaboration Tools' section with proficiency levels?",
@@ -558,7 +558,7 @@ const ResumeTipsForRemoteJobsPage = ({ seoData }) => {
           </div>
         </section>
 
-        {/* NEW: Section-by-Section Remote Resume Builder */}
+        {/* Section-by-Section Remote Resume Builder */}
         <section className="section">
           <div className="section-container">
             <div className="section-header">
@@ -642,7 +642,7 @@ const ResumeTipsForRemoteJobsPage = ({ seoData }) => {
           </div>
         </section>
 
-        {/* NEW: Hiring Manager Priorities */}
+        {/* Hiring Manager Priorities */}
         <section className="section section-alt">
           <div className="section-container">
             <div className="section-header">
@@ -695,7 +695,7 @@ const ResumeTipsForRemoteJobsPage = ({ seoData }) => {
           </div>
         </section>
 
-        {/* NEW: 10-Point Remote Resume Checklist */}
+        {/* 10-Point Remote Resume Checklist */}
         <section className="section section-alt">
           <div className="section-container">
             <div className="section-header">
@@ -776,58 +776,6 @@ const ResumeTipsForRemoteJobsPage = ({ seoData }) => {
           </div>
         </section>
 
-        {/* Internal Links - ALL BROKEN LINKS REMOVED */}
-        <section className="section section-alt" style={{ background: 'var(--bg-surface-lowest)' }} aria-labelledby="resources-heading">
-          <div className="section-container">
-            <h2 id="resources-heading" className="section-title" style={{ textAlign: 'center', marginBottom: '2rem' }}>🔗 Continue Your Remote Job Search</h2>
-            <div className="grid">
-              <Link href="/resume-templates" className="card-executive">
-                <h3 style={{ marginBottom: '0.75rem', fontSize: 'var(--font-size-title-md)' }}>Remote-Ready Resume Templates</h3>
-                <p style={{ color: 'var(--text-secondary)', marginBottom: '1rem', lineHeight: '1.6', fontSize: 'var(--font-size-body-sm)' }}>Browse templates optimized for remote job applications with space for tools, skills, and remote achievements.</p>
-                <span style={{ color: 'var(--accent-primary)', fontWeight: '600' }}>View Templates <FiArrowRight style={{ marginLeft: '0.5rem', display: 'inline' }} /></span>
-              </Link>
-              <Link href="/free-resume-tools" className="card-executive">
-                <h3 style={{ marginBottom: '0.75rem', fontSize: 'var(--font-size-title-md)' }}>Free Resume Tools</h3>
-                <p style={{ color: 'var(--text-secondary)', marginBottom: '1rem', lineHeight: '1.6', fontSize: 'var(--font-size-body-sm)' }}>Check your resume's remote-readiness, match keywords, and optimize for ATS—all free.</p>
-                <span style={{ color: 'var(--accent-primary)', fontWeight: '600' }}>Explore Tools <FiArrowRight style={{ marginLeft: '0.5rem', display: 'inline' }} /></span>
-              </Link>
-            </div>
-          </div>
-        </section>
-
-        {/* Resource Hub */}
-        <section className="section" aria-labelledby="hub-heading">
-          <div className="section-container">
-            <h2 id="hub-heading" className="section-title" style={{ textAlign: 'center', marginBottom: '2rem' }}>Complete Your Remote Job Search Toolkit</h2>
-            <div className="grid">
-              <div className="card-executive">
-                <h3 style={{ fontSize: 'var(--font-size-title-md)', marginBottom: '1rem' }}>📚 Resume Writing Guides</h3>
-                <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-                  <li><Link href="/free-resume-keyword-matcher" className="geo-link-card" style={{ padding: '0.75rem' }}>Keyword Matcher Tool</Link></li>
-                  <li><Link href="/interview-tips" className="geo-link-card" style={{ padding: '0.75rem' }}>Interview Preparation</Link></li>
-                  <li><Link href="/cover-letter-guides" className="geo-link-card" style={{ padding: '0.75rem' }}>Cover Letter Guides</Link></li>
-                </ul>
-              </div>
-              <div className="card-executive">
-                <h3 style={{ fontSize: 'var(--font-size-title-md)', marginBottom: '1rem' }}>⚡ AI & Modern Tools</h3>
-                <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-                  <li><Link href="/ai-resume-builders-how-to-use-artificial-intelligence-to-write-your-best-resume" className="geo-link-card" style={{ padding: '0.75rem' }}>AI Resume Builders Guide</Link></li>
-                  <li><Link href="/how-to-use-chatgpt-to-improve-your-resume-bullets-prompt-engineering-guide-2026" className="geo-link-card" style={{ padding: '0.75rem' }}>ChatGPT Resume Prompts</Link></li>
-                  <li><Link href="/free-action-verb-recommender" className="geo-link-card" style={{ padding: '0.75rem' }}>Action Verb Recommender</Link></li>
-                </ul>
-              </div>
-              <div className="card-executive">
-                <h3 style={{ fontSize: 'var(--font-size-title-md)', marginBottom: '1rem' }}>📊 Free Resume Tools</h3>
-                <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-                  <li><Link href="/free-resume-score-checker" className="geo-link-card" style={{ padding: '0.75rem' }}>Resume Score Checker</Link></li>
-                  <li><Link href="/free-ats-resume-checker" className="geo-link-card" style={{ padding: '0.75rem' }}>ATS Resume Checker</Link></li>
-                  <li><Link href="/free-resume-summary-generator" className="geo-link-card" style={{ padding: '0.75rem' }}>Summary Generator</Link></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </section>
-
         {/* CTA */}
         <section style={{ padding: 'var(--section-gap-lg) 0', background: 'linear-gradient(135deg, #1c1b1d 0%, #2a2a2c 100%)', textAlign: 'center', borderTop: '0.5px solid var(--border-gold-filament)', borderBottom: '0.5px solid var(--border-gold-filament)', position: 'relative', overflow: 'hidden' }} aria-labelledby="cta-heading">
           <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle at 50% 50%, rgba(242,202,80,0.05) 0%, transparent 70%)', pointerEvents: 'none' }} />
@@ -850,47 +798,29 @@ const ResumeTipsForRemoteJobsPage = ({ seoData }) => {
           </div>
         </section>
 
-        {/* NEW SECTION: 5 Randomly Selected Links for Internal Linking Boost */}
-        <section className="section" style={{ background: 'var(--bg-surface-lowest)', borderTop: '0.5px solid var(--border-gold-filament)' }} aria-labelledby="expand-toolkit-heading">
+        {/* NEW SECTION: Related Remote Work Resources */}
+        <section className="section" style={{ background: 'var(--bg-surface-lowest)', borderTop: '0.5px solid var(--border-gold-filament)' }} aria-labelledby="related-resources-heading">
           <div className="section-container">
-            <h2 id="expand-toolkit-heading" className="section-title" style={{ textAlign: 'left', marginBottom: '1.5rem' }}>Expand Your Career Toolkit</h2>
-            <div className="grid">
-              
-              {/* Link 1 */}
-              <Link href="/how-to-create-a-resume-with-no-experience" className="card-executive">
-                <h3 style={{ marginBottom: '0.5rem', fontSize: '1.1rem' }}>Resume with No Experience</h3>
-                <p style={{ color: 'var(--text-secondary)', marginBottom: '0.75rem', fontSize: '0.95rem' }}>Perfect for freshers: How to highlight potential over history.</p>
-                <span style={{ color: 'var(--accent-primary)', fontWeight: '500', fontSize: '0.9rem' }}>Learn How <FiArrowRight style={{ marginLeft: '0.25rem', display: 'inline' }} /></span>
-              </Link>
-
-              {/* Link 2 */}
-              <Link href="/interview-tips" className="card-executive">
-                <h3 style={{ marginBottom: '0.5rem', fontSize: '1.1rem' }}>Interview Preparation Tips</h3>
-                <p style={{ color: 'var(--text-secondary)', marginBottom: '0.75rem', fontSize: '0.95rem' }}>Ace your next interview with proven strategies and common questions.</p>
-                <span style={{ color: 'var(--accent-primary)', fontWeight: '500', fontSize: '0.9rem' }}>Get Tips <FiArrowRight style={{ marginLeft: '0.25rem', display: 'inline' }} /></span>
-              </Link>
-
-              {/* Link 3 */}
-              <Link href="/jobs-boards" className="card-executive">
-                <h3 style={{ marginBottom: '0.5rem', fontSize: '1.1rem' }}>Top Job Boards for 2026</h3>
-                <p style={{ color: 'var(--text-secondary)', marginBottom: '0.75rem', fontSize: '0.95rem' }}>Discover the best platforms to find entry-level and fresher roles.</p>
-                <span style={{ color: 'var(--accent-primary)', fontWeight: '500', fontSize: '0.9rem' }}>Browse Jobs <FiArrowRight style={{ marginLeft: '0.25rem', display: 'inline' }} /></span>
-              </Link>
-
-              {/* Link 4 */}
-              <Link href="/cover-letter-guides" className="card-executive">
-                <h3 style={{ marginBottom: '0.5rem', fontSize: '1.1rem' }}>Cover Letter Guides</h3>
-                <p style={{ color: 'var(--text-secondary)', marginBottom: '0.75rem', fontSize: '0.95rem' }}>Learn how to write compelling cover letters that get noticed.</p>
-                <span style={{ color: 'var(--accent-primary)', fontWeight: '500', fontSize: '0.9rem' }}>Read Guides <FiArrowRight style={{ marginLeft: '0.25rem', display: 'inline' }} /></span>
-              </Link>
-
-              {/* Link 5 */}
-              <Link href="/how-to-beat-the-ats-optimization-tips-for-modern-hiring-software" className="card-executive">
-                <h3 style={{ marginBottom: '0.5rem', fontSize: '1.1rem' }}>Beat the ATS Screening</h3>
-                <p style={{ color: 'var(--text-secondary)', marginBottom: '0.75rem', fontSize: '0.95rem' }}>Optimize your application for online government and corporate portals.</p>
-                <span style={{ color: 'var(--accent-primary)', fontWeight: '500', fontSize: '0.9rem' }}>Learn More <FiArrowRight style={{ marginLeft: '0.25rem', display: 'inline' }} /></span>
-              </Link>
-
+            <div className="section-header">
+              <h2 id="related-resources-heading" className="section-title">Related Remote Work Resources</h2>
+              <p className="section-subtitle">Explore more specialized guides to strengthen your remote job application journey.</p>
+            </div>
+            <div className="geo-link-grid">
+              {[
+                { href: "/resume-tips-for-usa-college-students-and-graduates", text: "College Student Resume Tips", iconName: "FiBookOpen" },
+                { href: "/jobs-search-tips", text: "Job Search Tips", iconName: "FiSearch" },
+                { href: "/jobs-boards", text: "Job Boards Directory", iconName: "FiGrid" },
+                { href: "/resume-for-abroad-job", text: "Abroad Job Resume Guide", iconName: "FiGlobe" },
+                { href: "/resume-guide", text: "Resume Writing Guide", iconName: "FiFileText" }
+              ].map((link, i) => {
+                const IconComponent = ICON_MAP[link.iconName] || FiFileText;
+                return (
+                  <Link key={i} href={link.href} className="geo-link-card">
+                    <IconComponent size={24} style={{ marginBottom: '0.75rem', color: 'var(--accent-primary)' }} />
+                    <span style={{ fontSize: 'var(--font-size-body-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-primary)', lineHeight: '1.4' }}>{link.text}</span>
+                  </Link>
+                );
+              })}
             </div>
           </div>
         </section>

@@ -228,6 +228,40 @@ const FAQS = [
   { question: "Can I add custom skills not in the predefined lists?", answer: "Yes! Our calculator allows you to add custom skills to both your current skills and target skills lists. This helps create a more personalized and accurate assessment of your unique skill profile. Custom skills are treated as bonuses in the scoring system. You can also remove custom skills at any time by clicking the X icon. This flexibility ensures the calculator adapts to specialized roles, emerging technologies, and company-specific requirements not covered by our standard skill lists." }
 ];
 
+// NEW INTERNAL LINKS FOR THIS PAGE
+const INTERNAL_LINKS = [
+  {
+    url: "/job-fit-calculator",
+    title: "Job Fit Calculator",
+    description: "Measure how well you match a specific job description.",
+    icon: "FiTarget"
+  },
+  {
+    url: "/job-market-demand-calculator",
+    title: "Job Market Demand Calculator",
+    description: "Check demand and competition for your target role.",
+    icon: "FiTrendingUp"
+  },
+  {
+    url: "/resume-strength-calculator",
+    title: "Resume Strength Calculator",
+    description: "Score your resume across 12 critical dimensions.",
+    icon: "FiBarChart2"
+  },
+  {
+    url: "/resume-calculators",
+    title: "Resume Calculators Hub",
+    description: "All free resume and career calculators in one place.",
+    icon: "FiGrid"
+  },
+  {
+    url: "/top-skills-employers-in-the-usa-want-on-resumes",
+    title: "Top Employer Skills",
+    description: "The skills USA employers want on resumes in 2026.",
+    icon: "FiAward"
+  }
+];
+
 const ICON_MAP = {
   FiHome, FiChevronRight, FiTarget, FiBook, FiBriefcase, FiCalendar,
   FiPieChart, FiShield, FiZap, FiStar, FiAward, FiGrid, FiFileText, FiArrowRight,
@@ -950,25 +984,22 @@ const SkillGapCalculatorPage = ({ seoData }) => {
           </div>
         </section>
 
-        {/* Internal Links */}
-        <section className="section" aria-labelledby="resources-heading">
+        {/* ===== NEW INTERNAL LINKS SECTION ===== */}
+        <section className="section" style={{ background: 'var(--bg-surface-lowest)', borderTop: '0.5px solid var(--border-gold-filament)' }} aria-labelledby="internal-links-heading">
           <div className="section-container">
             <div className="section-header">
-              <h2 id="resources-heading" className="section-title">Explore More Career Tools</h2>
-              <p className="section-subtitle">Complement your skill development with these powerful career resources</p>
+              <h2 id="internal-links-heading" className="section-title">Related Career & Resume Calculators</h2>
+              <p className="section-subtitle">Continue developing your career with these free analysis tools</p>
             </div>
-            <div className="geo-link-grid">
-              {[
-                { href: "/career-path-calculator", text: "Career Path Calculator", iconName: "FiTrendingUp" },
-                { href: "/salary-calculator", text: "Free Salary Calculator", iconName: "FiDollarSign" },
-                { href: "/free-ats-resume-checker", text: "ATS Resume Checker", iconName: "FiTarget" },
-                { href: "/free-resume-builder", text: "ATS-Friendly Resume Builder", iconName: "FiFileText" }
-              ].map((link, i) => {
-                const IconComponent = ICON_MAP[link.iconName] || FiFileText;
+            <div className="grid">
+              {INTERNAL_LINKS.map((link, i) => {
+                const Icon = ICON_MAP[link.icon] || FiFileText;
                 return (
-                  <Link key={i} href={link.href} className="geo-link-card">
-                    <IconComponent size={20} style={{ marginBottom: '0.625rem', color: 'var(--accent-primary)' }} />
-                    <span style={{ fontSize: 'var(--font-size-label-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-secondary)', lineHeight: '1.4' }}>{link.text}</span>
+                  <Link key={i} href={link.url} className="card-executive" style={{ textAlign: 'center', padding: '2rem 1.5rem' }}>
+                    <Icon size={28} color="var(--accent-primary)" style={{ marginBottom: '1rem' }} />
+                    <h3 style={{ fontSize: 'var(--font-size-title-md)', marginBottom: '0.5rem' }}>{link.title}</h3>
+                    <p style={{ color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)', marginBottom: '0.75rem' }}>{link.description}</p>
+                    <span style={{ color: 'var(--accent-primary)', fontWeight: '500', fontSize: '0.9rem' }}>Try It <FiArrowRight style={{ marginLeft: '0.25rem', display: 'inline' }} /></span>
                   </Link>
                 );
               })}

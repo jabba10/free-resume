@@ -6,7 +6,8 @@ import {
   FiCalendar, FiPieChart, FiShield, FiZap, FiTarget, FiAward,
   FiGrid, FiFileText, FiArrowRight, FiRefreshCw, FiTrash2,
   FiHelpCircle, FiDatabase, FiAlertCircle, FiLock, FiServer,
-  FiBriefcase, FiPercent, FiEye, FiCheck, FiBookOpen
+  FiBriefcase, FiPercent, FiEye, FiCheck, FiBookOpen,
+  FiActivity, FiBarChart2, FiGlobe, FiUsers, FiMapPin
 } from 'react-icons/fi';
 
 // ============================================================================
@@ -145,11 +146,45 @@ const FAQS = [
   { question: "What tax rate should I use for accurate estimates?", answer: "The average effective tax rate in the United States is approximately 22-25% for middle-income earners, which includes federal income tax, state income tax (varies by state), Social Security (6.2%), and Medicare (1.45%). Higher earners may see effective rates of 28-35%. For the most accurate estimate, check your most recent pay stub for your actual withholding percentage, or consult the IRS tax brackets for your income level and filing status. You can adjust the tax rate slider anytime to see how different scenarios affect your take-home pay." }
 ];
 
+// NEW INTERNAL LINKS FOR THIS PAGE
+const INTERNAL_LINKS = [
+  {
+    url: "/job-market-demand-calculator",
+    title: "Job Market Demand Calculator",
+    description: "Measure demand for your target role and location.",
+    icon: "FiActivity"
+  },
+  {
+    url: "/promotion-probability-calculator",
+    title: "Promotion Probability Calculator",
+    description: "Estimate your likelihood of getting promoted.",
+    icon: "FiTrendingUp"
+  },
+  {
+    url: "/cost-of-living-calculator",
+    title: "Cost of Living Calculator",
+    description: "Compare living costs between cities and states.",
+    icon: "FiMapPin"
+  },
+  {
+    url: "/resume-calculators",
+    title: "Resume Calculators Hub",
+    description: "All free resume and career calculators in one place.",
+    icon: "FiGrid"
+  },
+  {
+    url: "/resume-strength-calculator",
+    title: "Resume Strength Calculator",
+    description: "Score your resume across 12 critical dimensions.",
+    icon: "FiBarChart2"
+  }
+];
+
 const ICON_MAP = {
   FiHome, FiChevronRight, FiDollarSign, FiClock, FiTrendingUp, FiCalendar, FiPieChart,
   FiShield, FiZap, FiTarget, FiAward, FiGrid, FiFileText, FiArrowRight, FiRefreshCw,
   FiTrash2, FiHelpCircle, FiDatabase, FiAlertCircle, FiLock, FiServer, FiBriefcase,
-  FiPercent, FiEye, FiCheck, FiBookOpen
+  FiPercent, FiEye, FiCheck, FiBookOpen, FiActivity, FiBarChart2, FiGlobe, FiUsers, FiMapPin
 };
 
 // ============================================================================
@@ -755,7 +790,6 @@ const SalaryCalculatorPage = ({ seoData }) => {
                 <FiDollarSign /> Calculate Your Salary Now
               </button>
               <Link href="/free-resume-builder" className="btn-outline"><FiFileText /> Build Your Resume</Link>
-              <Link href="/salary-calculator" className="btn-outline"><FiPieChart /> Salary Calculator (This Page)</Link>
             </div>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', justifyContent: 'center', marginTop: '2rem' }}>
               {["6 Salary Breakdowns", "Tax Estimation", "Overtime Calculator", "Instant Results", "100% Free"].map((f, i) => (
@@ -765,27 +799,22 @@ const SalaryCalculatorPage = ({ seoData }) => {
           </div>
         </section>
 
-        {/* Internal Links */}
-        <section className="section" aria-labelledby="resources-heading">
+        {/* ===== NEW INTERNAL LINKS SECTION ===== */}
+        <section className="section" style={{ background: 'var(--bg-surface-lowest)', borderTop: '0.5px solid var(--border-gold-filament)' }} aria-labelledby="internal-links-heading">
           <div className="section-container">
             <div className="section-header">
-              <h2 id="resources-heading" className="section-title">Explore More Career Tools</h2>
-              <p className="section-subtitle">Complement your salary planning with these powerful career resources</p>
+              <h2 id="internal-links-heading" className="section-title">Related Salary & Career Calculators</h2>
+              <p className="section-subtitle">Plan your career and finances with our full suite of free tools</p>
             </div>
-            <div className="geo-link-grid">
-              {[
-                { href: "/salary-calculator", text: "Free Salary Calculator (This Tool)", iconName: "FiDollarSign" },
-                { href: "/resume-calculators", text: "15+ Resume Calculators Hub", iconName: "FiPieChart" },
-                { href: "/free-resume-builder", text: "Free ATS-Friendly Resume Builder", iconName: "FiFileText" },
-                { href: "/free-ats-resume-checker", text: "ATS Resume Checker", iconName: "FiTarget" },
-                { href: "/resume-templates", text: "Professional Resume Templates", iconName: "FiGrid" },
-                { href: "/free-resume-score-checker", text: "Resume Score Checker", iconName: "FiAward" }
-              ].map((link, i) => {
-                const IconComponent = ICON_MAP[link.iconName] || FiFileText;
+            <div className="grid">
+              {INTERNAL_LINKS.map((link, i) => {
+                const Icon = ICON_MAP[link.icon] || FiFileText;
                 return (
-                  <Link key={i} href={link.href} className="geo-link-card">
-                    <IconComponent size={20} style={{ marginBottom: '0.625rem', color: 'var(--accent-primary)' }} />
-                    <span style={{ fontSize: 'var(--font-size-label-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-secondary)', lineHeight: '1.4' }}>{link.text}</span>
+                  <Link key={i} href={link.url} className="card-executive" style={{ textAlign: 'center', padding: '2rem 1.5rem' }}>
+                    <Icon size={28} color="var(--accent-primary)" style={{ marginBottom: '1rem' }} />
+                    <h3 style={{ fontSize: 'var(--font-size-title-md)', marginBottom: '0.5rem' }}>{link.title}</h3>
+                    <p style={{ color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)', marginBottom: '0.75rem' }}>{link.description}</p>
+                    <span style={{ color: 'var(--accent-primary)', fontWeight: '500', fontSize: '0.9rem' }}>Try It <FiArrowRight style={{ marginLeft: '0.25rem', display: 'inline' }} /></span>
                   </Link>
                 );
               })}

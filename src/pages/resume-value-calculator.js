@@ -143,6 +143,40 @@ const FAQS = [
   { question: "How accurate is the market value estimate?", answer: "Our calculator provides data-driven estimates based on salary surveys, industry benchmarks, and hiring market analysis. The actual market value depends on location, specific industry, company size, and negotiation outcomes. Use this estimate as a strategic guide to understand your competitive positioning, not as a guaranteed salary figure." }
 ];
 
+// NEW INTERNAL LINKS FOR THIS PAGE
+const INTERNAL_LINKS = [
+  {
+    url: "/resume-strength-calculator",
+    title: "Resume Strength Calculator",
+    description: "Score your resume across 12 critical dimensions.",
+    icon: "FiActivity"
+  },
+  {
+    url: "/salary-calculator",
+    title: "Salary Calculator",
+    description: "Compare your compensation against market rates.",
+    icon: "FiDollarSign"
+  },
+  {
+    url: "/resume-achievement-calculator",
+    title: "Achievement Calculator",
+    description: "Quantify the impact of your resume achievements.",
+    icon: "FiTrendingUp"
+  },
+  {
+    url: "/resume-calculators",
+    title: "Resume Calculators Hub",
+    description: "Explore all free resume analysis tools.",
+    icon: "FiGrid"
+  },
+  {
+    url: "/job-fit-calculator",
+    title: "Job Fit Calculator",
+    description: "Measure how well you match a job description.",
+    icon: "FiTarget"
+  }
+];
+
 const ICON_MAP = { 
   FiHome, FiChevronRight, FiDollarSign, FiTarget, FiBriefcase, 
   FiCalendar, FiPieChart, FiShield, FiZap, FiStar, FiAward,
@@ -670,25 +704,22 @@ const ResumeValueCalculatorPage = ({ seoData }) => {
           </div>
         </section>
 
-        {/* Internal Links */}
-        <section className="section" aria-labelledby="resources-heading">
+        {/* ===== NEW INTERNAL LINKS SECTION ===== */}
+        <section className="section" style={{ background: 'var(--bg-surface-lowest)', borderTop: '0.5px solid var(--border-gold-filament)' }} aria-labelledby="internal-links-heading">
           <div className="section-container">
             <div className="section-header">
-              <h2 id="resources-heading" className="section-title">Explore More Career Tools</h2>
-              <p className="section-subtitle">Complement your value assessment with these powerful resources</p>
+              <h2 id="internal-links-heading" className="section-title">Related Resume Calculators & Tools</h2>
+              <p className="section-subtitle">Explore our full suite of free tools to optimize every aspect of your job search</p>
             </div>
-            <div className="geo-link-grid">
-              {[
-                { href: "/salary-calculator", text: "Free Salary Calculator", iconName: "FiDollarSign" },
-                { href: "/resume-strength-calculator", text: "Resume Strength Checker", iconName: "FiFileText" },
-                { href: "/free-ats-resume-checker", text: "ATS Resume Checker", iconName: "FiTarget" },
-                { href: "/free-resume-builder", text: "Free Resume Builder", iconName: "FiEdit" }
-              ].map((link, i) => {
-                const Icon = ICON_MAP[link.iconName] || FiFileText;
+            <div className="grid">
+              {INTERNAL_LINKS.map((link, i) => {
+                const Icon = ICON_MAP[link.icon] || FiFileText;
                 return (
-                  <Link key={i} href={link.href} className="geo-link-card">
-                    <Icon size={20} style={{ marginBottom: '0.625rem', color: 'var(--accent-primary)' }} />
-                    <span style={{ fontSize: 'var(--font-size-label-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-secondary)', lineHeight: '1.4' }}>{link.text}</span>
+                  <Link key={i} href={link.url} className="card-executive" style={{ textAlign: 'center', padding: '2rem 1.5rem' }}>
+                    <Icon size={28} color="var(--accent-primary)" style={{ marginBottom: '1rem' }} />
+                    <h3 style={{ fontSize: 'var(--font-size-title-md)', marginBottom: '0.5rem' }}>{link.title}</h3>
+                    <p style={{ color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)', marginBottom: '0.75rem' }}>{link.description}</p>
+                    <span style={{ color: 'var(--accent-primary)', fontWeight: '500', fontSize: '0.9rem' }}>Try It <FiArrowRight style={{ marginLeft: '0.25rem', display: 'inline' }} /></span>
                   </Link>
                 );
               })}

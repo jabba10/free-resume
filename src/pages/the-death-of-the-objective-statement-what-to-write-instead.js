@@ -156,21 +156,38 @@ const TESTIMONIALS = [
   { quote: "As a career changer, I had no idea how to start my resume without an objective. The value proposition examples showed me exactly how to highlight my transferable skills. I landed an interview in my target field within two weeks of the rewrite.", metric: "Interview in 2 Weeks", name: "Marcus T.", role: "Project Manager (Career Changer)", company: "Construction to Technology" }
 ];
 
-const RELATED_LINKS = [
-  { href: "/resume-templates", title: "Professional Resume Templates", desc: "ATS-optimized templates with modern summary sections designed for maximum recruiter impact.", icon: FiFileText },
-  { href: "/free-resume-tools", title: "Free Resume Building Tools", desc: "AI-powered resume builder, keyword matcher, and ATS checker to optimize every section.", icon: FiTool },
-  { href: "/how-to-write-a-professional-summary-that-hooks-recruiters-in-6-seconds", title: "Professional Summary Guide", desc: "Deep dive into writing summaries that hook recruiters in the critical 6-second scan window.", icon: FiTarget },
-  { href: "/free-resume-bullet-point-generator", title: "Bullet Point Generator", desc: "Transform weak descriptions into powerful achievement bullets with quantified impact.", icon: FiZap },
-  { href: "/free-action-verb-recommender", title: "Action Verb Recommender", desc: "Find powerful action verbs that strengthen every section of your resume.", icon: FiEdit3 },
-  { href: "/top-skills-employers-in-the-usa-want-on-resumes", title: "Top USA Employer Skills", desc: "Discover the exact skills American employers prioritize in their hiring algorithms.", icon: FiTrendingUp }
-];
-
-const FOOTER_LINKS = [
-  { href: "/how-to-write-a-resume", title: "Complete Resume Writing Guide" },
-  { href: "/resume-skills-section", title: "Resume Skills Section Guide" },
-  { href: "/resume-formatting-guide", title: "Resume Formatting Guide" },
-  { href: "/free-ats-resume-checker", title: "Free ATS Resume Checker" },
-  { href: "/interview-tips", title: "Interview Preparation Guide" }
+// NEW INTERNAL LINKS FOR THIS PAGE
+const INTERNAL_LINKS = [
+  {
+    url: "/resume-objective-statement",
+    title: "Resume Objective Statement Guide",
+    description: "Understand when (rarely) an objective still works and why summaries win.",
+    icon: "FiFileText"
+  },
+  {
+    url: "/professional-resume-summary",
+    title: "Professional Resume Summary Guide",
+    description: "Master the summary format that replaces the outdated objective.",
+    icon: "FiTarget"
+  },
+  {
+    url: "/resume-skills-section",
+    title: "Resume Skills Section",
+    description: "Build a skills section that passes ATS and impresses recruiters.",
+    icon: "FiLayers"
+  },
+  {
+    url: "/what-to-put-on-a-resume",
+    title: "What to Put on a Resume",
+    description: "Section-by-section checklist of what belongs on a modern resume.",
+    icon: "FiClipboard"
+  },
+  {
+    url: "/resume-guide",
+    title: "Complete Resume Guide",
+    description: "Full end-to-end guide to writing a modern, effective resume.",
+    icon: "FiBookOpen"
+  }
 ];
 
 // ============================================================================
@@ -807,36 +824,25 @@ const DeathOfObjectiveStatementPage = ({ seoData }) => {
           </div>
         </section>
 
-        {/* Internal Links */}
-        <section className="section" aria-labelledby="resources-heading">
+        {/* ===== NEW INTERNAL LINKS SECTION ===== */}
+        <section className="section" style={{ background: 'var(--bg-surface-lowest)', borderTop: '0.5px solid var(--border-gold-filament)' }} aria-labelledby="internal-links-heading">
           <div className="section-container">
-            <h2 id="resources-heading" className="section-title" style={{textAlign: 'center', marginBottom: '2rem'}}>🔗 Continue Your Resume Journey</h2>
-            <div className="geo-link-grid">
-              {RELATED_LINKS.map((link, i) => {
-                const IconComponent = link.icon || FiFileText;
+            <div className="section-header">
+              <h2 id="internal-links-heading" className="section-title">Related Resume Writing Resources</h2>
+              <p className="section-subtitle">Continue building your resume expertise with these comprehensive guides</p>
+            </div>
+            <div className="grid">
+              {INTERNAL_LINKS.map((link, i) => {
+                const Icon = ICON_MAP[link.icon] || FiFileText;
                 return (
-                  <Link key={i} href={link.href} className="geo-link-card">
-                    <IconComponent size={20} style={{ marginBottom: '0.625rem', color: 'var(--accent-primary)' }} />
-                    <span style={{ fontSize: 'var(--font-size-label-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-secondary)', lineHeight: '1.4', marginBottom: '0.25rem' }}>{link.title}</span>
-                    <span style={{ fontSize: 'var(--font-size-label-sm)', color: 'var(--text-muted)', lineHeight: '1.4' }}>{link.desc}</span>
+                  <Link key={i} href={link.url} className="card-executive" style={{ textAlign: 'center', padding: '2rem 1.5rem' }}>
+                    <Icon size={28} color="var(--accent-primary)" style={{ marginBottom: '1rem' }} />
+                    <h3 style={{ fontSize: 'var(--font-size-title-md)', marginBottom: '0.5rem' }}>{link.title}</h3>
+                    <p style={{ color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)', marginBottom: '0.75rem' }}>{link.description}</p>
+                    <span style={{ color: 'var(--accent-primary)', fontWeight: '500', fontSize: '0.9rem' }}>Read Guide <FiArrowRight style={{ marginLeft: '0.25rem', display: 'inline' }} /></span>
                   </Link>
                 );
               })}
-            </div>
-          </div>
-        </section>
-
-        {/* Footer SEO Links */}
-        <section className="section section-alt">
-          <div className="section-container">
-            <h3 style={{ fontSize: '1.2rem', marginBottom: '1.5rem', fontWeight: '600', textAlign: 'center', fontFamily: 'var(--font-body)' }}>Explore More Career Guides</h3>
-            <div className="geo-link-grid">
-              {FOOTER_LINKS.map((link, i) => (
-                <Link key={i} href={link.href} className="geo-link-card">
-                  <FiChevronRight size={20} style={{ marginBottom: '0.625rem', color: 'var(--accent-primary)' }} />
-                  <span style={{ fontSize: 'var(--font-size-label-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-secondary)', lineHeight: '1.4' }}>{link.title}</span>
-                </Link>
-              ))}
             </div>
           </div>
         </section>
@@ -905,8 +911,8 @@ export async function getStaticProps() {
   ];
 
   const meta = {
-    title: "The Death of the Objective Statement: What to Write Instead (2026 Guide)",
-    description: "Objective statements are obsolete. Learn what to write instead to grab recruiter attention in 6 seconds. Free guide with modern alternatives & ATS-friendly examples.",
+    title: `The Death of the Objective Statement: What to Write Instead (${CURRENT_YEAR} Guide)`,
+    description: `Objective statements are obsolete. Learn what to write instead to grab recruiter attention in 6 seconds. Free guide with modern alternatives & ATS-friendly examples.`,
     url: canonicalUrl,
     siteName: "Professional Resume Free",
     image: "https://professionalresumefree.com/ats.jpeg",

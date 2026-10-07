@@ -193,21 +193,28 @@ const TESTIMONIALS = [
   { quote: "I was including everything on my resume—15 years of experience across 4 pages. Learning what to exclude was as valuable as knowing what to include. My condensed 2-page resume immediately performed better.", metric: "50% More Callbacks", name: "David M.", role: "Operations Director", company: "Healthcare Organization" }
 ];
 
-const RELATED_LINKS = [
-  { href: "/resume-templates", title: "Professional Resume Templates", desc: "ATS-optimized templates with all essential sections properly structured and formatted.", icon: FiLayout },
-  { href: "/free-resume-tools", title: "Free Resume Building Tools", desc: "AI-powered resume builder, content optimizer, and ATS checker for perfect content.", icon: FiTool },
-  { href: "/how-to-write-a-resume", title: "Complete Resume Writing Guide", desc: "Step-by-step guide covering every aspect of professional resume creation.", icon: FiBookOpen },
-  { href: "/resume-skills-section", title: "Resume Skills Section Guide", desc: "How to organize, categorize, and present your skills for maximum ATS impact.", icon: FiTarget },
-  { href: "/resume-education-section", title: "Resume Education Section Guide", desc: "Optimize your education section for every career stage and industry.", icon: FiAward },
-  { href: "/free-ats-resume-checker", title: "Free ATS Resume Checker", desc: "Test your resume content against major ATS platforms before submitting.", icon: FiSearch }
-];
-
-const FOOTER_LINKS = [
-  { href: "/resume-formatting-guide", title: "Resume Formatting Guide" },
-  { href: "/basic-resume-format", title: "Basic Resume Format Guide" },
-  { href: "/how-to-describe-work-experience-on-resume", title: "Describe Work Experience Guide" },
-  { href: "/free-resume-score-checker", title: "Free Resume Score Checker" },
-  { href: "/interview-tips", title: "Interview Preparation Guide" }
+// Updated internal links as requested
+const INTERNAL_LINKS = [
+  {
+    url: "/what-should-a-resume-look-like",
+    title: "What a Resume Should Look Like"
+  },
+  {
+    url: "/resume-skills-section",
+    title: "Resume Skills Section"
+  },
+  {
+    url: "/resume-education-section",
+    title: "Resume Education Section"
+  },
+  {
+    url: "/resume-guide",
+    title: "Resume Writing Guide"
+  },
+  {
+    url: "/resume-mistakes-americans-make-and-how-to-fix-them",
+    title: "Common Resume Mistakes"
+  }
 ];
 
 // ============================================================================
@@ -277,8 +284,8 @@ const WhatToPutOnResumePage = ({ seoData }) => {
     date.setDate(date.getDate() - (i * 15 + 30));
     return date.toISOString().split('T')[0];
   });
-  const safeAdditionalInternalLinks = additionalInternalLinks || RELATED_LINKS;
-  const safeFooterSeoLinks = footerSeoLinks || FOOTER_LINKS;
+  const safeAdditionalInternalLinks = additionalInternalLinks || INTERNAL_LINKS;
+  const safeFooterSeoLinks = footerSeoLinks || [];
   
   const articleId = `${safeCanonicalUrl}#article`;
 
@@ -970,34 +977,15 @@ const WhatToPutOnResumePage = ({ seoData }) => {
           </div>
         </section>
 
-        {/* Internal Links */}
-        <section className="section" aria-labelledby="resources-heading">
+        {/* Updated Internal Links Section */}
+        <section className="section" aria-labelledby="internal-links-heading">
           <div className="section-container">
-            <h2 id="resources-heading" className="section-title" style={{textAlign: 'center', marginBottom: '2rem'}}>🔗 Explore More Career Resources</h2>
-            <p className="section-subtitle" style={{marginBottom: '2rem'}}>Complement this guide with our powerful free tools and expert resources</p>
+            <h2 id="internal-links-heading" className="section-title" style={{textAlign: 'center', marginBottom: '2rem'}}>Related Resume Resources</h2>
+            <p className="section-subtitle" style={{marginBottom: '2rem'}}>Explore our comprehensive guides to build a perfect resume</p>
             <div className="geo-link-grid">
-              {safeAdditionalInternalLinks.map((link, i) => {
-                const IconComponent = link.icon || FiFileText;
-                return (
-                  <Link key={i} href={link.href} className="geo-link-card">
-                    <IconComponent size={20} style={{ marginBottom: '0.625rem', color: 'var(--accent-primary)' }} />
-                    <span style={{ fontSize: 'var(--font-size-label-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-secondary)', lineHeight: '1.4', marginBottom: '0.25rem' }}>{link.title}</span>
-                    <span style={{ fontSize: 'var(--font-size-label-sm)', color: 'var(--text-muted)', lineHeight: '1.4' }}>{link.desc}</span>
-                  </Link>
-                );
-              })}
-            </div>
-          </div>
-        </section>
-
-        {/* Footer SEO Links */}
-        <section className="section section-alt">
-          <div className="section-container">
-            <h3 style={{ fontSize: '1.2rem', marginBottom: '1.5rem', fontWeight: '600', textAlign: 'center', fontFamily: 'var(--font-body)' }}>Explore More Resume Guides</h3>
-            <div className="geo-link-grid">
-              {safeFooterSeoLinks.map((link, i) => (
-                <Link key={i} href={link.href} className="geo-link-card">
-                  <FiChevronRight size={20} style={{ marginBottom: '0.625rem', color: 'var(--accent-primary)' }} />
+              {safeAdditionalInternalLinks.map((link, i) => (
+                <Link key={i} href={link.url} className="geo-link-card">
+                  <FiFileText size={20} style={{ marginBottom: '0.625rem', color: 'var(--accent-primary)' }} />
                   <span style={{ fontSize: 'var(--font-size-label-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-secondary)', lineHeight: '1.4' }}>{link.title}</span>
                 </Link>
               ))}
@@ -1063,8 +1051,8 @@ export async function getStaticProps() {
   ];
 
   const meta = {
-    title: "What to Put on a Resume 2026: Complete Guide & Examples",
-    description: "Learn exactly what to put on a resume in 2026. Comprehensive guide with sections, examples, and ATS optimization tips to maximize interview chances.",
+    title: `What to Put on a Resume ${CURRENT_YEAR}: Complete Guide & Examples`,
+    description: `Learn exactly what to put on a resume in ${CURRENT_YEAR}. Comprehensive guide with sections, examples, and ATS optimization tips to maximize interview chances.`,
     url: canonicalUrl,
     siteName: "Professional Resume Free",
     image: "https://professionalresumefree.com/og-what-to-put-on-resume.jpg",

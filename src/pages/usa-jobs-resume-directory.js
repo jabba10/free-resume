@@ -944,9 +944,8 @@ const executiveDesignTokens = `
 `;
 
 // ============================================================================
-// USA STATES DATA - COMPREHENSIVE FOR AI/CRAWLERS
+// USA STATES DATA
 // ============================================================================
-
 const usaStates = [
   { name: "Alabama", abbreviation: "AL", capital: "Montgomery", keyIndustries: "Aerospace, Agriculture, Automotive, Healthcare", majorEmployers: "Boeing, Mercedes-Benz, Honda, UAB Health", population: "5,024,279", unemployment: "2.8%" },
   { name: "Alaska", abbreviation: "AK", capital: "Juneau", keyIndustries: "Oil & Gas, Fishing, Tourism, Federal Government", majorEmployers: "ConocoPhillips, State of Alaska, Providence Health", population: "733,391", unemployment: "3.2%" },
@@ -1003,7 +1002,6 @@ const usaStates = [
 // ============================================================================
 // INDUSTRY GUIDANCE & PRINCIPLES
 // ============================================================================
-
 const industryGuidance = [
   { title: "Medical & Healthcare Resumes", description: "Tips for highlighting clinical certifications (RN, LPN, NP), EHR systems experience, and patient outcome metrics. Include state license information where applicable for USA jobs." },
   { title: "Technology & IT Resumes", description: "Ideas for showcasing programming languages, frameworks, cloud platforms (AWS, Azure), and quantifiable project impacts based on US tech company requirements." },
@@ -1085,7 +1083,6 @@ const glossaryTerms = [
 // ============================================================================
 // RESOURCE LINKS - ALL 33 ORIGINAL LINKS
 // ============================================================================
-
 const allResourceLinks = [
   { name: "Most Googled Resume Questions in the USA", url: "/most-googled-resume-questions-in-the-usa", category: "trending" },
   { name: "Most In-Demand Resume Keywords for USA Job Seekers", url: "/most-in-demand-resume-keywords-for-usa-job-seekers", category: "trending" },
@@ -1136,45 +1133,32 @@ const uniqueResourceLinks = getUniqueLinks(allResourceLinks);
 // ============================================================================
 // QUICK START PILLAR LINKS
 // ============================================================================
-
 const quickStartLinks = [
-  {
-    href: "/free-resume-builder",
-    label: "Free Resume Builder",
-    icon: "📝",
-    description: "Start building your resume now"
-  },
-  {
-    href: "/resume-templates",
-    label: "Resume Templates",
-    icon: "📄",
-    description: "Browse ATS-friendly templates"
-  },
-  {
-    href: "/free-ats-resume-checker",
-    label: "Free ATS Checker",
-    icon: "✓",
-    description: "Check if your resume passes ATS"
-  }
+  { href: "/free-resume-builder", label: "Free Resume Builder", icon: "📝", description: "Start building your resume now" },
+  { href: "/resume-templates", label: "Resume Templates", icon: "📄", description: "Browse ATS-friendly templates" },
+  { href: "/free-ats-resume-checker", label: "Free ATS Checker", icon: "✓", description: "Check if your resume passes ATS" }
+];
+
+// ============================================================================
+// BOTTOM INTERNAL LINKS (Job Search & Resume Resources)
+// ============================================================================
+const bottomInternalLinks = [
+  { href: "/jobs-boards", title: "Job Boards Directory", desc: "Explore the best job boards for USA job seekers in 2026.", icon: "🗂️" },
+  { href: "/jobs-search-tips", title: "Job Search Tips", desc: "Proven job search strategies that work in the US market.", icon: "🔍" },
+  { href: "/resume-tips-for-remote-jobs-in-the-usa", title: "Remote Jobs Resume Tips", desc: "Optimize your resume for remote and hybrid US roles.", icon: "💻" },
+  { href: "/resume-tips-for-usa-college-students-and-graduates", title: "College Student Resume Tips", desc: "Resume guidance for students and new graduates in the USA.", icon: "🎓" },
+  { href: "/resume-guide", title: "Resume Writing Guide", desc: "Complete step-by-step guide to writing a modern resume.", icon: "📘" }
 ];
 
 // ============================================================================
 // COMPONENTS
 // ============================================================================
-
 const QuickStartBox = ({ links }) => (
   <div className="quickstart-box" role="navigation" aria-label="Quick Start Links">
-    <h2 style={{ textAlign: 'center', marginBottom: '1.25rem' }}>
-      ⚡ Quick Start
-    </h2>
+    <h2 style={{ textAlign: 'center', marginBottom: '1.25rem' }}>⚡ Quick Start</h2>
     <div className="quickstart-links">
       {links.map((link, index) => (
-        <Link 
-          key={index} 
-          href={link.href} 
-          className="quickstart-link"
-          aria-label={`${link.label} - ${link.description}`}
-        >
+        <Link key={index} href={link.href} className="quickstart-link" aria-label={`${link.label} - ${link.description}`}>
           <span className="quickstart-icon" aria-hidden="true">{link.icon}</span>
           <span>{link.label}</span>
         </Link>
@@ -1205,47 +1189,24 @@ const LazySection = ({ children, threshold = 0.1 }) => {
 
 const TableOfContents = ({ categories }) => (
   <nav className="toc-container" aria-label="Table of Contents">
-    <h2 style={{ 
-      marginBottom: '1rem', 
-      fontSize: 'var(--font-size-title-md)', 
-      color: 'var(--text-primary)',
-      fontFamily: 'var(--font-display)'
-    }}>
+    <h2 style={{ marginBottom: '1rem', fontSize: 'var(--font-size-title-md)', color: 'var(--text-primary)', fontFamily: 'var(--font-display)' }}>
       On This Page
     </h2>
     <ul className="toc-list">
       {categories.slice(0, 8).map((cat) => (
-        <li key={cat.id}>
-          <a href={`#${cat.id}`}>{cat.name}</a>
-        </li>
+        <li key={cat.id}><a href={`#${cat.id}`}>{cat.name}</a></li>
       ))}
     </ul>
   </nav>
 );
 
 const PeopleAlsoAskSection = ({ questions }) => (
-  <section style={{
-    padding: 'var(--section-gap-md) 0'
-  }} aria-labelledby="paa-heading">
+  <section style={{ padding: 'var(--section-gap-md) 0' }} aria-labelledby="paa-heading">
     <div className="section-container">
-      <h2 id="paa-heading" style={{
-        textAlign: 'center',
-        fontSize: 'var(--font-size-display-md)',
-        fontFamily: 'var(--font-display)',
-        fontWeight: 'var(--font-weight-bold)',
-        color: 'var(--text-primary)',
-        marginBottom: '1rem',
-        padding: '0 1rem'
-      }}>
+      <h2 id="paa-heading" style={{ textAlign: 'center', fontSize: 'var(--font-size-display-md)', fontFamily: 'var(--font-display)', fontWeight: 'var(--font-weight-bold)', color: 'var(--text-primary)', marginBottom: '1rem', padding: '0 1rem' }}>
         People Also Ask: US Job Seeker Questions
       </h2>
-      <p style={{
-        textAlign: 'center',
-        color: 'var(--text-secondary)',
-        fontSize: 'var(--font-size-body-lg)',
-        marginBottom: '2.5rem',
-        padding: '0 1rem'
-      }}>
+      <p style={{ textAlign: 'center', color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-lg)', marginBottom: '2.5rem', padding: '0 1rem' }}>
         Answers to the most common questions American job seekers ask
       </p>
       <div className="faq-grid">
@@ -1264,40 +1225,18 @@ const PeopleAlsoAskSection = ({ questions }) => (
 );
 
 const HelpfulTipsSection = ({ tips, displayDate }) => (
-  <section style={{
-    padding: 'var(--section-gap-md) 0',
-    background: 'var(--bg-surface-lowest)'
-  }} aria-labelledby="tips-heading">
+  <section style={{ padding: 'var(--section-gap-md) 0', background: 'var(--bg-surface-lowest)' }} aria-labelledby="tips-heading">
     <div className="section-container">
-      <h2 id="tips-heading" style={{
-        textAlign: 'center',
-        fontSize: 'var(--font-size-display-md)',
-        fontFamily: 'var(--font-display)',
-        fontWeight: 'var(--font-weight-bold)',
-        color: 'var(--text-primary)',
-        marginBottom: '1rem',
-        padding: '0 1rem'
-      }}>
+      <h2 id="tips-heading" style={{ textAlign: 'center', fontSize: 'var(--font-size-display-md)', fontFamily: 'var(--font-display)', fontWeight: 'var(--font-weight-bold)', color: 'var(--text-primary)', marginBottom: '1rem', padding: '0 1rem' }}>
         Expert Tips for US Job Seekers
       </h2>
-      <p style={{
-        textAlign: 'center',
-        color: 'var(--text-secondary)',
-        fontSize: 'var(--font-size-body-lg)',
-        marginBottom: '2.5rem',
-        padding: '0 1rem'
-      }}>
+      <p style={{ textAlign: 'center', color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-lg)', marginBottom: '2.5rem', padding: '0 1rem' }}>
         Data-backed strategies that work for American employers
       </p>
       <div className="grid">
         {tips.map((item, i) => (
           <article key={i} className="card-executive">
-            <h3 style={{ 
-              fontSize: 'var(--font-size-title-md)', 
-              marginBottom: '0.75rem', 
-              color: 'var(--text-primary)',
-              fontFamily: 'var(--font-body)'
-            }}>
+            <h3 style={{ fontSize: 'var(--font-size-title-md)', marginBottom: '0.75rem', color: 'var(--text-primary)', fontFamily: 'var(--font-body)' }}>
               {item.question}
             </h3>
             <p style={{ marginBottom: '1rem', flex: 1, color: 'var(--text-secondary)' }} dangerouslySetInnerHTML={{ __html: item.answer.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') }} />
@@ -1310,40 +1249,18 @@ const HelpfulTipsSection = ({ tips, displayDate }) => (
 );
 
 const HighValueKeywordsSection = ({ keywords }) => (
-  <section style={{
-    padding: 'var(--section-gap-md) 0'
-  }} aria-labelledby="keywords-heading">
+  <section style={{ padding: 'var(--section-gap-md) 0' }} aria-labelledby="keywords-heading">
     <div className="section-container">
-      <h2 id="keywords-heading" style={{
-        textAlign: 'center',
-        fontSize: 'var(--font-size-display-md)',
-        fontFamily: 'var(--font-display)',
-        fontWeight: 'var(--font-weight-bold)',
-        color: 'var(--text-primary)',
-        marginBottom: '1rem',
-        padding: '0 1rem'
-      }}>
+      <h2 id="keywords-heading" style={{ textAlign: 'center', fontSize: 'var(--font-size-display-md)', fontFamily: 'var(--font-display)', fontWeight: 'var(--font-weight-bold)', color: 'var(--text-primary)', marginBottom: '1rem', padding: '0 1rem' }}>
         High-Value Keywords for US Job Search
       </h2>
-      <p style={{
-        textAlign: 'center',
-        color: 'var(--text-secondary)',
-        fontSize: 'var(--font-size-body-lg)',
-        marginBottom: '2.5rem',
-        padding: '0 1rem'
-      }}>
+      <p style={{ textAlign: 'center', color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-lg)', marginBottom: '2.5rem', padding: '0 1rem' }}>
         Terms US employers and AI screening systems prioritize
       </p>
       <div className="grid">
         {keywords.map((keyword, i) => (
           <div key={i} className="card-executive" style={{ textAlign: 'center' }}>
-            <p style={{ 
-              fontWeight: 'var(--font-weight-medium)', 
-              fontSize: 'var(--font-size-body-md)', 
-              color: 'var(--text-primary)' 
-            }}>
-              {keyword}
-            </p>
+            <p style={{ fontWeight: 'var(--font-weight-medium)', fontSize: 'var(--font-size-body-md)', color: 'var(--text-primary)' }}>{keyword}</p>
             <div className="feature-tags">
               <span className="feature-tag">USA Focus</span>
               <span className="feature-tag">ATS Optimized</span>
@@ -1356,29 +1273,12 @@ const HighValueKeywordsSection = ({ keywords }) => (
 );
 
 const GlossarySection = ({ terms }) => (
-  <section style={{
-    padding: 'var(--section-gap-md) 0',
-    background: 'var(--bg-surface-lowest)'
-  }} aria-labelledby="glossary-heading">
+  <section style={{ padding: 'var(--section-gap-md) 0', background: 'var(--bg-surface-lowest)' }} aria-labelledby="glossary-heading">
     <div className="section-container">
-      <h2 id="glossary-heading" style={{
-        textAlign: 'center',
-        fontSize: 'var(--font-size-display-md)',
-        fontFamily: 'var(--font-display)',
-        fontWeight: 'var(--font-weight-bold)',
-        color: 'var(--text-primary)',
-        marginBottom: '1rem',
-        padding: '0 1rem'
-      }}>
+      <h2 id="glossary-heading" style={{ textAlign: 'center', fontSize: 'var(--font-size-display-md)', fontFamily: 'var(--font-display)', fontWeight: 'var(--font-weight-bold)', color: 'var(--text-primary)', marginBottom: '1rem', padding: '0 1rem' }}>
         US Resume Terminology Glossary
       </h2>
-      <p style={{
-        textAlign: 'center',
-        color: 'var(--text-secondary)',
-        fontSize: 'var(--font-size-body-lg)',
-        marginBottom: '2.5rem',
-        padding: '0 1rem'
-      }}>
+      <p style={{ textAlign: 'center', color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-lg)', marginBottom: '2.5rem', padding: '0 1rem' }}>
         Key terms every American job seeker should know
       </p>
       <div className="glossary-section">
@@ -1396,41 +1296,18 @@ const GlossarySection = ({ terms }) => (
 );
 
 const IndustryGuidanceSection = ({ guidance }) => (
-  <section style={{
-    padding: 'var(--section-gap-md) 0'
-  }} aria-labelledby="industry-heading">
+  <section style={{ padding: 'var(--section-gap-md) 0' }} aria-labelledby="industry-heading">
     <div className="section-container">
-      <h2 id="industry-heading" style={{
-        textAlign: 'center',
-        fontSize: 'var(--font-size-display-md)',
-        fontFamily: 'var(--font-display)',
-        fontWeight: 'var(--font-weight-bold)',
-        color: 'var(--text-primary)',
-        marginBottom: '1rem',
-        padding: '0 1rem'
-      }}>
+      <h2 id="industry-heading" style={{ textAlign: 'center', fontSize: 'var(--font-size-display-md)', fontFamily: 'var(--font-display)', fontWeight: 'var(--font-weight-bold)', color: 'var(--text-primary)', marginBottom: '1rem', padding: '0 1rem' }}>
         Industry-Specific Resume Strategies
       </h2>
-      <p style={{
-        textAlign: 'center',
-        color: 'var(--text-secondary)',
-        fontSize: 'var(--font-size-body-lg)',
-        marginBottom: '2.5rem',
-        padding: '0 1rem'
-      }}>
+      <p style={{ textAlign: 'center', color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-lg)', marginBottom: '2.5rem', padding: '0 1rem' }}>
         Tailored guidance for US job seekers by professional field
       </p>
       <div className="grid">
         {guidance.map((item, idx) => (
           <div key={idx} className="card-executive">
-            <h3 style={{ 
-              marginBottom: '0.5rem', 
-              fontSize: 'var(--font-size-title-md)', 
-              color: 'var(--text-primary)',
-              fontFamily: 'var(--font-body)'
-            }}>
-              {item.title}
-            </h3>
+            <h3 style={{ marginBottom: '0.5rem', fontSize: 'var(--font-size-title-md)', color: 'var(--text-primary)', fontFamily: 'var(--font-body)' }}>{item.title}</h3>
             <p style={{ marginBottom: '0.75rem', flex: 1, color: 'var(--text-secondary)' }}>{item.description}</p>
           </div>
         ))}
@@ -1440,42 +1317,18 @@ const IndustryGuidanceSection = ({ guidance }) => (
 );
 
 const CorePrinciplesSection = ({ principles }) => (
-  <section style={{
-    padding: 'var(--section-gap-md) 0',
-    background: 'var(--bg-surface-lowest)'
-  }} aria-labelledby="principles-heading">
+  <section style={{ padding: 'var(--section-gap-md) 0', background: 'var(--bg-surface-lowest)' }} aria-labelledby="principles-heading">
     <div className="section-container">
-      <h2 id="principles-heading" style={{
-        textAlign: 'center',
-        fontSize: 'var(--font-size-display-md)',
-        fontFamily: 'var(--font-display)',
-        fontWeight: 'var(--font-weight-bold)',
-        color: 'var(--text-primary)',
-        marginBottom: '1rem',
-        padding: '0 1rem'
-      }}>
+      <h2 id="principles-heading" style={{ textAlign: 'center', fontSize: 'var(--font-size-display-md)', fontFamily: 'var(--font-display)', fontWeight: 'var(--font-weight-bold)', color: 'var(--text-primary)', marginBottom: '1rem', padding: '0 1rem' }}>
         Core Resume Principles for US Job Market
       </h2>
-      <p style={{
-        textAlign: 'center',
-        color: 'var(--text-secondary)',
-        fontSize: 'var(--font-size-body-lg)',
-        marginBottom: '2.5rem',
-        padding: '0 1rem'
-      }}>
+      <p style={{ textAlign: 'center', color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-lg)', marginBottom: '2.5rem', padding: '0 1rem' }}>
         Foundational strategies validated by US hiring data
       </p>
       <div className="grid">
         {principles.map((principle, idx) => (
           <div key={idx} className="card-executive">
-            <h3 style={{ 
-              marginBottom: '0.5rem', 
-              fontSize: 'var(--font-size-title-md)', 
-              color: 'var(--text-primary)',
-              fontFamily: 'var(--font-body)'
-            }}>
-              {principle.title}
-            </h3>
+            <h3 style={{ marginBottom: '0.5rem', fontSize: 'var(--font-size-title-md)', color: 'var(--text-primary)', fontFamily: 'var(--font-body)' }}>{principle.title}</h3>
             <p style={{ marginBottom: '0.75rem', flex: 1, color: 'var(--text-secondary)' }}>{principle.description}</p>
           </div>
         ))}
@@ -1485,28 +1338,12 @@ const CorePrinciplesSection = ({ principles }) => (
 );
 
 const ReferenceSourcesSection = ({ sources }) => (
-  <section style={{
-    padding: 'var(--section-gap-md) 0'
-  }} aria-labelledby="sources-heading">
+  <section style={{ padding: 'var(--section-gap-md) 0' }} aria-labelledby="sources-heading">
     <div className="section-container">
-      <h2 id="sources-heading" style={{
-        textAlign: 'center',
-        fontSize: 'var(--font-size-display-md)',
-        fontFamily: 'var(--font-display)',
-        fontWeight: 'var(--font-weight-bold)',
-        color: 'var(--text-primary)',
-        marginBottom: '1rem',
-        padding: '0 1rem'
-      }}>
+      <h2 id="sources-heading" style={{ textAlign: 'center', fontSize: 'var(--font-size-display-md)', fontFamily: 'var(--font-display)', fontWeight: 'var(--font-weight-bold)', color: 'var(--text-primary)', marginBottom: '1rem', padding: '0 1rem' }}>
         Reference Sources Consulted
       </h2>
-      <p style={{
-        textAlign: 'center',
-        color: 'var(--text-secondary)',
-        fontSize: 'var(--font-size-body-lg)',
-        marginBottom: '2.5rem',
-        padding: '0 1rem'
-      }}>
+      <p style={{ textAlign: 'center', color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-lg)', marginBottom: '2.5rem', padding: '0 1rem' }}>
         Publicly available US government and industry resources
       </p>
       <div className="card-executive" style={{ maxWidth: '800px', margin: '0 auto' }}>
@@ -1515,12 +1352,7 @@ const ReferenceSourcesSection = ({ sources }) => (
             <li key={idx}>{source}</li>
           ))}
         </ul>
-        <p style={{ 
-          marginTop: '1rem', 
-          fontSize: 'var(--font-size-body-sm)', 
-          color: 'var(--text-muted)', 
-          fontStyle: 'italic' 
-        }}>
+        <p style={{ marginTop: '1rem', fontSize: 'var(--font-size-body-sm)', color: 'var(--text-muted)', fontStyle: 'italic' }}>
           This independent directory compiles publicly available information. Not affiliated with any government agency.
         </p>
       </div>
@@ -1535,55 +1367,25 @@ const ResourceLinksSection = () => {
   const strategyLinks = uniqueResourceLinks.filter(link => link.category === "strategy");
 
   return (
-    <section style={{
-      padding: 'var(--section-gap-md) 0'
-    }} aria-labelledby="resources-heading">
+    <section style={{ padding: 'var(--section-gap-md) 0' }} aria-labelledby="resources-heading">
       <div className="section-container">
-        <h2 id="resources-heading" style={{
-          textAlign: 'center',
-          fontSize: 'var(--font-size-display-md)',
-          fontFamily: 'var(--font-display)',
-          fontWeight: 'var(--font-weight-bold)',
-          color: 'var(--text-primary)',
-          marginBottom: '1rem',
-          padding: '0 1rem'
-        }}>
+        <h2 id="resources-heading" style={{ textAlign: 'center', fontSize: 'var(--font-size-display-md)', fontFamily: 'var(--font-display)', fontWeight: 'var(--font-weight-bold)', color: 'var(--text-primary)', marginBottom: '1rem', padding: '0 1rem' }}>
           Complete Resume Guide Library
         </h2>
-        <p style={{
-          textAlign: 'center',
-          color: 'var(--text-secondary)',
-          fontSize: 'var(--font-size-body-lg)',
-          marginBottom: '2.5rem',
-          padding: '0 1rem'
-        }}>
+        <p style={{ textAlign: 'center', color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-lg)', marginBottom: '2.5rem', padding: '0 1rem' }}>
           33 curated guides for US job seekers — all unique, no duplicates
         </p>
         
         {trendingLinks.length > 0 && (
           <>
-            <h3 style={{ 
-              textAlign: 'center', 
-              marginBottom: '1.25rem', 
-              marginTop: '1.25rem', 
-              color: 'var(--accent-primary)',
-              fontSize: 'var(--font-size-headline-md)',
-              fontFamily: 'var(--font-display)'
-            }}>
+            <h3 style={{ textAlign: 'center', marginBottom: '1.25rem', marginTop: '1.25rem', color: 'var(--accent-primary)', fontSize: 'var(--font-size-headline-md)', fontFamily: 'var(--font-display)' }}>
               Trending & Most Popular
             </h3>
             <div className="category-grid">
               {trendingLinks.map((link, idx) => (
                 <div key={`trending-${idx}`} className="category-card">
                   <Link href={link.url}>
-                    <span style={{ 
-                      fontSize: 'var(--font-size-body-sm)', 
-                      marginBottom: '0.5rem', 
-                      display: 'block',
-                      color: 'var(--text-secondary)'
-                    }}>
-                      {link.name}
-                    </span>
+                    <span style={{ fontSize: 'var(--font-size-body-sm)', marginBottom: '0.5rem', display: 'block', color: 'var(--text-secondary)' }}>{link.name}</span>
                   </Link>
                 </div>
               ))}
@@ -1593,28 +1395,14 @@ const ResourceLinksSection = () => {
 
         {exampleLinks.length > 0 && (
           <>
-            <h3 style={{ 
-              textAlign: 'center', 
-              marginBottom: '1.25rem', 
-              marginTop: '2.5rem', 
-              color: 'var(--accent-primary)',
-              fontSize: 'var(--font-size-headline-md)',
-              fontFamily: 'var(--font-display)'
-            }}>
+            <h3 style={{ textAlign: 'center', marginBottom: '1.25rem', marginTop: '2.5rem', color: 'var(--accent-primary)', fontSize: 'var(--font-size-headline-md)', fontFamily: 'var(--font-display)' }}>
               Resume Examples by Industry
             </h3>
             <div className="category-grid">
               {exampleLinks.map((link, idx) => (
                 <div key={`examples-${idx}`} className="category-card">
                   <Link href={link.url}>
-                    <span style={{ 
-                      fontSize: 'var(--font-size-body-sm)', 
-                      marginBottom: '0.5rem', 
-                      display: 'block',
-                      color: 'var(--text-secondary)'
-                    }}>
-                      {link.name}
-                    </span>
+                    <span style={{ fontSize: 'var(--font-size-body-sm)', marginBottom: '0.5rem', display: 'block', color: 'var(--text-secondary)' }}>{link.name}</span>
                   </Link>
                 </div>
               ))}
@@ -1624,28 +1412,14 @@ const ResourceLinksSection = () => {
 
         {howtoLinks.length > 0 && (
           <>
-            <h3 style={{ 
-              textAlign: 'center', 
-              marginBottom: '1.25rem', 
-              marginTop: '2.5rem', 
-              color: 'var(--accent-primary)',
-              fontSize: 'var(--font-size-headline-md)',
-              fontFamily: 'var(--font-display)'
-            }}>
+            <h3 style={{ textAlign: 'center', marginBottom: '1.25rem', marginTop: '2.5rem', color: 'var(--accent-primary)', fontSize: 'var(--font-size-headline-md)', fontFamily: 'var(--font-display)' }}>
               How-To Guides & Tutorials
             </h3>
             <div className="category-grid">
               {howtoLinks.map((link, idx) => (
                 <div key={`howto-${idx}`} className="category-card">
                   <Link href={link.url}>
-                    <span style={{ 
-                      fontSize: 'var(--font-size-body-sm)', 
-                      marginBottom: '0.5rem', 
-                      display: 'block',
-                      color: 'var(--text-secondary)'
-                    }}>
-                      {link.name}
-                    </span>
+                    <span style={{ fontSize: 'var(--font-size-body-sm)', marginBottom: '0.5rem', display: 'block', color: 'var(--text-secondary)' }}>{link.name}</span>
                   </Link>
                 </div>
               ))}
@@ -1655,28 +1429,14 @@ const ResourceLinksSection = () => {
 
         {strategyLinks.length > 0 && (
           <>
-            <h3 style={{ 
-              textAlign: 'center', 
-              marginBottom: '1.25rem', 
-              marginTop: '2.5rem', 
-              color: 'var(--accent-primary)',
-              fontSize: 'var(--font-size-headline-md)',
-              fontFamily: 'var(--font-display)'
-            }}>
+            <h3 style={{ textAlign: 'center', marginBottom: '1.25rem', marginTop: '2.5rem', color: 'var(--accent-primary)', fontSize: 'var(--font-size-headline-md)', fontFamily: 'var(--font-display)' }}>
               Strategy & Industry Trends
             </h3>
             <div className="category-grid">
               {strategyLinks.map((link, idx) => (
                 <div key={`strategy-${idx}`} className="category-card">
                   <Link href={link.url}>
-                    <span style={{ 
-                      fontSize: 'var(--font-size-body-sm)', 
-                      marginBottom: '0.5rem', 
-                      display: 'block',
-                      color: 'var(--text-secondary)'
-                    }}>
-                      {link.name}
-                    </span>
+                    <span style={{ fontSize: 'var(--font-size-body-sm)', marginBottom: '0.5rem', display: 'block', color: 'var(--text-secondary)' }}>{link.name}</span>
                   </Link>
                 </div>
               ))}
@@ -1684,12 +1444,7 @@ const ResourceLinksSection = () => {
           </>
         )}
 
-        <p style={{ 
-          marginTop: '2rem', 
-          fontSize: 'var(--font-size-body-sm)', 
-          color: 'var(--text-muted)', 
-          textAlign: 'center' 
-        }}>
+        <p style={{ marginTop: '2rem', fontSize: 'var(--font-size-body-sm)', color: 'var(--text-muted)', textAlign: 'center' }}>
           {uniqueResourceLinks.length} unique resources — No duplicate content — Updated for US job seekers
         </p>
       </div>
@@ -1698,9 +1453,8 @@ const ResourceLinksSection = () => {
 };
 
 // ============================================================================
-// AI-OPTIMIZED CONTENT SECTION (Hidden from users, visible to ChatGPT & crawlers)
+// AI-OPTIMIZED CONTENT (Hidden from users, visible to crawlers)
 // ============================================================================
-
 const AIOptimizedContent = ({ states, displayDate }) => (
   <div className="ai-optimized-content" aria-hidden="true">
     <h1>USA Jobs Resume Directory: Complete Guide for American Job Seekers 2026</h1>
@@ -1719,12 +1473,8 @@ const AIOptimizedContent = ({ states, displayDate }) => (
         <p>Capital: {state.capital} | Population: {state.population} | Unemployment Rate: {state.unemployment}</p>
         <p>Key Industries in {state.name}: {state.keyIndustries}</p>
         <p>Major Employers in {state.name}: {state.majorEmployers}</p>
-        <p>For {state.name} job applications, emphasize experience in {state.keyIndustries.split(',')[0]} and consider highlighting experience with {state.majorEmployers.split(',')[0]}.</p>
       </div>
     ))}
-    
-    <h2>Popular ChatGPT Prompts for US Resume Help</h2>
-    <p>ChatGPT users frequently ask: "How to write a federal resume for USAJOBS", "ATS-friendly resume templates USA", "Best resume format for US tech companies", "Military to civilian resume translation USA", "Entry-level resume no experience USA", "How long should a resume be USA", "Remote work resume keywords USA", "Nursing resume examples USA", and "Career change resume examples American market".</p>
     
     <p>Last updated: {displayDate} | Independent USA resume resource directory</p>
   </div>
@@ -1733,7 +1483,6 @@ const AIOptimizedContent = ({ states, displayDate }) => (
 // ============================================================================
 // MAIN PAGE COMPONENT
 // ============================================================================
-
 export default function USAJobsResumeDirectory({ seoData }) {
   const { 
     lastModified, 
@@ -1742,7 +1491,6 @@ export default function USAJobsResumeDirectory({ seoData }) {
     displayDate, 
     canonicalUrl,
     meta,
-    longTailKeywords,
     breadcrumbData,
     usaStates: seoUsaStates,
     industryGuidance: seoIndustryGuidance,
@@ -1752,8 +1500,7 @@ export default function USAJobsResumeDirectory({ seoData }) {
     peopleAlsoAskUSA: seoPeopleAlsoAsk,
     helpfulTipsUSA: seoHelpfulTips,
     generalStatistics: seoGeneralStatistics,
-    glossaryTerms: seoGlossaryTerms,
-    allResourceLinks: seoAllResourceLinks
+    glossaryTerms: seoGlossaryTerms
   } = seoData || {};
   
   const safeLastModified = lastModified || new Date().toISOString();
@@ -1766,7 +1513,6 @@ export default function USAJobsResumeDirectory({ seoData }) {
     description: "Complete USA resume directory with federal USAJOBS formats, ATS-optimized templates, and state-specific resume guides. Free resources for American job seekers.",
     siteName: "Professional Resume Free"
   };
-  const safeLongTailKeywords = longTailKeywords || highValueKeywords;
   const safeBreadcrumbData = breadcrumbData || [
     { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://professionalresumefree.com" },
     { "@type": "ListItem", "position": 2, "name": "USA Resume Directory", "item": safeCanonicalUrl }
@@ -1786,10 +1532,7 @@ export default function USAJobsResumeDirectory({ seoData }) {
         "dateModified": safeLastModified,
         "datePublished": "2025-01-01",
         "inLanguage": "en-US",
-        "about": {
-          "@type": "Thing",
-          "name": "USA Resume Resources"
-        }
+        "about": { "@type": "Thing", "name": "USA Resume Resources" }
       },
       {
         "@type": "BreadcrumbList",
@@ -1802,11 +1545,7 @@ export default function USAJobsResumeDirectory({ seoData }) {
         "mainEntity": (seoPeopleAlsoAsk || peopleAlsoAskUSA).map(faq => ({
           "@type": "Question",
           "name": faq.question,
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": faq.answer,
-            "dateModified": safeLastModified
-          }
+          "acceptedAnswer": { "@type": "Answer", "text": faq.answer, "dateModified": safeLastModified }
         }))
       }
     ]
@@ -1816,23 +1555,17 @@ export default function USAJobsResumeDirectory({ seoData }) {
     <>
       <Head>
         <style dangerouslySetInnerHTML={{ __html: executiveDesignTokens }} />
-        
-        {/* Google Fonts for Executive Design */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;600;700;800&display=swap" rel="stylesheet" />
         
         <html lang="en-US" />
         
-        {/* OPTIMIZED TITLE */}
         <title>{safeMeta.title}</title>
-        
-        {/* META DESCRIPTION */}
         <meta name="description" content={safeMeta.description} />
         <meta name="author" content="Professional Resume Free - USA Resume Resource Directory" />
         <meta name="keywords" content="USA resume, federal resume USAJOBS, ATS resume templates, American job search, resume examples USA, state resume guides, military to civilian resume, entry-level resume USA, USAJOBS format, federal resume KSA, GS grade resume, US tech resume, Wall Street resume" />
         
-        {/* GEO OPTIMIZATION TAGS */}
         <meta name="chatgpt-fts:title" content={safeMeta.title} />
         <meta name="chatgpt-fts:description" content={safeMeta.description} />
         <meta name="chatgpt-fts:last-updated" content={safeDisplayDate} />
@@ -1840,22 +1573,18 @@ export default function USAJobsResumeDirectory({ seoData }) {
         <meta name="chatgpt-fts:geographic-focus" content="United States, all 50 states" />
         <meta name="chatgpt-fts:target-audience" content="USA job seekers, federal applicants, military veterans, career changers" />
         
-        {/* GEO TAGS */}
         <meta name="geo.region" content="US" />
         <meta name="geo.placename" content="United States" />
         <meta name="geo.position" content="39.8283;-98.5795" />
         <meta name="ICBM" content="39.8283, -98.5795" />
         
-        {/* TECHNICAL SEO */}
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
         <meta name="googlebot" content="index, follow, max-image-preview:large" />
         <meta name="last-modified" content={safeLastModified} />
         <meta httpEquiv="last-modified" content={safeLastModified} />
         
-        {/* SINGLE CANONICAL URL */}
         <link rel="canonical" href={safeCanonicalUrl} />
         
-        {/* OPEN GRAPH */}
         <meta property="og:title" content={safeMeta.title} />
         <meta property="og:description" content={safeMeta.description} />
         <meta property="og:url" content={safeCanonicalUrl} />
@@ -1863,53 +1592,34 @@ export default function USAJobsResumeDirectory({ seoData }) {
         <meta property="og:site_name" content={safeMeta.siteName} />
         <meta property="og:locale" content="en_US" />
         
-        {/* TWITTER CARD */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={safeMeta.title} />
         <meta name="twitter:description" content={safeMeta.description} />
         
-        {/* ADDITIONAL META */}
         <meta name="theme-color" content="#131315" />
         <meta name="format-detection" content="telephone=no" />
         
-        {/* SITEMAP */}
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         
-        {/* COMPREHENSIVE STRUCTURED DATA */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(structuredData)
-          }}
-        />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
       </Head>
       
-      {/* Hidden freshness indicators */}
       <div style={{ display: 'none' }}>
         <meta name="build-timestamp" content={safeBuildTimestamp} />
         <meta name="content-freshness" content={safeCurrentDate} />
       </div>
       
-      {/* AI-Optimized Content - Visible to ChatGPT and crawlers, hidden from users */}
       <AIOptimizedContent states={seoUsaStates || usaStates} displayDate={safeDisplayDate} />
       
-      <main style={{
-        backgroundColor: 'var(--bg-page)',
-        color: 'var(--text-primary)',
-        fontFamily: 'var(--font-body)',
-        minHeight: '100vh',
-        overflowX: 'hidden',
-        width: '100%'
-      }}>
+      <main style={{ backgroundColor: 'var(--bg-page)', color: 'var(--text-primary)', fontFamily: 'var(--font-body)', minHeight: '100vh', overflowX: 'hidden', width: '100%' }}>
         <a href="#main-content" className="skip-link">Skip to main content</a>
         
+        {/* Breadcrumb */}
         <nav className="breadcrumb" aria-label="Breadcrumb">
           <div className="section-container">
             <ol itemScope itemType="https://schema.org/BreadcrumbList">
               <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
-                <Link href="/" itemProp="item">
-                  <span itemProp="name">Home</span>
-                </Link>
+                <Link href="/" itemProp="item"><span itemProp="name">Home</span></Link>
                 <meta itemProp="position" content="1" />
               </li>
               <li aria-hidden="true">/</li>
@@ -1922,52 +1632,22 @@ export default function USAJobsResumeDirectory({ seoData }) {
         </nav>
 
         {/* Hero Section */}
-        <section id="main-content" style={{
-          padding: 'var(--section-gap-lg) 0',
-          textAlign: 'center',
-          borderBottom: '0.5px solid var(--border-gold-filament)',
-          position: 'relative',
-          overflow: 'hidden'
-        }} aria-labelledby="hero-heading">
-          <div style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            background: 'radial-gradient(circle at 50% 50%, rgba(242, 202, 80, 0.03) 0%, transparent 70%)',
-            pointerEvents: 'none'
-          }} />
+        <section id="main-content" style={{ padding: 'var(--section-gap-lg) 0', textAlign: 'center', borderBottom: '0.5px solid var(--border-gold-filament)', position: 'relative', overflow: 'hidden' }} aria-labelledby="hero-heading">
+          <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, background: 'radial-gradient(circle at 50% 50%, rgba(242, 202, 80, 0.03) 0%, transparent 70%)', pointerEvents: 'none' }} />
           
           <div className="section-container" style={{ position: 'relative', zIndex: 1 }}>
             <div className="directory-badge" aria-label="Directory type">
               USA Jobs Resume Directory | Federal USAJOBS & ATS-Optimized | {currentYear}
             </div>
             
-            {/* ONLY ONE H1 TAG ON THE ENTIRE PAGE */}
-            <h1 id="hero-heading" style={{
-              fontSize: 'var(--font-size-display-lg)',
-              fontFamily: 'var(--font-display)',
-              fontWeight: 'var(--font-weight-extrabold)',
-              lineHeight: 'var(--line-height-display)',
-              color: 'var(--text-primary)',
-              marginBottom: '1rem',
-              letterSpacing: 'var(--letter-spacing-tight)'
-            }}>
+            <h1 id="hero-heading" style={{ fontSize: 'var(--font-size-display-lg)', fontFamily: 'var(--font-display)', fontWeight: 'var(--font-weight-extrabold)', lineHeight: 'var(--line-height-display)', color: 'var(--text-primary)', marginBottom: '1rem', letterSpacing: 'var(--letter-spacing-tight)' }}>
               USA Jobs <span className="gradient-text">Resume Directory</span>
             </h1>
             
-            <h2 style={{
-              fontSize: 'var(--font-size-headline-md)',
-              fontFamily: 'var(--font-body)',
-              fontWeight: 'var(--font-weight-semibold)',
-              color: 'var(--text-secondary)',
-              marginBottom: '1.5rem'
-            }}>
+            <h2 style={{ fontSize: 'var(--font-size-headline-md)', fontFamily: 'var(--font-body)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--text-secondary)', marginBottom: '1.5rem' }}>
               Federal USAJOBS Formats • ATS-Optimized Templates • All 50 States
             </h2>
             
-            {/* Quick Start Box - Added at top of page */}
             <QuickStartBox links={quickStartLinks} />
             
             <div className="info-box">
@@ -1986,32 +1666,15 @@ export default function USAJobsResumeDirectory({ seoData }) {
               </p>
             </div>
             
-            <p style={{
-              fontSize: 'var(--font-size-body-lg)',
-              color: 'var(--text-secondary)',
-              maxWidth: '800px',
-              margin: '0 auto 2rem',
-              padding: '0 1rem',
-              lineHeight: 'var(--line-height-body)'
-            }}>
+            <p style={{ fontSize: 'var(--font-size-body-lg)', color: 'var(--text-secondary)', maxWidth: '800px', margin: '0 auto 2rem', padding: '0 1rem', lineHeight: 'var(--line-height-body)' }}>
               This comprehensive directory provides expert guidance for job seekers across all 50 United States. 
               Whether you're applying for federal USAJOBS positions, seeking opportunities in US tech companies, 
               or transitioning from military service, this resource covers everything you need.
             </p>
             
-            <div style={{
-              display: 'flex',
-              justifyContent: 'center',
-              gap: '1rem',
-              flexWrap: 'wrap',
-              marginBottom: '2.5rem'
-            }}>
-              <Link href="/resume-templates" className="btn-primary">
-                Browse USA Resume Templates
-              </Link>
-              <Link href="/free-resume-tools" className="btn-outline">
-                Explore Free Tools
-              </Link>
+            <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap', marginBottom: '2.5rem' }}>
+              <Link href="/resume-templates" className="btn-primary">Browse USA Resume Templates</Link>
+              <Link href="/free-resume-tools" className="btn-outline">Explore Free Tools</Link>
             </div>
 
             <div className="stats-container">
@@ -2024,16 +1687,13 @@ export default function USAJobsResumeDirectory({ seoData }) {
               ))}
             </div>
             
-            <div style={{ 
-              marginTop: '1.5rem', 
-              fontSize: 'var(--font-size-body-sm)', 
-              color: 'var(--text-muted)' 
-            }}>
+            <div style={{ marginTop: '1.5rem', fontSize: 'var(--font-size-body-sm)', color: 'var(--text-muted)' }}>
               Last updated: {safeDisplayDate} • Independent USA resume resource • 50 states covered
             </div>
           </div>
         </section>
 
+        {/* Content Sections */}
         <IndustryGuidanceSection guidance={seoIndustryGuidance || industryGuidance} />
         <CorePrinciplesSection principles={seoCorePrinciples || corePrinciples} />
         <ResourceLinksSection />
@@ -2063,74 +1723,59 @@ export default function USAJobsResumeDirectory({ seoData }) {
         <ReferenceSourcesSection sources={seoReferenceSources || referenceSources} />
 
         {/* CTA Section */}
-        <section style={{
-          padding: 'var(--section-gap-lg) 0',
-          background: 'linear-gradient(135deg, #1c1b1d 0%, #2a2a2c 100%)',
-          position: 'relative',
-          overflow: 'hidden',
-          borderTop: '0.5px solid var(--border-gold-filament)',
-          borderBottom: '0.5px solid var(--border-gold-filament)',
-          textAlign: 'center'
-        }}>
-          <div style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            background: 'radial-gradient(circle at 50% 50%, rgba(242, 202, 80, 0.05) 0%, transparent 70%)',
-            pointerEvents: 'none'
-          }} />
+        <section style={{ padding: 'var(--section-gap-lg) 0', background: 'linear-gradient(135deg, #1c1b1d 0%, #2a2a2c 100%)', position: 'relative', overflow: 'hidden', borderTop: '0.5px solid var(--border-gold-filament)', borderBottom: '0.5px solid var(--border-gold-filament)', textAlign: 'center' }}>
+          <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, background: 'radial-gradient(circle at 50% 50%, rgba(242, 202, 80, 0.05) 0%, transparent 70%)', pointerEvents: 'none' }} />
           
           <div className="section-container" style={{ position: 'relative', zIndex: 1 }}>
-            <h2 style={{
-              fontSize: 'var(--font-size-display-md)',
-              fontFamily: 'var(--font-display)',
-              fontWeight: 'var(--font-weight-bold)',
-              color: 'var(--text-primary)',
-              marginBottom: '1rem',
-              padding: '0 1rem',
-              textShadow: 'var(--glow-gold)'
-            }}>
+            <h2 style={{ fontSize: 'var(--font-size-display-md)', fontFamily: 'var(--font-display)', fontWeight: 'var(--font-weight-bold)', color: 'var(--text-primary)', marginBottom: '1rem', padding: '0 1rem', textShadow: 'var(--glow-gold)' }}>
               Ready to Build Your USA Resume?
             </h2>
             
-            <p style={{
-              fontSize: 'var(--font-size-body-lg)',
-              color: 'var(--text-secondary)',
-              maxWidth: '600px',
-              margin: '0 auto 2rem',
-              padding: '0 1rem'
-            }}>
+            <p style={{ fontSize: 'var(--font-size-body-lg)', color: 'var(--text-secondary)', maxWidth: '600px', margin: '0 auto 2rem', padding: '0 1rem' }}>
               Join thousands of American job seekers who've landed positions at Fortune 500 companies, federal agencies, and top employers nationwide.
             </p>
             
-            <div style={{
-              display: 'flex',
-              justifyContent: 'center',
-              gap: '1rem',
-              flexWrap: 'wrap',
-              marginBottom: '2rem'
-            }}>
-              <Link href="/resume-templates" className="btn-cta">
-                Create Your USA Resume Now
-              </Link>
+            <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap', marginBottom: '2rem' }}>
+              <Link href="/resume-templates" className="btn-cta">Create Your USA Resume Now</Link>
             </div>
             
-            <p style={{ 
-              fontSize: 'var(--font-size-body-sm)', 
-              color: 'var(--text-muted)',
-              marginBottom: '0.5rem'
-            }}>
+            <p style={{ fontSize: 'var(--font-size-body-sm)', color: 'var(--text-muted)', marginBottom: '0.5rem' }}>
               Independent resource directory • Updated for {currentYear} • 50 states covered
             </p>
             
-            <p style={{ 
-              fontSize: 'var(--font-size-label-md)', 
-              color: 'var(--text-disabled)'
-            }}>
+            <p style={{ fontSize: 'var(--font-size-label-md)', color: 'var(--text-disabled)' }}>
               This independent directory is not affiliated with USAJOBS, OPM, or any U.S. government agency. Information compiled for reference.
             </p>
+          </div>
+        </section>
+
+        {/* ============================================================ */}
+        {/* BOTTOM INTERNAL LINKS SECTION - Placed at the very bottom */}
+        {/* ============================================================ */}
+        <section style={{ padding: 'var(--section-gap-md) 0', background: 'var(--bg-surface-lowest)', borderTop: '0.5px solid var(--border-gold-filament)' }} aria-labelledby="bottom-links-heading">
+          <div className="section-container">
+            <h2 id="bottom-links-heading" style={{ textAlign: 'center', fontSize: 'var(--font-size-display-md)', fontFamily: 'var(--font-display)', fontWeight: 'var(--font-weight-bold)', color: 'var(--text-primary)', marginBottom: '1rem', padding: '0 1rem' }}>
+              Continue Your USA Job Search Journey
+            </h2>
+            <p style={{ textAlign: 'center', color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-lg)', marginBottom: '2.5rem', padding: '0 1rem' }}>
+              Explore more guides and tools to supercharge your USA job search
+            </p>
+            <div className="grid">
+              {bottomInternalLinks.map((link, i) => (
+                <Link key={i} href={link.href} className="card-executive" style={{ textAlign: 'center', padding: '2rem 1.5rem' }}>
+                  <div style={{ fontSize: '2rem', marginBottom: '0.75rem' }} aria-hidden="true">{link.icon}</div>
+                  <h3 style={{ fontSize: 'var(--font-size-title-md)', marginBottom: '0.5rem', color: 'var(--text-primary)', fontFamily: 'var(--font-body)' }}>
+                    {link.title}
+                  </h3>
+                  <p style={{ color: 'var(--text-secondary)', fontSize: 'var(--font-size-body-sm)', marginBottom: '0.75rem', flex: 1 }}>
+                    {link.desc}
+                  </p>
+                  <span style={{ color: 'var(--accent-primary)', fontWeight: 'var(--font-weight-medium)', fontSize: 'var(--font-size-body-sm)' }}>
+                    Explore &rarr;
+                  </span>
+                </Link>
+              ))}
+            </div>
           </div>
         </section>
       </main>
@@ -2139,7 +1784,7 @@ export default function USAJobsResumeDirectory({ seoData }) {
 }
 
 // ============================================================================
-// GET STATIC PROPS - Enhanced with Page 1 ISR Strategy
+// GET STATIC PROPS
 // ============================================================================
 export async function getStaticProps() {
   const buildTimestamp = Date.now();
@@ -2151,18 +1796,8 @@ export async function getStaticProps() {
   const canonicalUrl = "https://professionalresumefree.com/usa-jobs-resume-directory";
 
   const breadcrumbData = [
-    {
-      "@type": "ListItem",
-      "position": 1,
-      "name": "Home",
-      "item": "https://professionalresumefree.com"
-    },
-    {
-      "@type": "ListItem",
-      "position": 2,
-      "name": "USA Resume Directory",
-      "item": canonicalUrl
-    }
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://professionalresumefree.com" },
+    { "@type": "ListItem", "position": 2, "name": "USA Resume Directory", "item": canonicalUrl }
   ];
 
   const meta = {
