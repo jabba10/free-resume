@@ -1,3 +1,6 @@
+
+
+
 /** @type {import('next').NextConfig} */
 
 // ============================================================================
@@ -33,8 +36,9 @@ const CACHE = {
   // Static assets with revalidation (7 days)
   STATIC_ASSETS: 'public, max-age=604800, s-maxage=604800, stale-while-revalidate=86400',
   
-  // HTML pages - Use stale-while-revalidate for SEO
-  HTML: 'public, max-age=60, s-maxage=300, stale-while-revalidate=86400, stale-if-error=86400',
+  // HTML pages - UPDATED TO 24 HOURS FOR GOOGLEBOT STABILITY
+  // max-age=0 forces browser to check Vercel. s-maxage=86400 caches at Vercel Edge for 24h (HIT).
+  HTML: 'public, max-age=0, s-maxage=86400, stale-while-revalidate=604800, stale-if-error=604800',
   
   // AI files - cache for 1 week
   AI_FILES: 'public, max-age=604800, s-maxage=604800, stale-while-revalidate=86400, stale-if-error=86400',
@@ -241,9 +245,7 @@ const nextConfig = {
         headers: [
           { key: 'Content-Type', value: 'application/rss+xml; charset=utf-8' },
           ...cacheHeaders(CACHE.FEEDS),
-          // Allow AI crawlers to read the feed but not index it as a page
           { key: 'X-Robots-Tag', value: 'noindex, follow' },
-          // Explicit allow for AI feed readers
           { key: 'Access-Control-Allow-Origin', value: '*' },
           { key: 'Vary', value: 'Accept' },
         ],
@@ -279,7 +281,7 @@ const nextConfig = {
         headers: cacheHeaders(CACHE.ROBOTS),
       },
       
-      // HTML pages - Safe caching for SEO
+      // HTML pages - Safe caching for SEO (Now updated to use the 24hr CACHE.HTML)
       {
         source: '/:path*',
         headers: [
