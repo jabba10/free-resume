@@ -971,12 +971,7 @@ export default function LandingPage({ lastModified, buildTimestamp, updatedStats
         "speakable": {
           "@type": "SpeakableSpecification",
           "cssSelector": [".hero-section h1", ".hero-section p", ".ai-definition-box", ".section-title"]
-        },
-        "contentReference": [
-          `${baseUrl}/llms.txt`,
-          `${baseUrl}/llms-full.txt`,
-          `${baseUrl}/api/ai-context.json`
-        ]
+        }
       },
       {
         "@type": "WebSite",
@@ -1138,14 +1133,8 @@ export default function LandingPage({ lastModified, buildTimestamp, updatedStats
         <meta name="build-timestamp" content={buildTimestamp} />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
 
-        {/* ── AI CONTENT NEGOTIATION LINKS ── */}
-        <link rel="ai-context" type="application/json" href={`${baseUrl}/api/ai-context.json`} />
-        <link rel="ai-summary" type="application/json" href={`${baseUrl}/api/ai-summary.json`} />
-        <link rel="ai-full" type="application/json" href={`${baseUrl}/api/ai-full.json`} />
-
         {/* ── LLMS.TXT LINKS ── */}
         <link rel="describedby" type="text/plain" href={`${baseUrl}/llms.txt`} title="AI Site Index — Machine-Readable Summary" />
-        <link rel="alternate" type="text/plain" href={`${baseUrl}/llms-full.txt`} title="AI Full Content Index — Complete Site Content" />
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
 
         {/* ── RSS FEED — Discovered by AI crawlers ── */}
@@ -1156,9 +1145,6 @@ export default function LandingPage({ lastModified, buildTimestamp, updatedStats
           href={`${baseUrl}/feed.xml`}
         />
         
-        {/* JSON Feed for AI Crawlers */}
-        <link rel="alternate" type="application/feed+json" href={`${baseUrl}/feed.json`} title="AI Content Feed" />
-
         {/* ── CANONICAL + HREFLANG ── */}
         <link rel="canonical" href={canonicalUrl} />
         <link rel="alternate" href={canonicalUrl} hrefLang="en-us" />
@@ -1281,20 +1267,20 @@ export default function LandingPage({ lastModified, buildTimestamp, updatedStats
                 and <strong>15+ calculators</strong>.
               </p>
 
-              {/* 🔥 Primary CTAs */}
+              {/* Primary CTAs */}
               <div className="button-container" role="group" aria-label="Primary call to action">
                 <Link href="/free-resume-builder" className="btn-cta" aria-label="Build your free resume now — no sign-up required">
-                  🚀 Build Your Free Resume Now
+                  Build Your Free Resume Now
                 </Link>
                 <Link href="/free-ats-resume-checker" className="btn-primary" aria-label="Check your resume ATS score free instantly">
-                  ✅ Free ATS Resume Checker — Instant Scan
+                  Free ATS Resume Checker — Instant Scan
                 </Link>
                 <Link href="/resume-templates" className="btn-outline" aria-label="Browse 46+ ATS-friendly resume templates">
-                  📄 Browse 46+ ATS-Friendly Templates
+                  Browse 46+ ATS-Friendly Templates
                 </Link>
               </div>
 
-              {/* 🔥 Trust Badge Links */}
+              {/* Trust Badge Links */}
               <div style={{
                 display: 'flex',
                 flexWrap: 'wrap',
@@ -1315,7 +1301,7 @@ export default function LandingPage({ lastModified, buildTimestamp, updatedStats
                   borderRadius: 'var(--radius-full)',
                   transition: 'all var(--transition-fast) var(--easing-default)'
                 }}>
-                  <span style={{ fontSize: '1.2rem' }}>🤖</span> AI Resume Builder Guide
+                  AI Resume Builder Guide
                 </Link>
                 <Link href="/free-resume-keyword-matcher" style={{
                   display: 'inline-flex',
@@ -1330,7 +1316,7 @@ export default function LandingPage({ lastModified, buildTimestamp, updatedStats
                   borderRadius: 'var(--radius-full)',
                   transition: 'all var(--transition-fast) var(--easing-default)'
                 }}>
-                  <span style={{ fontSize: '1.2rem' }}>🎯</span> Resume Keyword Matcher — Beat ATS
+                  Resume Keyword Matcher — Beat ATS
                 </Link>
               </div>
 
@@ -1347,16 +1333,16 @@ export default function LandingPage({ lastModified, buildTimestamp, updatedStats
                 />
               </div>
 
-              {/* 🔥 Secondary CTAs */}
+              {/* Secondary CTAs */}
               <div className="button-container" role="group" aria-label="Secondary call to action buttons">
                 <Link href="/free-cover-letter-generator" className="btn-primary" aria-label="Generate a free cover letter">
-                  📝 Free Cover Letter Generator
+                  Free Cover Letter Generator
                 </Link>
                 <Link href="/resume-calculators" className="btn-primary" aria-label="Explore 15+ free resume calculators">
-                  📊 Resume Calculators — 15+ Tools
+                  Resume Calculators — 15+ Tools
                 </Link>
                 <Link href="/free-resume-tools" className="btn-outline" aria-label="Explore all 12+ free resume tools">
-                  🛠️ 12+ Free Resume Tools
+                  12+ Free Resume Tools
                 </Link>
               </div>
 
@@ -1365,8 +1351,6 @@ export default function LandingPage({ lastModified, buildTimestamp, updatedStats
                 <strong style={{ color: 'var(--accent-primary)' }}>AI & Developer Access:</strong>
                 Machine-readable site index at{' '}
                 <a href={`${baseUrl}/llms.txt`} rel="noopener" aria-label="llms.txt — AI-readable site index">/llms.txt</a>
-                {' '}and full content at{' '}
-                <a href={`${baseUrl}/llms-full.txt`} rel="noopener" aria-label="llms-full.txt — complete AI-readable content">/llms-full.txt</a>
               </div>
 
               {/* AI Definition Box */}
@@ -1426,15 +1410,15 @@ export default function LandingPage({ lastModified, buildTimestamp, updatedStats
             <div className="featured-tools-grid">
               {/* Tool 1: ATS Checker */}
               <Link href="/free-ats-resume-checker" className="tool-card featured">
-                <div className="tool-icon">✅</div>
+                <div className="tool-icon">Check</div>
                 <h3>Free ATS Resume Checker</h3>
                 <p>Pass automated screening with instant feedback</p>
-                <span className="tool-badge">🔥 Most Used</span>
+                <span className="tool-badge">Most Used</span>
               </Link>
 
               {/* Tool 2: Score Checker */}
               <Link href="/free-resume-score-checker" className="tool-card">
-                <div className="tool-icon">⭐</div>
+                <div className="tool-icon">Star</div>
                 <h3>Free Resume Score Checker</h3>
                 <p>Get instant score and detailed improvement tips</p>
                 <span className="tool-badge">Essential</span>
@@ -1442,7 +1426,7 @@ export default function LandingPage({ lastModified, buildTimestamp, updatedStats
 
               {/* Tool 3: Keyword Matcher */}
               <Link href="/free-resume-keyword-matcher" className="tool-card">
-                <div className="tool-icon">🎯</div>
+                <div className="tool-icon">Target</div>
                 <h3>Resume Keyword Matcher</h3>
                 <p>Match job descriptions to beat ATS screening</p>
                 <span className="tool-badge">Strategic</span>
@@ -1450,15 +1434,15 @@ export default function LandingPage({ lastModified, buildTimestamp, updatedStats
 
               {/* Tool 4: Cover Letter */}
               <Link href="/free-cover-letter-generator" className="tool-card">
-                <div className="tool-icon">📝</div>
+                <div className="tool-icon">Letter</div>
                 <h3>Free Cover Letter Generator</h3>
                 <p>Create compelling cover letters that get interviews</p>
                 <span className="tool-badge">Popular</span>
               </Link>
 
-              {/* Tool 5: Salary Calculator — NEWLY ADDED */}
+              {/* Tool 5: Salary Calculator */}
               <Link href="/salary-calculator" className="tool-card">
-                <div className="tool-icon">💰</div>
+                <div className="tool-icon">Money</div>
                 <h3>Free Salary Calculator</h3>
                 <p>Convert hourly to annual pay with tax estimates and benchmarks</p>
                 <span className="tool-badge">New</span>
@@ -1466,7 +1450,7 @@ export default function LandingPage({ lastModified, buildTimestamp, updatedStats
 
               {/* Tool 6: Calculators */}
               <Link href="/resume-calculators" className="tool-card">
-                <div className="tool-icon">📊</div>
+                <div className="tool-icon">Chart</div>
                 <h3>Resume Calculators</h3>
                 <p>15+ calculators — Strength, Value, Skill Gap &amp; more</p>
                 <span className="tool-badge">15+ Tools</span>
@@ -1501,16 +1485,16 @@ export default function LandingPage({ lastModified, buildTimestamp, updatedStats
 
             <div className="link-row">
               <Link href="/best-ats-resume-format-2026" className="link-with-arrow">
-                📄 Best ATS Resume Format 2026 →
+                Best ATS Resume Format 2026
               </Link>
               <Link href="/most-googled-resume-questions-in-the-usa" className="link-with-arrow">
-                🔍 Most Googled Resume Questions in the USA →
+                Most Googled Resume Questions in the USA
               </Link>
               <Link href="/how-to-beat-the-ats-optimization-tips-for-modern-hiring-software" className="link-with-arrow">
-                🏆 How to Beat the ATS — Ultimate Guide →
+                How to Beat the ATS — Ultimate Guide
               </Link>
               <Link href="/ai-resume-builders-how-to-use-artificial-intelligence-to-write-your-best-resume" className="link-with-arrow">
-                🤖 AI Resume Builder Guide →
+                AI Resume Builder Guide
               </Link>
             </div>
           </div>
@@ -1520,12 +1504,12 @@ export default function LandingPage({ lastModified, buildTimestamp, updatedStats
         <section className="section section-alt">
           <div className="section-container">
             <Link href="/complete-resume-resource-library" className="resource-banner">
-              <h3>📚 Complete Resume Resource Library 2026</h3>
+              <h3>Complete Resume Resource Library 2026</h3>
               <p>
                 60+ expert guides, templates, tools, and calculators — all in one place.
                 Everything you need to create the perfect resume for any career stage.
               </p>
-              <span className="btn-outline">Explore Library →</span>
+              <span className="btn-outline">Explore Library</span>
             </Link>
           </div>
         </section>
@@ -1578,12 +1562,12 @@ export default function LandingPage({ lastModified, buildTimestamp, updatedStats
                 and 15+ calculators. No sign-up required. No credit card. No watermarks. Just a great resume.
               </p>
               <div className="button-container" role="group" aria-label="Final call to action buttons">
-                <Link href="/free-resume-builder" className="btn-cta">🚀 Build Your Free Resume Now</Link>
-                <Link href="/resume-templates" className="btn-primary">📄 Browse 46+ Templates</Link>
-                <Link href="/salary-calculator" className="btn-outline">💰 Free Salary Calculator</Link>
+                <Link href="/free-resume-builder" className="btn-cta">Build Your Free Resume Now</Link>
+                <Link href="/resume-templates" className="btn-primary">Browse 46+ Templates</Link>
+                <Link href="/salary-calculator" className="btn-outline">Free Salary Calculator</Link>
               </div>
               <p className="text-small" style={{ marginTop: '2rem', color: 'var(--text-muted)' }}>
-                ✓ 100% Free • ✓ No Sign Up • ✓ Privacy Protected • ✓ Instant PDF Download • ✓ ATS-Optimized • ✓ Based on Industry Standards
+                100% Free • No Sign Up • Privacy Protected • Instant PDF Download • ATS-Optimized • Based on Industry Standards
               </p>
               
               {/* Enhanced AI Crawler Footer References */}
@@ -1593,21 +1577,13 @@ export default function LandingPage({ lastModified, buildTimestamp, updatedStats
                   <a href={`${baseUrl}/llms.txt`} style={{ color: 'var(--text-disabled)' }}>
                     professionalresumefree.com/llms.txt
                   </a>
-                  {' '}· full content at{' '}
-                  <a href={`${baseUrl}/llms-full.txt`} style={{ color: 'var(--text-disabled)' }}>
-                    /llms-full.txt
-                  </a>
-                  {' '}· AI context at{' '}
-                  <a href={`${baseUrl}/api/ai-context.json`} style={{ color: 'var(--text-disabled)' }}>
-                    /api/ai-context.json
-                  </a>
-                  {' '}· RSS feed at{' '}
+                  {' '}• RSS feed at{' '}
                   <a href={`${baseUrl}/feed.xml`} style={{ color: 'var(--text-disabled)' }}>
                     /feed.xml
                   </a>
                 </p>
                 <p style={{ marginTop: '0.5rem' }}>
-                  Data fresh as of: {displayDate} · Build: {buildTimestamp}
+                  Data fresh as of: {displayDate} • Build: {buildTimestamp}
                 </p>
               </div>
             </div>
@@ -1622,8 +1598,6 @@ export default function LandingPage({ lastModified, buildTimestamp, updatedStats
           <span itemProp="last-updated">{displayDate}</span>
           <span itemProp="build-timestamp">{buildTimestamp}</span>
           <span itemProp="llms-index">{baseUrl}/llms.txt</span>
-          <span itemProp="llms-full">{baseUrl}/llms-full.txt</span>
-          <span itemProp="ai-context">{baseUrl}/api/ai-context.json</span>
           <span itemProp="rss-feed">{baseUrl}/feed.xml</span>
           <span itemProp="user-count">125000</span>
           <span itemProp="resumes-created">500000</span>

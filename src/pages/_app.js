@@ -9,15 +9,17 @@ import Navbar from "../Components/Navbar";
 import Footer from "../Components/Footer";
 import "./globals.css";
 
+// Import AI Schemas
+import globalSchema from "../../public/ai/global-schema.json";
+import faqsMap from "../../public/ai/faqs-map.json";
+
 /**
  * Client-side tracker for GoatCounter pageviews
- * Optimized for SSG (Static Site Generation)
  */
 function GoatCounterTracker() {
   const router = useRouter();
 
   useEffect(() => {
-    // Wait for GoatCounter to be available, then track initial page
     const initGoatCounter = () => {
       if (typeof window !== 'undefined' && window.goatcounter) {
         window.goatcounter.count({
@@ -28,22 +30,16 @@ function GoatCounterTracker() {
       }
     };
 
-    // Check if GoatCounter is already loaded
     if (window.goatcounter) {
       initGoatCounter();
     } else {
-      // If not loaded yet, wait for it
       window.addEventListener('load', () => {
-        setTimeout(initGoatCounter, 100); // Small delay to ensure GoatCounter is initialized
+        setTimeout(initGoatCounter, 100);
       });
     }
 
-    // Track route changes for client-side navigation
     const handleRouteChange = (url) => {
-      // Google Analytics
       gtag.pageview(url);
-
-      // GoatCounter - track pageview on route change
       if (typeof window !== 'undefined' && window.goatcounter) {
         window.goatcounter.count({
           path: url,
@@ -62,12 +58,27 @@ function GoatCounterTracker() {
   return null;
 }
 
-/**
- * Main App component - Optimized for SSG
- */
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
   const canonicalUrl = `https://professionalresumefree.com${router.asPath}`;
+
+  // Get the FAQs for the current page route
+  const currentPath = router.pathname === '/' ? '/' : router.pathname;
+  const pageFaqs = faqsMap[currentPath] || [];
+
+  // Build FAQ schema ONLY if this page has FAQs
+  const faqSchema = pageFaqs.length > 0 ? {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": pageFaqs.map((faq) => ({
+      "@type": "Question",
+      "name": faq.question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faq.answer,
+      },
+    })),
+  } : null;
 
   return (
     <>
@@ -98,16 +109,9 @@ function MyApp({ Component, pageProps }) {
         {/* ========== CANONICAL URL ========== */}
         <link rel="canonical" href={canonicalUrl} key="canonical" />
         
-        {/* ========== BASIC SEO ========== */}
-        <title>Professional Resume Free - Build Your Perfect Resume</title>
-        <meta name="description" content="Create professional resumes for free. Build, customize, and download your perfect resume in minutes with our easy-to-use resume builder." />
-        <meta name="keywords" content="resume builder, professional resume, free resume, cv maker, job application, resume template, cover letter, career" />
-        
         {/* ========== OPEN GRAPH (SOCIAL MEDIA) ========== */}
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://professionalresumefree.com" />
-        <meta property="og:title" content="Professional Resume Free - Build Your Perfect Resume" />
-        <meta property="og:description" content="Create professional resumes for free. Build, customize, and download your perfect resume in minutes with our easy-to-use resume builder." />
+        <meta property="og:url" content={canonicalUrl} />
         <meta property="og:image" content="https://professionalresumefree.com/og-image.png" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
@@ -119,9 +123,7 @@ function MyApp({ Component, pageProps }) {
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:site" content="@ResumeFree" />
         <meta name="twitter:creator" content="@ResumeFree" />
-        <meta name="twitter:url" content="https://professionalresumefree.com" />
-        <meta name="twitter:title" content="Professional Resume Free - Build Your Perfect Resume" />
-        <meta name="twitter:description" content="Create professional resumes for free. Build, customize, and download your perfect resume in minutes." />
+        <meta name="twitter:url" content={canonicalUrl} />
         <meta name="twitter:image" content="https://professionalresumefree.com/twitter-image.png" />
         <meta name="twitter:image:alt" content="Professional Resume Builder Screenshot" />
         
@@ -131,24 +133,21 @@ function MyApp({ Component, pageProps }) {
         <meta name="publisher" content="Professional Resume Free" />
         <meta name="language" content="English" />
         
-        {/* ========== STRUCTURED DATA (JSON-LD) ========== */}
+        {/* ========== 🚨 AI & STRUCTURED DATA (JSON-LD) 🚨 ========== */}
+        
+        {/* 1. Global Identity Schema (Organization, WebSite, SoftwareApp) */}
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "WebApplication",
-              name: "Professional Resume Free",
-              description: "Free online resume builder for creating professional resumes",
-              url: "https://professionalresumefree.com",
-              applicationCategory: "BusinessApplication",
-              operatingSystem: "Any",
-              offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-              aggregateRating: { "@type": "AggregateRating", ratingValue: "4.8", ratingCount: "1250" },
-              author: { "@type": "Organization", name: "Professional Resume Free" }
-            })
-          }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(globalSchema) }}
         />
+        
+        {/* 2. Per-Page FAQ Schema (Injected only if FAQs exist for this route) */}
+        {faqSchema && (
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+          />
+        )}
         
         {/* ========== PRELOAD CRITICAL RESOURCES ========== */}
         <link rel="preconnect" href="https://www.googletagmanager.com" />

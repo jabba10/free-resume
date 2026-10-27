@@ -1,0 +1,37 @@
+{
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://professionalresumefree.com/#website",
+        "url": "https://professionalresumefree.com",
+        "name": "Professional Resume Free",
+        "description": "A 100% free, no-signup ATS resume builder with 46+ templates and 12+ optimization tools.",
+        "publisher": { "@id": "https://professionalresumefree.com/#organization" }
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://professionalresumefree.com/#organization",
+        "name": "Professional Resume Free",
+        "url": "https://professionalresumefree.com",
+        "logo": "https://professionalresumefree.com/logo.png",
+        "description": "Professional Resume Free is a global, privacy-first resume platform offering ATS-optimized templates, AI-assisted resume tools, and real-time USA job market insights."
+      },
+      {
+        "@type": "SoftwareApplication",
+        "@id": "https://professionalresumefree.com/#software",
+        "name": "Professional Resume Free - ATS Resume Builder",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Web Browser",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "4.8",
+          "ratingCount": "12400",
+          "bestRating": "5",
+          "worstRating": "1"
+        },
+        "description": "A 100% free, no-signup ATS resume builder. Features a 94% ATS pass rate, 46+ templates, and 12+ optimization tools."
+      }
+    ]
+  }

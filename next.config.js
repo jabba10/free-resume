@@ -1,6 +1,3 @@
-
-
-
 /** @type {import('next').NextConfig} */
 
 // ============================================================================
@@ -47,9 +44,6 @@ const CACHE = {
   SITEMAP: 'public, max-age=3600, s-maxage=3600, stale-while-revalidate=86400',
   ROBOTS: 'public, max-age=86400, s-maxage=86400',
   
-  // Schema.org structured data
-  SCHEMA: 'public, max-age=604800, s-maxage=604800, stale-while-revalidate=86400',
-  
   // Production fallback
   PRODUCTION: 'public, max-age=300, s-maxage=600, stale-while-revalidate=3600, must-revalidate',
   DEVELOPMENT: 'no-cache, no-store, must-revalidate',
@@ -61,39 +55,12 @@ const CACHE = {
   FEEDS: 'public, max-age=3600, s-maxage=3600, stale-while-revalidate=86400, stale-if-error=86400',
 };
 
+// ✅ FIXED: Removed all deleted files. Only keeping the valid AI files.
 const AI_FILES = [
-  '/ai/llms.txt',
-  '/ai/llms-full.txt',
-  '/ai/llms-seo.txt',
-  '/ai/llms-ranking.txt',
-  '/ai/llms-schema.json',
-  '/ai/llms-vector.txt',
-  '/ai/llms-crawlmap.txt',
-  '/ai/llms-intent-map.txt',
-  '/ai/llms-synonyms.txt',
+  '/llms.txt',
   '/ai/llms-qa-bank.txt',
-  '/ai/llms-topic-clusters.txt',
-  '/ai/llms-entity-descriptions.txt',
-  '/ai/llms-prompt-instructions.txt',
-  '/ai/llms-canonical-answers.txt',
-];
-
-const AI_MANIFESTS = [
-  '/openai.json',
-  '/perplexity.json',
-  '/claude.json',
-  '/bingai.json',
-  '/gemini.json',
-];
-
-const STRUCTURED_DATA_FILES = [
-  '/schema/organization.json',
-  '/schema/website.json',
-  '/schema/breadcrumb.json',
-  '/schema/faq.json',
-  '/schema/howto.json',
-  '/schema/article.json',
-  '/schema/product.json',
+  '/ai/global-schema.json',
+  '/ai/faqs-map.json',
 ];
 
 const STATIC_EXTENSIONS = {
@@ -132,7 +99,7 @@ const nextConfig = {
   reactStrictMode: true,
   compress: true,
   generateEtags: true,
-  swcMinify: true,
+  // ✅ FIXED: Removed swcMinify (deprecated in Next.js 15+)
   
   // Stable build ID
   generateBuildId: async () => {
@@ -193,22 +160,9 @@ const nextConfig = {
       headers: cacheHeaders(CACHE.AI_FILES),
     }));
 
-    const aiManifestHeaders = AI_MANIFESTS.map((file) => ({
-      source: file,
-      headers: cacheHeaders(CACHE.AI_FILES),
-    }));
-
-    const schemaHeaders = STRUCTURED_DATA_FILES.map((file) => ({
-      source: file,
-      headers: cacheHeaders(CACHE.SCHEMA),
-    }));
-
     return [
-      // Static assets - 1 year cache
-      {
-        source: '/_next/static/:path*',
-        headers: cacheHeaders(CACHE.IMMUTABLE),
-      },
+      // ✅ FIXED: Removed the /_next/static/:path* custom header block. 
+      // Next.js handles this automatically and perfectly on Vercel.
       
       // Images - 7 days cache
       {
@@ -261,10 +215,8 @@ const nextConfig = {
         ],
       },
       
-      // AI files
+      // AI files (Only the valid ones we kept)
       ...aiFileHeaders,
-      ...aiManifestHeaders,
-      ...schemaHeaders,
       
       // Sitemap
       {
@@ -281,7 +233,7 @@ const nextConfig = {
         headers: cacheHeaders(CACHE.ROBOTS),
       },
       
-      // HTML pages - Safe caching for SEO (Now updated to use the 24hr CACHE.HTML)
+      // HTML pages - Safe caching for SEO
       {
         source: '/:path*',
         headers: [
