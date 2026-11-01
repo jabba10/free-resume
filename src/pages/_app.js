@@ -60,7 +60,6 @@ function GoatCounterTracker() {
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
-  const canonicalUrl = `https://professionalresumefree.com${router.asPath}`;
 
   // Get the FAQs for the current page route
   const currentPath = router.pathname === '/' ? '/' : router.pathname;
@@ -83,15 +82,9 @@ function MyApp({ Component, pageProps }) {
   return (
     <>
       <Head>
-        {/* ========== ESSENTIAL META TAGS ========== */}
+        {/* ========== ESSENTIAL META TAGS (Non-SEO, Safe Globals) ========== */}
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
-        
-        {/* ========== FAVICON & APP ICONS ========== */}
-        <link rel="icon" href="/favicon.ico" />
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
         
         {/* ========== WEB APP MANIFEST (PWA) ========== */}
         <link rel="manifest" href="/site.webmanifest" />
@@ -101,33 +94,31 @@ function MyApp({ Component, pageProps }) {
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <meta name="mobile-web-app-capable" content="yes" />
         
-        {/* ========== THEME COLORS ========== */}
+        {/* ========== THEME COLORS (Safe Globals) ========== */}
         <meta name="theme-color" content="#2563eb" />
         <meta name="msapplication-TileColor" content="#2563eb" />
         <meta name="msapplication-config" content="/browserconfig.xml" />
         
-        {/* ========== CANONICAL URL ========== */}
-        <link rel="canonical" href={canonicalUrl} key="canonical" />
+        {/* 
+          ✅ NO CANONICAL HERE 
+          Each page has its own hardcoded canonical tag.
+          Adding one here would create duplicates.
+        */}
         
-        {/* ========== OPEN GRAPH (SOCIAL MEDIA) ========== */}
+        {/* 
+          ✅ NO TITLE OR DESCRIPTION HERE 
+          Each page has its own hardcoded title and meta description.
+          Adding them here would cause "More than one title/description tag" errors.
+        */}
+        
+        {/* ========== OPEN GRAPH & TWITTER (Safe Globals - Overridden Per Page) ========== */}
+        {/* These use generic defaults; individual pages should override with page-specific OG/Twitter tags */}
         <meta property="og:type" content="website" />
-        <meta property="og:url" content={canonicalUrl} />
-        <meta property="og:image" content="https://professionalresumefree.com/og-image.png" />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
-        <meta property="og:image:alt" content="Professional Resume Builder Interface" />
         <meta property="og:site_name" content="Professional Resume Free" />
         <meta property="og:locale" content="en_US" />
-        
-        {/* ========== TWITTER CARD ========== */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:site" content="@ResumeFree" />
-        <meta name="twitter:creator" content="@ResumeFree" />
-        <meta name="twitter:url" content={canonicalUrl} />
-        <meta name="twitter:image" content="https://professionalresumefree.com/twitter-image.png" />
-        <meta name="twitter:image:alt" content="Professional Resume Builder Screenshot" />
         
-        {/* ========== ADDITIONAL SEO ========== */}
+        {/* ========== ADDITIONAL SEO (Safe Globals) ========== */}
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
         <meta name="author" content="Professional Resume Free" />
         <meta name="publisher" content="Professional Resume Free" />
@@ -176,11 +167,24 @@ function MyApp({ Component, pageProps }) {
       {/* ========== GOATCOUNTER TRACKER COMPONENT ========== */}
       <GoatCounterTracker />
 
-      {/* ========== MAIN APP CONTENT ========== */}
+      {/* 
+        ⚠️ H1 DUPLICATE WARNING ⚠️
+        Your Navbar component likely contains an <h1> tag (e.g., around the logo).
+        Since EVERY page also has its own hardcoded <h1>, this creates 2 H1s per page.
+        
+        FIX: Open ../Components/Navbar.js and change the logo wrapper from:
+          <h1><Logo /></h1>
+        to:
+          <div><Logo /></div>   OR   <span><Logo /></span>
+        
+        Only the main page content should have an <h1>.
+      */}
       <Navbar />
+      
       <main className="app-wrapper">
         <Component {...pageProps} />
       </main>
+      
       <Footer />
 
       {/* ========== VERCEL ANALYTICS ========== */}

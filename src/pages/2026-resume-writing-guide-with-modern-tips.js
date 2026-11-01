@@ -27,6 +27,10 @@ const themeFlashPreventionScript = `
     document.body.style.fontFamily = "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif";
     document.body.style.webkitFontSmoothing = 'antialiased';
     document.body.style.mozOsxFontSmoothing = 'grayscale';
+    
+    // Force hardware acceleration for better Edge rendering
+    document.body.style.transform = 'translateZ(0)';
+    document.body.style.willChange = 'auto';
   })();
 `;
 
@@ -34,7 +38,7 @@ const themeFlashPreventionScript = `
 // CAREERFLOW EXECUTIVE BRAND DESIGN TOKENS
 // ============================================================================
 const executiveDesignTokens = `
-  /* ========== CSS CUSTOM PROPERTIES ========== */
+  /* ========== CSS CUSTOM PROPERTIES WITH FALLBACKS ========== */
   :root {
     /* ========== COLOR SYSTEM ========== */
     
@@ -193,6 +197,7 @@ const executiveDesignTokens = `
   html {
     background-color: #131315 !important;
     color: #e5e1e4 !important;
+    min-height: 100%;
   }
   
   body {
@@ -205,11 +210,15 @@ const executiveDesignTokens = `
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
     min-height: 100vh;
+    /* Edge-specific fixes */
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
   }
   
   #__next {
     background-color: #131315;
     min-height: 100vh;
+    width: 100%;
   }
   
   h1, h2, h3, h4, h5, h6 {
@@ -217,6 +226,7 @@ const executiveDesignTokens = `
     color: var(--text-primary);
     letter-spacing: var(--letter-spacing-tight);
     word-wrap: break-word;
+    overflow-wrap: break-word;
   }
   
   h1 { font-size: var(--font-size-display-lg); line-height: var(--line-height-display); font-weight: var(--font-weight-bold); margin-bottom: 1rem; }
@@ -233,6 +243,8 @@ const executiveDesignTokens = `
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    /* Edge fallback */
+    color: #f2ca50;
   }
   
   .section-container {
@@ -312,6 +324,8 @@ const executiveDesignTokens = `
   
   .card-executive {
     background: var(--card-bg);
+    /* Edge fallback for backdrop-filter */
+    background: rgba(28, 27, 29, 0.6);
     backdrop-filter: blur(var(--glass-blur));
     -webkit-backdrop-filter: blur(var(--glass-blur));
     border: var(--card-border);
@@ -321,6 +335,9 @@ const executiveDesignTokens = `
     height: 100%;
     display: flex;
     flex-direction: column;
+    /* Ensure visibility in Edge */
+    min-height: 100px;
+    position: relative;
   }
   .card-executive:hover { background: var(--card-bg-hover); border-color: rgba(212, 175, 55, 0.3); transform: var(--card-hover-transform); box-shadow: var(--card-hover-shadow); }
   
@@ -347,6 +364,7 @@ const executiveDesignTokens = `
     gap: 0.5rem;
     background: var(--card-bg);
     backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
     padding: 0.5rem 1rem;
     border-radius: 9999px;
     border: var(--card-border);
@@ -370,6 +388,7 @@ const executiveDesignTokens = `
     margin: 2rem 0;
     background: var(--card-bg);
     backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
     border-radius: 0.75rem;
     border: var(--card-border);
     -webkit-overflow-scrolling: touch;
@@ -402,6 +421,7 @@ const executiveDesignTokens = `
     padding: 0.5rem 1rem;
     background: var(--card-bg);
     backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
     border: var(--card-border);
     border-radius: 0.5rem;
     cursor: pointer;
@@ -468,6 +488,7 @@ const executiveDesignTokens = `
     padding: 1.5rem;
     background: var(--card-bg);
     backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
     border-radius: 0.75rem;
     border: var(--card-border);
   }
@@ -1017,12 +1038,15 @@ Specialization: Artificial Intelligence
       </Head>
 
       <main style={{
-        backgroundColor: 'var(--bg-page)',
-        color: 'var(--text-primary)',
-        fontFamily: 'var(--font-body)',
+        backgroundColor: '#131315',
+        color: '#e5e1e4',
+        fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
         minHeight: '100vh',
         overflowX: 'hidden',
-        width: '100%'
+        width: '100%',
+        // Edge-specific fixes
+        WebkitFontSmoothing: 'antialiased',
+        MozOsxFontSmoothing: 'grayscale'
       }}>
         {/* Skip to main content for accessibility */}
         <a href="#main-content" className="skip-link">Skip to main content</a>
@@ -1113,7 +1137,7 @@ Specialization: Artificial Intelligence
                 </div>
               </article>
               
-              <aside style={{ padding: '1rem', background: 'var(--card-bg)', backdropFilter: 'blur(var(--glass-blur))', borderRadius: '0.75rem', border: 'var(--card-border)' }}>
+              <aside style={{ padding: '1rem', background: 'var(--card-bg)', backdropFilter: 'blur(var(--glass-blur))', WebkitBackdropFilter: 'blur(var(--glass-blur))', borderRadius: '0.75rem', border: 'var(--card-border)' }}>
                 <h3 style={{ fontSize: 'var(--font-size-title-md)', marginBottom: '1rem' }}>Trust Signals & Credentials</h3>
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '0.75rem', marginBottom: '1.5rem' }}>
                   {[

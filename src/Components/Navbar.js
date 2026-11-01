@@ -24,16 +24,12 @@ const Navbar = () => {
       const mobile = window.innerWidth <= 1024;
       setIsMobile(mobile);
       
-      // Close menu if resizing to desktop
       if (!mobile && isMenuOpen) {
         closeMenu();
       }
     };
 
-    // Set initial state
     handleResize();
-
-    // Add event listener
     window.addEventListener('resize', handleResize);
     window.addEventListener('orientationchange', handleResize);
 
@@ -51,24 +47,20 @@ const Navbar = () => {
   // Close menu on escape key press
   useEffect(() => {
     const handleEscape = (event) => {
-      if (event.key === 'Escape') {
-        closeMenu();
-      }
+      if (event.key === 'Escape') closeMenu();
     };
-
     document.addEventListener('keydown', handleEscape);
-    return () => {
-      document.removeEventListener('keydown', handleEscape);
-    };
+    return () => document.removeEventListener('keydown', handleEscape);
   }, [closeMenu]);
 
-  // Prevent body scroll when menu is open
+  // Prevent body scroll when mobile menu is open
   useEffect(() => {
     if (isMenuOpen && isMobile) {
+      const scrollY = window.scrollY;
       document.body.style.overflow = 'hidden';
       document.body.style.position = 'fixed';
+      document.body.style.top = `-${scrollY}px`;
       document.body.style.width = '100%';
-      document.body.style.top = `-${window.scrollY}px`;
     } else {
       const scrollY = document.body.style.top;
       document.body.style.overflow = '';
@@ -100,11 +92,16 @@ const Navbar = () => {
   ];
 
   return (
-    <header className={styles.header}>
+    <header className={styles.header} role="banner">
       <div className={styles.container}>
-        {/* Brand/Logo */}
+        {/* Brand/Logo - ✅ CONFIRMED: No H1 here, safe for SEO */}
         <div className={styles.brand}>
-          <Link href="/" className={styles.logo} onClick={closeMenu}>
+          <Link 
+            href="/" 
+            className={styles.logo} 
+            onClick={closeMenu}
+            aria-label="ProfessionalResumeFree - Go to homepage"
+          >
             <span className={styles.logoText}>ProfessionalResumeFree</span>
           </Link>
         </div>
@@ -118,9 +115,9 @@ const Navbar = () => {
           aria-controls="main-navigation"
           type="button"
         >
-          <span></span>
-          <span></span>
-          <span></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
         </button>
 
         {/* Overlay for mobile */}
@@ -136,11 +133,12 @@ const Navbar = () => {
         <nav 
           id="main-navigation"
           className={`${styles.nav} ${isMenuOpen ? styles.open : ''}`}
+          aria-label="Main navigation"
           aria-hidden={!isMenuOpen && isMobile}
         >
-          <ul className={styles.navList}>
+          <ul className={styles.navList} role="menubar">
             {navItems.map((item) => (
-              <li key={item.href} className={styles.navItem}>
+              <li key={item.href} className={styles.navItem} role="none">
                 <Link 
                   href={item.href} 
                   className={`${styles.navLink} ${
@@ -148,6 +146,7 @@ const Navbar = () => {
                   }`}
                   onClick={closeMenu}
                   aria-current={pathname === item.href ? 'page' : undefined}
+                  role="menuitem"
                   tabIndex={!isMenuOpen && isMobile ? -1 : 0}
                 >
                   {item.label}

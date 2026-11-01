@@ -5,13 +5,23 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head>
-        {/* Default fallback meta tags (overridden by individual pages using next/head) */}
-        <title>Professional Resume Free - Build Your Perfect Resume</title>
-        <meta 
-          name="description" 
-          content="Create professional resumes for free. Build, customize, and download your perfect resume in minutes with our easy-to-use resume builder." 
-        />
+        {/* 
+          ✅ SAFE GLOBAL TAGS ONLY 
+          These do NOT conflict with page-specific SEO tags.
+        */}
+        
+        {/* Theme color for browser UI (safe to have globally) */}
         <meta name="theme-color" content="#2563eb" />
+        
+        {/* Font preconnects for performance (no SEO conflict) */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
+        
+        {/* Favicon links (safe globals) */}
+        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
       </Head>
       <body>
         <Main />
