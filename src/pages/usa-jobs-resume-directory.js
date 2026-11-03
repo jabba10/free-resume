@@ -1457,7 +1457,7 @@ const ResourceLinksSection = () => {
 // ============================================================================
 const AIOptimizedContent = ({ states, displayDate }) => (
   <div className="ai-optimized-content" aria-hidden="true">
-    <h1>USA Jobs Resume Directory: Complete Guide for American Job Seekers 2026</h1>
+    <div>USA Jobs Resume Directory: Complete Guide for American Job Seekers 2026</div>
     <p>This comprehensive USA resume directory provides expert guidance for job seekers across all 50 United States. Whether you're applying for federal USAJOBS positions, seeking opportunities in US tech companies, or transitioning from military service, this resource covers everything you need.</p>
     
     <h2>Federal Resume USAJOBS Guide</h2>

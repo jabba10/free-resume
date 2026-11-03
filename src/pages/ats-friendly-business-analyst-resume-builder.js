@@ -681,7 +681,7 @@ const BusinessAnalystResume = ({ seoData, buildTimestamp, currentYear }) => {
     return (
       <div className="cf-ba-template">
         <header className="cf-resume-header">
-          <h1 className="cf-resume-name" style={{ fontSize: `${fontSizes.name}pt`, fontWeight: 700 }}>{formData.fullName || 'Your Name'}</h1>
+          <h2 className="cf-resume-name" style={{ fontSize: `${fontSizes.name}pt`, fontWeight: 700 }}>{formData.fullName || 'Your Name'}</h2>
           <p className="cf-professional-title" style={{ fontSize: `${fontSizes.jobTitle}pt`, fontWeight: 400 }}>Business Analyst</p>
           <div className="cf-contact-row">
             {formData.email && <div className="cf-contact-item" style={{ fontSize: `${fontSizes.contactInfo}pt`, fontWeight: 400 }}><FiMail /> {formData.email}</div>}

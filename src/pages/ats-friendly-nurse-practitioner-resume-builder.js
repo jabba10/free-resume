@@ -1028,10 +1028,10 @@ const Resume = ({ seoData, buildTimestamp }) => {
                 </span>
               </div>
               
-              {/* ONLY ONE H1 TAG ON THE ENTIRE PAGE */}
-              <h1 className="cf-hero-title">
+              {/* ONLY ONE H1 TAG ON THE ENTIRE PAGE - Changed to div to avoid duplicate H1 */}
+              <div className="cf-hero-title">
                 Create Your <span className="cf-gradient-text">NP Resume {currentYear}</span>
-              </h1>
+              </div>
               
               <p className="cf-hero-subtitle">
                 Create a <strong className="cf-hero-highlight">professional, ATS-optimized nurse practitioner resume for free in minutes.</strong> Our NP resume builder ensures your advanced practice experience, credentials, and prescriptive authority get noticed by hospitals and healthcare employers.

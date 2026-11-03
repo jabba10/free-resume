@@ -647,7 +647,8 @@ const ElectricianResume = ({ seoData, buildTimestamp }) => {
     return (
       <div className="cf-electrician-template">
         <header className="cf-resume-header">
-          <h1 className="cf-resume-name" style={{ fontSize: `${fontSizes.name}pt`, fontWeight: 700 }}>{formData.fullName || 'Your Name'}</h1>
+          {/* Changed h1 to div to ensure only one h1 exists on the page (in the Hero section) */}
+          <div className="cf-resume-name" style={{ fontSize: `${fontSizes.name}pt`, fontWeight: 700 }}>{formData.fullName || 'Your Name'}</div>
           <div className="cf-contact-row">
             {formData.email && <div className="cf-contact-item" style={{ fontSize: `${fontSizes.contactInfo}pt`, fontWeight: 400 }}><FiMail /> {formData.email}</div>}
             {(formData.email && (formData.phone || formData.address)) && <div className="cf-contact-separator">•</div>}

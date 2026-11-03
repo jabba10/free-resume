@@ -1174,7 +1174,7 @@ const LegalResume = ({ seoData, buildTimestamp }) => {
         <section className="cf-faq-section" aria-labelledby="faq-title">
           <div className="cf-container">
             <div className="cf-section-header">
-              <h2 className="cf-section-title" id="faq-title">Frequently Asked Questions</h2>
+              <h3 className="cf-section-title" id="faq-title">Frequently Asked Questions</h3>
               <p>Everything you need to know about creating professional legal resumes with our tool.</p>
             </div>
             <div className="cf-faq-grid">{faqs.map((faq,i)=>(<div key={i} className="cf-faq-item"><h3 className="cf-faq-question">{faq.question}</h3><p className="cf-faq-answer">{faq.answer}</p></div>))}</div>

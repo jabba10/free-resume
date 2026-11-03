@@ -594,7 +594,8 @@ const Resume = ({ seoData, buildTimestamp }) => {
     return (
       <div className="cf-universal-template">
         <header className="cf-resume-header">
-          <h1 className="cf-resume-name" style={{ fontSize: `${fontSizes.name}pt`, fontWeight: 700 }}>{formData.fullName || 'Your Name'}</h1>
+          {/* Changed h1 to div to ensure only one h1 exists on the page (in the Hero section) */}
+          <div className="cf-resume-name" style={{ fontSize: `${fontSizes.name}pt`, fontWeight: 700 }}>{formData.fullName || 'Your Name'}</div>
           {formData.professionalTitle && <h2 className="cf-professional-title" style={{ fontSize: `${fontSizes.professionalTitle}pt`, fontWeight: 400 }}>{formData.professionalTitle}</h2>}
           <div className="cf-contact-row">
             {formData.email && <div className="cf-contact-item" style={{ fontSize: `${fontSizes.contactInfo}pt`, fontWeight: 400 }}><FiMail /> {formData.email}</div>}

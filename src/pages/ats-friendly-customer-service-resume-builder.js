@@ -994,7 +994,7 @@ const CustomerServiceResume = ({ seoData, buildTimestamp }) => {
           <div className="cf-container">
             <div className="cf-hero-content">
               <div className="cf-trust-badge"><FiStar className="cf-trust-icon"/><span className="cf-trust-text">Best Free Customer Service Resume Builder {currentYear}</span></div>
-              <h1 className="cf-hero-title">Free Customer Service Resume <span className="cf-gradient-text">Builder {currentYear}: Start Now</span></h1>
+              <div className="cf-hero-title">Free Customer Service Resume <span className="cf-gradient-text">Builder {currentYear}: Start Now</span></div>
               <p className="cf-hero-subtitle">Create a <strong className="cf-hero-highlight">professional, ATS-optimized customer service resume for free in minutes.</strong> Our global customer service resume builder ensures your experience and metrics get noticed by employers worldwide.</p>
               <div className="cf-cta-buttons">
                 <button onClick={() => setActiveSection('personal')} className="cf-btn-primary" aria-label="Start building your free customer service resume now—no sign-up required">

@@ -550,7 +550,7 @@ const Resume = ({ seoData, buildTimestamp }) => {
     return (
       <div className="cf-universal-template">
         <header className="cf-resume-header">
-          <h1 className="cf-resume-name" style={{ fontSize: `${fontSizes.name}pt` }}>{formData.fullName || 'Your Name'}</h1>
+          <h2 className="cf-resume-name" style={{ fontSize: `${fontSizes.name}pt` }}>{formData.fullName || 'Your Name'}</h2>
           <div className="cf-contact-row">
             {formData.email && <div className="cf-contact-item" style={{ fontSize: `${fontSizes.contactInfo}pt` }}><FiMail /> {formData.email}</div>}
             {(formData.email && (formData.phone || formData.address)) && <div className="cf-contact-separator">•</div>}

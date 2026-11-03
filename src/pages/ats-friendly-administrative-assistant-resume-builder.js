@@ -993,7 +993,7 @@ const AdminResume = ({ seoData, buildTimestamp, currentYear }) => {
           <div className="cf-container">
             <div className="cf-hero-content">
               <div className="cf-trust-badge"><FiStar className="cf-trust-icon"/><span className="cf-trust-text">{`Best Free Administrative Resume Builder ${currentYear}`}</span></div>
-              <h1 className="cf-hero-title">{`Free Administrative `}<span className="cf-gradient-text">Resume Builder: Create Yours in 5 Minutes</span></h1>
+              <div className="cf-hero-title">{`Free Administrative `}<span className="cf-gradient-text">Resume Builder: Create Yours in 5 Minutes</span></div>
               <p className="cf-hero-subtitle">Create a <strong className="cf-hero-highlight">professional, ATS-optimized administrative resume for free in minutes.</strong> Our administrative resume builder ensures your office management skills and administrative experience get noticed by global employers.</p>
               <div className="cf-cta-buttons">
                 <button onClick={() => setActiveSection('personal')} className="cf-btn-primary" aria-label="Start building your free administrative resume now—no sign-up required"><span className="cf-btn-text">Build Your Administrative Resume Now</span><FiArrowRight className="cf-btn-icon"/><div className="cf-btn-pulse"></div></button>

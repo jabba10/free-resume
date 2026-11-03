@@ -985,7 +985,7 @@ const EngineeringResume = ({ seoData, buildTimestamp }) => {
           <div className="cf-container">
             <div className="cf-hero-content">
               <div className="cf-trust-badge"><FiStar className="cf-trust-icon"/><span className="cf-trust-text">Best Free Engineering Resume Builder {currentYear}</span></div>
-              <h1 className="cf-hero-title">Free Engineering <span className="cf-gradient-text">Resume Builder {currentYear}</span></h1>
+              <div className="cf-hero-title">Free Engineering <span className="cf-gradient-text">Resume Builder {currentYear}</span></div>
               <p className="cf-hero-subtitle">Create a <strong className="cf-hero-highlight">professional, ATS-optimized engineering resume for free in minutes.</strong> Our technical resume builder ensures your engineering experience and skills get noticed by tech companies and engineering firms.</p>
               <div className="cf-cta-buttons">
                 <button onClick={() => setActiveSection('personal')} className="cf-btn-primary" aria-label="Start building your free engineering resume now—no sign-up required">

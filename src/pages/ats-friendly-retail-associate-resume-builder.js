@@ -934,9 +934,9 @@ const RetailResume = ({
     return (
       <div className="rf-universal-template">
         <header className="rf-resume-header">
-          <h1 className="rf-resume-name" style={{ fontSize: `${fontSizes.name}pt` }}>
+          <div className="rf-resume-name" style={{ fontSize: `${fontSizes.name}pt` }}>
             {formData.fullName || 'Your Name'}
-          </h1>
+          </div>
           <div className="rf-contact-row">
             {formData.email && <div className="rf-contact-item" style={{ fontSize: `${fontSizes.contactInfo}pt` }}><FiMail /> {formData.email}</div>}
             {(formData.email && (formData.phone || formData.address)) && <div className="rf-contact-separator">•</div>}
