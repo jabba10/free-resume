@@ -264,7 +264,10 @@ const ResumeObjectiveGenerator = ({ seoData, lastModified, buildTimestamp, curre
   const safeCurrentDate = currentDate || new Date().toISOString().split('T')[0];
   const safeLastModifiedDate = lastModifiedDate || lastModified || new Date().toISOString();
   const canonicalUrl = `${SITE_URL}/free-resume-objective-generator`;
-  const pageTitle = `Free Resume Objective Generator – Professional & ATS-Safe ${currentYear} | Get 3x More Interviews`;
+  
+  // UPDATED TITLE: Short, keyword-rich, includes dynamic year
+  const pageTitle = `Free ATS Resume Objective Generator ${currentYear} | Pro Tool`;
+  
   const pageDescription = `Generate targeted, ATS-friendly resume objectives tailored to your career level (${currentYear}). Professional statements that get 3x more interviews. 100% free, no signup required.`;
 
   const [formData, setFormData] = useState({ careerLevel: '', jobTitle: '', industry: '', keyGoal: '' });

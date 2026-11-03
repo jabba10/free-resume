@@ -173,7 +173,10 @@ const HowToUseChatGPTResume = ({ seoData }) => {
   const safeLastModifiedDate = lastModifiedDate || new Date().toISOString();
   const safeBuildTimestamp = buildTimestamp || Date.now();
   const canonicalUrl = "https://professionalresumefree.com/how-to-use-chatgpt-to-write-a-resume-that-does-not-sound-like-a-robot";
-  const metaTitle = "How to Use ChatGPT to Write a Resume That Doesn't Sound Like a Robot (2026 Guide)";
+  
+  // UPDATED TITLE: Concise, high-CTR, under 70 chars, includes dynamic year
+  const metaTitle = `Human-Sounding AI Resumes: ChatGPT Guide ${CURRENT_YEAR}`;
+  
   const metaDescription = "Learn to use ChatGPT for resume writing without robotic results. Expert prompts, editing strategies, and real examples to make your resume sound human.";
 
   const [activeFaq, setActiveFaq] = useState(null);
@@ -435,7 +438,7 @@ const HowToUseChatGPTResume = ({ seoData }) => {
         <section className="section" id="main-content" aria-labelledby="hero-heading">
           <div className="section-container">
             <div style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center' }}>
-              <div className="badge">CHATGPT RESUME GUIDE 2026</div>
+              <div className="badge">CHATGPT RESUME GUIDE {CURRENT_YEAR}</div>
               <h1 id="hero-heading" style={{ fontSize: 'var(--font-size-display-lg)', fontFamily: 'var(--font-display)', fontWeight: 'var(--font-weight-extrabold)', lineHeight: 'var(--line-height-display)', marginBottom: '1.25rem' }}>
                 How to Use ChatGPT to Write a Resume That Doesn't Sound Like a Robot
               </h1>

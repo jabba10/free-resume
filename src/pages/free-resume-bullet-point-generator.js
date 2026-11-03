@@ -203,7 +203,7 @@ const getSchemaData = (faqDates, reviewDates, currentDate, lastModifiedDate, cur
       "@type": "WebPage",
       "@id": `${SITE_URL}/free-resume-bullet-point-generator/#webpage`,
       "url": `${SITE_URL}/free-resume-bullet-point-generator`,
-      "name": `Free Resume Bullet Point Generator - CAR Method & ATS Optimized ${currentYear}`,
+      "name": `Resume Bullet Point Generator ${currentYear}: CAR & ATS Optimized`,
       "description": `Generate powerful resume bullet points with CAR methodology. Create quantifiable, ATS-optimized bullet points in minutes. 100% free with industry-specific templates for ${currentYear}.`,
       "datePublished": "2024-01-01",
       "dateModified": lastModifiedDate,
@@ -544,7 +544,7 @@ const ResumeBulletPointGenerator = ({ seoData, buildTimestamp, currentYear: prop
         <style dangerouslySetInnerHTML={{ __html: executiveDesignTokens }} />
         
         {/* Basic Meta Tags - Injected from Page 1 Blueprint */}
-        <title>{`Free Resume Bullet Point Generator - CAR Method & ATS Optimized ${currentYear} | Resume Bullet Points Builder`}</title>
+        <title>{`Resume Bullet Point Generator ${currentYear}: CAR & ATS Optimized`}</title>
         <meta name="description" content={`Generate powerful resume bullet points with CAR methodology. Create quantifiable, ATS-optimized bullet points in minutes. 100% free with industry-specific templates for ${currentYear}.`} />
         <meta name="keywords" content={`resume bullet point generator, CAR method resume, resume achievements, quantifiable bullet points, resume writing, career tools, free resume builder, ATS resume, professional resume, job search tools ${currentYear}`} />
         <meta name="author" content="Professional Resume Free" />
@@ -558,7 +558,7 @@ const ResumeBulletPointGenerator = ({ seoData, buildTimestamp, currentYear: prop
         <meta name="build-timestamp" content={buildTimestamp} />
         
         {/* GEO Optimization Tags - Injected from Page 1 Blueprint */}
-        <meta name="chatgpt-fts:title" content="Free Resume Bullet Point Generator - CAR Method & ATS Optimized" />
+        <meta name="chatgpt-fts:title" content={`Resume Bullet Point Generator ${currentYear}: CAR & ATS Optimized`} />
         <meta name="chatgpt-fts:description" content="Generate powerful resume bullet points with CAR methodology. Create quantifiable, ATS-optimized bullet points in minutes. 100% free." />
         <meta name="chatgpt-fts:keywords" content="resume bullet points, CAR method, ATS resume, achievement statements" />
         <meta name="chatgpt-fts:last-updated" content={safeCurrentDate} />
@@ -574,7 +574,7 @@ const ResumeBulletPointGenerator = ({ seoData, buildTimestamp, currentYear: prop
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;600;700;800&display=swap" rel="stylesheet" />
         
         {/* Open Graph Protocol - Injected from Page 1 Blueprint */}
-        <meta property="og:title" content={`Free Resume Bullet Point Generator - CAR Method & ATS Optimized ${currentYear}`} />
+        <meta property="og:title" content={`Resume Bullet Point Generator ${currentYear}: CAR & ATS Optimized`} />
         <meta property="og:description" content="Generate powerful resume bullet points with CAR methodology. Create quantifiable, ATS-optimized bullet points in minutes with our AI-powered tool." />
         <meta property="og:image" content={`${SITE_URL}/images/og-resume-bullet-point-generator.jpg`} />
         <meta property="og:image:width" content="1200" />
@@ -588,7 +588,7 @@ const ResumeBulletPointGenerator = ({ seoData, buildTimestamp, currentYear: prop
         
         {/* Twitter Cards - Injected from Page 1 Blueprint */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={`Free Resume Bullet Point Generator - CAR Method & ATS Optimized ${currentYear}`} />
+        <meta name="twitter:title" content={`Resume Bullet Point Generator ${currentYear}: CAR & ATS`} />
         <meta name="twitter:description" content="Generate powerful resume bullet points with CAR methodology. Create quantifiable, ATS-optimized bullet points in minutes with AI." />
         <meta name="twitter:image" content={`${SITE_URL}/images/twitter-resume-bullet-point-generator.jpg`} />
         <meta name="twitter:image:alt" content="Free Resume Bullet Point Generator with AI Templates" />

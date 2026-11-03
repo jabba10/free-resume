@@ -233,7 +233,10 @@ const ResumeKeywordDensityAnalyzer = ({ seoData, lastModified, buildTimestamp, c
   const safeCurrentDate = currentDate || new Date().toISOString().split('T')[0];
   const safeLastModifiedDate = lastModifiedDate || lastModified || new Date().toISOString();
   const canonicalUrl = "https://professionalresumefree.com/free-resume-keyword-density-analyzer-tool";
-  const pageTitle = `Resume Keyword Density Analyzer – ATS Optimization & Strategic Keyword Placement ${currentYear}`;
+  
+  // UPDATED TITLE: Concise, high-CTR, under 70 chars, includes dynamic year
+  const pageTitle = `Free Resume Keyword Density Analyzer & ATS Tool ${currentYear}`;
+  
   const pageDescription = `Free professional resume keyword density analyzer with ATS optimization, industry-specific keyword suggestions, and strategic placement guidance. Improve your resume's visibility with keyword analysis. ${currentYear}`;
 
   const [text, setText] = useState('');

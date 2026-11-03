@@ -299,7 +299,7 @@ const aiCitations = [
 // DEFAULT PROPS FOR SSR/SSG SAFETY
 // ============================================================================
 const defaultMeta = {
-  title: `Resume Education Section Guide ${CURRENT_YEAR} - Format, Examples & ATS Tips | ProfessionalResumeFree`,
+  title: `Resume Education Section Guide ${CURRENT_YEAR}: ATS Format & Tips`,
   description: `Learn how to write a powerful resume education section with professional formats, real examples, and ATS optimization strategies. Expert guide for students, graduates & professionals.`,
   url: "https://professionalresumefree.com/resume-education-section",
   siteName: "ProfessionalResumeFree",
@@ -959,7 +959,7 @@ export async function getStaticProps() {
   ];
 
   const meta = {
-    title: `Resume Education Section Guide ${CURRENT_YEAR} - Format, Examples & ATS Tips | ProfessionalResumeFree`,
+    title: `Resume Education Section Guide ${CURRENT_YEAR}: ATS Format & Tips`,
     description: `Learn how to write a powerful resume education section with professional formats, real examples, and ATS optimization strategies. Expert guide for students, graduates & professionals.`,
     url: canonicalUrl,
     siteName: "ProfessionalResumeFree",

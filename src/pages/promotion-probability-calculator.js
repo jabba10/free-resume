@@ -205,7 +205,8 @@ const aiCitations = [
 // DEFAULT PROPS FOR SSR/SSG SAFETY
 // ============================================================================
 const defaultMeta = {
-  title: `Free Promotion Probability Calculator ${CURRENT_YEAR} - Estimate Your Chances | No Sign Up`,
+  // UPDATED TITLE: Concise, high-CTR, under 70 chars, includes dynamic year
+  title: `Free Promotion Probability Calculator ${CURRENT_YEAR} | Career Tool`,
   description: `Calculate your promotion probability with our free tool. Rate yourself on 6 key factors, adjust for company size, and get timeline estimates. Actionable recommendations included. 100% private.`,
   url: "https://professionalresumefree.com/promotion-probability-calculator",
   siteName: "Professional Resume Free",
@@ -1240,7 +1241,8 @@ export async function getStaticProps() {
   ];
 
   const meta = {
-    title: `Free Promotion Probability Calculator ${CURRENT_YEAR} - Estimate Your Chances | No Sign Up`,
+    // UPDATED TITLE: Concise, high-CTR, under 70 chars, includes dynamic year
+    title: `Free Promotion Probability Calculator ${CURRENT_YEAR} | Career Tool`,
     description: `Calculate your promotion probability with our free tool. Rate yourself on 6 key factors, adjust for company size, and get timeline estimates. Actionable recommendations included. 100% private.`,
     url: canonicalUrl,
     siteName: "Professional Resume Free",

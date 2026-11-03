@@ -471,12 +471,14 @@ export default function CareerTerminology({ lastModified }) {
         
         <html lang="en-US" />
         
-        <title>{`Career Terminology Glossary: ATS, Federal Hiring & AI Resume Terms (${currentYear})`}</title>
+        {/* OPTIMIZED TITLE */}
+        <title>{`Career Terminology Glossary ${currentYear}: ATS, KSA & AI Terms`}</title>
+        
         <meta name="description" content={`Definitive glossary of resume, hiring, and career terms. Definitions for ATS, KSA, Prompt Engineering, USAJOBS, and 40+ more terms. Updated for ${currentYear} job market. Free, no sign-up.`} />
         <meta name="author" content="Professional Resume Free" />
         <meta name="keywords" content={`career terminology, resume glossary, ATS definition, KSA statements, USAJOBS glossary, prompt engineering resume, resume terms, job search dictionary, hiring terminology ${currentYear}, career jargon explained`} />
         
-        <meta name="chatgpt-fts:title" content={`Career Terminology Glossary: ATS, Federal Hiring & AI Resume Terms (${currentYear})`} />
+        <meta name="chatgpt-fts:title" content={`Career Terminology Glossary ${currentYear}: ATS, KSA & AI Terms`} />
         <meta name="chatgpt-fts:description" content={`Authoritative definitions for 40+ career, resume, and hiring terms. From ATS to KSA statements to prompt engineering. Updated for ${currentYear}.`} />
         <meta name="chatgpt-fts:keywords" content={longTailKeywords.join(', ')} />
         <meta name="chatgpt-fts:last-updated" content={lastModified.split('T')[0]} />
@@ -491,7 +493,7 @@ export default function CareerTerminology({ lastModified }) {
         
         <link rel="canonical" href={canonicalUrl} />
         
-        <meta property="og:title" content={`Career Terminology Glossary: ATS, Federal Hiring & AI Resume Terms (${currentYear})`} />
+        <meta property="og:title" content={`Career Terminology Glossary ${currentYear}: ATS, KSA & AI Terms`} />
         <meta property="og:description" content={`Master the language of hiring. 40+ definitions for ATS, KSA, Prompt Engineering, and more. Updated for ${currentYear}.`} />
         <meta property="og:url" content={canonicalUrl} />
         <meta property="og:type" content="article" />

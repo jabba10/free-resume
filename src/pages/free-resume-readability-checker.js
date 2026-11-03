@@ -263,7 +263,10 @@ const ResumeReadabilityChecker = ({ seoData, lastModified, buildTimestamp, curre
   const safeCurrentDate = currentDate || new Date().toISOString().split('T')[0];
   const safeLastModifiedDate = lastModifiedDate || lastModified || new Date().toISOString();
   const canonicalUrl = `${SITE_URL}/free-resume-readability-checker`;
-  const pageTitle = `Free Resume Readability Checker – Professional Flesch-Kincaid Analysis & ATS Optimization ${currentYear}`;
+  
+  // UPDATED TITLE: Concise, high-CTR, under 70 chars, includes dynamic year
+  const pageTitle = `Free Resume Readability Checker ${currentYear} | ATS & Flesch`;
+  
   const pageDescription = `Analyze and improve your resume's readability with our free online tool. Get Flesch-Kincaid scores, sentence analysis, ATS optimization tips, and actionable suggestions. No sign up required.`;
 
   const [text, setText] = useState('');

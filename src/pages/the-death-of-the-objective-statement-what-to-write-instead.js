@@ -234,7 +234,8 @@ const DeathOfObjectiveStatementPage = ({ seoData }) => {
     { "@type": "ListItem", "position": 3, "name": "The Death of the Objective Statement", "item": safeCanonicalUrl }
   ];
   const safeMeta = meta || {
-    title: `The Death of the Objective Statement: What to Write Instead (${CURRENT_YEAR} Guide)`,
+    // UPDATED TITLE: Shorter, action-oriented, includes dynamic year
+    title: `Stop Using Resume Objectives ${CURRENT_YEAR}: Best Alternatives`,
     description: `Objective statements are obsolete. Learn what to write instead to grab recruiter attention in 6 seconds. Free ${CURRENT_YEAR} guide with modern alternatives & ATS-friendly examples.`,
     url: safeCanonicalUrl,
     siteName: "Professional Resume Free",
@@ -911,7 +912,8 @@ export async function getStaticProps() {
   ];
 
   const meta = {
-    title: `The Death of the Objective Statement: What to Write Instead (${CURRENT_YEAR} Guide)`,
+    // UPDATED TITLE: Shorter, action-oriented, includes dynamic year
+    title: `Stop Using Resume Objectives ${CURRENT_YEAR}: Best Alternatives`,
     description: `Objective statements are obsolete. Learn what to write instead to grab recruiter attention in 6 seconds. Free guide with modern alternatives & ATS-friendly examples.`,
     url: canonicalUrl,
     siteName: "Professional Resume Free",

@@ -592,8 +592,8 @@ const ResumeSummaryGenerator = ({ seoData, currentYear: propYear }) => {
       <Head>
         <style dangerouslySetInnerHTML={{ __html: executiveDesignTokens }} />
         
-        {/* OPTIMIZED TITLE - dynamic year */}
-        <title>{`Free Resume Summary Generator | Professional Career Profile Builder ${currentYear}`}</title>
+        {/* OPTIMIZED TITLE - dynamic year, short, keyword-rich */}
+        <title>{`Free ATS Resume Summary Generator ${currentYear} | Pro Tool`}</title>
         
         <meta
           name="description"
@@ -627,7 +627,7 @@ const ResumeSummaryGenerator = ({ seoData, currentYear: propYear }) => {
         <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
         
         {/* Open Graph */}
-        <meta property="og:title" content={`Free Resume Summary Generator | Professional Career Profile Builder ${currentYear}`} />
+        <meta property="og:title" content={`Free ATS Resume Summary Generator ${currentYear} | Pro Tool`} />
         <meta property="og:description" content="Create ATS-friendly professional resume summaries instantly with our free generator. Choose from 20+ templates, add keywords, and download your perfect summary." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content={canonicalUrl} />
@@ -641,7 +641,7 @@ const ResumeSummaryGenerator = ({ seoData, currentYear: propYear }) => {
         
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={`Free Resume Summary Generator | Professional Career Profile Builder ${currentYear}`} />
+        <meta name="twitter:title" content={`Free ATS Resume Summary Generator ${currentYear}`} />
         <meta name="twitter:description" content="Create professional ATS-friendly resume summaries instantly. 20+ templates, keyword optimization, free to use." />
         <meta name="twitter:image" content={`${SITE_URL}/images/twitter-resume-summary-generator.jpg`} />
         <meta name="twitter:image:alt" content="Professional Resume Summary Generator" />

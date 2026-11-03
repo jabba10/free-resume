@@ -270,7 +270,7 @@ const ResumeWordCharacterCounter = ({ seoData, currentYear: propYear }) => {
         "@type": "WebPage",
         "@id": `${PAGE_URL}#webpage`,
         "url": PAGE_URL,
-        "name": `Resume Word & Character Counter - Professional Length Checker ${currentYear}`,
+        "name": `Free Resume Word Counter ${currentYear} | ATS Length Check`,
         "description": "Free professional resume word counter and character counter with ATS optimization guidance. Check your resume length against industry standards with real-time analysis.",
         "datePublished": "2024-01-01",
         "dateModified": safeLastModifiedDate,
@@ -476,8 +476,8 @@ const ResumeWordCharacterCounter = ({ seoData, currentYear: propYear }) => {
       <Head>
         <style dangerouslySetInnerHTML={{ __html: executiveDesignTokens }} />
         
-        {/* Primary Meta Tags - dynamic year */}
-        <title>{`Resume Word & Character Counter – Professional Length Checker ${currentYear} | Free ATS Optimized Tool`}</title>
+        {/* Primary Meta Tags - dynamic year, optimized title */}
+        <title>{`Free Resume Word Counter ${currentYear} | ATS Length Check`}</title>
         <meta 
           name="description" 
           content={`Free professional resume word counter and character counter with ATS optimization. Check your resume length against industry standards. Real-time analysis with word count, character count, and professional recommendations. ${currentYear}`}
@@ -510,7 +510,7 @@ const ResumeWordCharacterCounter = ({ seoData, currentYear: propYear }) => {
         <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
         
         {/* Open Graph - dynamic year */}
-        <meta property="og:title" content={`Resume Word & Character Counter – Professional Length Checker ${currentYear}`} />
+        <meta property="og:title" content={`Free Resume Word Counter ${currentYear} | ATS Length Check`} />
         <meta property="og:description" content="Free professional resume word counter with ATS optimization guidance. Check length, characters, and get industry-standard recommendations." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content={canonicalUrl} />

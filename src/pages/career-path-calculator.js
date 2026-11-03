@@ -515,7 +515,7 @@ const CareerPathCalculatorPage = ({ seoData }) => {
         "@type": "WebPage",
         "@id": canonicalUrl,
         "url": canonicalUrl,
-        "name": `Free Career Path Calculator ${currentYear} - Salary Projections, Growth & Skills | No Sign Up`,
+        "name": `Career Path Calculator ${currentYear}: Salary & Skills Forecast`,
         "description": `Plan your career with our free calculator. Get 10-year salary projections, skill roadmaps, and growth forecasts for tech careers. Compare paths, see earnings potential, and identify required skills. 100% private.`,
         "datePublished": `${currentYear}-01-15`,
         "dateModified": safeLastModifiedDate,
@@ -613,7 +613,7 @@ const CareerPathCalculatorPage = ({ seoData }) => {
         <html lang="en-US" />
         
         {/* ===== SEO TITLE (dynamic year) ===== */}
-        <title>{`Free Career Path Calculator ${currentYear} - Salary Projections, Growth & Skills | No Sign Up`}</title>
+        <title>{`Career Path Calculator ${currentYear}: Salary & Skills Forecast`}</title>
         
         {/* ===== META DESCRIPTION ===== */}
         <meta name="description" content={`Plan your career with our free calculator. Get 10-year salary projections, skill roadmaps, and growth forecasts for tech careers. Compare paths, see earnings potential, and identify required skills. 100% private. Updated ${currentYear}.`} />
@@ -621,7 +621,7 @@ const CareerPathCalculatorPage = ({ seoData }) => {
         <meta name="keywords" content={`career path calculator ${currentYear}, career progression calculator, salary projection tool, career growth forecast, tech career paths, software engineer salary, data scientist career, career roadmap, skills development, career planning tool, ${currentYear} career outlook, professional growth calculator`} />
         
         {/* ===== GEO OPTIMIZATION TAGS ===== */}
-        <meta name="chatgpt-fts:title" content={`Free Career Path Calculator ${currentYear} - Salary Projections & Growth Forecasts`} />
+        <meta name="chatgpt-fts:title" content={`Career Path Calculator ${currentYear}: Salary & Skills Forecast`} />
         <meta name="chatgpt-fts:description" content={`Plan your career trajectory with detailed salary projections, skill roadmaps, and growth analytics. Compare 5 tech career paths across 10 industries. Free and private.`} />
         <meta name="chatgpt-fts:keywords" content={longTailKeywords.join(', ')} />
         <meta name="chatgpt-fts:last-updated" content={safeCurrentDate} />
@@ -639,7 +639,7 @@ const CareerPathCalculatorPage = ({ seoData }) => {
         <link rel="canonical" href={canonicalUrl} />
         
         {/* ===== OPEN GRAPH TAGS ===== */}
-        <meta property="og:title" content={`Free Career Path Calculator ${currentYear} - Salary Projections, Growth & Skills | No Sign Up`} />
+        <meta property="og:title" content={`Career Path Calculator ${currentYear}: Salary & Skills Forecast`} />
         <meta property="og:description" content={`Plan your career trajectory with detailed salary projections, skill roadmaps, and growth analytics. Compare 5 tech career paths across 10 industries. Free, private, no sign-up required.`} />
         <meta property="og:url" content={canonicalUrl} />
         <meta property="og:image" content="https://professionalresumefree.com/ats.jpeg" />
@@ -653,7 +653,7 @@ const CareerPathCalculatorPage = ({ seoData }) => {
         
         {/* ===== TWITTER CARD TAGS ===== */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={`Free Career Path Calculator ${currentYear} - Salary Projections & Growth`} />
+        <meta name="twitter:title" content={`Career Path Calculator ${currentYear}: Salary & Skills`} />
         <meta name="twitter:description" content={`Get 10-year salary projections, skill roadmaps, and growth forecasts. Compare tech career paths. Free and private.`} />
         <meta name="twitter:image" content="https://professionalresumefree.com/ats.jpeg" />
         <meta name="twitter:image:alt" content="Free Career Path Calculator" />

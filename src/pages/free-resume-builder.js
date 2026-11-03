@@ -624,8 +624,10 @@ const Resume = ({ seoData, buildTimestamp }) => {
       <style>{careerFlowStyles}</style>
       <div className="cf-resume-builder" lang="en-US">
         <Head>
-          <title>{`Free Professional Resume Builder ${currentYear}: ATS-Friendly Templates for Job Seekers`}</title>
-          <meta name="title" content={`Free Professional Resume Builder ${currentYear}: ATS-Friendly Templates for Job Seekers`} />
+          {/* OPTIMIZED TITLE */}
+          <title>{`Free ATS Resume Builder ${currentYear}: Create Pro CVs Fast`}</title>
+          
+          <meta name="title" content={`Free ATS Resume Builder ${currentYear}: Create Pro CVs Fast`} />
           <meta name="description" content={`Create your professional resume for free in ${currentYear}. ATS-optimized templates help job seekers highlight experience, skills & achievements. Start now—no sign-up.`} />
           <meta name="keywords" content={`resume builder, professional resume templates, ATS friendly resume, free resume builder, online resume maker, CV builder, job application resume, career resume templates, professional CV maker ${currentYear}`} />
           <meta name="author" content="Professional Resume Free" />
@@ -642,7 +644,7 @@ const Resume = ({ seoData, buildTimestamp }) => {
           <link rel="alternate" href={canonicalUrl} hreflang="en-CA" />
           <link rel="alternate" href={canonicalUrl} hreflang="en-AU" />
           <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
-          <meta property="og:title" content={`Free Professional Resume Builder ${currentYear}: ATS-Friendly Templates for Job Seekers`} />
+          <meta property="og:title" content={`Free ATS Resume Builder ${currentYear}: Create Pro CVs Fast`} />
           <meta property="og:description" content={`Create your professional resume for free in ${currentYear}. ATS-optimized templates help job seekers highlight experience, skills & achievements. Start now—no sign-up.`} />
           <meta property="og:image" content="https://professionalresumefree.com/images/og-resume-builder-preview.jpg" />
           <meta property="og:image:width" content="1200" />
@@ -657,7 +659,7 @@ const Resume = ({ seoData, buildTimestamp }) => {
           <meta property="og:locale:alternate" content="en_AU" />
           <meta property="og:updated_time" content={safeLastModifiedDate} />
           <meta name="twitter:card" content="summary_large_image" />
-          <meta name="twitter:title" content={`Free Professional Resume Builder ${currentYear}: ATS-Friendly Templates for Job Seekers`} />
+          <meta name="twitter:title" content={`Free ATS Resume Builder ${currentYear}: Create Pro CVs Fast`} />
           <meta name="twitter:description" content={`Create your professional resume for free in ${currentYear}. ATS-optimized templates help job seekers highlight experience, skills & achievements. Start now—no sign-up.`} />
           <meta name="twitter:image" content="https://professionalresumefree.com/images/twitter-resume-builder-preview.jpg" />
           <meta name="twitter:image:alt" content="Free Professional Resume Builder with ATS Templates" />
@@ -684,7 +686,7 @@ const Resume = ({ seoData, buildTimestamp }) => {
                     "@type": "WebPage",
                     "@id": `${canonicalUrl}#webpage`,
                     "url": canonicalUrl,
-                    "name": `Free Professional Resume Builder ${currentYear} - ATS-Friendly Templates for Job Seekers`,
+                    "name": `Free ATS Resume Builder ${currentYear} - Create Pro CVs Fast`,
                     "description": "Create professional ATS-optimized resumes for free. Land interviews faster with our universal resume builder.",
                     "datePublished": "2024-01-01",
                     "dateModified": safeLastModifiedDate,

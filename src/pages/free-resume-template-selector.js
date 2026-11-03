@@ -535,8 +535,8 @@ const ResumeTemplateSelector = ({ seoData, currentYear: propYear }) => {
       <Head>
         <style dangerouslySetInnerHTML={{ __html: executiveDesignTokens }} />
         
-        {/* OPTIMIZED TITLE - dynamic year */}
-        <title>{`Free Resume Template Selector | Professional ATS-Friendly Templates ${currentYear}`}</title>
+        {/* OPTIMIZED TITLE - dynamic year, under 70 chars */}
+        <title>{`Free ATS Resume Templates ${currentYear} | Professional Builder`}</title>
         
         <meta
           name="description"
@@ -570,7 +570,7 @@ const ResumeTemplateSelector = ({ seoData, currentYear: propYear }) => {
         <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
         
         {/* Open Graph */}
-        <meta property="og:title" content={`Free Resume Template Selector | Professional ATS-Friendly Templates ${currentYear}`} />
+        <meta property="og:title" content={`Free ATS Resume Templates ${currentYear} | Professional Builder`} />
         <meta property="og:description" content={`Browse and download professional resume templates with ATS compatibility ratings. Free .docx and PDF formats. ${currentYear}`} />
         <meta property="og:type" content="website" />
         <meta property="og:url" content={canonicalUrl} />
@@ -584,7 +584,7 @@ const ResumeTemplateSelector = ({ seoData, currentYear: propYear }) => {
         
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={`Free Resume Template Selector | Professional ATS-Friendly Templates ${currentYear}`} />
+        <meta name="twitter:title" content={`Free ATS Resume Templates ${currentYear} | Professional Builder`} />
         <meta name="twitter:description" content="Browse and download professional resume templates with ATS compatibility ratings. 47+ industry-specific builders, free to use." />
         <meta name="twitter:image" content={`${SITE_URL}/images/twitter-template-selector.jpg`} />
         <meta name="twitter:image:alt" content="Professional Resume Template Selector" />

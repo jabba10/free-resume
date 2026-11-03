@@ -232,7 +232,8 @@ const aiCitations = [
 // DEFAULT PROPS FOR SSR/SSG SAFETY
 // ============================================================================
 const defaultMeta = {
-  title: "Resume for Gulf Job: Complete 2026 Expert Guide | Professional Resume Free",
+  // UPDATED TITLE: Shorter, keyword-rich, includes dynamic year
+  title: `Gulf Job Resume Guide ${CURRENT_YEAR}: UAE, KSA & GCC Tips`,
   description: "Expert guide to crafting an ATS-friendly resume for Gulf/Middle East jobs with cultural insights, format tips, and industry-specific templates to secure interviews.",
   url: "https://professionalresumefree.com/resume-for-gulf-job",
   siteName: "Professional Resume Free",
@@ -804,7 +805,8 @@ export async function getStaticProps() {
   ];
 
   const meta = {
-    title: "Resume for Gulf Job: Complete 2026 Expert Guide | Professional Resume Free",
+    // UPDATED TITLE: Shorter, keyword-rich, includes dynamic year
+    title: `Gulf Job Resume Guide ${CURRENT_YEAR}: UAE, KSA & GCC Tips`,
     description: "Expert guide to crafting an ATS-friendly resume for Gulf/Middle East jobs with cultural insights, format tips, and industry-specific templates to secure interviews.",
     url: canonicalUrl,
     siteName: "Professional Resume Free",

@@ -269,7 +269,10 @@ const ResumeKeywordMatcher = ({ seoData, lastModified, buildTimestamp, currentYe
   const safeCurrentDate = currentDate || new Date().toISOString().split('T')[0];
   const safeLastModifiedDate = lastModifiedDate || lastModified || new Date().toISOString();
   const canonicalUrl = `${SITE_URL}/free-resume-keyword-matcher`;
-  const pageTitle = `Free Resume Keyword Matcher | ATS Keyword Analysis Tool ${currentYear} | ProfessionalResumeFree`;
+  
+  // UPDATED TITLE: Concise, high-CTR, under 70 chars, includes dynamic year
+  const pageTitle = `Free Resume Keyword Matcher & ATS Analyzer ${currentYear}`;
+  
   const pageDescription = `Optimize your resume for ATS systems with our free keyword matcher. Analyze job description vs resume keywords instantly. ${currentYear}'s most accurate keyword matching tool. Privacy-first, no signup required.`;
 
   const [jobDescription, setJobDescription] = useState('');

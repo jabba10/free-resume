@@ -590,8 +590,8 @@ const Resume = ({ seoData, buildTimestamp }) => {
       <style>{careerFlowStyles}</style>
       <div className="cf-resume-builder" lang="en-GB">
         <Head>
-          <title>{`Free UK Support Worker CV Builder ${currentYear}: DBS-Ready Templates for Care Pros`}</title>
-          <meta name="title" content={`Free UK Support Worker CV Builder ${currentYear}: DBS-Ready Templates for Care Pros`} />
+          <title>{`Free UK Support Worker CV Builder ${currentYear}: DBS-Ready PDF`}</title>
+          <meta name="title" content={`Free UK Support Worker CV Builder ${currentYear}: DBS-Ready PDF`} />
           <meta name="description" content={`Create your professional support worker CV for free in ${currentYear}. DBS-ready templates help UK care professionals highlight qualifications, experience & skills. Start now—no sign-up.`} />
           <meta name="keywords" content="support worker CV builder, care worker CV templates, UK care sector CV, DBS ready CV, CQC compliant CV, free CV builder for support workers, healthcare assistant CV, domiciliary care CV, learning disabilities support CV, mental health support CV" />
           <meta name="author" content="Professional UK Support Worker CV Free" />
@@ -605,7 +605,7 @@ const Resume = ({ seoData, buildTimestamp }) => {
           <link rel="alternate" href={canonicalUrl} hreflang="en" />
           <link rel="alternate" href={canonicalUrl} hreflang="en-GB" />
           <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
-          <meta property="og:title" content={`Free UK Support Worker CV Builder ${currentYear}: DBS-Ready Templates for Care Pros`} />
+          <meta property="og:title" content={`Free UK Support Worker CV Builder ${currentYear}: DBS-Ready PDF`} />
           <meta property="og:description" content={`Create your professional support worker CV for free in ${currentYear}. DBS-ready templates help UK care professionals highlight qualifications, experience & skills. Start now—no sign-up.`} />
           <meta property="og:image" content="https://professionalresumefree.com/images/og-support-worker-cv-builder-preview.jpg" />
           <meta property="og:image:width" content="1200" />
@@ -617,7 +617,7 @@ const Resume = ({ seoData, buildTimestamp }) => {
           <meta property="og:locale" content="en_GB" />
           <meta property="og:updated_time" content={safeLastModifiedDate} />
           <meta name="twitter:card" content="summary_large_image" />
-          <meta name="twitter:title" content={`Free UK Support Worker CV Builder ${currentYear}: DBS-Ready Templates for Care Pros`} />
+          <meta name="twitter:title" content={`Free UK Support Worker CV Builder ${currentYear}: DBS-Ready PDF`} />
           <meta name="twitter:description" content={`Create your professional support worker CV for free in ${currentYear}. DBS-ready templates help UK care professionals highlight qualifications, experience & skills. Start now—no sign-up.`} />
           <meta name="twitter:image" content="https://professionalresumefree.com/images/twitter-support-worker-cv-builder-preview.jpg" />
           <meta name="twitter:image:alt" content="Free UK Support Worker CV Builder with DBS Ready Templates" />

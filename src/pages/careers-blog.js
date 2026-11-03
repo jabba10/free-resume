@@ -404,8 +404,8 @@ const CareerBlog = ({ seoData }) => {
         
         <html lang="en-US" />
         
-        {/* ===== SEO TITLE (dynamic year) ===== */}
-        <title>{`Career Change Guide ${currentYear}: How to Successfully Switch Careers (65 chars)`}</title>
+        {/* ===== UPDATED SEO TITLE (dynamic year, under 70 chars) ===== */}
+        <title>{`Career Change Guide ${currentYear}: Switch Jobs Successfully`}</title>
         
         {/* ===== META DESCRIPTION ===== */}
         <meta name="description" content={`Step-by-step career change strategies for ${currentYear} with 89% success rates. Learn how to transition careers, develop new skills, write career change resumes, and land dream jobs using proven methodologies.`} />

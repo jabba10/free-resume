@@ -330,7 +330,8 @@ const aiCitations = [
 // DEFAULT PROPS FOR SSR/SSG SAFETY
 // ============================================================================
 const defaultMeta = {
-  title: `Free Resume Calculators ${CURRENT_YEAR} - 15+ Tools to Optimize Your Resume | No Sign Up`,
+  // UPDATED TITLE: Shorter, keyword-rich, includes dynamic year
+  title: `Free Resume Calculators ${CURRENT_YEAR}: 15+ Optimization Tools`,
   description: `Access 15+ free resume calculators and tools. Evaluate resume strength, check ATS compatibility, assess skills gaps, calculate market value, and more. All 100% free, private, no sign-up required.`,
   url: "https://professionalresumefree.com/resume-calculators",
   siteName: "Professional Resume Free",
@@ -884,7 +885,8 @@ export async function getStaticProps() {
   ];
 
   const meta = {
-    title: `Free Resume Calculators ${CURRENT_YEAR} - 15+ Tools to Optimize Your Resume | No Sign Up`,
+    // UPDATED TITLE: Shorter, keyword-rich, includes dynamic year
+    title: `Free Resume Calculators ${CURRENT_YEAR}: 15+ Optimization Tools`,
     description: `Access 15+ free resume calculators and tools. Evaluate resume strength, check ATS compatibility, assess skills gaps, calculate market value, and more. All 100% free, private, no sign-up required.`,
     url: canonicalUrl,
     siteName: "Professional Resume Free",

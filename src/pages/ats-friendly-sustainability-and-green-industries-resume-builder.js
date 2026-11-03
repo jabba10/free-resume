@@ -639,8 +639,9 @@ const Resume = ({ seoData, buildTimestamp }) => {
       <style>{sustainabilityResumeStyles}</style>
       <div className="cf-resume-builder" lang="en-US">
         <Head>
-          <title>{`Free Sustainability Resume Builder ${currentYear}: ATS Templates for Green Industry Pros`}</title>
-          <meta name="title" content={`Free Sustainability Resume Builder ${currentYear}: ATS Templates for Green Industry Pros`} />
+          {/* UPDATED TITLE: Concise, high-CTR, under 70 chars, includes dynamic year */}
+          <title>{`Free Sustainability Resume Builder ${currentYear} | ATS & ESG`}</title>
+          <meta name="title" content={`Free Sustainability Resume Builder ${currentYear} | ATS & ESG`} />
           <meta name="description" content={`Create your professional sustainability resume for free in ${currentYear}. ATS-optimized templates help green industry professionals highlight ESG impact, certifications & projects. Start now—no sign-up.`} />
           <meta name="keywords" content="sustainability resume builder, green industry resume templates, ESG resume builder, renewable energy resume, ATS friendly sustainability resume, free resume builder for environmental professionals, climate resume, sustainability CV, green jobs resume, environmental careers" />
           <meta name="author" content="Professional Sustainability Resume Free" />
@@ -657,7 +658,7 @@ const Resume = ({ seoData, buildTimestamp }) => {
           <link rel="alternate" href={canonicalUrl} hreflang="en-CA" />
           <link rel="alternate" href={canonicalUrl} hreflang="en-AU" />
           <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
-          <meta property="og:title" content={`Free Sustainability Resume Builder ${currentYear}: ATS Templates for Green Industry Pros`} />
+          <meta property="og:title" content={`Free Sustainability Resume Builder ${currentYear} | ATS & ESG`} />
           <meta property="og:description" content={`Create your professional sustainability resume for free in ${currentYear}. ATS-optimized templates help green industry professionals highlight ESG impact, certifications & projects. Start now—no sign-up.`} />
           <meta property="og:image" content="https://professionalresumefree.com/images/og-sustainability-resume-builder-preview.jpg" />
           <meta property="og:image:width" content="1200" />
@@ -672,7 +673,7 @@ const Resume = ({ seoData, buildTimestamp }) => {
           <meta property="og:locale:alternate" content="en_AU" />
           <meta property="og:updated_time" content={safeLastModifiedDate} />
           <meta name="twitter:card" content="summary_large_image" />
-          <meta name="twitter:title" content={`Free Sustainability Resume Builder ${currentYear}: ATS Templates for Green Industry Pros`} />
+          <meta name="twitter:title" content={`Free Sustainability Resume Builder ${currentYear} | ATS & ESG`} />
           <meta name="twitter:description" content={`Create your professional sustainability resume for free in ${currentYear}. ATS-optimized templates help green industry professionals highlight ESG impact, certifications & projects. Start now—no sign-up.`} />
           <meta name="twitter:image" content="https://professionalresumefree.com/images/twitter-sustainability-resume-builder-preview.jpg" />
           <meta name="twitter:image:alt" content="Free Sustainability Resume Builder with ATS Templates" />

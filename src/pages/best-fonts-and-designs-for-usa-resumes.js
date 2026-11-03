@@ -502,7 +502,8 @@ export async function getStaticProps() {
   ];
 
   const meta = {
-    title: `Best Fonts and Designs for USA Resumes ${currentYear}: Complete ATS Friendly Guide`,
+    // UPDATED TITLE: Shorter, keyword-rich, includes dynamic year
+    title: `Best Resume Fonts & Designs ${currentYear}: ATS Safe Guide`,
     description: `Discover the best fonts and designs for USA resumes. Comprehensive guide covering ATS friendly typography, modern layouts, expert design rules, and proven strategies to pass screening and impress recruiters. Free ${currentYear} guide with examples.`,
     url: canonicalUrl,
     siteName: "Professional Resume Free",
@@ -719,15 +720,15 @@ function BestFontsAndDesignsPage({
         <html lang="en" />
         
         {/* ===== SEO TITLE (dynamic year) ===== */}
-        <title>{`Best Fonts and Designs for USA Resumes ${currentYear}: Complete ATS Friendly Guide`}</title>
+        <title>{meta.title}</title>
         
         {/* ===== META DESCRIPTION ===== */}
-        <meta name="description" content={`Discover the best fonts and designs for USA resumes. Comprehensive guide covering ATS friendly typography, modern layouts, expert design rules, and proven strategies to pass screening and impress recruiters. Free ${currentYear} guide with examples.`} />
+        <meta name="description" content={meta.description} />
         <meta name="author" content="Professional Resume Free" />
         <meta name="keywords" content={`best fonts for resume, resume design USA, ATS friendly fonts, resume typography, modern resume layout, professional resume design, resume format ${currentYear}, resume margins, resume file format`} />
         
         {/* ===== GEO OPTIMIZATION TAGS ===== */}
-        <meta name="chatgpt-fts:title" content={`Best Fonts and Designs for USA Resumes ${currentYear}: Complete ATS Friendly Guide`} />
+        <meta name="chatgpt-fts:title" content={meta.title} />
         <meta name="chatgpt-fts:description" content="Complete guide to fonts and designs for USA resumes. ATS safe choices, modern layouts, expert design principles, and proven strategies to get interviews." />
         <meta name="chatgpt-fts:keywords" content={longTailKeywords.join(', ')} />
         <meta name="chatgpt-fts:last-updated" content={currentDate} />
@@ -745,8 +746,8 @@ function BestFontsAndDesignsPage({
         <link rel="canonical" href={canonicalUrl} />
         
         {/* ===== OPEN GRAPH TAGS ===== */}
-        <meta property="og:title" content={`Best Fonts and Designs for USA Resumes ${currentYear}: Complete ATS Friendly Guide`} />
-        <meta property="og:description" content={`Discover the best fonts and designs for USA resumes. Comprehensive guide covering ATS friendly typography, modern layouts, expert design rules. Free ${currentYear} guide.`} />
+        <meta property="og:title" content={meta.title} />
+        <meta property="og:description" content={meta.description} />
         <meta property="og:url" content={canonicalUrl} />
         <meta property="og:type" content="article" />
         <meta property="og:image" content="https://professionalresumefree.com/ats.jpeg" />
@@ -759,7 +760,7 @@ function BestFontsAndDesignsPage({
         
         {/* ===== TWITTER CARD TAGS ===== */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={`Best Fonts and Designs for USA Resumes ${currentYear}`} />
+        <meta name="twitter:title" content={`Best Resume Fonts & Designs ${currentYear}`} />
         <meta name="twitter:description" content="ATS friendly fonts and designs to land more interviews. Free guide with expert tips." />
         <meta name="twitter:image" content="https://professionalresumefree.com/ats.jpeg" />
         <meta name="twitter:site" content="@ProResumeFree" />
@@ -784,7 +785,7 @@ function BestFontsAndDesignsPage({
                 {
                   "@type": "Article",
                   "@id": `${canonicalUrl}#article`,
-                  "headline": `Best Fonts and Designs for USA Resumes ${currentYear}: Complete ATS Friendly Guide`,
+                  "headline": meta.title,
                   "description": `Comprehensive guide to the best fonts and designs for USA resumes. ATS-friendly typography, modern layouts, and expert design rules for ${currentYear}.`,
                   "image": "https://professionalresumefree.com/ats.jpeg",
                   "author": {

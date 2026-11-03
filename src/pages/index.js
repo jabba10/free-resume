@@ -1095,7 +1095,7 @@ export default function LandingPage({ lastModified, buildTimestamp, updatedStats
         <style dangerouslySetInnerHTML={{ __html: executiveDesignTokens }} />
         
         {/* ── PRIMARY SEO TAGS ── */}
-        <title>Free ATS Resume Builder: 46+ Templates, 12+ Tools, 15+ Calculators | Get Hired Fast! No Sign-Up PDF</title>
+        <title>{`Free ATS Resume Builder ${currentYear}: 46+ Templates & Tools`}</title>
         <meta name="description" content={`Create your ATS-ready resume in under 10 minutes. ${templateCount}+ industry templates, ${calculatorCount}+ calculators, instant PDF, no sign-up. 98% parse rate. Free tools included. Trusted by 125,000+ job seekers.`} />
         <meta name="author" content="Professional Resume Free" />
         <meta name="keywords" content="ATS resume builder, free resume templates, professional resume maker, ATS-friendly resume, resume optimization tools, resume calculators, instant PDF resume, no sign-up resume, resume templates 2026" />

@@ -217,8 +217,8 @@ const CostOfLivingCalculatorPage = ({ seoData, buildTimestamp, currentYear: prop
 
   const canonicalUrl = "https://professionalresumefree.com/cost-of-living-calculator";
   
-  // Optimized title - dynamic year
-  const optimizedTitle = `Free Cost of Living Calculator ${currentYear} - Compare Cities, Salary & Expenses`;
+  // OPTIMIZED TITLE - Shorter, keyword-rich, includes dynamic year
+  const optimizedTitle = `Cost of Living Calculator ${currentYear}: Compare Cities & Salary`;
 
   // Long-tail keywords for GEO
   const longTailKeywords = [
@@ -471,7 +471,7 @@ const CostOfLivingCalculatorPage = ({ seoData, buildTimestamp, currentYear: prop
         <meta name="keywords" content={`cost of living calculator, cost of living comparison, salary comparison by city, relocation calculator, cost of living index, compare cities cost of living, equivalent salary calculator, moving expenses calculator, ${currentYear} cost of living, city cost comparison, living wage calculator, expenses by city`} />
         
         {/* GEO OPTIMIZATION TAGS */}
-        <meta name="chatgpt-fts:title" content={`Free Cost of Living Calculator ${currentYear} - Compare Cities, Salary & Expenses`} />
+        <meta name="chatgpt-fts:title" content={optimizedTitle} />
         <meta name="chatgpt-fts:description" content="Calculate equivalent salary needed when relocating between US cities. Free cost of living comparison with detailed expense breakdowns. No sign-up required." />
         <meta name="chatgpt-fts:keywords" content={longTailKeywords.join(', ')} />
         <meta name="chatgpt-fts:last-updated" content={safeCurrentDate} />
@@ -495,7 +495,7 @@ const CostOfLivingCalculatorPage = ({ seoData, buildTimestamp, currentYear: prop
         <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
         
         {/* OPEN GRAPH */}
-        <meta property="og:title" content={`Free Cost of Living Calculator ${currentYear} - Compare Cities, Salary & Expenses`} />
+        <meta property="og:title" content={optimizedTitle} />
         <meta property="og:description" content="Compare cost of living between any two US cities. Calculate equivalent salary needed to maintain your lifestyle. Free tool with detailed expense breakdowns." />
         <meta property="og:url" content={canonicalUrl} />
         <meta property="og:image" content="https://professionalresumefree.com/ats.jpeg" />
@@ -509,7 +509,7 @@ const CostOfLivingCalculatorPage = ({ seoData, buildTimestamp, currentYear: prop
         
         {/* TWITTER CARD */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={`Free Cost of Living Calculator ${currentYear} - Compare Cities & Salaries`} />
+        <meta name="twitter:title" content={optimizedTitle} />
         <meta name="twitter:description" content="Instantly compare cost of living across US cities. Free, private, no sign-up required. Calculate equivalent salary for relocation." />
         <meta name="twitter:image" content="https://professionalresumefree.com/ats.jpeg" />
         <meta name="twitter:image:alt" content={`Cost of Living Calculator ${currentYear}`} />

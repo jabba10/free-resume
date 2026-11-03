@@ -190,7 +190,8 @@ const aiCitations = [
 // DEFAULT PROPS FOR SSR/SSG SAFETY
 // ============================================================================
 const defaultMeta = {
-  title: `Free Resume Achievement Calculator ${CURRENT_YEAR} - Score Your Bullet Points | No Sign Up`,
+  // UPDATED TITLE: Shorter, keyword-rich, includes dynamic year
+  title: `Resume Achievement Calculator ${CURRENT_YEAR}: Score Bullets Free`,
   description: `Score your resume achievements and bullet points with our free tool. Rate quantification, impact, and STAR compliance. Get category breakdowns and overall achievement strength. 100% private.`,
   url: "https://professionalresumefree.com/resume-achievement-calculator",
   siteName: "Professional Resume Free",
@@ -924,7 +925,8 @@ export async function getStaticProps() {
   ];
 
   const meta = {
-    title: `Free Resume Achievement Calculator ${CURRENT_YEAR} - Score Your Bullet Points | No Sign Up`,
+    // UPDATED TITLE: Shorter, keyword-rich, includes dynamic year
+    title: `Resume Achievement Calculator ${CURRENT_YEAR}: Score Bullets Free`,
     description: `Score your resume achievements and bullet points with our free tool. Rate quantification, impact, and STAR compliance. Get category breakdowns and overall achievement strength. 100% private.`,
     url: canonicalUrl,
     siteName: "Professional Resume Free",
