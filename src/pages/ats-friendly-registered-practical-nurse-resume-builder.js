@@ -45,7 +45,8 @@ import {
   FiDollarSign,
   FiShoppingBag,
   FiMonitor,
-  FiTruck
+  FiTruck,
+  FiZap // <--- ADDED MISSING IMPORT
 } from 'react-icons/fi';
 import Link from 'next/link';
 
