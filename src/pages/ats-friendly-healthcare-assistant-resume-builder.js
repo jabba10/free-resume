@@ -817,9 +817,9 @@ const HealthcareAssistantResume = ({ seoData, buildTimestamp }) => {
                 <FiStar className="cf-trust-icon"/>
                 <span className="cf-trust-text">Best Free NHS CV Builder {currentYear}</span>
               </div>
-              <h1 className="cf-hero-title">
+              <h2 className="cf-hero-title">
                 Free Healthcare Assistant CV Builder: Create Yours in 5 Minutes
-              </h1>
+              </h2>
               <p className="cf-hero-subtitle">
                 Create a <strong className="cf-hero-highlight">professional, NHS-compliant healthcare assistant CV for free in minutes.</strong> Our UK-specific builder ensures your skills and experience meet NHS and care home employer requirements.
               </p>

@@ -976,7 +976,7 @@ const DisabilitySupportResume = ({ seoData, buildTimestamp }) => {
           <div className="cf-container">
             <div className="cf-hero-content">
               <div className="cf-trust-badge"><FiStar className="cf-trust-icon"/><span className="cf-trust-text">Best Free NDIS Resume Builder {currentYear}</span></div>
-              <h1 className="cf-hero-title">Free NDIS <span className="cf-gradient-text">Resume Builder {currentYear}: Create Your Australian Support Worker CV & Get Hired</span></h1>
+              <h2 className="cf-hero-title">Free NDIS <span className="cf-gradient-text">Resume Builder {currentYear}: Create Your Australian Support Worker CV & Get Hired</span></h2>
               <p className="cf-hero-subtitle">Create a <strong className="cf-hero-highlight">professional, NDIS-optimized disability support resume for free in minutes.</strong> Our Australian resume builder ensures your experience gets noticed by disability service providers and NDIS organisations.</p>
               <div className="cf-cta-buttons">
                 <button onClick={() => setActiveSection('personal')} className="cf-btn-primary" aria-label="Start building your free disability support resume now—no sign-up required">

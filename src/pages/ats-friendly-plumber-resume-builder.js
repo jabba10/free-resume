@@ -997,9 +997,9 @@ const PlumberResume = ({ seoData, buildTimestamp }) => {
               </div>
               
               {/* ONLY ONE H1 TAG ON THE ENTIRE PAGE */}
-              <h1 className="cf-hero-title">
+              <h2 className="cf-hero-title">
                 Free Plumber Resume <span className="cf-gradient-text">Builder {currentYear}</span>
-              </h1>
+              </h2>
               
               <p className="cf-hero-subtitle">
                 Create a <strong className="cf-hero-highlight">professional, ATS-optimized plumbing resume for free in minutes.</strong> Our plumber resume builder ensures your technical skills and certifications get noticed by contractors and plumbing companies.

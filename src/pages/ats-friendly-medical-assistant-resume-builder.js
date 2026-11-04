@@ -999,9 +999,9 @@ const Resume = ({ seoData, buildTimestamp }) => {
               </div>
               
               {/* ONLY ONE H1 TAG ON THE ENTIRE PAGE */}
-              <h1 className="cf-hero-title">
+              <h2 className="cf-hero-title">
                 Free Medical Assistant <span className="cf-gradient-text">Resume Builder {currentYear}</span>
-              </h1>
+              </h2>
               
               <p className="cf-hero-subtitle">
                 Create a <strong className="cf-hero-highlight">professional, ATS-optimized Medical Assistant resume for free in minutes.</strong> Our CMA/RMA resume builder ensures your clinical skills and certifications get noticed by clinics, hospitals, and healthcare employers.

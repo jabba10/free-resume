@@ -958,7 +958,7 @@ const Resume = ({ seoData, buildTimestamp }) => {
           <div className="cf-container">
             <div className="cf-hero-content">
               <div className="cf-trust-badge"><FiStar className="cf-trust-icon"/><span className="cf-trust-text">Best Free Warehouse Resume Builder {currentYear}</span></div>
-              <h1 className="cf-hero-title">Free Warehouse Resume Builder {currentYear}</h1>
+              <h2 className="cf-hero-title">Free Warehouse Resume Builder {currentYear}</h2>
               <p className="cf-hero-subtitle">Create a <strong className="cf-hero-highlight">professional, ATS-optimized warehouse resume for free in minutes.</strong> Our warehouse resume builder helps you highlight equipment skills, safety training, and logistics experience that impress hiring managers.</p>
               <div className="cf-cta-buttons">
                 <button onClick={() => setActiveSection('personal')} className="cf-btn-primary" aria-label="Start building your free warehouse resume now—no sign-up required">

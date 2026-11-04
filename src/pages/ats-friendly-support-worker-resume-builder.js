@@ -915,7 +915,7 @@ const Resume = ({ seoData, buildTimestamp }) => {
           <div className="cf-container">
             <div className="cf-hero-content">
               <div className="cf-trust-badge"><FiStar className="cf-trust-icon"/><span className="cf-trust-text">Best Free Support Worker CV Builder {currentYear}</span></div>
-              <h1 className="cf-hero-title">Free UK Support Worker <span className="cf-gradient-text">CV Builder {currentYear}</span></h1>
+              <h2 className="cf-hero-title">Free UK Support Worker <span className="cf-gradient-text">CV Builder {currentYear}</span></h2>
               <p className="cf-hero-subtitle">Create a <strong className="cf-hero-highlight">professional, DBS-ready support worker CV for free in minutes.</strong> Our UK support worker CV builder helps you highlight qualifications, experience, and care skills that impress hiring managers.</p>
               <div className="cf-cta-buttons">
                 <button onClick={() => setActiveSection('personal')} className="cf-btn-primary" aria-label="Start building your free support worker CV now—no sign-up required">

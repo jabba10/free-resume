@@ -923,7 +923,7 @@ Specialization: Artificial Intelligence
         {/* ===== OPTIMIZED TITLE - UNDER 70 CHARACTERS ===== */}
         <title>{pageTitle}</title>
         
-        {/* ===== META DESCRIPTION ===== */}
+        {/* ===== META DESCRIPTION - ADDED AS REQUESTED ===== */}
         <meta name="description" content={`Expert ${currentYear} resume guide: Compare chronological (87%), functional (63%), and hybrid (94% ATS pass) formats. CAR method examples, ATS keywords, emerging trends. Updated weekly.`} />
         <meta name="author" content="Isata Kamara - Professional Resume Writer (10+ Years Experience)" />
         <meta name="keywords" content={`${currentYear} resume writing guide, chronological resume format ${currentYear}, functional resume format examples, hybrid resume format, CAR method resume writing, ATS resume optimization ${currentYear}, resume keywords ${currentYear}, professional resume writing tips, resume format comparison`} />
@@ -1055,6 +1055,7 @@ Specialization: Artificial Intelligence
         <section className="section" id="main-content">
           <div className="section-container">
             <div style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center' }}>
+              {/* ===== H1 TAG ADDED AS REQUESTED ===== */}
               <h1 style={{
                 fontSize: 'var(--font-size-display-lg)',
                 fontFamily: 'var(--font-display)',

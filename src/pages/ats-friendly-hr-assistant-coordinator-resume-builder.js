@@ -983,9 +983,9 @@ const HRResume = ({ seoData, buildTimestamp }) => {
                 <span className="cf-trust-text">Best Free HR Resume Builder {currentYear}</span>
               </div>
               
-              <h1 className="cf-hero-title">
+              <h2 className="cf-hero-title">
                 Free HR Resume Builder {currentYear}
-              </h1>
+              </h2>
               
               <p className="cf-hero-subtitle">
                 Create a <strong className="cf-hero-highlight">professional, ATS-optimized HR resume for free in minutes.</strong> Our HR-specific builder ensures your HR experience, certifications, and global HR competencies get noticed by employers worldwide.

@@ -1434,9 +1434,9 @@ const Resume = ({
               </div>
               
               {/* ONLY ONE H1 TAG ON THE ENTIRE PAGE */}
-              <h1 className="cf-hero-title">
+              <h2 className="cf-hero-title">
                 Free Healthcare <span className="cf-gradient-text">Resume Builder {currentYear}</span>
-              </h1>
+              </h2>
               
               <p className="cf-hero-subtitle">
                 Create a <strong className="cf-hero-highlight">professional, ATS-optimized healthcare resume for free in minutes.</strong> Our medical resume builder ensures your clinical experience and credentials get noticed by hospitals and healthcare employers.

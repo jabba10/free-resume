@@ -971,7 +971,7 @@ const RetailResume = ({ seoData, buildTimestamp, currentYear }) => {
           <div className="cf-container">
             <div className="cf-hero-content">
               <div className="cf-trust-badge"><FiStar className="cf-trust-icon"/><span className="cf-trust-text">Best Free Retail Resume Builder {year}</span></div>
-              <h1 className="cf-hero-title">Free Retail Resume <span className="cf-gradient-text">Builder {year}: Create Your ATS Store Manager Resume & Get Hired</span></h1>
+              <h2 className="cf-hero-title">Free Retail Resume <span className="cf-gradient-text">Builder {year}: Create Your ATS Store Manager Resume & Get Hired</span></h2>
               <p className="cf-hero-subtitle">Create a <strong className="cf-hero-highlight">professional, ATS-optimized retail resume for free in minutes.</strong> Our retail resume builder ensures your sales achievements and retail experience get noticed by employers.</p>
               <div className="cf-cta-buttons">
                 <button onClick={() => setActiveSection('personal')} className="cf-btn-primary" aria-label="Start building your free retail resume now—no sign-up required">
