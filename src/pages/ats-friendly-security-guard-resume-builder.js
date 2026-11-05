@@ -1334,9 +1334,9 @@ __html: JSON.stringify({
 Best Free Security Guard Resume Builder {currentYear}
 </span>
 </div>
-<h1 className="sf-hero-title">
+<div className="sf-hero-title">
 Create Your <span className="sf-gradient-text">Security Guard Resume {currentYear}</span>
-</h1>
+</div>
 <p className="sf-hero-subtitle">
 Create a <strong className="sf-hero-highlight">professional, ATS-optimized security guard resume for free in minutes.</strong> Our security resume builder helps you highlight certifications, licenses, and security experience that impress hiring managers.
 </p>

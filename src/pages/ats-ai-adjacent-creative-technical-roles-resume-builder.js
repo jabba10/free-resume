@@ -592,7 +592,7 @@ const Resume = ({ seoData, buildTimestamp, currentYear }) => {
           <div className="cf-container">
             <div className="cf-hero-content">
               <div className="cf-trust-badge"><FiStar className="cf-trust-icon"/><span className="cf-trust-text">{`Best Free Technical Resume Builder ${currentYear}`}</span></div>
-              <h1 className="cf-hero-title" id="hero-heading">{`Free `}<span className="cf-gradient-text">{`Technical Resume Builder ${currentYear}`}</span></h1>
+              <div className="cf-hero-title" id="hero-heading">{`Free `}<span className="cf-gradient-text">{`Technical Resume Builder ${currentYear}`}</span></div>
               <p className="cf-hero-subtitle">{`Create a `}<strong className="cf-hero-highlight">{`professional, ATS-optimized technical resume for free in minutes.`}</strong>{` Our technical resume builder ensures your projects, skills, and technical experience get noticed by tech companies and AI startups. Join `}<strong>3M+ technical professionals</strong>{` who landed interviews `}<strong>3x faster</strong>{`.`}</p>
               <div className="cf-cta-buttons">
                 <button onClick={() => setActiveSection('personal')} className="cf-btn-primary"><span className="cf-btn-text">Start Building Your Technical Resume Now</span><FiArrowRight className="cf-btn-icon"/><div className="cf-btn-pulse"></div></button>

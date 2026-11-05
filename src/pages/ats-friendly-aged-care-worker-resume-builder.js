@@ -568,7 +568,7 @@ const Resume = ({ seoData, buildTimestamp, currentYear }) => {
     },
     {
       question: "How do I highlight my Australian aged care experience?",
-      answer: "Our builder guides you to highlight Australian experience with NDIS compliance, Aged Care Quality Standards, Australian privacy laws, and specific Australian care models. We help you showcase experience relevant to Australian providers."
+      answer: "Our builder guides you to highlight Australian experience with NDIS compliance, Aged Care Quality Standards, AN-ACC funding, consumer-directed care, restorative care approaches, and Australian privacy principles. We help you showcase experience relevant to Australian providers."
     },
     {
       question: "Can I download my Australian-style aged care resume as PDF without creating an account?",
@@ -998,7 +998,7 @@ const Resume = ({ seoData, buildTimestamp, currentYear }) => {
           <div className="cf-container">
             <div className="cf-hero-content">
               <div className="cf-trust-badge"><FiStar className="cf-trust-icon"/><span className="cf-trust-text">Best Free Aged Care Resume Builder {year}</span></div>
-              <h1 className="cf-hero-title">Free Aged Care <span className="cf-gradient-text">Resume Builder Australia {year}</span></h1>
+              <div className="cf-hero-title">Free Aged Care <span className="cf-gradient-text">Resume Builder Australia {year}</span></div>
               <p className="cf-hero-subtitle">Create a <strong className="cf-hero-highlight">professional, ATS-optimized aged care resume for free in minutes.</strong> Our Australian resume builder ensures your care experience and Australian qualifications get noticed by aged care providers and recruiters.</p>
               <div className="cf-cta-buttons">
                 <button onClick={() => setActiveSection('personal')} className="cf-btn-primary" aria-label="Start building your free aged care resume now—no sign-up required"><span className="cf-btn-text">Start Building Your Aged Care Resume Now</span><FiArrowRight className="cf-btn-icon"/><div className="cf-btn-pulse"></div></button>

@@ -983,7 +983,7 @@ const AdvancedManufacturingResume = ({ seoData, buildTimestamp, currentYear }) =
           <div className="cf-container">
             <div className="cf-hero-content">
               <div className="cf-trust-badge"><FiStar className="cf-trust-icon"/><span className="cf-trust-text">{`Best Free Manufacturing Resume Builder ${currentYear}`}</span></div>
-              <h1 className="cf-hero-title">{`Free Manufacturing Resume `}<span className="cf-gradient-text">{`Builder ${currentYear}: Start Now`}</span></h1>
+              <div className="cf-hero-title">{`Free Manufacturing Resume `}<span className="cf-gradient-text">{`Builder ${currentYear}: Start Now`}</span></div>
               <p className="cf-hero-subtitle">Create a <strong className="cf-hero-highlight">professional, ATS-optimized manufacturing resume for free in minutes.</strong> Our industry resume builder ensures your technical experience and credentials get noticed by leading manufacturers and automation companies.</p>
               <div className="cf-cta-buttons">
                 <button onClick={() => setActiveSection('personal')} className="cf-btn-primary" aria-label="Start building your free manufacturing resume now—no sign-up required"><span className="cf-btn-text">Start Building Your Manufacturing Resume Now</span><FiArrowRight className="cf-btn-icon"/><div className="cf-btn-pulse"></div></button>

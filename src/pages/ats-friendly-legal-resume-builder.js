@@ -993,9 +993,9 @@ const LegalResume = ({ seoData, buildTimestamp }) => {
                 <span className="cf-trust-text">Best Free Legal Resume Builder {currentYear}</span>
               </div>
               
-              <h1 className="cf-hero-title">
+              <div className="cf-hero-title">
                 Free Legal Resume Builder {currentYear}: Start Now
-              </h1>
+              </div>
               
               <p className="cf-hero-subtitle">
                 Create a <strong className="cf-hero-highlight">professional, ATS-optimized legal resume for free in minutes.</strong> Our legal resume builder ensures your experience and credentials get noticed by top law firms and legal employers globally.

@@ -895,7 +895,7 @@ const Resume = ({ seoData, buildTimestamp }) => {
           <div className="cf-container">
             <div className="cf-hero-content">
               <div className="cf-trust-badge"><FiStar className="cf-trust-icon"/><span className="cf-trust-text">Best Free Data Analyst Resume Builder {currentYear}</span></div>
-              <h1 className="cf-hero-title">Free Data Analyst <span className="cf-gradient-text">Resume Builder: Create Yours in 5 Minutes</span></h1>
+              <div className="cf-hero-title">Free Data Analyst <span className="cf-gradient-text">Resume Builder: Create Yours in 5 Minutes</span></div>
               <p className="cf-hero-subtitle">Create a <strong className="cf-hero-highlight">professional, ATS-optimized data analyst resume for free in minutes.</strong> Our resume builder ensures your technical skills and data projects get noticed by tech companies and global employers.</p>
               <div className="cf-cta-buttons">
                 <button onClick={() => setActiveSection('personal')} className="cf-btn-primary" aria-label="Start building your free data analyst resume now—no sign-up required">

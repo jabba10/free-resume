@@ -823,7 +823,7 @@ const Resume = ({ seoData, buildTimestamp }) => {
           <div className="cf-container">
             <div className="cf-hero-content">
               <div className="cf-trust-badge"><FiStar className="cf-trust-icon"/><span className="cf-trust-text">Best Free Tech Resume Builder {currentYear}</span></div>
-              <h1 className="cf-hero-title">Free Tech <span className="cf-gradient-text">Resume Builder {currentYear}</span></h1>
+              <div className="cf-hero-title">Free Tech <span className="cf-gradient-text">Resume Builder {currentYear}</span></div>
               <p className="cf-hero-subtitle">Create a <strong className="cf-hero-highlight">professional, ATS-optimized tech resume for free in minutes.</strong> Our tech resume builder helps you highlight coding skills, projects, and technical experience that impress hiring managers.</p>
               <div className="cf-cta-buttons">
                 <button onClick={() => setActiveSection('personal')} className="cf-btn-primary" aria-label="Start building your free tech resume now—no sign-up required">

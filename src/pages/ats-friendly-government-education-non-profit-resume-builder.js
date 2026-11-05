@@ -946,9 +946,9 @@ const GovernmentResume = ({ seoData, buildTimestamp }) => {
                 </span>
               </div>
               
-              <h1 className="cf-hero-title">
+              <div className="cf-hero-title">
                 Free Government Resume Builder {currentYear}: Start Now
-              </h1>
+              </div>
               
               <p className="cf-hero-subtitle">
                 Create a <strong className="cf-hero-highlight">professional, ATS-optimized public sector resume for free.</strong> Our government resume builder ensures your public service experience meets federal application standards and non-profit sector expectations.

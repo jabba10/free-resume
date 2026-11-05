@@ -892,7 +892,7 @@ const CeoResume = ({ seoData, buildTimestamp, currentYear }) => {
           <div className="cf-container">
             <div className="cf-hero-content">
               <div className="cf-trust-badge"><FiStar className="cf-trust-icon"/><span className="cf-trust-text">Best Free Executive Resume Builder {year}</span></div>
-              <h1 className="cf-hero-title">Free Executive <span className="cf-gradient-text">Resume Builder {year}</span></h1>
+              <div className="cf-hero-title">Free Executive <span className="cf-gradient-text">Resume Builder {year}</span></div>
               <p className="cf-hero-subtitle">Create a <strong className="cf-hero-highlight">professional, board-level executive resume for free in minutes.</strong> Our CEO resume builder ensures your leadership experience and strategic achievements get noticed by boards and search committees.</p>
               <div className="cf-cta-buttons">
                 <button onClick={() => setActiveSection('personal')} className="cf-btn-primary" aria-label="Start building your free executive resume now—no sign-up required">

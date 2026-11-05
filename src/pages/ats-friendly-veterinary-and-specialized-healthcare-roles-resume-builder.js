@@ -946,7 +946,7 @@ const VeterinaryResume = ({ seoData, buildTimestamp }) => {
           <div className="cf-container">
             <div className="cf-hero-content">
               <div className="cf-trust-badge"><FiStar className="cf-trust-icon"/><span className="cf-trust-text">Best Free Veterinary Resume Builder {currentYear}</span></div>
-              <h1 className="cf-hero-title">Free Veterinary Resume Builder {currentYear}</h1>
+              <div className="cf-hero-title">Free Veterinary Resume Builder {currentYear}</div>
               <p className="cf-hero-subtitle">Create a <strong className="cf-hero-highlight">professional, ATS-optimized veterinary resume for free in minutes.</strong> Our veterinary resume builder helps you highlight clinical experience, certifications, and animal healthcare skills that impress hiring managers.</p>
               <div className="cf-cta-buttons">
                 <button onClick={() => setActiveSection('personal')} className="cf-btn-primary" aria-label="Start building your free veterinary resume now—no sign-up required">

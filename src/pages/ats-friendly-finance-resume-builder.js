@@ -911,9 +911,9 @@ const Resume = ({ seoData, buildTimestamp }) => {
                 <span className="cf-trust-text">Best Free Finance Resume Builder {currentYear}</span>
               </div>
               
-              <h1 className="cf-hero-title">
+              <div className="cf-hero-title">
                 Free Finance <span className="cf-gradient-text">Resume Builder {currentYear}: Create Your ATS Investment Banking CV & Get Hired</span>
-              </h1>
+              </div>
               
               <p className="cf-hero-subtitle">
                 Create a <strong className="cf-hero-highlight">professional, ATS-optimized finance resume for free in minutes.</strong> Our finance resume builder ensures your deal experience and financial credentials get noticed by investment banks, hedge funds, and financial institutions.
