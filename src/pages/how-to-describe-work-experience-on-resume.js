@@ -388,7 +388,7 @@ const DescribeWorkExperience = ({ seoData, buildTimestamp }) => {
         <style dangerouslySetInnerHTML={{ __html: executiveDesignTokens }} />
         
         {/* Basic Meta Tags */}
-        <title>How to Describe Work Experience on Resume: Complete Guide 2026 | Achievement Formulas & ATS Tips</title>
+        <title>Describe Work Experience on Resume: {CURRENT_YEAR} Guide</title>
         <meta name="description" content={`Master work experience description with 4 achievement formulas (CAR, STAR, PAR, XYZ), 8-step writing process, industry examples, and ATS optimization. Resumes with achievement-focused descriptions receive 73% more interview invitations. ${CURRENT_YEAR}`} />
         <meta name="keywords" content="how to describe work experience on resume, work experience description, achievement statements resume, CAR method resume, STAR method resume, PAR method resume, XYZ formula resume, action verbs for resume, ATS resume optimization, resume writing guide, quantify achievements resume, resume bullet points" />
         <meta name="author" content="Professional Resume Free" />

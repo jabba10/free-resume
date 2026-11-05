@@ -510,7 +510,7 @@ const CoverLetterGenerator = ({ seoData, buildTimestamp, currentYear: propYear }
         <style dangerouslySetInnerHTML={{ __html: executiveDesignTokens }} />
         
         {/* Basic Meta Tags - Injected from Page 1 Blueprint */}
-        <title>{`Free Cover Letter Generator - Professional Templates ${currentYear} | Cover Letter Builder`}</title>
+        <title>{`Free Cover Letter Generator: Pro Templates ${currentYear}`}</title>
         <meta name="description" content={`Create professional ATS-optimized cover letters for free. Generate customized cover letters in minutes with our tool. Privacy-first, no signup required. ${currentYear}`} />
         <meta name="keywords" content={`free cover letter generator, professional cover letter, cover letter template, job application letter, cover letter builder, ATS cover letter, customizable cover letter ${currentYear}`} />
         <meta name="author" content="Professional Resume Free" />

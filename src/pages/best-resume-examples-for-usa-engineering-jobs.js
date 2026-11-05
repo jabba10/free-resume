@@ -484,7 +484,7 @@ function BestEngineeringResumeExamples({
         <html lang="en" />
         
         {/* ===== SEO TITLE (dynamic year) ===== */}
-        <title>{`Best Resume Examples for USA Engineering Jobs ${currentYear}: Complete Expert Guide`}</title>
+        <title>{`USA Engineering Resume Examples ${currentYear}: Expert Guide`}</title>
         
         {/* ===== META DESCRIPTION ===== */}
         <meta name="description" content={`Discover the best resume examples for USA engineering jobs. Comprehensive guide with proven templates for civil, mechanical, electrical, chemical, and software engineers. Free ${currentYear} examples with detailed analysis.`} />
