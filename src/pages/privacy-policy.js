@@ -386,7 +386,7 @@ export async function getStaticProps() {
   const now = new Date();
   const currentDate = now.toISOString().split('T')[0];
   const lastModifiedDate = now.toISOString();
-  return { props: { seoData: { currentDate, lastModifiedDate } }, revalidate: 3600 };
+  return { props: { seoData: { currentDate, lastModifiedDate } }, revalidate: 86400 };
 }
 
 export default PrivacyPolicy;

@@ -2137,7 +2137,7 @@ breadcrumbData
 buildTimestamp
 },
 // ISR: Revalidate every hour (3600 seconds)
-revalidate: 3600
+revalidate: 86400
 };
 }
 export default LogisticsResume;

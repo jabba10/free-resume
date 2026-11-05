@@ -1033,7 +1033,7 @@ export async function getStaticProps() {
         freshnessIndicator: currentDate
       } 
     }, 
-    revalidate: 3600 
+    revalidate: 86400 
   };
 }
 

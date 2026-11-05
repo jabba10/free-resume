@@ -2362,7 +2362,7 @@ breadcrumbData
 },
 buildTimestamp
 },
-revalidate: 3600
+revalidate: 86400
 };
 }
 export default SecurityGuardResume;

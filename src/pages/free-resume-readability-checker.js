@@ -745,7 +745,7 @@ export async function getStaticProps() {
       currentYear
     },
     // Revalidate every hour for fresh content
-    revalidate: 3600,
+    revalidate: 86400,
   };
 }
 

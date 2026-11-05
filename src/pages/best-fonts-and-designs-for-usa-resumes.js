@@ -679,7 +679,7 @@ export async function getStaticProps() {
       fontComparisonData,
       newInternalLinks
     },
-    revalidate: 3600 // ISR: Revalidate every hour
+    revalidate: 86400 // ISR: Revalidate every hour
   };
 }
 

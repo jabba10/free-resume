@@ -927,7 +927,7 @@ export async function getStaticProps() {
         reviewDates
       }
     },
-    revalidate: 3600
+    revalidate: 86400
   };
 }
 

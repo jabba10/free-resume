@@ -967,7 +967,7 @@ export async function getStaticProps() {
       }
     },
     // Revalidate every 2 hours (7200 seconds)
-    revalidate: 7200,
+    revalidate: 86400,
   };
 }
 

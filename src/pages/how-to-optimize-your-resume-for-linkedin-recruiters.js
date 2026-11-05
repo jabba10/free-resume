@@ -742,7 +742,7 @@ export async function getStaticProps() {
         faqDates
       }
     },
-    revalidate: 3600 // ISR: revalidate every hour
+    revalidate: 86400 // ISR: revalidate every hour
   };
 }
 

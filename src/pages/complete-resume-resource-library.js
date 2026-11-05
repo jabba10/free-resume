@@ -2394,6 +2394,6 @@ export async function getStaticProps() {
         breadcrumbData
       }
     },
-    revalidate: 3600, // ISR: Revalidate every hour
+    revalidate: 86400, // ISR: Revalidate every hour
   };
 }

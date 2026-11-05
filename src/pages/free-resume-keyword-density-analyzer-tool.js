@@ -889,7 +889,7 @@ export async function getStaticProps() {
       currentYear
     },
     // Revalidate every 1 hour (3600 seconds)
-    revalidate: 3600
+    revalidate: 86400
   };
 }
 

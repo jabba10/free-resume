@@ -815,7 +815,7 @@ export async function getStaticProps() {
         lastModifiedDate
       }
     },
-    revalidate: 3600
+    revalidate: 86400
   };
 }
 

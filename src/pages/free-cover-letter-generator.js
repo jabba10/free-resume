@@ -1052,7 +1052,7 @@ export async function getStaticProps() {
       currentYear,
       buildTimestamp
     },
-    revalidate: 3600 // Revalidate every hour (ISR strategy from Page 1)
+    revalidate: 86400 // Revalidate every hour (ISR strategy from Page 1)
   };
 }
 

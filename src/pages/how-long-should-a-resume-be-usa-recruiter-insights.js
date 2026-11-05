@@ -919,7 +919,7 @@ export async function getStaticProps() {
       }
     },
     // Revalidate every 12 hours for fresh content
-    revalidate: 43200,
+    revalidate: 86400,
   };
 }
 

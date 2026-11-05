@@ -991,7 +991,7 @@ export async function getStaticProps() {
       reviewDates,
       faqDates
     },
-    revalidate: 7200 // ISR: revalidate every 2 hours
+    revalidate: 86400 // ISR: revalidate every 2 hours
   };
 }
 

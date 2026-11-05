@@ -169,7 +169,7 @@ export async function getStaticProps() {
       },
       buildTimestamp
     },
-    revalidate: 3600, // ISR: Revalidate every hour (from Page 1 blueprint)
+    revalidate: 86400, // ISR: Revalidate every hour (from Page 1 blueprint)
   };
 }
 

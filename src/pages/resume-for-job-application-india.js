@@ -1151,7 +1151,7 @@ export async function getStaticProps() {
         testimonials
       }
     },
-    revalidate: 7200,
+    revalidate: 86400,
   };
 }
 

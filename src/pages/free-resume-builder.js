@@ -1149,7 +1149,7 @@ export async function getStaticProps() {
       buildTimestamp
     },
     // ISR: Revalidate every hour
-    revalidate: 3600
+    revalidate: 86400
   };
 }
 

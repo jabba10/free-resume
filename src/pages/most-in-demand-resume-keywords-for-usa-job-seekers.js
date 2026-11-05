@@ -925,7 +925,7 @@ export async function getStaticProps() {
       longTailKeywords,
       reviewDates
     },
-    revalidate: 3600 // ISR: revalidate every hour
+    revalidate: 86400 // ISR: revalidate every hour
   };
 }
 

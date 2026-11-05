@@ -1828,6 +1828,6 @@ export async function getStaticProps() {
         allResourceLinks
       }
     },
-    revalidate: 3600
+    revalidate: 86400
   };
 }

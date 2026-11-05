@@ -1141,7 +1141,7 @@ export async function getStaticProps() {
       },
       buildTimestamp
     }, 
-    revalidate: 3600 
+    revalidate: 86400
   };
 }
 

@@ -924,7 +924,7 @@ export async function getStaticProps() {
       },
       currentYear
     },
-    revalidate: 3600,
+    revalidate: 86400,
   };
 }
 

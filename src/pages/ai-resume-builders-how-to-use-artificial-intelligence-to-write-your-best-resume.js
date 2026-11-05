@@ -1546,7 +1546,7 @@ export async function getStaticProps() {
       reviewDates,
       currentYear
     },
-    revalidate: 3600 // Revalidate every hour for strong freshness signals
+    revalidate: 86400 // Revalidate every hour for strong freshness signals
   };
 }
 

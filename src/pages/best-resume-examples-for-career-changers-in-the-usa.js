@@ -403,7 +403,7 @@ export async function getStaticProps() {
       faqDates,
       newInternalLinks
     },
-    revalidate: 3600 // ISR: Revalidate every hour (injected from Page 1 blueprint pattern)
+    revalidate: 86400 // ISR: Revalidate every hour (injected from Page 1 blueprint pattern)
   };
 }
 

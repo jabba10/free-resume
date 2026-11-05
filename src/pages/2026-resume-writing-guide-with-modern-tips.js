@@ -1598,7 +1598,7 @@ export async function getStaticProps() {
   
   return {
     props: { currentDate, lastModifiedDate, currentYear },
-    revalidate: 3600 // Revalidate every hour for freshness
+    revalidate: 86400 // Revalidate every hour for freshness
   };
 }
 

@@ -776,7 +776,7 @@ export async function getStaticProps() {
         lastModifiedDate
       }
     },
-    revalidate: 3600 // ISR: revalidate every hour
+    revalidate: 86400 // ISR: revalidate every hour
   };
 }
 

@@ -844,7 +844,7 @@ export async function getStaticProps() {
         faqDates
       } 
     }, 
-    revalidate: 3600 
+    revalidate: 86400 
   };
 }
 

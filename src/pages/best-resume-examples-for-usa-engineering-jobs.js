@@ -441,7 +441,7 @@ export async function getStaticProps() {
       reviewDates,
       newInternalLinks
     },
-    revalidate: 3600 // ISR: Revalidate every hour
+    revalidate: 86400 // ISR: Revalidate every hour
   };
 }
 
