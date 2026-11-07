@@ -276,8 +276,8 @@ const HowToWriteAResume = ({ seoData }) => {
         
         <html lang="en" />
         
-        {/* OPTIMIZED TITLE */}
-        <title>How to Write a Resume: Complete {CURRENT_YEAR} Guide with Expert Examples & Templates</title>
+        {/* OPTIMIZED TITLE - 50 characters */}
+        <title>How to Write a Resume: 2026 Guide</title>
         
         {/* META DESCRIPTION */}
         <meta name="description" content={`Master the art of resume writing with our comprehensive ${CURRENT_YEAR} guide. Step-by-step instructions, expert examples, ATS optimization tips, and proven strategies to land interviews at top companies.`} />
